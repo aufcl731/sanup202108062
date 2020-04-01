@@ -1,0 +1,58 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block staticfile %}
+<link rel="stylesheet" href="{% static 'css/material.css' %}">
+<link rel="stylesheet" href="{% static 'css/production.css' %}">
+<link rel="stylesheet" href="{% static 'css/jquery.minicolors.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery.minicolors.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/materials.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/production.js' %}"></script>
+{% endblock staticfile %}
+
+{% block content %}
+            <div id="ContentWrap">
+                <div>
+                    <h3>Order-Progress</h3>
+                    <table>
+                        <tr>
+                            <th>Code</th>
+                            <th>Design</th>
+                            <th>Warping</th>
+                            <th>Knitting</th>
+                            <th>Manager</th>
+                            <th>Order Date</th>
+                            <th>Due Date</th>
+                            <th>WorkSheet</th>
+                        </tr>
+                        {% for order in designOrderList %}
+                            <tr>
+                                <td class="processLink"><a href="process/{{ order.id }}">{{ order.code }}</a></td>
+                                <td>{{ order.design_data_id.CAD_Design_Data_name }}</td>
+                                <td>
+                                    {% if order.warp_process.warp_beam_set.all %}
+                                        <progress value="0" max="{{ order.warp_process.warp_beam_set.all.count }}"></progress>
+                                    {% else %}
+                                        빔을 선택하세요
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if order.knit_process.knit_beam_set.all %}
+                                        <progress value="{{ order.trs_total_meter }}" max="{{ order.design_qty }}">20%</progress>
+                                    {% else %}
+                                        빔을 선택하세요
+                                    {% endif %}
+                                </td>
+                                <td>{{ order.order_id.manager.name }}</td>
+                                <td>{{ order.order_id.order_date|date:"Y-m-d" }}</td>
+                                <td>{{ order.order_id.due_date|date:"Y-m-d" }}</td>
+                                <td><span onclick="warpSheet()">정경표</span>  |  <span onclick="knitSheet({{ order.pk }})">작업설계서</span><!--  |  <span onclick="showQrCode({{ order.pk }})">QRCODE</span>!--></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
+
+{% endblock content %}

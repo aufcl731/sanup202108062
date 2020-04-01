@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <title>{{ title }}</title>
+      <meta name="viewport" content="width=1920">
+      <script type='text/javascript' src="{% static 'js/jquery-1.12.3.min.js' %}"></script>
+      <script type='text/javascript' src="{% static 'js/chart.js' %}"></script>
+      <script type='text/javascript' src="{% static 'js/circleful.js' %}"></script>
+      <script type='text/javascript' src="{% static 'js/common.js' %}"></script>
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      <link rel="stylesheet" href="{% static 'css/chart.css' %}">
+      <link rel="stylesheet" href="{% static 'css/circleful.css' %}">
+      <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+  </head>
+  <body>
+  <div id="mask" onclick="closeMask()"></div>
+    <div id="root">
+        <div id="head">
+            <h1>TexDDM</h1>
+            <div class="headRight">
+                <span>{{ user.username }}</span>
+                {% if user.propic  %}
+                    <span class="userPropic"><img src="{{ user.propic.url }}" height="25px"></span>
+                {% else %}
+                    <span class="userPropic"><img src="{% static 'image/ningen.png' %}" height="25px"></span>
+                {% endif %}
+                <span onclick="javascript:window.location='/logout'">
+                    <img src="{% static 'image/logout.png' %}" height="25px">
+                </span>
+
+                {% if user.username == 'admin' %}
+                    {% if order.cheack == True %}
+                        <span><img src="{% static 'image/bell.png' %}" height="25px"></span>
+
+                    {% else %}
+                        <span><img onclick="alrammove()" src="{% static 'image/bell-1.png' %}" height="25px"></span>
+                    {% endif %}
+                {% endif %}
+
+            </div>
+        </div>
+         <div class="ahffk" onclick="alramout()">
+            <div id="mainWrap" class="fix">
+                <div id="gnb">
+                    <ul>
+                        <li><a href="/dashboard"><img src="{% static 'image/dashboard.png' %}" height="20px">Dashboard</a></li>
+                        <li><a href="/order"><img src="{% static 'image/order.png' %}" height="20px">Order</a></li>
+                        <li><a href="/schedule"><img src="{% static 'image/design.png' %}" height="20px">Schedule</a></li>
+                        <li><a href="/production"><img src="{% static 'image/production.png' %}" height="20px">Production</a></li>
+                        <li><a href="/machine"><img src="{% static 'image/production.png' %}" height="20px">Machine</a></li>
+                        <li><a href="/design_data"><img src="{% static 'image/design.png' %}" height="20px">Design</a></li>
+                        <li><a href="/material"><img src="{% static 'image/design.png' %}" height="20px">Materials</a></li>
+                        <li><a href="/setting"><img src="{% static 'image/setting.png' %}" height="20px">Setting</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alram" id="alramtest">
+                {% for order in orderList %}
+                    {% if order.cheack == False %}
+                    <div id="ordercheack" onclick="cheakchange()">
+                        <div>
+                            {{ order.buyer }} 에서 주문이 들어왔습니다.
+                            <input type="hidden" id="orderidval" name="orderidval" value="{{ order.id }}">
+                        </div>
+                        <div>
+                            주문번호 {{ order.code }}
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <script>
+                $(document).ready(function() {
+                    var selectMenu = $('#gnb').find('li');
+                    if('{{ title }}'){
+                        for(var i = 0; i<selectMenu.length; i++){
+                            if(selectMenu.eq(i).text() == '{{ title }}'){
+                                $(selectMenu.eq(i)).addClass('gnbSelect');
+                            }
+                        }
+                    }else{
+                        $(selectMenu.eq(0)).addClass('gnbSelect');
+                        document.title = "Dashboard";
+                    }
+                })
+            </script>
+    {% block content %}
+    {% endblock %}
+        </div>
+    </div>
+    {% block staticfile %}
+  {% endblock %}
+ </body>
+</html>

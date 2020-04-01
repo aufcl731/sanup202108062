@@ -1,0 +1,146 @@
+* {
+    margin:0;
+    padding:0;
+}
+#loginWrap {
+    background:rgb(66,78,102);
+    height:100vh;
+    max-width:1920px;
+    position: relative;
+}
+#loginWrap h1 {
+    width:670px;
+    color:#fff;
+    font-size:70px;
+    text-align: center;
+}
+#loginBox {
+    width:747px;
+    height:665px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-332px;
+    margin-left:-373px;
+}
+
+#loginTab {
+    padding-top:150px;
+    background:#fff;
+    width:670px;
+    border-radius: 20px;
+    height:450px;
+    position:relative;
+}
+
+#loginInputBox {
+    text-align: center;
+}
+
+#loginInputBox > div, #loginInputBox > p {
+    height:50px;
+}
+
+#loginInputBox input {
+    padding-left:10px;
+    font-size:20px;
+    height:30px;
+    width:264px;
+    border:0;
+    border-bottom:3px solid rgb(66,78,102);
+}
+
+.loginBtn {
+    margin-bottom:70px;
+    margin-top:40px;
+}
+.loginBtn span, #loginInputBox #signupBtn{
+    display:inline-block;
+    width:211px;
+    height:50px;
+    color:#fff;
+    background:rgb(66,78,102);
+    line-height: 50px;
+    font-size:20px;
+    cursor: pointer;
+}
+
+.loginBot {
+    color:rgb(66,78,102);
+}
+
+.loginBot a {
+    font-weight: bold;
+    color:rgb(229,159,73);
+    text-decoration: none;
+}
+
+.rightDeco, .leftDeco {
+    position:absolute;
+}
+
+
+.rightDeco{
+    top:50px;
+    right:-300px;
+}
+
+.leftDeco{
+    bottom:50px;
+    left:-300px;
+    -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
+    -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
+    -o-transform:matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.decorationLBar {
+    background-image:linear-gradient(to right, rgb(255, 255, 255) , rgba(255, 255, 255, 0));
+    height:20px;
+    width:300px;
+}
+
+.decorationSBar {
+    margin-top:30px;
+    background-image:linear-gradient(to right, rgb(255, 255, 255) , rgba(255, 255, 255, 0));
+    height:20px;
+    width:150px;
+}
+
+
+
+/* server */
+.serverBtn {
+    display:inline-block;
+    width:40%;
+    height:450px;
+    text-decoration: none;
+    color:#444;
+    line-height:450px;
+    border-radius:20px;
+    font-weight: bold;
+    font-size:25px;
+}
+
+#serverChoiceBox {
+    text-align:center;
+    height:100%;
+}
+
+#serverTab {
+    padding:75px 0;
+    background:#fff;
+    width:670px;
+    border-radius: 20px;
+    height:450px;
+    position:relative;
+}
+
+#popServer {
+    background:rgb(213,73,66);
+    color:#fff;
+}
+
+#pdmServer {
+    background:#bbe7ff;
+    color:#343444;
+}

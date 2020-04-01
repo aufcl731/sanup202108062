@@ -1,0 +1,256 @@
+a {
+    text-decoration: none;
+}
+
+#mask {
+    background:rgba(0,0,0,0.3);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:100000;
+    display:none;
+}
+
+#ContentWrap {
+    width:1470px;
+    color: black;
+    font-size:12px;
+    background-color: rgb(219, 221, 224);
+    margin-left: 240px;
+    margin-top: 60px;
+    padding: 15px 20px;
+    min-height:calc(100vh - 90px);
+}
+
+#materialsTop, #materialsBot {
+    width:100%;
+    height:300px;
+}
+
+#materialsBot > div {
+    width:727px;
+    float:left;
+    height:300px;
+    overflow:auto;
+}
+
+#materialsBot > div:first-child {
+    margin-right:15px;
+}
+
+#rawWrap > div {
+    float:left;
+    width:205px;
+}
+
+#rawWrap > div:first-child {
+    width:517px;
+    margin-right:4px;
+}
+#rollWrap > div:first-child{
+
+}
+
+table {
+    width:100%;
+    border-collapse: collapse;
+    color:#000;
+}
+
+table td, table th {
+    border:1px solid #a2a3a4;
+    padding:5px 0;
+    font-size:11px;
+    text-align:center;
+}
+
+table th {
+    background:rgb(62, 67, 88);
+    color:#fff;
+    height:15px;
+}
+
+table tr {
+    background:#fff;
+}
+
+table tr:nth-child(2n+1){
+   background:rgb(239,242,245);
+}
+
+
+#ContentWrap span {
+    display:inline-block;
+    width:100px;
+    text-align:center;
+    padding:5px;
+    font-size:12px;
+    background-color:rgb(62, 67, 88);
+    font-weight: bold;
+    color:#fff;
+}
+
+#ContentWrap table span {
+    width:50px;
+    color:#444;
+    border:1px solid #a9a9a9;
+    padding:3px;
+    background:#fff;
+    font-size:8px;
+    cursor:pointer;
+    border-radius:5px;
+
+}
+
+#ContentWrap input {
+    padding:4px;
+    width: 195px;
+    text-align:center;
+    font-weight: bold;
+}
+
+.conTitle h3 {
+    float:left;
+}
+
+.searchBox {
+    text-align:right;
+}
+
+#designInfoTitle {
+    background:rgb(62, 67, 88);
+    color:#fff;
+    height:15px;
+    padding:6px 0;
+    text-align:center;
+}
+
+#yarnModal {
+    position:absolute;
+    top:calc(50% - 200px);
+    left:calc(50% - 300px);
+    z-index: 9999999;
+    width:671px;
+    background:rgb(219, 221, 224);
+    border:3px solid rgb(62, 67, 88);
+    display:none;
+}
+
+.modalTitle {
+    background:rgb(62, 67, 88);
+    padding:5px 0 10px 0;
+
+}
+
+.modalTitle h2 {
+    margin-left:20px;
+    font-size:15px;
+    color:#fff;
+}
+
+.yarnData {
+    padding:0 40px;
+}
+
+.yarnData > div {
+    float:left;
+}
+
+.yarnData > div:first-child {
+    margin-right:30px;
+}
+
+.line {
+    color:#000;
+    margin:15px 0;
+}
+
+.line label {
+    display:inline-block;
+    width:100px;
+    text-align:center;
+    padding:8px;
+    font-size:12px;
+    background-color:rgb(62, 67, 88);
+    font-weight: bold;
+    color:#fff;
+}
+
+#yarnModal .line input, #beamModal input, #rollModal .line input {
+    padding:3px;
+    width: 150px;
+    height:20px;
+}
+
+#yarnModal .line #yarnColor {
+    width:128px;
+    padding-left:25px;
+}
+
+.createBtnBox {
+    padding:10px 40px;
+    text-align:right;
+}
+
+.createBtnBox > span {
+    display:inline-block;
+    width:61px;
+    text-align:center;
+    padding:8px;
+    font-size:12px;
+    background-color:rgb(62, 67, 88);
+    font-weight: bold;
+    color:#fff;
+    cursor:pointer;
+}
+
+
+/* beam */
+
+#beamModal {
+    display:none;
+    position:absolute;
+    top:calc(50% - 200px);
+    left:calc(50% - 300px);
+    z-index: 9999999;
+    width:620px;
+    background:rgb(219, 221, 224);
+    border:3px solid rgb(62, 67, 88);
+}
+
+#beamModal .line {
+    float:left;
+    margin-left:20px;
+}
+
+#beamModal .createBtnBox {
+    padding:0 20px 20px 0;
+}
+
+.searchBox > span {
+    cursor:pointer;
+}
+
+#beamTableBox tbody {
+    max-height: 260px;
+    overflow: auto;
+}
+
+#rollModal {
+    display:none;
+    position:absolute;
+    top:calc(50% - 200px);
+    left:calc(50% - 300px);
+    z-index: 9999999;
+    width:671px; <!--671-->
+    height:155px;
+    background:rgb(219, 221, 224);
+    border:3px solid rgb(62, 67, 88);
+}
+
+#rollModal .rollData .fix .line{
+    float:left;
+    margin-left:20px;
+}

@@ -1,0 +1,711 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block staticfile %}
+<link rel="stylesheet" href="{% static 'css/order.css' %}">
+<script type="text/javascript" src="{% static 'js/selectbox.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/common.js' %}"></script>
+
+<script type="text/javascript">
+    var os = null;
+
+    window.onload = function(){
+        var designCount = {{ designCount }};
+        var orderCount = {{ orderCount }};
+        var platform = window.navigator.platform;
+
+        $("input:text[numberOnly]").on("keyup", function() {
+            $(this).val($(this).val().replace(/[^0-9]/g,""));
+        });
+
+        var macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+
+        if (macosPlatforms.indexOf(platform) !== -1) {
+            os = 'Mac OS';
+        }
+
+
+        if(designCount > 13 && os != 'Mac OS'){
+            $('#designListTable td:last-child').css('width', '105px');
+        }
+
+        if(orderCount > 13 && os != 'Mac OS'){
+            $('#orderListWrap td:last-child').css('width', '77px');
+        }
+
+        document.getElementById('order_date').valueAsDate = new Date();
+        $('#designListTable>tbody>tr').eq(0).trigger('click');
+    };
+
+</script>
+<script type="text/javascript" src="{% static 'js/order.js' %}"></script>
+{% endblock staticfile %}
+
+{% block content %}
+            <div id="orderContentWrap" class="fix">
+                <div id="orderLeft">
+                    <h3>Order</h3>
+                        <form action="/order/" method="POST" name="orderForm" id="orderForm">{% csrf_token %}
+                        <div id="orderLeftTop" class="fix">
+                            <div id="orderSheetLeft">
+                                <div>
+                                    <span>사업장</span>
+                                    <input type="text" id="company" name="company" value="{{ company }}">
+                                </div>
+                                <div>
+                                    <span>거래처</span>
+                                    <input type="text" name="buyer" id="buyer">
+                                </div>
+                                <div>
+                                    <span>담당자</span>
+                                    <input type="text" value="{{ user.username }}" disabled name="username" id="username">
+                                </div>
+                                <div>
+                                    <span>오더일자</span>
+                                    <input type="date" id="order_date" disabled name="order_date">
+                                </div>
+                            </div>
+                            <div id="orderSheetRight">
+                                <div class="margin_exempt">
+                                    <span>오더구분</span>
+                                    <select name="order_type" id="order_type" class="justselect">
+                                        <option value="0">샘플</option>
+                                        <option value="1">메인</option>
+                                    </select>
+                                </div>
+                                <div class="margin_exempt">
+                                    <span>내외구분</span>
+                                    <select name="order_inout" id="order_inout" class="justselect">
+                                        <option value="0">내수</option>
+                                        <option value="1">외수</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <span>차수</span>
+                                    <input type="text" id="order_round" name="order_round" value="1">
+                                </div>
+                                <div>
+                                    <span>납기일자</span>
+                                    <input type="date" id="due_date" name="due_date">
+                                </div>
+                            </div>
+                        <!--
+                        <div id="designOrder">
+                            <div id="designOrderTop" class="fix">
+                                <div>Name</div>
+                                <div>Order Qty</div>
+                            </div>
+                            <div class="oDesignList fix">
+                                <div>OTA-AAA</div>
+                                <div><input type="text" name="orderQty" id="orderQty"></div>
+                            </div>
+                        </div>
+                        -->
+
+                        <div id="designOrder">
+                            <div>
+                                <table id="designOrderTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Order Yard</th>
+                                            <th>Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--
+                                        <tr>
+                                            <td>OTA-111</td>
+                                            <td><input type="text"></td>
+                                            <td><button>Remove</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>OTA-111</td>
+                                            <td><input type="text"></td>
+                                            <td><button>Remove</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>OTA-111</td>
+                                            <td><input type="text"></td>
+                                            <td><button>Remove</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>OTA-111</td>
+                                            <td><input type="text"></td>
+                                            <td><button>Remove</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>OTA-111</td>
+                                            <td><input type="text"></td>
+                                            <td><button>Remove</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>OTA-111</td>
+                                            <td><input type="text"></td>
+                                            <td><button>Remove</button></td>
+                                        </tr>
+                                    -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="orderBtnWrap">
+                            <div>
+                                <span class="btnSpan" onclick="createOrder()">등록</span>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                    <div id="orderListWrap">
+                        <h3>Order List</h3>
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>오더코드</th>
+                                        <th>거래처</th>
+                                        <th>오더구분</th>
+                                        <th>내외구분</th>
+                                        <th>진행상황</th>
+                                        <th>오더일자</th>
+                                        <th>납기일자</th>
+                                        <th>차수</th>
+                                        <th>담당자</th>
+                                        <th>거래명세표</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for order in orderList %}
+                                    <tr>
+                                        <td class="orderId">{{ order.id }}</td>
+                                        <td>{{ order.code }}</td>
+                                        <td>{{ order.buyer }}</td>
+                                        <!-- if문 -->
+                                        {% if order.type == 0 %}
+                                            <td>샘플</td>
+                                        {% else %}
+                                            <td>메인</td>
+                                        {% endif %}
+                                        {% if order.order_inout == 0 %}
+                                            <td>내수</td>
+                                        {% else %}
+                                            <td>외수</td>
+                                        {% endif %}
+                                        {% if order.state == 0 %}
+                                            <td>대기</td>
+                                        {% elif order.state == 1 %}
+                                            <td>진행중</td>
+                                        {% else %}
+                                            <td>종료</td>
+                                        {% endif %}
+                                        <td>{{ order.order_date|date:"Y-m-d" }}</td>
+                                        <td>{{ order.order_date|date:"Y-m-d" }}</td>
+                                        <td>{{ order.due_date|date:"Y-m-d" }}</td>
+                                        <td>{{ order.order_round }}</td>
+                                        <td>{{ order.manager.name }}</td>
+                                        <td><span onclick="openRawRoll()">거래명세표</span></td>
+                                    </tr>
+
+                                {% endfor %}
+                                <!--
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>OTA-1</td>
+                                        <td>Youngwoo</td>
+                                        <td>샘플</td>
+                                        <td>내수</td>
+                                        <td>진행중</td>
+                                        <td>2019-9-1</td>
+                                        <td>2019-9-5</td>
+                                        <td>1</td>
+                                        <td>서일원</td>
+                                    </tr>
+                                    -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                        <!-- Left Top End -->
+
+                <div id="designListWrap" class="fix">
+                    <h3>Design</h3>
+                    <div id="designSearchBox">
+                        <span>Name</span>
+                        <input type="text" placeholder="Search" onkeyup="searchDesign()">
+                    </div>
+                    <div id="designListMid">
+                        <table id="designListTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Create Date</th>
+                                    <th>Materials</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for designObj in designDataList %}
+                                <tr onclick="setDesignData({{designObj.CAD_Design_Data_id}})" id="designData{{designObj.CAD_Design_Data_id}}" class="designDataTr">
+                                    <td>{{designObj.CAD_Design_Data_name}}</td>
+                                    <td>{{designObj.CAD_Design_Data_create_date|date:"Y-m-d"}}</td>
+                                    <td>{{designObj.CAD_Design_Data_create_date|date:"Y-m-d"}}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="designListTop">
+                        <div id="designTopInfo">
+                            <span>Name</span>
+                            <input type="text" disabled>
+                            <span>Date</span>
+                            <input type="text" disabled>
+                        </div>
+                    </div>
+                    <div id="designBottom">
+                        <div class="fix">
+                            <div id="designImgBox">
+                                <img src="{% static 'image/simulation_img.jpg' %}" width="200px">
+                            </div>
+                            <div id="designInfo">
+                                <h5>Product Data</h5>
+                                <p>WPI : 28w/inch</p>
+                                <p>CPC : 20c/cm</p>
+                                <p>Width : 400inch</p>
+                            </div>
+                        </div>
+                        <div id="designSubmitBox">
+                            <span onclick="addDesignData()">디자인 등록</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form action="/order/modify" method="POST" name="modifyOrderForm" id="modifyOrderForm">{% csrf_token %}
+            <div id="detailOrderModal">
+                <div>
+                    <h3>오더 상세보기</h3>
+                </div>
+                <div class="inputTab fix">
+                    <div>
+                        <div class="line">
+                            <label for="detailCompany">사업장</label>
+                            <input type="text" disabled id="detailCompany" name="detailCompany">
+                        </div>
+                        <div class="line">
+                            <label for="detailBuyer">거래처</label>
+                            <input type="text" id="detailBuyer" name="detailBuyer">
+                        </div>
+                        <div class="line">
+                            <label for="detailManager">담당자</label>
+                            <input type="text" id="detailManager" name="detailManager">
+                        </div>
+                        <div class="line">
+                            <label for="detailOrderDate">오더일자</label>
+                            <input type="date" id="detailOrderDate" name="detailOrderDate">
+                        </div>
+
+                    </div>
+                    <div>
+                        <div class="line margin_exempt">
+                            <label for="detailOrderType">오더구분</label>
+                            <select name="detailOrderType" id="detailOrderType" class="justselect2">
+
+                            </select>
+                        </div>
+                        <div class="line margin_exempt">
+                            <label for="detailOrderInout">내외구분</label>
+                            <select name="detailOrderInout" id="detailOrderInout" class="justselect2">
+
+                            </select>
+                        </div>
+                        <div class="line">
+                            <label for="detailRound">차수</label>
+                            <input type="text" id="detailRound" name="detailRound">
+                        </div>
+                        <div class="line">
+                            <label for="detailDueDate">납기일</label>
+                            <input type="date" id="detailDueDate" name="detailDueDate">
+                        </div>
+                    </div>
+                    <div class="orderDesignDetail">
+                        <div class="fix">
+                            <div id="subDesignImgBox">
+                                <label class="subLabel">시뮬레이션 이미지</label>
+                                <span><img src="{% static 'image/simulation_img.jpg' %}" width="200px"></span>
+                            </div>
+                            <div id="subDesignInfo">
+                                <div id="subOrderWrap" class="subLine">
+                                    <label class="subLabel" for="subOrderCode">서브오더</label>
+                                    <select name='subOrderCode' id='subOrderCode' class='justselect2'>
+                                    </select>
+                                </div>
+                                <div class="subLine">
+                                    <label class="subLabel" for="subDesign">디자인명</label>
+                                    <input type="text" disabled id="subDesign" name="subDesign">
+                                </div>
+                                <div class="subLine lastSubLine">
+                                    <label for="subDesignQty" class="subLabel">수량</label>
+                                    <input type="text" id="subDesignQty" name="subDesignQty">
+                                </div>
+
+                                <input type="hidden" id="oid" name="oid">
+
+                                <!--
+                                <div class="subLine subLine_exempt">
+                                    <label class="subLabel">WPI</label>
+                                    <input type="text">
+                                </div>
+                                <div class="subLine">
+                                    <label class="subLabel">CPC</label>
+                                    <input type="text">
+                                </div>
+                                <div class="subLine">
+                                    <label class="subLabel">Width</label>
+                                    <input type="text">
+                                </div>
+                                -->
+                            </div>
+                            <div id="subModalBtnBox">
+                                <span onclick="modifyOrder()">저장</span>
+                                <span onclick="deleteOrder()">삭제</span>
+                                <span onclick="closeModal()">닫기</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+    <script>
+
+
+        $('#orderListWrap tr').on('dblclick', function(){
+            $('#orderListWrap tr').removeClass('listSelected');
+            $(this).addClass('listSelected');
+            var oid = $(this).find('.orderId').text();
+            $.ajax({
+                url: '/order/detail/'+oid,
+                type: 'POST',
+                cache: false,
+                //data: {},
+                dataType: 'json',
+                async: false,
+                success: function (res) {
+                    $('#mask').css('display','block');
+                    $('#detailOrderModal').css('display','block');
+                    $('#detailSubOrder').empty();
+                    $('#detailCompany').val(res.order.company);
+                    $('#detailCode').val(res.order.code);
+                    $('#detailBuyer').val(res.order.buyer);
+                    $('#detailManager').val(res.order.Manager);
+                    $('#detailOrderDate').val(res.order.order_date);
+                    $('#detailDueDate').val(res.order.due_date);
+                    $('#detailRound').val(res.order.order_round);
+                    $('#detailManager').val(res.order.manager);
+                    $('#oid').val(oid);
+                    console.log(res);
+
+                    var orderType = "";
+                    if(res.order.type == 0){
+                        orderType += "<option value='0'>샘플</option><option value='1'>메인</option>";
+                    }else{
+                        orderType += "<option value='1'>메인</option><option value='0'>샘플</option>";
+                    }
+
+                    var orderInout = "";
+                    if(res.order.order_inout == 0){
+                        orderInout += "<option value='0'>내수</option><option value='1'>외수</option>";
+                    }else{
+                        orderInout += "<option value='1'>외수</option><option value='0'>내수</option>";
+                    }
+
+                    $('#detailOrderType').append(orderType);
+                    $('#detailOrderInout').append(orderInout);
+                    var subOrder = "";
+                    for (var i = 0; i < res.order.subOrder.length; i++){
+                        subOrder += "<option value='"+i+"'>"+res.order.subOrder[i].code+"</option>";
+                    }
+                    $('#subDesign').val(res.order.subOrder[0].design_data.CAD_Design_Data_name);
+                    $('#subOrderCode').append(subOrder);
+                    /* $('#subDesignImgBox').find('span').css('background-image','url("'+res.order.subOrder[0].design_data.CAD_Design_Data_simulation_image+'")') */
+                    $('#subDesignImgBox').find('img').attr('src', res.order.subOrder[0].design_data.CAD_Design_Data_simulation_image);
+                    $('#subDesignQty').val(res.order.subOrder[0].design_qty);
+
+                    /* selectBox Design Function */
+                    createSelectBox2();
+
+
+
+                },
+                error: function () {
+
+                }
+            })
+        });
+
+        $(document).on('click', '#subOrderWrap .selectbox__option2', function(){
+            oid = $('').val();
+            subOrderName = $(this).text();
+            $.ajax({
+                url:'/order/detail/'+oid,
+                cache:false,
+                //data:{},
+                dataType:'json',
+                async: false,
+                success: function(res){
+                    for (var i = 0; i < res.order.subOrder.length; i++){
+                        if(res.order.subOrder[i].code == subOrderName){
+                            $('#subDesignImgBox').find('img').attr('src', res.order.subOrder[i].design_data.CAD_Design_Data_simulation_image);
+                            $('#subDesign').val(res.order.subOrder[i].design_data.CAD_Design_Data_name);
+                            $('#subDesignQty').val(res.order.subOrder[i].design_qty);
+                        }
+                    }
+                },
+                error: function(e){
+                    console.log(e)
+                }
+            });
+        });
+
+        function closeModal(){
+           $('#detailOrderModal').css('display','none');
+           $('#mask').css('display','none');
+           $('.justselect2').empty();
+           $('.selectbox2').remove();
+           $('.listSelected').removeClass('listSelected');
+           window.location.reload(true,0);
+        };
+
+        /*  window.open('/order/warpWorkSheet', 'WorkSheet', 'width=900, height=800') */
+
+    </script>
+{% endblock content %}

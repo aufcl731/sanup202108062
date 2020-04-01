@@ -1,0 +1,105 @@
+#machineWrap {
+    width:calc(100% - 280px);
+    padding:15px 20px;
+    margin-left:240px;
+    margin-top:60px;
+}
+
+.machineTop > div {
+    background-color:#fff;
+    float:left;
+    margin-right:0.5%;
+    min-height:30vh;
+}
+
+.machineTop > div:nth-child(1){
+    width:40%;
+}
+
+.machineTop > div:nth-child(2){
+    width:25%
+}
+
+.machineTop > div:nth-child(3){
+    width:34%;
+    margin-right: 0;
+}
+
+.machineBot {
+    font-size:12px;
+    margin-top:0.7%;
+    width:100%;
+    min-height:calc(70vh - 100px);
+}
+
+.machineDetail > div {
+    color:#fff;
+    width:24.4%;
+    float:left;
+    margin-right: 0.8%;
+    background-color:rgb(44,45,48);
+    margin-bottom:10px;
+}
+
+.machineDetail > div:nth-child(4n) {
+    width:24.4%;
+    float:left;
+    margin-right:0;
+}
+
+.machine div {
+    padding:5px 0;
+}
+
+.machine > div {
+    float:left;
+}
+
+.machineInfo > div {
+    float:left;
+}
+
+.machineInfo span {
+    margin-left:10px;
+    margin-right:20px;
+}
+.machineInfo > div {
+    width:50%;
+}
+
+.machine .machineLeft {
+    width:23%;
+    padding-left:2%;
+}
+
+.machineRight {
+    width:75%;
+}
+
+/* ㅁㄴㅇ */
+
+.machineID span {
+    font-size:20px;
+    font-weight: bold;
+}
+
+.machineProgress {
+    font-weight: bold;
+    font-size:20px;
+}
+
+.machineLeft .machineState {
+    margin-top:3px;
+}
+
+.machineState span {
+    padding:5px 15px;
+    background:radial-gradient(circle, rgb(72, 137, 211), rgb(54, 114, 181));
+    border-radius:10px;
+}
+
+
+
+
+
+/**/

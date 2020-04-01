@@ -1,0 +1,642 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block staticfile %}
+<link rel="stylesheet" href="{% static 'css/schedule.css' %}">
+<link rel="stylesheet" href="{% static 'css/simple-calendar.css' %}">
+<script>
+    var machineType;
+    if('{{ machine }}' == 'False')
+        machineType = 2;
+    else
+        machineType = 1;
+
+    $(document).ready(function() {
+        var platform = window.navigator.platform;
+        var os;
+        var macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+        var orderCount = '{{ designOrderCount }}';
+
+        if (macosPlatforms.indexOf(platform) !== -1) {
+            os = 'Mac OS';
+        }
+
+        $('#calendar').simpleCalendar({
+            fixedStartDay: false
+        });
+
+        if(orderCount > 12 && os != 'Mac OS'){
+            $('#orderDesign tr > td:nth-child(5)').css('width', '77px');
+        }
+    });
+
+    function selectOrder(orderId, machineType) {
+        $('.orderTr').removeClass('selected');
+        var selectedOrderTr = '#order' + orderId;
+        $(selectedOrderTr).addClass('selected');
+        $('#orderId').val(orderId);
+        $('#orderName').val($(selectedOrderTr + '>td:nth-child(1)').html());
+        $.ajax({
+            url:'/schedule/selectOrder',
+            type: 'POST',
+            cache:false,
+            data:{'orderId': orderId, 'type': machineType},
+            dataType:'json',
+            async: false,
+            success: function(res){
+                console.log(res);
+                res.machineJsonList.trs.forEach(function (trsObj) {
+                    var trsCode = '#knitMachineOutput' + trsObj.id;
+                    $(trsCode).text(trsObj.dailyOutPut + 'yard');
+                });
+
+                $('#yarnTable > tbody').empty();
+
+                res.yarnList.forEach(function (obj) {
+                    console.log(obj);
+                    var tr = document.createElement('tr');
+
+                    if(res.yarnList.length > 3 && os != 'Mac OS')
+                        tr.className = 'yarnOver';
+
+                    var td = document.createElement('td');
+                    td.innerHTML = obj.name;
+                    tr.append(td);
+
+                    td = document.createElement('td');
+                    td.innerHTML = obj.code;
+                    tr.append(td);
+
+                    td = document.createElement('td');
+                    td.innerHTML = obj.maker;
+                    tr.append(td);
+
+                    td = document.createElement('td');
+                    td.innerHTML = obj.count;
+                    tr.append(td);
+
+                    td = document.createElement('td');
+                    td.innerHTML = obj.filament;
+                    tr.append(td);
+
+                    td = document.createElement('td');
+                    td.innerHTML = obj.contraction;
+                    tr.append(td);
+
+                    td = document.createElement('td');
+                    td.innerHTML = obj.material;
+                    tr.append(td);
+
+                    td = document.createElement('td');
+                    td.innerHTML = obj.kind;
+                    tr.append(td);
+
+                    td = document.createElement('td');
+                    td.innerHTML = obj.color;
+                    tr.append(td);
+
+                    td = document.createElement('td');
+                    td.innerHTML = obj.qty;
+                    tr.append(td);
+
+                    $('#yarnTable > tbody').append(tr);
+                });
+
+
+                $('#beamTable tbody').empty();
+
+                res.beamList.forEach(function (obj) {
+                    console.log(obj);
+                    var tr = document.createElement('tr');
+
+                    if(res.beamList.length > 3 && os != 'Mac OS')
+                        tr.className = 'beamOver';
+
+                    var td = document.createElement('td');
+
+                    td.innerHTML = obj.name;
+                    tr.append(td);
+
+                    td = document.createElement('td');
+                    td.innerHTML = obj.yarnName;
+                    tr.append(td);
+
+                    td = document.createElement('td');
+                    td.innerHTML = obj.yarn_qty;
+                    tr.append(td);
+
+                    td = document.createElement('td');
+                    td.innerHTML = obj.size;
+                    tr.append(td);
+
+                    $('#beamTable tbody').append(tr);
+                });
+            },
+            error: function(e){
+                console.log(e)
+            }
+        });
+    }
+
+    function showWarpMachineInfo(id, type) {
+        console.log(id);
+        $('#mask').css('display', 'block');
+        $('#detailOrderModalWarp').css('display', 'block');
+        event.stopPropagation();
+
+        $.ajax({
+            url: '/machine/getWarpInfoByJson',
+            type: 'POST',
+            cache: false,
+            data: {'id': id, 'type': type},
+            dataType: 'json',
+            async: false,
+            success: function (res) {
+                if(type==1) {
+                    console.log(res);
+                    $('#warpName').html(res.tws_name);
+                    $('#warpUser').html(res.user_id);
+                    $('#warpInstallationTime').html(res.tws_installation_time);
+                    $('#warpCode').html(res.tns_code);
+                    $('#warpCompany').html(res.company_code);
+                    $('#warpIp').html(res.tws_ip);
+                }else{
+                    console.log(res);
+                    $('#warpName').html(res.name);
+                    $('#warpUser').html('');
+                    $('#warpInstallationTime').html(res.create_date);
+                    $('#warpCode').html(res.code);
+                    $('#warpCompany').html(res.company_id);
+                    $('#warpIp').html('');
+                }
+            },
+            error: function (e) {
+                console.log(e)
+            }
+        });
+    }
+
+    function showKnitMachineInfo(id, type) {
+        console.log(id);
+        $('#mask').css('display', 'block');
+        $('#detailOrderModalKnit').css('display', 'block');
+        event.stopPropagation();
+
+        $.ajax({
+            url:'/machine/getKnitInfoByJson',
+            type: 'POST',
+            cache:false,
+            data:{'id': id, 'type': type},
+            dataType:'json',
+            async: false,
+            success: function(res){
+                console.log(res);
+                if(type == 1) {
+                    $('#knitName').html(res.trs_model_name);
+                    $('#knitCompany').html(res.company_code);
+                    $('#knitInstallationTime').html(res.trs_installation_time);
+                    $('#knitBeamCount').html(res.trs_beam_cnt);
+                    $('#knitEacEnable').html(res.trs_eac_enable);
+                    $('#knitLowmotorEnable').html(res.trs_lowmotor_enable);
+                    $('#knitCode').html(res.tns_code);
+                    $('#knitUser').html(res.user_id);
+                    $('#knitTempo').html(res.trs_tempo);
+                    $('#knitBarCount').html(res.trs_bar_cnt);
+                    $('#knitGauge').html(res.trs_gauge);
+                    $('#knitIp').html(res.trs_ip);
+                }else{
+                    $('#knitName').html(res.name);
+                    $('#knitCompany').html(res.company_id);
+                    $('#knitInstallationTime').html(res.create_data);
+                    $('#knitBeamCount').html('');
+                    $('#knitEacEnable').html('');
+                    $('#knitLowmotorEnable').html('');
+                    $('#knitCode').html(res.code);
+                    $('#knitUser').html(res.user_id);
+                    $('#knitTempo').html('');
+                    $('#knitBarCount').html(res.bar_cnt);
+                    $('#knitGauge').html(res.gauge);
+                    $('#knitIp').html('');
+                }
+            },
+            error: function(e){
+                console.log(e)
+            }
+        });
+    }
+
+    function selectMachine(type, id, machine) {
+        if(type == 1){
+            $('.warpMachine').removeClass('selected');
+            $('#warpMachine' + id).addClass('selected');
+            $('#warpMachineId').val(id);
+            $('#warpMachineName').val($('#warpMachineName' + id).html());
+
+        }else{
+            $('.knitMachine').removeClass('selected');
+            $('#knitMachine' + id).addClass('selected');
+            $('#knitMachineId').val(id);
+            $('#knitMachineName').val($('#knitMachineName' + id).html());
+        }
+    }
+
+    function closeModal(){
+       $('#detailOrderModalKnit').css('display','none');
+       $('#mask').css('display','none');
+
+    }
+
+    function closeModal1(){
+       $('#detailOrderModalWarp').css('display','none');
+       $('#mask').css('display','none');
+       location.reload()
+    }
+/*
+    function showYarnInfo(id) {
+        console.log(id);
+        $.ajax({
+            url:'/material/getYarnInfoByJson',
+            type: 'POST',
+            cache:false,
+            data:{'id': id},
+            dataType:'json',
+            async: false,
+            success: function(res){
+                $('#yarnName').html(res.name);
+                $('#yarnCode').html(res.code);
+                $('#yarnQty').html(res.qty);
+                $('#yarnMaker').html(res.maker);
+                $('#yarnCount').html(res.count);
+                $('#yarnFilament').html(res.filament);
+                $('#yarnContraction').html(res.contraction);
+                $('#yarnMaterial').html(res.material);
+                $('#yarnKind').html(res.kind);
+                $('#yarnColor').html(res.color);
+            },
+            error: function(e){
+                console.log(e)
+            }
+        });
+        $('#detailOrderModalWarp').css('display','block');
+        $('#mask').css('display','block');
+    }
+*/
+</script>
+<script type="text/javascript" src="{% static 'js/jquery.simple-calendar.js' %}"></script>
+{% endblock staticfile %}
+
+{% block content %}
+<div id="ContentWrap" class="fix">
+    <div>
+        <h4>Calendar</h4>
+        <div class="calendarMachine">
+            <div id="calendar"></div>
+            <hr>
+            <h4>Machine Schedule</h4>
+            <div id="machineSchedule">
+                <div id="warpMachineSchedule">
+                    <div>
+                        <h4>정경기</h4>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="division"></div>
+                <div id="knitMachineSchedule">
+                    <div>
+                        <h4>경편기</h4>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h4>Schedule</h4>
+        <div class="orderMaterial">
+            <div id="orderDesign">
+                <div class="scheduleOrder">
+                    <h4>Order</h4>
+                    <div class="order">
+                        <table>
+                            <col width="26%">
+                            <col width="20%">
+                            <col width="14%">
+                            <col width="20%">
+                            <col width="20%">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Design</th>
+                                    <th>Manager</th>
+                                    <th>Order Date</th>
+                                    <th>Due Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in designOrderList %}
+                                    {% if machine %}
+                                        <tr class="orderTr" onclick="selectOrder({{ order.id }}, 1)" id="order{{ order.id }}">
+                                            <td>{{ order.code }}</td>
+                                            <td>{{ order.design_data_id.CAD_Design_Data_name }}</td>
+                                            <td>{{ order.order_id.manager.name }}</td>
+                                            <td>{{ order.order_id.order_date|date:"Y-m-d" }}</td>
+                                            <td>{{ order.order_id.due_date|date:"Y-m-d" }}</td>
+                                        </tr>
+                                    {% else %}
+                                        <tr class="orderTr" onclick="selectOrder({{ order.id }}, 2)" id="order{{ order.id }}">
+                                            <td>{{ order.code }}</td>
+                                            <td>{{ order.design_data_id.CAD_Design_Data_name }}</td>
+                                            <td>{{ order.order_id.manager.name }}</td>
+                                            <td>{{ order.order_id.order_date|date:"Y-m-d" }}</td>
+                                            <td>{{ order.order_id.due_date|date:"Y-m-d" }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="machine">
+                    <div class="warpMachineList">
+                        <h4>정경기</h4>
+                        <div>
+                            {% for warpMachineObj in warpMachineList %}
+                                {% if machine %}
+                                    <div class="warpMachine" id="warpMachine{{ warpMachineObj.id }}" onclick="selectMachine(1, {{ warpMachineObj.id }})">
+                                        <div>
+                                            <div id="warpMachineName{{ warpMachineObj.id }}">{{ warpMachineObj.tns_code }}</div>
+                                            <img class="infoBtn" onclick="showWarpMachineInfo('{{ warpMachineObj.pk }}', 1)" src="{% static 'image/information.png' %}">
+                                        </div>
+                                        <div><div>{{ warpMachineObj.tws_name }}</div></div>
+                                        <div><div id="warpMachine{{ warpMachineObj.tns_code }}">Order를 선택하세요</div></div>
+                                    </div>
+                                {% else %}
+                                    <div class="warpMachine" id="warpMachine{{ warpMachineObj.pk }}" onclick="selectMachine(1, {{ warpMachineObj.pk }})">
+                                        <div>
+                                            <div id="warpMachineName{{ warpMachineObj.pk }}">{{ warpMachineObj.code }}</div>
+                                            <img class="infoBtn" onclick="showWarpMachineInfo('{{ warpMachineObj.pk }}', 2)" src="{% static 'image/information.png' %}">
+                                        </div>
+                                        <div><div>{{ warpMachineObj.name }}</div></div>
+                                        <div><div id="warpMachine{{ warpMachineObj.code }}">Order를 선택하세요</div></div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="division"></div>
+                    <div class="knitMachineList">
+                        <h4>경편기</h4>
+                        <div>
+                            {% for knitMachineObj in knitMachineList %}
+                                {% if machine %}
+                                    <div class="knitMachine" id="knitMachine{{ knitMachineObj.id }}" onclick="selectMachine(2, {{ knitMachineObj.id }})">
+                                        <div>
+                                            <div id="knitMachineName{{ knitMachineObj.id }}">{{ knitMachineObj.tns_code }}</div>
+                                            <img class="infoBtn" onclick="showKnitMachineInfo('{{ knitMachineObj.pk }}', 1)" src="{% static 'image/information.png' %}">
+                                        </div>
+                                        <div><div>{{ knitMachineObj.trs_model_name }}</div></div>
+                                        <div><div id="knitMachineOutput{{ knitMachineObj.pk }}">Order를 선택하세요</div></div>
+                                    </div>
+                                {% else %}
+                                    <div class="knitMachine" id="knitMachine{{ knitMachineObj.pk }}" onclick="selectMachine(2, {{ knitMachineObj.pk }})">
+                                        <div>
+                                            <div id="knitMachineName{{ knitMachineObj.pk }}">{{ knitMachineObj.code }}</div>
+                                            <img class="infoBtn" onclick="showKnitMachineInfo('{{ knitMachineObj.pk }}', 2)" src="{% static 'image/information.png' %}">
+                                        </div>
+                                        <div><div>{{ knitMachineObj.name }}</div></div>
+                                        <div><div id="knitMachineOutput{{ knitMachineObj.pk }}">Order를 선택하세요</div></div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div id="materialDiv">
+                <div id="yarnDiv">
+                    <div>Yarn</div>
+                    <div id="yarnTableDIv">
+                        <table id="yarnTable">
+                            <thead>
+                                <tr>
+                                    <th>이름</th>
+                                    <th>코드</th>
+                                    <th>메이커</th>
+                                    <th>굵기</th>
+                                    <th>필라멘트</th>
+                                    <th>수축률</th>
+                                    <th>재료</th>
+                                    <th>종류</th>
+                                    <th>색</th>
+                                    <th>수량</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <!--{% for yarn in yarnList %}
+                                <tr class="yarnOver">
+                                    <td>{{ yarn.name }}</td>
+                                    <td>{{ yarn.code }}</td>
+                                    <td>{{ yarn.maker }}</td>
+                                    <td>{{ yarn.count }}</td>
+                                    <td>{{ yarn.filament }}</td>
+                                    <td>{{ yarn.contraction }}</td>
+                                    <td>{{ yarn.material }}</td>
+                                    <td>{{ yarn.kind }}</td>
+                                    <td>{{ yarn.color }}</td>
+                                    <td>{{ yarn.lab }}</td>
+                                    <td>{{ yarn.qty }}</td>
+                                </tr>
+                            {% endfor %}
+                            -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="beamRawDiv">
+                    <div>Beam</div>
+                    <div id="beamTableDiv">
+                            <table id="beamTable">
+                                <colgroup>
+                                    <col width="30%"> <!-- 이름 -->
+                                    <col width="30%"> <!-- 코드 -->
+                                    <col width="20%"> <!-- 굵기 -->
+                                    <col width="20%"> <!-- 필라멘트 -->
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>이름</th>
+                                        <th>실</th>
+                                        <th>실수량</th>
+                                        <th>크기</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                    </div>
+                    <div>Raw</div>
+                    <div id="rawTableDiv">
+                        <table id="rawTable">
+                            <thead>
+                                <tr>
+                                    <th>롤 코드</th>
+                                    <th>중량</th>
+                                    <th>감긴량</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <form method="post" action="/schedule/createSchedule">
+                {% if machine == True %}
+                    <input type="hidden" name="machine" value="1">
+                {% else %}
+                    <input type="hidden" name="machine" value="2">
+                {% endif %}
+                <div class="createScheduleForm">
+                    <div>Order</div>
+                    <div><input type="text" id="orderName" disabled><input type="hidden" name="orderId" id="orderId"> </div>
+                    <div>Warping</div>
+                    <div>
+                        <div>
+                            <input type="text" id="warpMachineName" disabled><input type="hidden" id="warpMachineId" name="warpMachineId">
+                        </div>
+                        <div>
+                            <input type="datetime-local" id="warpStartTime" name="warpStartTime">
+                        </div>
+                        <div>
+                            <input type="datetime-local" id="warpEndTime" name="warpEndTime">
+                        </div>
+                    </div>
+                    <div>
+                        Knitting
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text" id="knitMachineName" disabled><input type="hidden" id="knitMachineId" name="knitMachineId">
+                        </div>
+                        <div>
+                            <input type="datetime-local" id="knitStartTime" name="knitStartTime">
+                        </div>
+                        <div>
+                            <input type="datetime-local" id="knitEndTime" name="knitEndTime">
+                        </div>
+                    </div>
+                    <div>
+                        <button>스케줄저장</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="detailOrderModalKnit">
+    <div>
+        <h3>경편기 상세보기</h3>
+    </div>
+    <div class="inputTab fix">
+        <div>
+            <div class="line">
+                <label for="knitName">이름</label>
+                <div id="knitName"></div>
+            </div>
+            <div class="line">
+                <label for="knitCompany">회사</label>
+                <div id="knitCompany"></div>
+            </div>
+            <div class="line">
+                <label for="knitInstallationTime">설치시간</label>
+                <div id="knitInstallationTime"></div>
+            </div>
+            <div class="line">
+                <label for="knitBeamCount">빔개수</label>
+                <div id="knitBeamCount"></div>
+            </div>
+            <div class="line">
+                <label for="knitEacEnable">eac_enable</label>
+                <div id="knitEacEnable"></div>
+            </div>
+            <div class="line">
+                <label for="knitLowmotorEnable">lowmotor_enable</label>
+                <div id="knitLowmotorEnable"></div>
+            </div>
+        </div>
+        <div>
+            <div class="line margin_exempt">
+                <label for="knitCode">코드</label>
+                <div id="knitCode"></div>
+            </div>
+            <div class="line margin_exempt">
+                <label for="knitUser">작업자</label>
+                <div id="knitUser"></div>
+            </div>
+            <div class="line">
+                <label for="knitTempo">템포</label>
+                <div id="knitTempo"></div>
+            </div>
+            <div class="line">
+                <label for="knitBarCount">바개수</label>
+                <div id="knitBarCount"></div>
+            </div>
+            <div class="line">
+                <label for="knitGauge">게이지</label>
+                <div id="knitGauge"></div>
+            </div>
+            <div class="line">
+                <label for="knitIp">ip</label>
+                <div id="knitIp"></div>
+            </div>
+        </div>
+    </div>
+    <div id="subModalBtnBox">
+        <span onclick="closeModal()">닫기</span>
+    </div>
+</div>
+<div id="detailOrderModalWarp">
+    <div>
+        <h3>정경기 상세보기</h3>
+    </div>
+    <div class="inputTab fix">
+        <div>
+            <div class="line">
+                <label for="warpName">이름</label>
+                <div id="warpName"></div>
+            </div>
+            <div class="line">
+                <label for="warpUser">작업자</label>
+                <div id="warpUser"></div>
+            </div>
+            <div class="line">
+                <label for="warpInstallationTime">설치시간</label>
+                <div id="warpInstallationTime"></div>
+            </div>
+        </div>
+        <div>
+            <div class="line margin_exempt">
+                <label for="warpCode">코드</label>
+                <div id="warpCode"></div>
+            </div>
+            <div class="line margin_exempt">
+                <label for="warpCompany">회사</label>
+                <div id="warpCompany"></div>
+            </div>
+            <div class="line">
+                <label for="warpIp">ip</label>
+                <div id="warpIp"></div>
+            </div>
+        </div>
+    </div>
+    <div id="subModalBtnBoxYarn">
+        <span onclick="closeModal1()">닫기</span>
+    </div>
+</div>
+{% endblock content %}

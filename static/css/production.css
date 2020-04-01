@@ -1,0 +1,9 @@
+.processLink a{
+    text-decoration:none;
+    color:#000;
+    font-weight: bold;
+}
+
+.processLink a:hover, .processLink a:active, .processLink a:focus, .processLink a:visited {
+    color:#000;
+}

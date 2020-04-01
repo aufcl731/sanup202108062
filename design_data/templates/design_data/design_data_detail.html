@@ -1,0 +1,139 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+{% block content %}
+        <div id="orderWrap">
+            <h2>경편설계도</h2>
+            <div>Name : {{ object.CAD_Design_Data_name }}</div>
+            <div id="topSecond">
+                <div>CODE : {{ object.CAD_Design_Data_code }}</div>
+                <div id="date">DATE : {{ object.CAD_Design_Data_create_date|date:"Y-m-d" }}</div>
+            </div>
+            <table id="yarnTable">
+                <colgroup>
+                    <col width="5%">
+                    <col width="5%">
+                    <col width="10%">
+                    <col width="13%">
+                    <col width="7%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="5%">
+                    <col width="10%">
+                </colgroup>
+                <tr>
+                    <th>BAR</th>
+                    <th>사번</th>
+                    <th>원사메이커</th>
+                    <th>사종</th>
+                    <th>색상</th>
+                    <th>고유코드</th>
+                    <th>비율(%)</th>
+                    <th>송출(mm/Rank)</th>
+                    <th>본수</th>
+                    <th>빔수</th>
+                    <th>총본수</th>
+                </tr>
+                {% for layer in object.fsty_cad_layer_set.all %}
+                <tr>
+                    <td>{{ layer.CAD_Layer_name }}</td>
+                    <td>{{ layer.fsty_cad_yarn.CAD_Yarn_idx }}</td>
+                    <td>{{ layer.fsty_cad_yarn.CAD_Yarn_maker }}</td>
+                    <td>{{ layer.fsty_cad_yarn.CAD_Yarn_spec }}</td>
+                    <td><div class="cadyarn_color" style="background-color:rgb({{ layer.fsty_cad_yarn.CAD_Yarn_rgb_color }}); width:80%; height:15px; border: 1px solid black;"></div></td>
+                    <td>{{ layer.fsty_cad_yarn.CAD_Yarn_code }}</td>
+                    <td>{{ layer.CAD_Layer_ratio }}</td>
+                    <td>{{ layer.CAD_Layer_mm_rack }}</td>
+                    <td>{{ layer.CAD_Layer_use }}</td>
+                    <td>{{ layer.CAD_Layer_beam }}</td>
+                    <td>{{ layer.CAD_Layer_total }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <table id="fabricTable">
+                <colgroup>
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                </colgroup>
+                <tr>
+                    <th>원단</th>
+                    <th>웨일밀도</th>
+                    <th>코스밀도</th>
+                    <th>폭</th>
+                    <th>중량/폭</th>
+                </tr>
+                {% for fabric in object.fsty_cad_production.fsty_cad_fabric_set.all %}
+                <tr>
+                    <td>{% if fabric.CAD_Fabric_type == 'R' %}생지{% else %}가공지{% endif %}</td>
+                    <td>{{ fabric.CAD_Fabric_wpi }} w/inch</td>
+                    <td>{{ fabric.CAD_Fabric_cpi }} c/cm</td>
+                    <td>{{ fabric.CAD_Fabric_width }} inch</td>
+                    <td>{{ fabric.CAD_Fabric_weight_per_width }} g/y</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <table id="colorTable">
+                <colgroup>
+                    <col width="10%">
+                    <col width="30%">
+                    <col width="30%">
+                    <col width="30%">
+                </colgroup>
+                <tr>
+                    <th>BAR</th>
+                    <th>RGB Color</th>
+                    <th>LAB Color</th>
+                    <th>Pantone Color</th>
+                </tr>
+                {% for layer in object.fsty_cad_layer_set.all %}
+                <tr>
+                    <td>{{ layer.CAD_Layer_name }}</td>
+                    <td>{{ layer.fsty_cad_yarn.CAD_Yarn_rgb_color }}</td>
+                    <td>{{ layer.fsty_cad_yarn.CAD_Yarn_lab_color }}</td>
+                    <td>{{ layer.fsty_cad_yarn.CAD_Yarn_pantone_color }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="output"><span>일일생산량 :</span> {{ object.fsty_cad_production.CAD_Production_quota_per_day }}</div>
+            <div class="machineName"><span>기종 :</span> {{ object.fsty_cad_production.CAD_Production_machine_name }}</div>
+            <div>
+                {% for layer in object.fsty_cad_layer_set.all %}
+                <div>
+                    <div class="course"><span>{{ layer.CAD_Layer_name }}</span> {{ layer.fsty_cad_chain_link.CAD_Chain_Link_course }}</div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="array">
+                <h3>배열</h3>
+                {% for layer in object.fsty_cad_layer_set.all %}
+                <div class="inoutData">
+                    <div><span>{{ layer.CAD_Layer_name }}</span> {{ layer.CAD_Layer_iodata }}</div>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="note">
+                <h3>비고</h3>
+                <div>{{ object.fsty_cad_production.CAD_Production_note}}</div>
+            </div>
+            <div id="psBox" class="fix">
+                <div>
+                    <h4>조직도</h4>
+                    <div><img src="{{ object.CAD_Design_Data_pattern_image.url }}"></div>
+                </div>
+
+                <div>
+                    <h4>배율 : {{ object.CAD_Design_Data_magnification }}</h4>
+                    <div><img src="{{ object.CAD_Design_Data_simulation_image.url }}"></div>
+                </div>
+
+            </div>
+            <div id="qrBox"><img src="{{ object.CAD_Design_Data_qr_code.url }}"></div>
+        </div>
+    </body>
+    </html>
+ {% endblock content %}

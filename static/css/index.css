@@ -1,0 +1,434 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');
+* {
+    margin:0;
+    padding:0;
+}
+
+body {
+    padding:0;
+    margin:0;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;    
+}
+
+
+#mainWrap {
+    max-width:1740px;
+    background-color:rgb(219,221,224);
+
+}
+
+#mainWrap>div {
+    float:left;
+}
+
+#head {
+    z-index: 9999;
+    height:60px;
+    line-height:60px;
+    color:rgb(226, 226, 226);           
+    min-width:100%;
+    background-color: rgb(44,46,48);
+    position:fixed;
+    top:0;
+    left:0;
+}
+
+
+#head h1 {
+    margin-left:50px;
+    float:left;
+}
+
+.headRight {
+    text-align:right;
+
+}
+
+.headRight span {
+    margin-right:40px;
+    cursor: pointer;
+ }
+
+
+.headRight img {
+    vertical-align: middle;
+}
+
+#mainWrap #gnb {
+    background-color:rgb(58, 62, 65);
+    min-height:calc(100vh - 60px);
+    width:240px;
+    position:fixed;
+    top:60px;
+    left: 0px;
+    z-index:9999;
+}
+
+
+a img {
+    vertical-align: middle;
+    margin-right:10px;
+    margin-bottom:5px;
+}
+
+h4 {
+    margin-bottom:10px;
+    color:#000;
+}
+
+#gnb{
+     margin-left: 0px;
+}
+
+#gnb ul {
+    margin-top:35px;
+}
+
+#gnb li a {
+    padding-left:30px;
+    height:45px;
+    line-height: 45px;
+    color:#fff;
+    display:block;
+}
+
+
+#gnb .gnbSelect a, #gnb li a:hover {
+    color:#fff;
+    background-image: linear-gradient(to right, rgb(134, 134, 134) , rgba(134, 134, 134, 0.17));
+}
+
+
+#contentsWrap, #orderContentWrap, #settingContentWrap {
+    margin-left:240px;
+    margin-top:60px;
+    background-color:rgb(219,221,224);
+    /* min-width:calc(100% - 240px);*/
+    width:1470px;
+    padding:15px 20px;
+    min-height:calc(100vh - 90px);
+}
+.ahffk{
+    overflow:hidden;
+}
+
+.alram{
+    width:300px;
+    overflow: auto;
+    color: #000;
+    background-color: #dbdde0;
+    position:fixed;
+    right: -300px;
+    top : 60px;
+    border-radius:0 0 0 8px;
+    z-index:99999;
+}
+.alram > div{
+    padding-left: 20px;
+}
+
+#contentsWrap > div {
+    float:left;
+    width:1470px;
+    /* background-color:#f99; */
+    margin-right:15px;
+}
+
+
+#contentsWrap > div:last-child {
+    margin-right:0;
+}
+
+.content > div {
+    float:left;
+}
+
+/* Order Tab */
+
+#orderWrap {
+    width:480px;
+    color:rgb(105, 105, 105);
+    min-height:40vh;
+    margin-right:15px;
+}
+
+#orderWrap>div {
+    float:left;
+    margin-bottom:1.5%;
+}
+
+.orderDiv {
+    min-height:40vh;
+}
+
+.orderDiv>div {
+    width:235px;
+    margin-right:10px;
+    height:20vh;
+    background-color:#fff;
+}
+
+.orderDiv>div:first-child {
+    margin-bottom:10px;
+}
+
+.orderDiv:last-child div {
+    margin-right:0;
+}
+
+.orderImg {
+    height:30%;
+    padding-left:10%;
+    padding-top:5%;
+}
+
+
+.orderText {
+    text-align:right;
+}
+
+#orderWrap .orderText>p:first-child {
+    color:#000;
+    font-size:60px;
+}
+
+.orderText>p {
+    margin-right:10%;
+}
+
+.orderText>p>strong {
+    color:rgb(59,84,166);
+}
+/* Efficiency Tab */
+
+#efficiencyWrap {
+    width:480px;
+    margin-right:15px;
+}
+
+#efficiencyWrap > div {
+    float:left;
+    width:235px;
+    margin-right:10px;
+    background:#fff;
+    min-height:calc(40vh + 10px);
+}
+
+#efficiencyWrap > div:last-child{
+    margin-right:0;
+}
+
+
+/* result Tab */
+#resultWrap {
+    width:480px;
+}
+
+#resultWrap > div {
+    width:480px;
+    min-height: calc(40vh + 10px);
+    background:#fff;
+}
+
+
+
+/* Bot Con */
+
+#con1 {
+    margin-top:20px;
+    width:480px;
+    margin-right:15px;    
+}
+
+#con1 > div{
+    /*background:#fff;*/
+    min-height:38vh;
+}
+
+/* Production Status by Order */
+#order_status {
+    margin-top:20px;
+    width:970px;
+}
+
+#order_status > div {
+    background:#fff;
+    min-height:38vh
+}
+
+
+#order_status table, #order_status tr, #order_status td, #order_status th  {
+    color:#605f5f;
+    border-collapse: collapse;
+    text-align: center;
+    font-size:12px;
+}
+
+#order_status td, #order_status th{
+    border:1px solid #a2a3a4;
+}
+
+#order_status table {
+    width:100%;
+}
+
+#order_status th {
+    background-color:rgb(62, 67, 88);
+    color:#fff;
+}
+
+#order_status th:last-child {
+    border:1px solid rgb(112,112,112);
+}
+
+#order_status td, #order_status th {
+    padding:5px 0;
+}
+
+    
+
+.fix:after {
+    clear:both;
+    display:block;
+    content:'';
+}
+
+#circle1, #circle2 {
+    position:relative;
+}
+
+.e_text {
+    position:absolute;
+    top:95px;
+    left:90px;
+    font-size:12px;
+    color:#aaa;
+    
+}
+
+.e_botText {
+    color:#aaa;
+}
+
+.e_botText > p {
+    text-align: center;
+    margin-top:20px;
+    font-size:14px;
+}
+
+
+
+.e_botText > p > span {
+    color:rgb(59,84,166);
+    font-weight: bold;
+    font-size:18px;
+}
+
+@media screen and (min-width:1750px){
+    
+}
+
+.userPropic>img {
+    display:inline-block;
+    width:25px;
+    height:25px;
+    border-radius:25px;
+}
+
+#mask {
+    background:rgba(0,0,0,0.3);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:100000;
+    display:none;
+}
+
+#weatherWrap>div {
+    float: left;
+    margin-bottom: 1.5%;
+}
+
+.weatherDiv {
+    min-height:40vh;
+}
+
+.weatherDiv>div {
+    width:235px;
+    margin-right:10px;
+    height:18.5vh;
+    background-color:#fff;
+}
+
+.weatherDiv>div:first-child {
+    margin-bottom:10px;
+}
+
+.weatherDiv:last-child>div {
+    margin-right:0;
+}
+
+.weatherImg {
+    padding-left:25px;
+}
+
+.weatherImg > div{
+    float: left;
+    margin-top: 5px;
+}
+
+.weatherImg > div > span {
+    font-weight: bold;
+    color: #000000;
+    font-size: 4.5vh;
+}
+
+.weatherImg > img {
+    display: block;
+    float: left;
+    margin:  0 25px 0 10px;
+    width: 6.5vh;
+}
+
+.weatherText {
+    clear: both;
+    text-align: center;
+}
+
+.weatherText>span {
+    color:#aaa;
+    font-size:1.3vh;
+}
+
+.humidityText {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.humidityText>span {
+    color:#aaa;
+    font-size:1.8vh;
+}
+
+.humidityText > img {
+    width: 20px;
+}
+
+.date {
+    padding-top: 20px;
+    color: #aaaaaa;
+    text-align: center;
+    font-size: 1.8vh;
+}
