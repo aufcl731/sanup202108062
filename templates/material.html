@@ -35,6 +35,7 @@
                                 <col width="6%"> <!-- 종류 -->
                                 <col width="8%"> <!-- RGB -->
                                 <col width="8%"> <!-- LAB -->
+                                <col width="8%"> <!-- 무게 -->
                                 <col width="8%"> <!-- 수량 -->
                                 <col width="8%"> <!-- 삭제 -->
                             </colgroup>
@@ -51,6 +52,7 @@
                                     <th>종류</th>
                                     <th>RGB</th>
                                     <th>LAB</th>
+                                    <th>무게</th>
                                     <th>수량</th>
                                     <th>입고일</th>
                                     <th>삭제</th>
@@ -70,6 +72,7 @@
                                     <td>{{ yarn.kind }}</td>
                                     <td>{{ yarn.color }}</td>
                                     <td>{{ yarn.lab }}</td>
+                                    <td>{{ yarn.weight }}</td>
                                     <td>{{ yarn.qty }}</td>
                                     <td>{{ yarn.Receivingdate}}</td>
                                     <td><span class='removeBtn' onclick='delYarnData("{{ yarn.id }}")'>Remove</span></td>
@@ -280,6 +283,10 @@
                             <input type="text" id="yarnColor" name="yarnColor">
                             -->
                             <input type="text" id="yarnColor" name="yarnColor" class="form-control" data-control="hue" value="#000">
+                        </div>
+                        <div class="line">
+                            <label>무게</label>
+                            <input type="text" id="yarnWeight" name="yarnWeight">
                         </div>
                         <div class="line">
                             <label>수량</label>

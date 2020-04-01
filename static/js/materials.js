@@ -282,6 +282,11 @@ function createYarn() {
         yarnForm.yarnContraction.focus();
         return;
     }
+    if(!exp_number.test(yarnForm.yarnWeight.value)){
+        alert('무게은 숫자만 입력가능합니다.');
+        yarnForm.yarnWeight.focus();
+        return;
+    }
     if(!exp_number.test(yarnForm.yarnQty.value)){
         alert('입고량은 숫자만 입력가능합니다.');
         yarnForm.yarnQty.focus();
