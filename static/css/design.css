@@ -1,0 +1,385 @@
+#orderContentWrap {
+    width:1540px;
+    color: black;
+    font-size:12px;
+}
+
+table {
+    border-color: rgb(215, 216, 216);
+}
+
+hr {
+    color: #3599dc;
+    height: 1px;
+    background: #3599dc;
+}
+
+#orderContentWrap > div {
+    background:#fff;
+    height: 830px;
+    float: left;
+}
+
+#orderContentWrap input, #orderContentWrap select {
+    width:150px;
+    text-align:center;
+    padding: 3px;
+}
+
+#showDesingData {
+    width: 1120px;
+    margin-left: 10px;
+    position:relative;
+}
+body>#designData{
+    align-content: center;
+
+}
+#designData {
+    height: 740px;
+    width:1030px;
+    margin: 0 auto;
+    overflow: auto;
+    padding: 10px 20px 10px 50px;
+
+}
+
+#designDataDelete {
+    margin:0 15px;
+    width: 1090px;
+    height: 70px;
+}
+
+#showDesignDataList{
+    width: 400px;
+}
+
+#designDataDelete button{
+    width: 75px;
+    height: 40px;
+    margin: auto 0 auto 1000px;
+}
+
+#designDataList {
+    height: 630px;
+    font-size:10px;
+}
+
+#searchDesign {
+    height: 80px;
+    margin-top: 20px;
+}
+
+#searchDesign div {
+    margin-top:15px;
+    margin-left:24px;
+}
+#searchDesign span {
+    display:inline-block;
+    width:100px;
+    text-align:center;
+    padding:8px;
+    font-size:10px;
+    background-color: rgb(62, 67, 88);
+    font-weight: bold;
+    color:#fff;
+}
+
+#orderContentWrap #searchName {
+    height:17px;
+    width:223px;
+}
+
+#orderContentWrap #searchName::placeholder{
+    color: rgb(62, 67, 88);
+    font-weight: bold;
+}
+
+#designDataList > table {
+    margin: 0 auto;
+    display: block;
+    width: 354px;
+    border-bottom: 1px solid rgb(215, 216, 216);
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#designDataList thead{
+    background-color: rgb(62, 67, 88);
+    color: #fff;
+}
+
+#designDataList > table tr{
+    height: 35px;
+}
+
+#designDataList th, td{
+    border:1px solid rgb(215, 216, 216);
+}
+
+#psBox img{
+    width: 100%;
+}
+
+#designDataList > table tbody {
+    display: block;
+    max-height: 630px;
+    overflow: auto;
+}
+
+table tr:nth-child(2n) {
+    background:rgb(239,242,245);
+}
+
+#designDataList th:nth-of-type(1), #designDataList td:nth-of-type(1) {
+    width: 50px;
+}
+#designDataList th:nth-of-type(2), #designDataList td:nth-of-type(2) {
+    width: 150px;
+}
+#designDataList th:last-child, #designDataList td:last-child {
+    width: 150px;
+}
+
+.fix:after {
+    clear:both;
+    display:block;
+    content:'';
+}
+
+#orderWrap {
+    width:90%;
+    margin:0 auto;
+}
+
+#orderWrap>h2 {
+    text-align: center;
+        color: rgb(54, 94, 114);
+}
+
+#orderWrap>div {
+    clear: both;
+}
+
+#topSecond {
+    position:relative;
+    margin-bottom:5px;
+    width: 100%;
+}
+
+#date {
+    position:absolute;
+    top:0;
+    right:0;
+}
+
+#yarnTable {
+    width:99%;
+    margin-bottom:35px;
+    border-collapse: collapse;
+    border:1px solid rgb(215, 216, 216);
+}
+
+#yarnTable td, #yarnTable th {
+    text-align:center;
+    padding:5px 5px;
+    border-collapse: collapse;
+    border:1px solid rgb(215, 216, 216);
+}
+
+.cadyarn_color {
+    margin:0 auto;
+}
+
+#fabricTable, #colorTable {
+    width:98%;
+    margin-bottom:35px;
+    border-collapse: collapse;
+    border:1px solid rgb(215, 216, 216);
+}
+
+#fabricTable td, #fabricTable th, #colorTable th,  #colorTable td, #layerTable td, #layerTable th, #productionTable td, #productionTable th, #imgTable td, #imgTable th {
+    text-align:center;
+    padding:5px 5px;
+    border-collapse: collapse;
+    border:1px solid rgb(215, 216, 216);
+}
+
+.course > span {
+    font-weight: bold;
+    margin-right:15px;
+}
+
+.output>span, .machineName>span {
+    font-weight: bold;
+}
+
+.output, .machineName {
+    margin-bottom:15px;
+}
+
+.array {
+    margin-bottom:35px;
+}
+
+.inoutData span {
+    font-weight: bold;
+    margin-right:15px;
+}
+
+#note {
+    margin-bottom:35px;
+}
+
+#psBox {
+    padding-bottom:40px;
+}
+
+#psBox>div {
+    float:left;
+    width:20%;
+    margin-right:50px;
+}
+
+#qrBox {
+    position:fixed;
+    bottom:50px;
+    right:50px;
+    width:100px;
+}
+
+.selected>td {
+    background:rgb(187, 231, 255);
+}
+
+#designDataList td {
+    cursor:pointer;
+}
+
+.noSearchDiv {
+    position:absolute;
+    top:40%;
+    left:40%;
+    font-weight:bold;
+    font-size:15px;
+}
+
+#layerTable {
+    width:98%;
+    margin-bottom:35px;
+    border-collapse: collapse;
+    border:1px solid rgb(215, 216, 216);
+}
+
+#yarnTable thead {
+    background-color: rgb(247, 254, 255);
+}
+
+#fabricTable thead {
+    background-color: rgb(237, 255, 253);
+}
+
+#colorTable thead {
+    background-color: rgb(234, 248, 255);
+}
+
+#layerTable thead {
+    background-color: rgb(235, 244, 255);
+}
+
+#orderContentWrap #yarnDiv, #orderContentWrap #fabricDiv, #orderContentWrap #colorDiv, #orderContentWrap #layerDiv, #orderContentWrap #productionDiv {
+    width: 100%;
+    margin:0;
+}
+
+#yarnDiv>div, #fabricDiv>div, #colorDiv>div, #layerDiv>div, #productionDiv>div {
+    width: 0.75%;
+    margin-right: 0.25%;
+    display: inline-block;
+    float: left;
+}
+
+#yarnDiv>div {
+    /*0eight: 83px;*/
+    background-color: rgb(187, 231, 255);
+}
+
+#fabricDiv>div {
+    height: 76px;
+    background-color: rgb(62, 235, 217);
+}
+
+#colorDiv>div {
+    height: 76px;
+    background-color: rgb(5, 166, 255);
+}
+
+#layerDiv>div {
+    height: 76px;
+    background-color: rgb(17, 120, 255);
+}
+
+#productionDiv>div {
+    height: 186px;
+    background-color: rgb(144, 146, 251);
+}
+
+#productionTable {
+    width: 45%;
+    margin-right: 35px;
+    float: left;
+    border-collapse: collapse;
+    border:1px solid rgb(215, 216, 216);
+}
+
+#imgTable {
+    width: 40%;
+    border-collapse: collapse;
+    border:1px solid rgb(215, 216, 216);
+}
+
+#productionDiv thead {
+    background-color: rgb(245, 245, 255);
+}
+
+#productionTable tbody tr:nth-child(1) {
+    height: 100px;
+}
+
+#productionTable tbody tr:nth-child(2) {
+    height: 55px;
+}
+
+#imgTable tbody tr:nth-child(1) {
+    height: 160px;
+}
+
+#imgTable div {
+    height: 155px;
+    width: 213px;
+    background-repeat: repeat;
+}
+
+#searchDesign > h3 {
+    margin-left: 30px;
+    color: rgb(59, 98, 117);
+    font-size: 30px;
+}
+
+#designData th {
+    color: rgb(5, 5, 5);
+}
+
+#deleteButton {
+    float: right;
+    margin: 5px 10px 0 0;
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+    padding: 8px;
+    font-size: 12px;
+    background-color: rgb(62, 67, 88);
+    font-weight: bold;
+    cursor:pointer;
+    color: #FFF;
+}

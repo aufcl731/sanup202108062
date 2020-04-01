@@ -1,0 +1,273 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#ContentWrap {
+    width:1640px;
+    color: black;
+    font-size:12px;
+    background-color: rgb(219, 221, 224);
+    margin-left: 240px;
+    margin-top: 60px;
+    padding: 15px 20px;
+    min-height: calc(100vh - 90px);
+}
+
+#ContentWrap > div:nth-child(1) {
+    height: 440px;
+    width: 1640px;
+}
+
+#ContentWrap > div:nth-child(1) {
+    margin: 5px 0 20px 0;
+}
+
+#ContentWrap > div > div {
+    float:left;
+    height: 440px;
+    width: 480px;
+    margin-right: 15px;
+}
+
+#ContentWrap > div > div > div {
+    background-color: white;
+}
+
+#ContentWrap > div > div:nth-child(3) {
+    margin: 0;
+}
+
+h4 {
+    font-size: 16px;
+}
+
+#ContentWrap .fix:nth-child(2) > div {
+    height: 380px;
+}
+
+#ContentWrap .fix:nth-child(2) > div > div {
+    height: 350px;
+}
+
+#ContentWrap #calendar {
+    padding: 20px 15px 0 15px;
+    height: 390px;
+    width: 450px;
+}
+
+#orderDesign table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    display: block;
+}
+
+#orderDesign table th {
+    background: rgb(62, 67, 88);
+    color: #fff;
+}
+
+#orderDesign tr {
+    height: 25px;
+}
+
+#orderDesign table th, #orderDesign table td {
+    border: 1px solid #a2a3a4;
+    padding: 5px 0;
+    padding: 5px 0;
+}
+
+#orderDesign tr > th:nth-child(1) {
+    width: 124px;
+}
+
+#orderDesign tr > td:nth-child(1) {
+    width: 124px;
+}
+
+#orderDesign tr > th:nth-child(2) {
+    width: 94px;
+}
+
+#orderDesign tr > td:nth-child(2) {
+    width: 95px;
+}
+
+#orderDesign tr > td:nth-child(3), #orderDesign tr > th:nth-child(3) {
+    width: 67px;
+}
+
+#orderDesign tr > th:nth-child(4) {
+    width: 93px;
+}
+
+#orderDesign tr > td:nth-child(4) {
+    width: 94px;
+}
+
+#orderDesign tr > th:nth-child(5) {
+    width: 93px;
+}
+
+#orderDesign tr > td:nth-child(5) {
+    width: 94px;
+}
+
+#orderDesign tbody {
+    display: block;
+    overflow: auto;
+    max-height: 325px;
+}
+
+#ContentWrap .machineList {
+    padding: 10px;
+    margin-top: 10px;
+    width: 460px;
+    height: 390px;
+    overflow: auto;
+}
+
+.machineList > .warpMachine {
+    font-size: 15px;
+    height: 110px;
+    margin-bottom: 10px;
+    background-color: rgb(221, 221, 221);
+}
+
+.machineList > .knitMachine {
+    font-size: 15px;
+    height: 175px;
+    margin-bottom: 10px;
+    background-color: rgb(221, 221, 221);
+}
+
+.machineList .machineSpec {
+    float: left;
+    width: calc(50% - 10px);
+    margin-left: 10px;
+}
+
+.machineCode {
+    padding: 10px 0 10px 10px;
+}
+
+.machineSpec > div {
+    margin-top: 5px;
+}
+
+.machineList > .selectedMachine {
+    background-color: rgb(187, 231, 255);
+}
+
+.orderTr.selected{
+    background-color: rgb(187, 231, 255);
+}
+
+#machineDetailWrap {
+    padding: 10px;
+    overflow: auto;
+    width: 460px;
+    height: 390px;
+}
+
+.machineTable {
+    width: 100%;
+    margin-bottom: 15px;
+    border-collapse: collapse;
+}
+
+.machineTable td {
+    text-align: center;
+    border: 1px solid #a2a3a4;
+    padding: 5px 0;
+}
+
+.machineTable td:nth-child(1) {
+    background-color: rgb(221, 221, 221);
+}
+
+.fix > div > span {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #000;
+    font-weight: bold;
+}
+
+.fix > div > select {
+    float: right;
+}
+
+.materialList {
+    margin-top: 10px;
+}
+
+#beamTable {
+    display: none;
+}
+
+#yarnTable {
+    display: none;
+}
+
+
+.materialList table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.materialList table th {
+    background: rgb(62, 67, 88);
+    color: #fff;
+}
+
+.materialList tr {
+    height: 25px;
+}
+
+.materialList table th, .materialList table td {
+    border: 1px solid #a2a3a4;
+    padding: 5px 0;
+    padding: 5px 0;
+}
+
+#orderDesign tr > th:nth-child(1) {
+    width: 124px;
+}
+
+#orderDesign tr > td:nth-child(1) {
+    width: 124px;
+}
+
+#orderDesign tr > th:nth-child(2) {
+    width: 94px;
+}
+
+#orderDesign tr > td:nth-child(2) {
+    width: 95px;
+}
+
+#orderDesign tr > td:nth-child(3), #orderDesign tr > th:nth-child(3) {
+    width: 67px;
+}
+
+#orderDesign tr > th:nth-child(4) {
+    width: 93px;
+}
+
+#orderDesign tr > td:nth-child(4) {
+    width: 94px;
+}
+
+#orderDesign tr > th:nth-child(5) {
+    width: 93px;
+}
+
+#orderDesign tr > td:nth-child(5) {
+    width: 94px;
+}
+
+.materialList tbody {
+    overflow: auto;
+    max-height: 325px;
+}

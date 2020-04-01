@@ -1,0 +1,646 @@
+.btnSpan {
+    cursor: pointer;
+}
+
+#orderContentWrap {
+    width:1470px;
+}
+
+#orderContentWrap h3 {
+    color:#000;
+    font-size:23px;
+}
+
+#orderSheetRight .margin_exempt {
+    margin-bottom:13px;
+}
+
+#orderContentWrap > div span, #detailOrderModal label {
+    display:inline-block;
+    width:113px;
+    text-align:center;
+    padding:8px;
+    font-size:12px;
+    background-color:rgb(62, 67, 88);
+    font-weight: bold;
+}
+
+#orderLeft {
+    width:1035px;
+    float:left;
+}
+
+#orderContentWrap #orderLeftTop > div:first-child {
+    border-top:1px solid #a2a3a4;
+    border-left: 1px solid #a2a3a4;;
+}
+
+#orderContentWrap #orderLeftTop > #orderSheetRight {
+    border-top:1px solid #a2a3a4;
+}
+
+#orderContentWrap #orderLeftTop > #designOrder {
+    border-top:1px solid #a2a3a4;
+    border-right:1px solid #a2a3a4;
+}
+
+#orderContentWrap #orderBtnWrap {
+    width:997px;
+    text-align:right;
+    background:#fff;
+    border:1px solid #a2a3a4;
+    border-top: 1px solid #d7d7d7;
+
+}
+
+#orderContentWrap > #orderLeft  #orderLeftTop > div {
+    padding:10px;
+    float:left;
+}
+
+
+#orderContentWrap > div > div > div > div:last-child {
+    margin-bottom:0;
+}
+
+#orderContentWrap > div > div{
+    margin-top:5px;
+}
+
+#orderSheetLeft > div, #orderSheetRight > div {
+    margin-bottom:15px;
+}
+
+#orderContentWrap > #orderLeftTop {
+    width:990px;
+    height:180px;
+    margin-right:15px;
+}
+
+#orderContentWrap input, #orderContentWrap select, #detailOrderModal input {
+    width:150px;
+    text-align:center;
+    padding: 3px;
+    height:20px;
+}
+
+#orderSheetLeft, #orderSheetRight, #designOrder {
+    width:319px;
+    background:#fff;
+    height:180px;
+}
+
+
+#designOrder>div:first-child {
+    height:170px;
+    overflow:auto;
+}
+
+#designOrder table {
+    color:#000;
+}
+
+#orderContentWrap > h3 {
+    color:#444;
+    padding-left:10px;
+}
+
+#designOrder {
+    overflow:auto;
+    height:180px;
+    margin-right:15px;
+}
+
+#designOrderTable, #designListTable {
+    width:100%;
+    border-collapse: collapse;
+    color:#000;
+}
+
+#designOrderTable td, #designOrderTable th, #designListTable td, #designListTable th {
+    border:1px solid #a2a3a4;
+    padding:5px 0;
+    font-size:10px;
+    text-align:center;
+}
+#designOrderTable th, #designListTable th {
+    background:rgb(62, 67, 88);
+    color:#fff;
+    height:15px;
+}
+
+#designListTable tr {
+    height:31px;
+}
+
+#designOrderTable td input {
+    width:100px;
+    padding:0;
+    border:0;
+    text-align:right;
+}
+
+#designOrderTable tr:nth-child(2n+1), #designListTable tr:nth-child(2n+1), #designOrderTable tr:nth-child(2n+1) input{
+   background:rgb(239,242,245);
+}
+
+#designListWrap {
+    width:420px;
+    float:left;
+}
+
+#designListWrap > div {
+    background:#fff;
+}
+
+#designListTop{
+    border:1px solid #a2a3a4;
+}
+
+#designListMid {
+    height:440px;
+    overflow:hidden;
+}
+
+
+#designSearchBox > div {
+
+}
+#designSearchBox input {
+    width:276px;
+    border:0;
+}
+
+#orderListWrap table {
+    text-align:center;
+}
+
+#orderListWrap table tr {
+    height:31px;
+}
+
+#orderListWrap table tr:nth-child(2n+1){
+    background:rgb(239,242,245);
+
+}
+
+#orderListWrap h3 {
+    margin-bottom:5px;
+}
+
+
+/* Select Box */
+@media screen and(max-width: 768px) {
+    .justwrap, .justwrap2 {
+
+        position: relative;
+        display: inline-block;
+        float: left;
+        width: 150px;
+        min-height: 30px;
+        margin: 0 30px
+    }
+    .justselect, .justselect2 {
+        width:148px;
+        display:block!important;
+        position: absolute;
+        margin: 2px 3px;
+        height: 26px;
+        z-index: 900;
+    }
+    .selectbox, .selectbox2 {
+        position:absolute!important;
+        z-index: 1000;
+        pointer-events: none;
+    }
+}
+.justwrap, .justwrap2 {
+    display:inline-block;
+}
+
+.selectbox,.selectbox2 {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 2px;
+    background: #fff;
+    width: 150px;
+    position: relative
+}
+.selectbox-options, .selectbox-options2 {
+    position: absolute;
+    width: 100%;
+    overflow: visible;
+    z-index: 1000;
+}
+
+.selectbox-options--hidden {
+    display: none;
+}
+.selectbox__option, .selectbox__option2 {
+    cursor: pointer;
+    color: #202020;
+    background:#fff;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    align-items: center;
+    width:150px;
+    height:20px;
+    padding:3px;
+    transition: .1s linear all;
+    line-height:20px;
+    font-size:12px;
+}
+.selectbox__option:first-child, .selectbox__option2:first-child {
+    border-top: 1px solid #eee;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px
+}
+
+.selectbox__option:last-child, .selectbox__option2:last-child {
+    border-bottom: 1px solid #eee;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px
+}
+
+.selectbox__option:hover, .selectbox__option2:hover {
+    background: rgb(127,181,207);
+    color: #fff
+}
+
+.selectbox__option--selected {
+    color: #fff;
+    background: rgb(127,181,207);
+}
+
+.selectbox__label, .selectbox__label2 {
+    cursor: pointer;
+    background: #fff;
+    color: #202020;
+    position:relative;
+    align-items:center;
+    border-radius:5px;
+    border:1px solid #eee;
+    transition: 150ms linear all;
+    /* box-shadow: 1px 1px 10px #eee;*/
+    width:150px;
+    height:20px;
+    padding:3px;
+    font-size:12px;
+    line-height:20px;
+}
+
+.selectbox__label:after, .selectbox__label2:after {
+    content: "";
+    display: inline;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #202020;
+    position:absolute;
+    right:8px;
+    top:50%;
+    transform:translateY(-50%);
+    transition:150ms linear all
+}
+
+.selectbox__label:hover, .selectbox__label2:hover{
+    border:1px solid rgb(127,181,207);;
+    color:#000;
+}
+
+.selectbox__label:hover:after, .selectbox__label2:hover:after {
+    border-top: 6px solid rgb(127,181,207);
+}
+
+/* design Bot */
+
+#orderContentWrap #designBottom {
+    border:1px solid #a2a3a4;
+    margin-top:0;
+    border-top:0;
+}
+
+#designBottom > div > div {
+    float:left;
+    width:208px;
+    height:150px;
+    color:#000;
+}
+
+
+#designBottom #designImgBox {
+    width:150px;
+    border-radius: 150px;
+    overflow:hidden;
+    margin-left:20px;
+}
+
+#orderContentWrap #designBottom {
+    padding:20px;
+}
+
+#designBottom  #designSubmitBox {
+    padding:15px 0 0 0;
+    display:inherit;
+    width:100%;
+    text-align:center;
+}
+
+#designSubmitBox > span {
+    cursor: pointer;
+}
+#designInfo > h5 {
+    text-indent:50px;
+    margin-bottom:30px;
+    font-size:15px;
+}
+#designInfo > p {
+    margin-bottom:20px;
+    text-indent:50px;
+    font-size:12px;
+}
+
+#designInfo > p:first-child {
+    margin-bottom:20px;
+    text-indent:50px;
+}
+/* orderList */
+#orderContentWrap #orderListWrap {
+    margin-top:15px;
+    height:495px;
+    overflow:auto;
+}
+
+#orderContentWrap #designTopInfo span {
+    width:50px;
+}
+#orderContentWrap #designTopInfo input {
+    width:126px;
+    border:0;
+}
+
+#orderContentWrap #orderListWrap > div {
+    background:#fff;
+    margin-right:15px;
+}
+
+#orderListWrap table {
+    width:100%;
+    border-collapse: collapse;
+    color:#000;
+    font-size:12px;
+}
+
+#orderListWrap table th, #orderListWrap table td {
+    border:1px solid #a2a3a4;
+    padding:5px 0;
+    text-overflow: ellipsis;
+}
+
+#orderListWrap table th {
+    background:rgb(62, 67, 88);
+    color:#fff;
+}
+
+/* table */
+table{
+    display: block;
+}
+
+tbody{
+    display: block;
+    overflow: auto;
+}
+
+#designOrderTable tbody{
+    max-height: 140px;
+}
+
+#orderListWrap tbody{
+    max-height: 430px;
+}
+
+#designListTable tbody{
+    max-height: 440px;
+}
+
+#designOrderTable th:nth-of-type(1), #designOrderTable td:nth-of-type(1) {
+    width: 90px;
+}
+
+#designOrderTable th:nth-of-type(2), #designOrderTable td:nth-of-type(2) {
+    width: 125px;
+}
+
+#designOrderTable th:nth-of-type(3), #designOrderTable td:nth-of-type(3) {
+    width: 100px;
+}
+
+#orderListWrap th:nth-of-type(1), #orderListWrap td:nth-of-type(1) {
+    width: 65px;
+}
+
+#orderListWrap th:nth-of-type(2), #orderListWrap td:nth-of-type(2) {
+    width: 140px;
+}
+
+#orderListWrap th:nth-of-type(3), #orderListWrap td:nth-of-type(3) {
+    width: 130px;
+}
+
+#orderListWrap th:nth-of-type(4), #orderListWrap td:nth-of-type(4) {
+    width: 80px;
+}
+
+#orderListWrap th:nth-of-type(5), #orderListWrap td:nth-of-type(5) {
+    width: 80px;
+}
+
+#orderListWrap th:nth-of-type(6), #orderListWrap td:nth-of-type(6) {
+    width: 80px;
+}
+
+#orderListWrap th:nth-of-type(7), #orderListWrap td:nth-of-type(7) {
+    width: 95px;
+}
+
+#orderListWrap th:nth-of-type(8), #orderListWrap td:nth-of-type(8) {
+    width: 95px;
+}
+
+#orderListWrap th:nth-of-type(9), #orderListWrap td:nth-of-type(9) {
+    width: 70px;
+}
+
+#orderListWrap th:nth-of-type(10), #orderListWrap td:nth-of-type(10) {
+    width: 80px;
+}
+
+#orderListWrap th:nth-of-type(11), #orderListWrap td:nth-of-type(11) {
+    width: 94px;
+}
+
+#designListTable th:nth-of-type(1), #designListTable td:nth-of-type(1) {
+    width: 138px;
+}
+
+#designListTable th:nth-of-type(2), #designListTable td:nth-of-type(2) {
+    width: 156px;
+}
+
+#designListTable th:nth-of-type(3), #designListTable td:nth-of-type(3) {
+    width: 122px;
+}
+
+/* selected */
+.designDataTr>td {
+    cursor:pointer;
+}
+
+.designDataTr.selected>td {
+    background:rgb(187, 231, 255);
+}
+
+#orderContentWrap #designOrderTable .removeBtn {
+    width:50px;
+    color:#444;
+    border:1px solid #a9a9a9;
+    padding:3px;
+    background:#fff;
+    font-size:8px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+#orderContentWrap #orderListWrap tr {
+    cursor:pointer;
+}
+
+#orderContentWrap #orderListWrap .listSelected {
+    background:#bbe7ff;
+}
+
+/* Detail Order */
+
+#detailOrderModal {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-200px;
+    margin-left:-240px;
+    width:647px;
+    background-color:#fff;
+    z-index:100000;
+    display:none;
+}
+
+.inputTab {
+    padding:20px;
+}
+
+.inputTab > div {
+    float:left;
+}
+
+.inputTab > div:first-child {
+    margin-right:20px;
+}
+
+#detailOrderModal .line {
+    margin-bottom:10px;
+}
+
+#detailOrderModal h3 {
+    background:#3e4358;
+    padding:10px 0 10px 30px;
+}
+
+.orderDesignDetail {
+    width:607px;
+}
+
+.orderDesignDetail > div > div {
+    float:left;
+}
+
+#subDesignInfo {
+    color:#000;
+}
+
+#subDesignImgBox {
+    width:294px;
+    margin-right:19px;
+}
+
+#subDesignImgBox label {
+    display:inline-block;
+    vertical-align: middle;
+    height:150px;
+    line-height:150px;
+    margin-right:15px;
+    color:#fff;
+}
+
+#subDesignImgBox > span {
+    display:inline-block;
+    vertical-align: middle;
+    margin:0 auto;
+    height:130px;
+    width:130px;
+    border-radius:130px;
+    overflow:hidden;
+    background-size:160px;
+}
+.subLine {
+    margin-bottom:35px;
+}
+
+.subLine:nth-child(2) {
+    margin-bottom:38px;
+}
+
+#detailOrderModal .subLine.lastSubLine {
+    margin-bottom:0;
+}
+
+#detailOrderModal .margin_exempt {
+    margin-bottom:8px;
+}
+
+.subLine label {
+    color:#fff;
+}
+
+#detailOrderModal .subLabel {
+    background:#3e437e;
+}
+
+#subModalBtnBox {
+    width:607px;
+    margin-top:10px;
+    border-top:1px solid #444;
+    padding-top:10px;
+    text-align:right;
+}
+
+#subModalBtnBox >span {
+    display:inline-block;
+    width:61px;
+    text-align:center;
+    padding:8px;
+    font-size:12px;
+    background-color:#3e437e;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+#orderListWrap table span {
+    width: 50px;
+    color: #444;
+    border: 1px solid #a9a9a9;
+    padding: 3px;
+    background: #fff;
+    font-size: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}

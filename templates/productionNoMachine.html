@@ -1,0 +1,347 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block staticfile %}
+<link rel="stylesheet" href="{% static 'css/productionDetail.css' %}">
+<script type="text/javascript" src="{% static 'js/production.js' %}"></script>
+<script>
+    $(document).ready(function() {
+        var platform = window.navigator.platform;
+        var os;
+        var macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+
+        if (macosPlatforms.indexOf(platform) !== -1) {
+            os = 'Mac OS';
+        }
+        if(os != 'Mac OS')
+            $('.halfBoxCol2 > table tbody tr td:nth-child(6)').css('width', '77px');
+    });
+</script>
+{% endblock staticfile %}
+
+{% block content %}
+            <div id="ContentWrap">
+                <div id="warpWrap">
+                    <h3>Warper</h3>
+                    <div class="fix"> <!-- 윗줄 -->
+                        <div class="warpGrid fix">
+                            <div class="sectionBox mr">
+                                <div class="halfBoxCol2">
+                                    <div id="circle2">
+                                        <span class="e_text">정경 진행률</span>
+                                    </div>
+                                    <div class="e_botText">
+                                        <p>총 빔수량: <span class="warpTotalQty">10</span></p>
+                                        <p>현재 빔수량: <span class="warpQty">7</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sectionBox">
+                                <div class="halfBox mb">
+                                    <div class="knitTitle">Order</div>
+                                    <div class="knitMachineCode">{{ designOrder.code }}</div>
+                                    <div class="orderLine">
+                                        <!-- <span>Design</span> -->
+                                        <span>{{ designOrder.design_data_id }}</span>
+                                    </div>
+                                </div>
+                                <div class="halfBox">
+                                    <div class="knitTitle">Machine</div>
+                                    <div class="knitMachineCode">TRS-0042</div>
+                                    <div class="machineLine">
+                                        <span>RPM</span>
+                                        <span>500</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- 1con -->
+                        <div class="warpGrid fix">
+                            <div class="sectionBox mr">
+                                <div class="halfBox mb">
+                                    <p class="knitTitle">Warper Speed</p>
+                                    <p class="knitContent">200</p>
+                                </div>
+                                <div class="halfBox">
+                                    <p class="knitTitle">Creel Speed</p>
+                                    <p class="knitContent">200</p>
+                                </div>
+                            </div>
+                            <div class="sectionBox">
+                                <div class="halfBox mb">
+                                    <p class="knitTitle">Operator</p>
+                                    <p class="knitContent">admin</p>
+                                </div>
+                                <div class="halfBox">
+                                    <p class="knitTitle">Current Meter</p>
+                                    <p class="knitContent">20000</p>
+                                </div>
+                            </div>
+                        </div> <!-- 2con -->
+                        <div class="warpGrid fix">
+                            <div class="beamTable">
+                                <div class="halfBoxCol2">
+                                    <table>
+                                        <colgroup>
+                                            <col width="20%">
+                                            <col width="20%">
+                                            <col width="12%">
+                                            <col width="13%">
+                                            <col width="15%">
+                                            <col width="20%">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>TRS Code</th>
+                                                <th>Beam No</th>
+                                                <th>Internal</th>
+                                                <th>External</th>
+                                                <th>Turn</th>
+                                                <th>Current Turn</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!--
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                        -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> <!-- 3con -->
+                    </div>
+                </div>
+
+                <div id="knitWrap">
+                    <h3>편직</h3>
+                    <div class="fix"> <!-- 윗줄 -->
+                        <div class="knitGrid fix">
+                            <div class="sectionBox mr">
+                                <div class="halfBoxCol2">
+                                    <div id="circle1">
+                                        <span class="e_text">편직 진행률</span>
+                                    </div>
+                                    <div class="e_botText">
+                                        <p>총 오더수량: <span class="knitTotalQty">{{ designOrder.design_qty }}</span></p>
+                                        <p>현재 재직수량: <span class="knitQty">20</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sectionBox">
+                                <div class="halfBox mb">
+                                    <div class="knitTitle">Order</div>
+                                    <div class="knitMachineCode">{{ designOrder.code }}</div>
+                                    <div class="orderLine">
+                                        <!-- <span>Design</span> -->
+                                        <span>{{ designOrder.design_data_id }}</span>
+                                    </div>
+                                </div>
+                                <div class="halfBox">
+                                    <div class="knitTitle">Machine</div>
+                                    <div class="knitMachineCode">TRS-0042</div>
+                                    <div class="machineLine">
+                                        <span>RPM</span>
+                                        <span>500</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- 1con -->
+                        <div class="knitGrid fix">
+                            <div class="sectionBox mr">
+                                <div class="halfBox mb">
+                                    <p class="knitTitle">Daily Output</p>
+                                    <p class="knitContent">20000y</p>
+                                </div>
+                                <div class="halfBox">
+                                    <p class="knitTitle">One-Time Output</p>
+                                    <p class="knitContent">2000y</p>
+                                </div>
+                            </div>
+                            <div class="sectionBox">
+                                <div class="halfBox mb">
+                                    <p class="knitTitle">Operator</p>
+                                    <p class="knitContent">admin</p>
+                                </div>
+                                <div class="halfBox">
+                                    <p class="knitTitle">?????</p>
+                                    <p class="knitContent">?????</p>
+                                </div>
+                            </div>
+                        </div> <!-- 2con -->
+                        <div class="knitGrid fix">
+                            <div class="beamTable">
+                                <div class="halfBoxCol2">
+                                    <table>
+                                        <colgroup>
+                                            <col width="20%">
+                                            <col width="20%">
+                                            <col width="12%">
+                                            <col width="13%">
+                                            <col width="15%">
+                                            <col width="20%">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>TRS Code</th>
+                                                <th>Beam No</th>
+                                                <th>Internal</th>
+                                                <th>External</th>
+                                                <th>Turn</th>
+                                                <th>Current Turn</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!--
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                           -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> <!-- 3con -->
+                    </div>
+                </div>
+            </div>
+
+{% endblock content %}

@@ -1,0 +1,3365 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: FSTY_CAD_Chain_Link; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "FSTY_CAD_Chain_Link" (
+    "CAD_Chain_Link_id" integer NOT NULL,
+    "CAD_Chain_Link_course" character varying(2000) NOT NULL,
+    "CAD_Chain_Link_layer_id" integer
+);
+
+
+ALTER TABLE public."FSTY_CAD_Chain_Link" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq" OWNED BY "FSTY_CAD_Chain_Link"."CAD_Chain_Link_id";
+
+
+--
+-- Name: FSTY_CAD_Design_Data; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "FSTY_CAD_Design_Data" (
+    "CAD_Design_Data_id" integer NOT NULL,
+    "CAD_Design_Data_name" character varying(100),
+    "CAD_Design_Data_code" character varying(100),
+    "CAD_Design_Data_xml" character varying(100),
+    "CAD_Design_Data_pattern_image" character varying(100),
+    "CAD_Design_Data_simulation_image" character varying(100),
+    "CAD_Design_Data_create_date" timestamp with time zone NOT NULL,
+    "CAD_Design_Data_trc_file" character varying(100),
+    "CAD_Design_Data_magnification" character varying(10)
+);
+
+
+ALTER TABLE public."FSTY_CAD_Design_Data" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Design_Data_CAD_Design_Data_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "FSTY_CAD_Design_Data_CAD_Design_Data_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."FSTY_CAD_Design_Data_CAD_Design_Data_id_seq" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Design_Data_CAD_Design_Data_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "FSTY_CAD_Design_Data_CAD_Design_Data_id_seq" OWNED BY "FSTY_CAD_Design_Data"."CAD_Design_Data_id";
+
+
+--
+-- Name: FSTY_CAD_Fabric; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "FSTY_CAD_Fabric" (
+    "CAD_Fabric_id" integer NOT NULL,
+    "CAD_Fabric_type" character varying(1),
+    "CAD_Fabric_wpi" character varying(100),
+    "CAD_Fabric_cpi" character varying(100),
+    "CAD_Fabric_width" character varying(100),
+    "CAD_Fabric_weight_per_width" character varying(100),
+    "CAD_Fabric_production_id" integer
+);
+
+
+ALTER TABLE public."FSTY_CAD_Fabric" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Fabric_CAD_Fabric_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "FSTY_CAD_Fabric_CAD_Fabric_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."FSTY_CAD_Fabric_CAD_Fabric_id_seq" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Fabric_CAD_Fabric_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "FSTY_CAD_Fabric_CAD_Fabric_id_seq" OWNED BY "FSTY_CAD_Fabric"."CAD_Fabric_id";
+
+
+--
+-- Name: FSTY_CAD_Layer; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "FSTY_CAD_Layer" (
+    "CAD_Layer_id" integer NOT NULL,
+    "CAD_Layer_name" character varying(100),
+    "CAD_Layer_ratio" character varying(100),
+    "CAD_Layer_mm_rack" character varying(100),
+    "CAD_Layer_use" character varying(100),
+    "CAD_Layer_beam" character varying(100),
+    "CAD_Layer_total" character varying(100),
+    "CAD_Layer_iodata" character varying(2000),
+    "CAD_Layer_design_data_id" integer
+);
+
+
+ALTER TABLE public."FSTY_CAD_Layer" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Layer_CAD_Layer_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "FSTY_CAD_Layer_CAD_Layer_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."FSTY_CAD_Layer_CAD_Layer_id_seq" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Layer_CAD_Layer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "FSTY_CAD_Layer_CAD_Layer_id_seq" OWNED BY "FSTY_CAD_Layer"."CAD_Layer_id";
+
+
+--
+-- Name: FSTY_CAD_Production; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "FSTY_CAD_Production" (
+    "CAD_Production_id" integer NOT NULL,
+    "CAD_Production_quota_per_day" character varying(100),
+    "CAD_Production_machine_name" character varying(100),
+    "CAD_Production_note" character varying(100),
+    "CAD_Production_design_data_id" integer
+);
+
+
+ALTER TABLE public."FSTY_CAD_Production" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Production_CAD_Production_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "FSTY_CAD_Production_CAD_Production_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."FSTY_CAD_Production_CAD_Production_id_seq" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Production_CAD_Production_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "FSTY_CAD_Production_CAD_Production_id_seq" OWNED BY "FSTY_CAD_Production"."CAD_Production_id";
+
+
+--
+-- Name: FSTY_CAD_Yarn; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "FSTY_CAD_Yarn" (
+    "CAD_Yarn_id" integer NOT NULL,
+    "CAD_Yarn_idx" character varying(100),
+    "CAD_Yarn_maker" character varying(100),
+    "CAD_Yarn_spec" character varying(100),
+    "CAD_Yarn_code" character varying(100),
+    "CAD_Yarn_rgb_color" character varying(100),
+    "CAD_Yarn_lab_color" character varying(100),
+    "CAD_Yarn_pantone_color" character varying(100),
+    "CAD_Yarn_layer_id" integer
+);
+
+
+ALTER TABLE public."FSTY_CAD_Yarn" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Yarn_CAD_Yarn_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "FSTY_CAD_Yarn_CAD_Yarn_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."FSTY_CAD_Yarn_CAD_Yarn_id_seq" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Yarn_CAD_Yarn_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "FSTY_CAD_Yarn_CAD_Yarn_id_seq" OWNED BY "FSTY_CAD_Yarn"."CAD_Yarn_id";
+
+
+--
+-- Name: Fabric_Beam; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Fabric_Beam" (
+    id integer NOT NULL,
+    name character varying(25),
+    yarn_qty integer NOT NULL,
+    size integer,
+    yarn_id integer
+);
+
+
+ALTER TABLE public."Fabric_Beam" OWNER TO postgres;
+
+--
+-- Name: Fabric_Beam_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Fabric_Beam_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fabric_Beam_id_seq" OWNER TO postgres;
+
+--
+-- Name: Fabric_Beam_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Fabric_Beam_id_seq" OWNED BY "Fabric_Beam".id;
+
+
+--
+-- Name: Fabric_Order; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Fabric_Order" (
+    id integer NOT NULL,
+    company character varying(25),
+    code character varying(25),
+    buyer character varying(10),
+    type integer,
+    state integer,
+    order_date timestamp with time zone,
+    due_date timestamp with time zone,
+    order_round integer,
+    order_inout integer,
+    manager_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Fabric_Order" OWNER TO postgres;
+
+--
+-- Name: Fabric_Order_DesignData; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Fabric_Order_DesignData" (
+    id integer NOT NULL,
+    code character varying(25),
+    design_qty integer,
+    qr_code character varying(100),
+    design_data_id_id integer NOT NULL,
+    order_id_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Fabric_Order_DesignData" OWNER TO postgres;
+
+--
+-- Name: Fabric_Order_DesignData_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Fabric_Order_DesignData_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fabric_Order_DesignData_id_seq" OWNER TO postgres;
+
+--
+-- Name: Fabric_Order_DesignData_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Fabric_Order_DesignData_id_seq" OWNED BY "Fabric_Order_DesignData".id;
+
+
+--
+-- Name: Fabric_Order_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Fabric_Order_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fabric_Order_id_seq" OWNER TO postgres;
+
+--
+-- Name: Fabric_Order_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Fabric_Order_id_seq" OWNED BY "Fabric_Order".id;
+
+
+--
+-- Name: Fabric_Raw; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Fabric_Raw" (
+    id integer NOT NULL,
+    qty integer NOT NULL,
+    "designData_id_id" integer NOT NULL
+);
+
+
+ALTER TABLE public."Fabric_Raw" OWNER TO postgres;
+
+--
+-- Name: Fabric_Raw_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Fabric_Raw_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fabric_Raw_id_seq" OWNER TO postgres;
+
+--
+-- Name: Fabric_Raw_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Fabric_Raw_id_seq" OWNED BY "Fabric_Raw".id;
+
+
+--
+-- Name: Fabric_Yarn; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Fabric_Yarn" (
+    id integer NOT NULL,
+    name character varying(25),
+    code character varying(25),
+    type character varying(25),
+    maker character varying(25),
+    count integer,
+    filament integer,
+    contraction integer,
+    material character varying(10),
+    kind character varying(25),
+    color character varying(25),
+    qty integer NOT NULL
+);
+
+
+ALTER TABLE public."Fabric_Yarn" OWNER TO postgres;
+
+--
+-- Name: Fabric_Yarn_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Fabric_Yarn_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fabric_Yarn_id_seq" OWNER TO postgres;
+
+--
+-- Name: Fabric_Yarn_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Fabric_Yarn_id_seq" OWNED BY "Fabric_Yarn".id;
+
+
+--
+-- Name: Knit_Beam; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Knit_Beam" (
+    id integer NOT NULL,
+    beam_id integer NOT NULL,
+    knit_process_id integer NOT NULL,
+    knit_current_external integer,
+    knit_current_turn_cnt integer,
+    knit_external integer,
+    knit_turn_cnt integer,
+    knit_yarn_id integer,
+    knit_yarn_thick integer
+);
+
+
+ALTER TABLE public."Knit_Beam" OWNER TO postgres;
+
+--
+-- Name: Knit_Beam_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Knit_Beam_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Knit_Beam_id_seq" OWNER TO postgres;
+
+--
+-- Name: Knit_Beam_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Knit_Beam_id_seq" OWNED BY "Knit_Beam".id;
+
+
+--
+-- Name: Knit_Machine; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Knit_Machine" (
+    id integer NOT NULL,
+    trs_code character varying(50),
+    user_id character varying(50),
+    company_code character varying(50),
+    trs_installation_time timestamp with time zone,
+    trs_model_name character varying(50),
+    trs_beam_cnt integer,
+    trs_bar_cnt integer,
+    trs_eac_enable integer,
+    trs_tempo integer,
+    trs_lowmotor_enable integer,
+    trs_gauge integer,
+    trs_ip character varying(50)
+);
+
+
+ALTER TABLE public."Knit_Machine" OWNER TO postgres;
+
+--
+-- Name: Knit_Machine_Realtime; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Knit_Machine_Realtime" (
+    id integer NOT NULL,
+    trs_operation_number integer,
+    trs_total_run_course integer,
+    trs_state integer,
+    trs_stopmark integer,
+    trs_onetime_prdt integer,
+    trs_set_prdt integer,
+    trs_run_course integer,
+    trs_total_oper_time timestamp with time zone,
+    trs_total_accum_time timestamp with time zone,
+    trs_meter double precision,
+    trs_total_meter integer,
+    trs_accumulate_meter integer,
+    trs_key_angle integer,
+    trs_rpm_main integer,
+    trs_sensor_01 integer,
+    trs_sensor_02 integer,
+    trs_sensor_03 integer,
+    trs_sensor_04 integer,
+    trs_sensor_05 integer,
+    trs_sensor_06 integer,
+    trs_sensor_07 integer,
+    trs_sensor_08 integer,
+    trs_sensor_09 integer,
+    trs_sensor_10 integer,
+    knit_process_id integer,
+    trs_onoff character varying(10)
+);
+
+
+ALTER TABLE public."Knit_Machine_Realtime" OWNER TO postgres;
+
+--
+-- Name: Knit_Machine_Realtime_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Knit_Machine_Realtime_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Knit_Machine_Realtime_id_seq" OWNER TO postgres;
+
+--
+-- Name: Knit_Machine_Realtime_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Knit_Machine_Realtime_id_seq" OWNED BY "Knit_Machine_Realtime".id;
+
+
+--
+-- Name: Knit_Machine_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Knit_Machine_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Knit_Machine_id_seq" OWNER TO postgres;
+
+--
+-- Name: Knit_Machine_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Knit_Machine_id_seq" OWNED BY "Knit_Machine".id;
+
+
+--
+-- Name: Knit_Process; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Knit_Process" (
+    id integer NOT NULL,
+    start_time timestamp with time zone,
+    end_time timestamp with time zone,
+    knit_machine_id_id integer,
+    order_designdata_id integer NOT NULL,
+    real_end_time timestamp with time zone,
+    real_start_time timestamp with time zone
+);
+
+
+ALTER TABLE public."Knit_Process" OWNER TO postgres;
+
+--
+-- Name: Knit_Process_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Knit_Process_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Knit_Process_id_seq" OWNER TO postgres;
+
+--
+-- Name: Knit_Process_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Knit_Process_id_seq" OWNED BY "Knit_Process".id;
+
+
+--
+-- Name: Warp_Beam; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Warp_Beam" (
+    id integer NOT NULL,
+    beam_id integer NOT NULL,
+    warp_process_id integer NOT NULL,
+    current_external integer,
+    current_turn_cnt integer,
+    external integer,
+    turn_cnt integer,
+    yarn_id integer,
+    yarn_count integer,
+    yarn_current_meter integer,
+    yarn_meter integer,
+    yarn_thick integer
+);
+
+
+ALTER TABLE public."Warp_Beam" OWNER TO postgres;
+
+--
+-- Name: Warp_Beam_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Warp_Beam_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Warp_Beam_id_seq" OWNER TO postgres;
+
+--
+-- Name: Warp_Beam_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Warp_Beam_id_seq" OWNED BY "Warp_Beam".id;
+
+
+--
+-- Name: Warp_Machine; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Warp_Machine" (
+    id integer NOT NULL,
+    tws_code character varying(50),
+    user_id character varying(50),
+    company_code character varying(50),
+    tws_name character varying(50),
+    tws_installation_time timestamp with time zone,
+    tws_ip character varying(50)
+);
+
+
+ALTER TABLE public."Warp_Machine" OWNER TO postgres;
+
+--
+-- Name: Warp_Machine_Realtime; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Warp_Machine_Realtime" (
+    id integer NOT NULL,
+    tws_start_date timestamp with time zone,
+    tws_start_time timestamp with time zone,
+    tws_meter integer,
+    tws_state integer,
+    tws_hoist_state integer,
+    tws_oiling_state integer,
+    tws_clamp_state integer,
+    tws_w_inverter_state integer,
+    tws_s_inverter_state integer,
+    tws_c_inverter_state integer,
+    tws_current_turncnt integer,
+    tws_runtime timestamp with time zone,
+    tws_current_meter integer,
+    tws_kia integer,
+    tws_warper_speed double precision,
+    tws_warper_outside integer,
+    tws_warper_total_length double precision,
+    tws_creel_total_length integer,
+    tws_creel_speed integer,
+    tws_elongation_rate integer,
+    tws_relax_deviation integer,
+    tws_error timestamp with time zone,
+    warp_process_id integer,
+    tws_onoff character varying(10)
+);
+
+
+ALTER TABLE public."Warp_Machine_Realtime" OWNER TO postgres;
+
+--
+-- Name: Warp_Machine_Realtime_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Warp_Machine_Realtime_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Warp_Machine_Realtime_id_seq" OWNER TO postgres;
+
+--
+-- Name: Warp_Machine_Realtime_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Warp_Machine_Realtime_id_seq" OWNED BY "Warp_Machine_Realtime".id;
+
+
+--
+-- Name: Warp_Machine_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Warp_Machine_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Warp_Machine_id_seq" OWNER TO postgres;
+
+--
+-- Name: Warp_Machine_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Warp_Machine_id_seq" OWNED BY "Warp_Machine".id;
+
+
+--
+-- Name: Warp_Process; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Warp_Process" (
+    id integer NOT NULL,
+    start_time timestamp with time zone,
+    end_time timestamp with time zone,
+    order_designdata_id integer NOT NULL,
+    warp_machine_id_id integer,
+    real_end_time timestamp with time zone,
+    real_start_time timestamp with time zone
+);
+
+
+ALTER TABLE public."Warp_Process" OWNER TO postgres;
+
+--
+-- Name: Warp_Process_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Warp_Process_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Warp_Process_id_seq" OWNER TO postgres;
+
+--
+-- Name: Warp_Process_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Warp_Process_id_seq" OWNED BY "Warp_Process".id;
+
+
+--
+-- Name: account_company; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE account_company (
+    id integer NOT NULL,
+    name character varying(25) NOT NULL,
+    code character varying(25)
+);
+
+
+ALTER TABLE public.account_company OWNER TO postgres;
+
+--
+-- Name: account_company_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE account_company_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_company_id_seq OWNER TO postgres;
+
+--
+-- Name: account_company_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE account_company_id_seq OWNED BY account_company.id;
+
+
+--
+-- Name: account_department; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE account_department (
+    id integer NOT NULL,
+    name character varying(25) NOT NULL
+);
+
+
+ALTER TABLE public.account_department OWNER TO postgres;
+
+--
+-- Name: account_department_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE account_department_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_department_id_seq OWNER TO postgres;
+
+--
+-- Name: account_department_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE account_department_id_seq OWNED BY account_department.id;
+
+
+--
+-- Name: account_user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE account_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    name character varying(20) NOT NULL,
+    company_code_id integer,
+    level integer,
+    email character varying(254) NOT NULL,
+    phone character varying(20),
+    create_date timestamp with time zone NOT NULL,
+    theme_code integer NOT NULL,
+    lang_code integer NOT NULL,
+    propic character varying(100),
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    group_code_id integer
+);
+
+
+ALTER TABLE public.account_user OWNER TO postgres;
+
+--
+-- Name: account_user_groups; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE account_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.account_user_groups OWNER TO postgres;
+
+--
+-- Name: account_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE account_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_user_groups_id_seq OWNER TO postgres;
+
+--
+-- Name: account_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE account_user_groups_id_seq OWNED BY account_user_groups.id;
+
+
+--
+-- Name: account_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE account_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_user_id_seq OWNER TO postgres;
+
+--
+-- Name: account_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE account_user_id_seq OWNED BY account_user.id;
+
+
+--
+-- Name: account_user_user_permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE account_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.account_user_user_permissions OWNER TO postgres;
+
+--
+-- Name: account_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE account_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_user_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: account_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE account_user_user_permissions_id_seq OWNED BY account_user_user_permissions.id;
+
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_migrations_id_seq OWNED BY django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- Name: materials_rawroll; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE materials_rawroll (
+    id integer NOT NULL,
+    raw_qty integer NOT NULL,
+    raw_id_id integer NOT NULL
+);
+
+
+ALTER TABLE public.materials_rawroll OWNER TO postgres;
+
+--
+-- Name: materials_rawroll_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE materials_rawroll_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.materials_rawroll_id_seq OWNER TO postgres;
+
+--
+-- Name: materials_rawroll_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE materials_rawroll_id_seq OWNED BY materials_rawroll.id;
+
+
+--
+-- Name: CAD_Chain_Link_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Chain_Link" ALTER COLUMN "CAD_Chain_Link_id" SET DEFAULT nextval('"FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq"'::regclass);
+
+
+--
+-- Name: CAD_Design_Data_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Design_Data" ALTER COLUMN "CAD_Design_Data_id" SET DEFAULT nextval('"FSTY_CAD_Design_Data_CAD_Design_Data_id_seq"'::regclass);
+
+
+--
+-- Name: CAD_Fabric_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Fabric" ALTER COLUMN "CAD_Fabric_id" SET DEFAULT nextval('"FSTY_CAD_Fabric_CAD_Fabric_id_seq"'::regclass);
+
+
+--
+-- Name: CAD_Layer_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Layer" ALTER COLUMN "CAD_Layer_id" SET DEFAULT nextval('"FSTY_CAD_Layer_CAD_Layer_id_seq"'::regclass);
+
+
+--
+-- Name: CAD_Production_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Production" ALTER COLUMN "CAD_Production_id" SET DEFAULT nextval('"FSTY_CAD_Production_CAD_Production_id_seq"'::regclass);
+
+
+--
+-- Name: CAD_Yarn_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Yarn" ALTER COLUMN "CAD_Yarn_id" SET DEFAULT nextval('"FSTY_CAD_Yarn_CAD_Yarn_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Fabric_Beam" ALTER COLUMN id SET DEFAULT nextval('"Fabric_Beam_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Fabric_Order" ALTER COLUMN id SET DEFAULT nextval('"Fabric_Order_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Fabric_Order_DesignData" ALTER COLUMN id SET DEFAULT nextval('"Fabric_Order_DesignData_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Fabric_Raw" ALTER COLUMN id SET DEFAULT nextval('"Fabric_Raw_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Fabric_Yarn" ALTER COLUMN id SET DEFAULT nextval('"Fabric_Yarn_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Knit_Beam" ALTER COLUMN id SET DEFAULT nextval('"Knit_Beam_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Knit_Machine" ALTER COLUMN id SET DEFAULT nextval('"Knit_Machine_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Knit_Machine_Realtime" ALTER COLUMN id SET DEFAULT nextval('"Knit_Machine_Realtime_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Knit_Process" ALTER COLUMN id SET DEFAULT nextval('"Knit_Process_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Warp_Beam" ALTER COLUMN id SET DEFAULT nextval('"Warp_Beam_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Warp_Machine" ALTER COLUMN id SET DEFAULT nextval('"Warp_Machine_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Warp_Machine_Realtime" ALTER COLUMN id SET DEFAULT nextval('"Warp_Machine_Realtime_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Warp_Process" ALTER COLUMN id SET DEFAULT nextval('"Warp_Process_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_company ALTER COLUMN id SET DEFAULT nextval('account_company_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_department ALTER COLUMN id SET DEFAULT nextval('account_department_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_user ALTER COLUMN id SET DEFAULT nextval('account_user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_user_groups ALTER COLUMN id SET DEFAULT nextval('account_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('account_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_migrations ALTER COLUMN id SET DEFAULT nextval('django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY materials_rawroll ALTER COLUMN id SET DEFAULT nextval('materials_rawroll_id_seq'::regclass);
+
+
+--
+-- Data for Name: FSTY_CAD_Chain_Link; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "FSTY_CAD_Chain_Link" ("CAD_Chain_Link_id", "CAD_Chain_Link_course", "CAD_Chain_Link_layer_id") FROM stdin;
+1	1,2 / 1,0 /  =   60 COS	1
+2	6,7 / 7,8 / 7,6 / 7,8 / 7,6 / 6,5 / 6,7 / 6,5 / 5,4 / 4,3 / 4,5 / 4,3 / 3,2 / 2,1 / 2,3 / 2,1 / 1,0 / 1,2 / 1,0 / 1,2 / 2,3 / 2,1 / 2,3 / 3,4 / 4,5 / 4,3 / 4,5 / 5,6 / 6,7 / 6,5 / 6,7 / 7,8 / 7,6 / 7,8 / 7,6 / 6,5 / 6,7 / 6,5 / 5,4 / 4,3 / 4,5 / 4,3 / 3,2 / 2,1 / 2,3 / 2,1 / 1,0 / 1,2 / 1,0 / 1,2 / 2,3 / 2,1 / 2,3 / 3,4 / 4,5 / 4,3 / 4,5 / 5,6 / 6,7 / 6,5 /  =   60 COS	2
+3	2,1 / 1,0 / 1,2 / 1,0 / 1,2 / 2,3 / 2,1 / 2,3 / 3,4 / 4,5 / 4,3 / 4,5 / 5,6 / 6,7 / 6,5 / 6,7 / 7,8 / 7,6 / 7,8 / 7,6 / 6,5 / 6,7 / 6,5 / 5,4 / 4,3 / 4,5 / 4,3 / 3,2 / 2,1 / 2,3 / 2,1 / 1,0 / 1,2 / 1,0 / 1,2 / 2,3 / 2,1 / 2,3 / 3,4 / 4,5 / 4,3 / 4,5 / 5,6 / 6,7 / 6,5 / 6,7 / 7,8 / 7,6 / 7,8 / 7,6 / 6,5 / 6,7 / 6,5 / 5,4 / 4,3 / 4,5 / 4,3 / 3,2 / 2,1 / 2,3 /  =   60 COS	3
+4	1,2 / 1,0 /  =   48 COS	4
+5	1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 /  =   48 COS	5
+6	6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 /  =   48 COS	6
+7	1,2 / 2,1 / 1,2 / 2,1 / 1,0 / 1,2 / 1,0 / 2,1 / 1,2 / 2,1 / 1,2 / 2,1 / 1,0 / 1,2 / 1,0 / 2,1 / 1,2 / 2,1 / 1,2 / 2,1 / 1,0 / 1,2 / 1,0 / 2,1 / 1,2 / 2,1 / 1,2 / 2,1 / 1,0 / 1,2 / 1,0 / 2,1 / 1,2 / 2,1 / 1,2 / 2,1 / 1,0 / 1,2 / 1,0 / 2,1 / 1,2 / 2,1 / 1,2 / 2,1 / 1,0 / 1,2 / 1,0 / 2,1 /  =   48 COS	7
+8	4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 1,0 / 2,3 / 1,0 / 2,3 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 1,0 / 2,3 / 1,0 / 2,3 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 1,0 / 2,3 / 1,0 / 2,3 / 4,5 / 3,2 / 4,5 / 3,2 /  =   48 COS	8
+9	1,0 / 2,3 / 1,0 / 2,3 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 1,0 / 2,3 / 1,0 / 2,3 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 1,0 / 2,3 / 1,0 / 2,3 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 /  =   48 COS	9
+10	1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 /  =   40 COS	10
+11	4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 / 4,5 / 3,2 / 1,0 / 2,3 /  =   40 COS	11
+12	1,0 / 1,2 /  =   48 COS	12
+13	3,4 / 1,0 /  =   48 COS	13
+14	1,0 / 0,1 / 1,0 / 0,1 / 1,0 / 0,1 / 1,0 / 0,1 / 3,4 / 3,2 / 3,4 / 3,2 / 3,4 / 3,2 / 3,4 / 3,2 / 1,0 / 0,1 / 1,0 / 0,1 / 1,0 / 0,1 / 1,0 / 0,1 / 3,4 / 3,2 / 3,4 / 3,2 / 3,4 / 3,2 / 3,4 / 3,2 / 1,0 / 0,1 / 1,0 / 0,1 / 1,0 / 0,1 / 1,0 / 0,1 / 3,4 / 3,2 / 3,4 / 3,2 / 3,4 / 3,2 / 3,4 / 3,2 /  =   48 COS	14
+15	1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 2,3 / 2,1 / 2,3 / 2,1 / 2,3 / 2,1 / 2,3 / 2,1 / 2,3 / 2,1 / 1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 2,3 / 2,1 / 2,3 / 2,1 / 2,3 / 2,1 / 2,3 / 2,1 / 2,3 / 2,1 / 1,0 /  =   40 COS	15
+16	3,4 / 3,2 / 3,4 / 3,2 / 3,4 / 3,2 / 3,4 / 3,2 / 3,4 / 3,2 / 2,1 / 2,3 / 2,1 / 2,3 / 2,1 / 2,3 / 2,1 / 2,3 / 2,1 / 2,3 / 3,4 / 3,2 / 3,4 / 3,2 / 3,4 / 3,2 / 3,4 / 3,2 / 3,4 / 3,2 / 2,1 / 2,3 / 2,1 / 2,3 / 2,1 / 2,3 / 2,1 / 2,3 / 2,1 / 2,3 /  =   40 COS	16
+17	1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 /  =   40 COS	17
+18	3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 4,5 / 3,2 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 4,5 /  =   40 COS	18
+19	1,0 / 1,2 /  =   6 COS	19
+20	1,0 / 6,6 / 1,0 / 5,6 / 1,0 / 5,6 /  =   6 COS	20
+21	1,0 / 5,6 / 1,0 / 6,6 / 1,0 / 5,6 /  =   6 COS	21
+22	1,0 / 5,6 / 1,0 / 5,6 / 1,0 / 6,6 /  =   6 COS	22
+23	1,0 / 1,2 /  =   54 COS	23
+24	2,3 / 2,1 / 3,4 / 3,2 / 4,5 / 4,3 / 5,6 / 5,4 / 6,7 / 6,5 / 7,8 / 7,6 / 8,9 / 8,7 / 9,10 / 9,8 / 10,11 / 10,9 / 11,12 / 11,10 / 12,13 / 12,11 / 13,14 / 13,12 / 14,15 / 14,13 / 15,16 / 14,13 / 14,15 / 13,12 / 13,14 / 12,11 / 12,13 / 11,10 / 11,12 / 10,9 / 10,11 / 9,8 / 9,10 / 8,7 / 8,9 / 7,6 / 7,8 / 6,5 / 6,7 / 5,4 / 5,6 / 4,3 / 4,5 / 3,2 / 3,4 / 2,1 / 2,3 / 1,0 /  =   54 COS	24
+25	15,16 / 14,13 / 14,15 / 13,12 / 13,14 / 12,11 / 12,13 / 11,10 / 11,12 / 10,9 / 10,11 / 9,8 / 9,10 / 8,7 / 8,9 / 7,6 / 7,8 / 6,5 / 6,7 / 5,4 / 5,6 / 4,3 / 4,5 / 3,2 / 3,4 / 2,1 / 2,3 / 1,0 / 2,3 / 2,1 / 3,4 / 3,2 / 4,5 / 4,3 / 5,6 / 5,4 / 6,7 / 6,5 / 7,8 / 7,6 / 8,9 / 8,7 / 9,10 / 9,8 / 10,11 / 10,9 / 11,12 / 11,10 / 12,13 / 12,11 / 13,14 / 13,12 / 14,15 / 14,13 /  =   54 COS	25
+26	1,0 / 1,2 /  =   54 COS	26
+27	2,3 / 2,1 / 3,4 / 3,2 / 4,5 / 4,3 / 5,6 / 5,4 / 6,7 / 6,5 / 7,8 / 7,6 / 8,9 / 8,7 / 9,10 / 9,8 / 10,11 / 10,9 / 11,12 / 11,10 / 12,13 / 12,11 / 13,14 / 13,12 / 14,15 / 14,13 / 15,16 / 14,13 / 14,15 / 13,12 / 13,14 / 12,11 / 12,13 / 11,10 / 11,12 / 10,9 / 10,11 / 9,8 / 9,10 / 8,7 / 8,9 / 7,6 / 7,8 / 6,5 / 6,7 / 5,4 / 5,6 / 4,3 / 4,5 / 3,2 / 3,4 / 2,1 / 2,3 / 1,0 /  =   54 COS	27
+28	15,16 / 14,13 / 14,15 / 13,12 / 13,14 / 12,11 / 12,13 / 11,10 / 11,12 / 10,9 / 10,11 / 9,8 / 9,10 / 8,7 / 8,9 / 7,6 / 7,8 / 6,5 / 6,7 / 5,4 / 5,6 / 4,3 / 4,5 / 3,2 / 3,4 / 2,1 / 2,3 / 1,0 / 2,3 / 2,1 / 3,4 / 3,2 / 4,5 / 4,3 / 5,6 / 5,4 / 6,7 / 6,5 / 7,8 / 7,6 / 8,9 / 8,7 / 9,10 / 9,8 / 10,11 / 10,9 / 11,12 / 11,10 / 12,13 / 12,11 / 13,14 / 13,12 / 14,15 / 14,13 /  =   54 COS	28
+29	1,0 / 1,2 /  =   54 COS	29
+30	2,3 / 2,1 / 3,4 / 3,2 / 4,5 / 4,3 / 5,6 / 5,4 / 6,7 / 6,5 / 7,8 / 7,6 / 8,9 / 8,7 / 9,10 / 9,8 / 10,11 / 10,9 / 11,12 / 11,10 / 12,13 / 12,11 / 13,14 / 13,12 / 14,15 / 14,13 / 15,16 / 14,13 / 14,15 / 13,12 / 13,14 / 12,11 / 12,13 / 11,10 / 11,12 / 10,9 / 10,11 / 9,8 / 9,10 / 8,7 / 8,9 / 7,6 / 7,8 / 6,5 / 6,7 / 5,4 / 5,6 / 4,3 / 4,5 / 3,2 / 3,4 / 2,1 / 2,3 / 1,0 /  =   54 COS	30
+31	15,16 / 14,13 / 14,15 / 13,12 / 13,14 / 12,11 / 12,13 / 11,10 / 11,12 / 10,9 / 10,11 / 9,8 / 9,10 / 8,7 / 8,9 / 7,6 / 7,8 / 6,5 / 6,7 / 5,4 / 5,6 / 4,3 / 4,5 / 3,2 / 3,4 / 2,1 / 2,3 / 1,0 / 2,3 / 2,1 / 3,4 / 3,2 / 4,5 / 4,3 / 5,6 / 5,4 / 6,7 / 6,5 / 7,8 / 7,6 / 8,9 / 8,7 / 9,10 / 9,8 / 10,11 / 10,9 / 11,12 / 11,10 / 12,13 / 12,11 / 13,14 / 13,12 / 14,15 / 14,13 /  =   54 COS	31
+32	4,3 / 3,2 / 3,4 / 3,2 / 1,0 / 1,2 / 1,0 / 1,2 / 4,3 / 3,2 / 3,4 / 3,2 / 1,0 / 1,2 / 1,0 / 1,2 /  =   16 COS	32
+33	1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 3,2 / 4,3 / 3,2 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 3,2 / 4,3 / 3,2 /  =   16 COS	33
+34	1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 5,6 / 7,8 / 7,6 / 7,8 / 7,6 / 5,4 / 3,2 /  =   12 COS	34
+35	8,7 / 7,6 / 7,8 / 7,6 / 5,4 / 3,2 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 5,6 /  =   12 COS	35
+36	1,0 / 1,2 /  =   40 COS	36
+37	1,2 / 1,0 /  =   40 COS	37
+38	1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,1 / 1,1 / 1,1 / 2,2 / 2,2 / 2,2 / 3,3 / 3,3 / 3,3 / 4,4 / 4,4 / 4,4 / 5,5 / 5,5 / 5,5 / 5,6 / 5,4 / 5,6 / 5,4 / 5,6 / 5,5 / 5,5 / 5,5 / 4,4 / 4,4 / 4,4 / 3,3 / 3,3 / 3,3 / 2,2 / 2,2 / 2,2 / 1,1 / 1,1 / 1,1 /  =   40 COS	38
+39	1,0 / 1,2 / 1,0 / 1,2 / 2,3 / 3,4 / 4,5 / 5,6 / 6,7 / 7,8 / 8,9 / 9,10 / 10,11 / 11,12 / 12,13 / 13,14 / 13,12 / 13,14 / 13,12 / 12,11 / 11,10 / 10,9 / 9,8 / 8,7 / 7,6 / 6,5 / 5,4 / 4,3 / 3,2 / 2,1 /  =   30 COS	39
+40	1,0 / 1,2 / 1,0 / 1,2 / 2,3 / 3,4 / 4,5 / 5,6 / 6,7 / 7,8 / 8,9 / 9,10 / 10,11 / 11,12 / 12,13 / 13,14 / 13,12 / 13,14 / 13,12 / 12,11 / 11,10 / 10,9 / 9,8 / 8,7 / 7,6 / 6,5 / 5,4 / 4,3 / 3,2 / 2,1 /  =   30 COS	40
+41	16,17 / 16,15 / 16,17 / 16,15 / 15,14 / 14,13 / 13,12 / 12,11 / 11,10 / 10,9 / 9,8 / 8,7 / 7,6 / 6,5 / 5,4 / 4,3 / 4,5 / 4,3 / 4,5 / 5,6 / 6,7 / 7,8 / 8,9 / 9,10 / 10,11 / 11,12 / 12,13 / 13,14 / 14,15 / 15,16 /  =   30 COS	41
+42	16,17 / 16,15 / 16,17 / 16,15 / 15,14 / 14,13 / 13,12 / 12,11 / 11,10 / 10,9 / 9,8 / 8,7 / 7,6 / 6,5 / 5,4 / 4,3 / 4,5 / 4,3 / 4,5 / 5,6 / 6,7 / 7,8 / 8,9 / 9,10 / 10,11 / 11,12 / 12,13 / 13,14 / 14,15 / 15,16 /  =   30 COS	42
+43	1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 /  =   48 COS	43
+44	4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 /  =   48 COS	44
+45	1,0 / 1,2 /  =   54 COS	45
+46	2,3 / 2,1 / 3,4 / 3,2 / 4,5 / 4,3 / 5,6 / 5,4 / 6,7 / 6,5 / 7,8 / 7,6 / 8,9 / 8,7 / 9,10 / 9,8 / 10,11 / 10,9 / 11,12 / 11,10 / 12,13 / 12,11 / 13,14 / 13,12 / 14,15 / 14,13 / 15,16 / 14,13 / 14,15 / 13,12 / 13,14 / 12,11 / 12,13 / 11,10 / 11,12 / 10,9 / 10,11 / 9,8 / 9,10 / 8,7 / 8,9 / 7,6 / 7,8 / 6,5 / 6,7 / 5,4 / 5,6 / 4,3 / 4,5 / 3,2 / 3,4 / 2,1 / 2,3 / 1,0 /  =   54 COS	46
+47	15,16 / 14,13 / 14,15 / 13,12 / 13,14 / 12,11 / 12,13 / 11,10 / 11,12 / 10,9 / 10,11 / 9,8 / 9,10 / 8,7 / 8,9 / 7,6 / 7,8 / 6,5 / 6,7 / 5,4 / 5,6 / 4,3 / 4,5 / 3,2 / 3,4 / 2,1 / 2,3 / 1,0 / 2,3 / 2,1 / 3,4 / 3,2 / 4,5 / 4,3 / 5,6 / 5,4 / 6,7 / 6,5 / 7,8 / 7,6 / 8,9 / 8,7 / 9,10 / 9,8 / 10,11 / 10,9 / 11,12 / 11,10 / 12,13 / 12,11 / 13,14 / 13,12 / 14,15 / 14,13 /  =   54 COS	47
+48	1,0 / 1,2 / 2,3 / 2,1 / 1,0 / 1,2 / 2,3 / 2,1 / 1,0 / 1,2 / 2,3 / 2,1 / 1,0 / 1,2 / 2,3 / 2,1 /  =   16 COS	48
+49	2,3 / 2,1 / 1,0 / 1,2 / 2,3 / 2,1 / 1,0 / 1,2 / 2,3 / 2,1 / 1,0 / 1,2 / 2,3 / 2,1 / 1,0 / 1,2 /  =   16 COS	49
+50	1,0 / 1,2 / 2,3 / 2,1 / 1,0 / 1,2 / 2,3 / 2,1 / 1,0 / 1,2 / 2,3 / 2,1 / 1,0 / 1,2 / 2,3 / 2,1 /  =   16 COS	50
+51	1,0 / 1,2 /  =   82 COS	51
+52	2,3 / 1,0 /  =   82 COS	52
+53	1,0 / 7,8 / 1,0 / 7,8 / 1,0 / 8,9 / 2,1 / 8,9 / 2,1 / 9,10 / 3,2 / 10,11 / 4,3 / 12,13 / 5,4 / 14,15 / 7,6 / 16,17 / 9,8 / 18,19 / 11,10 / 20,21 / 13,12 / 22,23 / 15,14 / 24,25 / 17,16 / 26,27 / 19,18 / 28,29 / 21,20 / 30,31 / 23,22 / 32,33 / 25,24 / 33,34 / 26,25 / 34,35 / 27,26 / 34,35 / 28,27 / 35,36 / 29,28 / 35,36 / 29,28 / 35,36 / 28,27 / 34,35 / 28,27 / 34,35 / 27,26 / 33,34 / 26,25 / 32,33 / 24,23 / 31,32 / 22,21 / 29,30 / 20,19 / 27,28 / 18,17 / 25,26 / 16,15 / 23,24 / 14,13 / 21,22 / 12,11 / 19,20 / 10,9 / 17,18 / 8,7 / 15,16 / 6,5 / 13,14 / 4,3 / 11,12 / 3,2 / 10,11 / 2,1 / 9,10 / 2,1 / 8,9 /  =   82 COS	53
+54	1,2 / 1,0 /  =   8 COS	54
+55	1,0 / 1,2 /  =   8 COS	55
+56	1,0 / 1,0 / 2,3 / 2,3 / 2,2 / 2,2 / 1,1 / 1,1 /  =   8 COS	56
+57	2,2 / 2,2 / 1,1 / 1,1 / 1,0 / 1,0 / 2,3 / 2,3 /  =   8 COS	57
+58	17,18 / 17,16 / 17,18 / 17,16 / 16,15 / 15,14 / 15,16 / 15,14 / 14,13 / 13,12 / 13,14 / 13,12 / 12,11 / 11,10 / 11,12 / 11,10 / 10,9 / 9,8 / 9,10 / 9,8 / 8,7 / 7,6 / 7,8 / 7,6 / 6,5 / 5,4 / 5,6 / 5,4 / 4,3 / 3,2 / 3,4 / 3,2 / 2,1 / 1,0 / 1,2 / 1,0 / 1,2 / 2,3 / 3,4 / 3,2 / 3,4 / 4,5 / 5,6 / 5,4 / 5,6 / 6,7 / 7,8 / 7,6 / 7,8 / 8,9 / 9,10 / 9,8 / 9,10 / 10,11 / 11,12 / 11,10 / 11,12 / 12,13 / 13,14 / 13,12 / 13,14 / 14,15 / 15,16 / 15,14 / 15,16 / 16,17 /  =   66 COS	58
+59	17,18 / 17,16 / 17,18 / 17,16 / 16,15 / 15,14 / 15,16 / 15,14 / 14,13 / 13,12 / 13,14 / 13,12 / 12,11 / 11,10 / 11,12 / 11,10 / 10,9 / 9,8 / 9,10 / 9,8 / 8,7 / 7,6 / 7,8 / 7,6 / 6,5 / 5,4 / 5,6 / 5,4 / 4,3 / 3,2 / 3,4 / 3,2 / 2,1 / 1,0 / 1,2 / 1,0 / 1,2 / 2,3 / 3,4 / 3,2 / 3,4 / 4,5 / 5,6 / 5,4 / 5,6 / 6,7 / 7,8 / 7,6 / 7,8 / 8,9 / 9,10 / 9,8 / 9,10 / 10,11 / 11,12 / 11,10 / 11,12 / 12,13 / 13,14 / 13,12 / 13,14 / 14,15 / 15,16 / 15,14 / 15,16 / 16,17 /  =   66 COS	59
+60	1,0 / 1,2 / 1,0 / 1,2 / 2,3 / 3,4 / 3,2 / 3,4 / 4,5 / 5,6 / 5,4 / 5,6 / 6,7 / 7,8 / 7,6 / 7,8 / 8,9 / 9,10 / 9,8 / 9,10 / 10,11 / 11,12 / 11,10 / 11,12 / 12,13 / 13,14 / 13,12 / 13,14 / 14,15 / 15,16 / 15,14 / 15,16 / 16,17 / 17,18 / 17,16 / 17,18 / 17,16 / 16,15 / 15,14 / 15,16 / 15,14 / 14,13 / 13,12 / 13,14 / 13,12 / 12,11 / 11,10 / 11,12 / 11,10 / 10,9 / 9,8 / 9,10 / 9,8 / 8,7 / 7,6 / 7,8 / 7,6 / 6,5 / 5,4 / 5,6 / 5,4 / 4,3 / 3,2 / 3,4 / 3,2 / 2,1 /  =   66 COS	60
+61	1,0 / 1,2 / 1,0 / 1,2 / 2,3 / 3,4 / 3,2 / 3,4 / 4,5 / 5,6 / 5,4 / 5,6 / 6,7 / 7,8 / 7,6 / 7,8 / 8,9 / 9,10 / 9,8 / 9,10 / 10,11 / 11,12 / 11,10 / 11,12 / 12,13 / 13,14 / 13,12 / 13,14 / 14,15 / 15,16 / 15,14 / 15,16 / 16,17 / 17,18 / 17,16 / 17,18 / 17,16 / 16,15 / 15,14 / 15,16 / 15,14 / 14,13 / 13,12 / 13,14 / 13,12 / 12,11 / 11,10 / 11,12 / 11,10 / 10,9 / 9,8 / 9,10 / 9,8 / 8,7 / 7,6 / 7,8 / 7,6 / 6,5 / 5,4 / 5,6 / 5,4 / 4,3 / 3,2 / 3,4 / 3,2 / 2,1 /  =   66 COS	61
+62	1,0 / 2,3 /  =   30 COS	62
+63	1,2 / 1,0 /  =   30 COS	63
+64	1,0 / 7,8 / 1,0 / 7,8 / 1,0 / 10,11 / 4,3 / 10,11 / 4,3 / 10,11 / 1,0 / 7,8 / 1,0 / 7,8 / 1,0 / 10,11 / 4,3 / 10,11 / 4,3 / 10,11 / 1,0 / 7,8 / 1,0 / 7,8 / 1,0 / 10,11 / 4,3 / 10,11 / 4,3 / 10,11 /  =   30 COS	64
+65	2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,1 / 1,2 / 2,1 / 1,2 / 2,1 / 1,2 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,1 / 1,2 / 2,1 / 1,2 / 2,1 / 1,2 /  =   48 COS	65
+66	2,3 / 1,0 /  =   48 COS	66
+67	0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 1,2 / 2,1 / 1,2 / 2,1 / 1,2 / 2,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 0,2 / 3,1 / 1,2 / 2,1 / 1,2 / 2,1 / 1,2 / 2,1 /  =   48 COS	67
+68	0,2 / 3,1 /  =   48 COS	68
+69	1,2 / 1,0 /  =   48 COS	69
+70	1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 /  =   48 COS	70
+71	6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 /  =   48 COS	71
+\.
+
+
+--
+-- Name: FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq"', 71, true);
+
+
+--
+-- Data for Name: FSTY_CAD_Design_Data; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "FSTY_CAD_Design_Data" ("CAD_Design_Data_id", "CAD_Design_Data_name", "CAD_Design_Data_code", "CAD_Design_Data_xml", "CAD_Design_Data_pattern_image", "CAD_Design_Data_simulation_image", "CAD_Design_Data_create_date", "CAD_Design_Data_trc_file", "CAD_Design_Data_magnification") FROM stdin;
+12	DESIGN30		data/project/12/xml/DESIGN30.xml	data/project/12/img/DESIGN30_design.jpg	data/project/12/img/DESIGN30_simulation.jpg	2019-10-25 10:14:02.256887+09		2.0
+1	DESIGN1		data/project/1/xml/DESIGN1_p1SS7gU.xml	data/project/1/img/DESIGN1_design_ocGFhnc.jpg	data/project/1/img/DESIGN1_simulation_uepKt0j.jpg	2019-10-25 09:40:26.503694+09		4.0
+20	DESIGN45	YW9202B	data/project/20/xml/DESIGN45.xml	data/project/20/img/DESIGN45_design.jpg	data/project/20/img/DESIGN45_simulation.jpg	2019-10-25 10:18:38.246176+09		1.0
+2	DESIGN10		data/project/2/xml/DESIGN10_tu7hbko.xml	data/project/2/img/DESIGN10_design_GJnLcIP.jpg	data/project/2/img/DESIGN10_simulation_omlpXEP.jpg	2019-10-25 09:41:16.673621+09		4.0
+13	DESIGN31	YW9090	data/project/13/xml/DESIGN31.xml	data/project/13/img/DESIGN31_design.jpg	data/project/13/img/DESIGN31_simulation.jpg	2019-10-25 10:14:29.263156+09		4.0
+3	DESIGN18		data/project/3/xml/DESIGN18.xml	data/project/3/img/DESIGN18_design.jpg	data/project/3/img/DESIGN18_simulation.jpg	2019-10-25 09:42:19.263499+09		4.0
+21	DESIGN51	DX1570	data/project/21/xml/DESIGN51.xml	data/project/21/img/DESIGN51_design.jpg	data/project/21/img/DESIGN51_simulation.jpg	2019-10-25 10:18:58.245715+09		1.0
+14	DESIGN32	DX91830	data/project/14/xml/DESIGN32.xml	data/project/14/img/DESIGN32_design.jpg	data/project/14/img/DESIGN32_simulation.jpg	2019-10-25 10:16:43.007794+09		1.0
+4	DESIGN19		data/project/4/xml/DESIGN19.xml	data/project/4/img/DESIGN19_design.jpg	data/project/4/img/DESIGN19_simulation.jpg	2019-10-25 09:43:01.303922+09		4.0
+5	DESIGN20		data/project/5/xml/DESIGN20.xml	data/project/5/img/DESIGN20_design.jpg	data/project/5/img/DESIGN20_simulation.jpg	2019-10-25 10:07:57.354498+09		4.0
+15	DESIGN34	DP1060	data/project/15/xml/DESIGN34.xml	data/project/15/img/DESIGN34_design.jpg	data/project/15/img/DESIGN34_simulation.jpg	2019-10-25 10:17:02.077928+09		1.0
+6	DESIGN22		data/project/6/xml/DESIGN22.xml	data/project/6/img/DESIGN22_design.jpg	data/project/6/img/DESIGN22_simulation.jpg	2019-10-25 10:08:18.469826+09		4.0
+22	DESIGN54		data/project/22/xml/DESIGN54.xml	data/project/22/img/DESIGN54_design.jpg	data/project/22/img/DESIGN54_simulation.jpg	2019-10-25 10:19:28.713274+09		4.0
+7	DESIGN24	YW-HOLDING1	data/project/7/xml/DESIGN24.xml	data/project/7/img/DESIGN24_design.jpg	data/project/7/img/DESIGN24_simulation.jpg	2019-10-25 10:08:46.40516+09		8.0
+16	DESIGN37	02-TF	data/project/16/xml/DESIGN37.xml	data/project/16/img/DESIGN37_design.jpg	data/project/16/img/DESIGN37_simulation.jpg	2019-10-25 10:17:17.313012+09		2.0
+8	DESIGN27	YW8013-START	data/project/8/xml/DESIGN27.xml	data/project/8/img/DESIGN27_design.jpg	data/project/8/img/DESIGN27_simulation.jpg	2019-10-25 10:09:29.373868+09		2.0
+23	\N	\N	data/project/23/xml/DESIGN10.xml	data/project/23/img/DESIGN10_design.jpg	data/project/23/img/DESIGN10_simulation.jpg	2019-11-19 15:48:22.153168+09		\N
+17	DESIGN4		data/project/17/xml/DESIGN4.xml	data/project/17/img/DESIGN4_design.jpg	data/project/17/img/DESIGN4_simulation.jpg	2019-10-25 10:17:40.253737+09		4.0
+9	DESIGN28	DX80130	data/project/9/xml/DESIGN28.xml	data/project/9/img/DESIGN28_design.jpg	data/project/9/img/DESIGN28_simulation.jpg	2019-10-25 10:09:53.381022+09		1.0
+10	DESIGN29	DX80130	data/project/10/xml/DESIGN29.xml	data/project/10/img/DESIGN29_design.jpg	data/project/10/img/DESIGN29_simulation.jpg	2019-10-25 10:10:25.330953+09		4.0
+18	DESIGN41	DP70240	data/project/18/xml/DESIGN41.xml	data/project/18/img/DESIGN41_design.jpg	data/project/18/img/DESIGN41_simulation.jpg	2019-10-25 10:17:58.762162+09		1.0
+11	DESIGN3	SXB0470	data/project/11/xml/DESIGN3.xml	data/project/11/img/DESIGN3_design.jpg	data/project/11/img/DESIGN3_simulation.jpg	2019-10-25 10:10:48.595511+09		1.0
+24	\N	\N	data/project/24/xml/DESIGN10.xml	data/project/24/img/DESIGN10_design.jpg	data/project/24/img/DESIGN10_simulation.jpg	2019-11-19 15:50:25.127995+09		\N
+19	DESIGN42	YW8063	data/project/19/xml/DESIGN42.xml	data/project/19/img/DESIGN42_design.jpg	data/project/19/img/DESIGN42_simulation.jpg	2019-10-25 10:18:16.954934+09		1.0
+25	DESIGN10		data/project/25/xml/DESIGN10.xml	data/project/25/img/DESIGN10_design.jpg	data/project/25/img/DESIGN10_simulation.jpg	2019-11-19 15:59:11.201913+09		4.0
+\.
+
+
+--
+-- Name: FSTY_CAD_Design_Data_CAD_Design_Data_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"FSTY_CAD_Design_Data_CAD_Design_Data_id_seq"', 25, true);
+
+
+--
+-- Data for Name: FSTY_CAD_Fabric; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "FSTY_CAD_Fabric" ("CAD_Fabric_id", "CAD_Fabric_type", "CAD_Fabric_wpi", "CAD_Fabric_cpi", "CAD_Fabric_width", "CAD_Fabric_weight_per_width", "CAD_Fabric_production_id") FROM stdin;
+1	R	40	20	60	0.0	1
+2	S	44.44	20	54	0.0	1
+3	R	28	28	42	0.0	2
+4	S	21.78	20	54	0.0	2
+5	R	28	5	42	0.0	3
+6	S	21.78	20	54	0.0	3
+7	R	28	20	60	0.0	4
+8	S	31.11	20	54	0.0	4
+9	R	28	28	60	0.0	5
+10	S	31.11	20	54	0.0	5
+11	R	20	28	42	0.0	6
+12	S	15.56	20	54	0.0	6
+13	R	28	28	63	2,506.5	7
+14	S	30	20	58.8	1,790.4	7
+15	R	28	28	63	548.9	8
+16	S	36	20	49	392.0	8
+17	R	28	28	63	76.4	9
+18	S	36	20	49	54.6	9
+19	R	28	20	63	54.6	10
+20	S	36	22	49	60.1	10
+21	R	28	28	42	67.6	11
+22	S	50	20	23.52	48.3	11
+23	R	28	28	42	0.0	12
+24	S	29.4	29	40	0.0	12
+25	R	28	28	42	71.1	13
+26	S	28	28	42	71.1	13
+27	R	28	21	84	60.4	14
+28	S	35.64	26	66	74.8	14
+29	R	28	15	84	81.3	15
+30	S	47.04	18	50	97.6	15
+31	R	28	20	63	183.0	16
+32	S	36	22	49	201.3	16
+33	R	28	20	63	0.0	17
+34	S	32.67	20	54	0.0	17
+35	R	28	20	105	159.5	18
+36	S	49	35	60	279.1	18
+37	R	28	28	42	409.3	19
+38	S	40	20	29.4	292.4	19
+39	R	28	28	42	114.3	20
+40	S	49	29	24	118.3	20
+41	R	28	20	73	53.1	21
+42	S	34.07	25	60	66.4	21
+43	R	28	5	42	0.0	22
+44	S	21.78	20	54	0.0	22
+45	R	28	28	42	0.0	23
+46	S	21.78	20	54	0.0	23
+\.
+
+
+--
+-- Name: FSTY_CAD_Fabric_CAD_Fabric_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"FSTY_CAD_Fabric_CAD_Fabric_id_seq"', 46, true);
+
+
+--
+-- Data for Name: FSTY_CAD_Layer; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "FSTY_CAD_Layer" ("CAD_Layer_id", "CAD_Layer_name", "CAD_Layer_ratio", "CAD_Layer_mm_rack", "CAD_Layer_use", "CAD_Layer_beam", "CAD_Layer_total", "CAD_Layer_iodata", "CAD_Layer_design_data_id") FROM stdin;
+1	L1	0	1700	0	0	0	FULL  START=0	1
+2	L2	0	1700	0	0	0	1A 1X 1A 1X 3A 1X 3A 1X   START=6	1
+3	L3	0	1700	0	0	0	1A 1X 1A 1X 3A 1X 3A 1X   START=0	1
+4	L1	0	1700	0	0	0	FULL  START=0	2
+5	L2	0	1700	0	0	0	1A 11X   START=6	2
+6	L3	0	1700	0	0	0	1A 11X   START=0	2
+7	L1	0	1700	0	0	0	FULL  START=0	3
+8	L2	0	1700	0	0	0	2X 2A   START=0	3
+9	L3	0	1700	0	0	0	2A 2X   START=0	3
+10	L1	0	1700	0	0	0	2X 2A   START=0	4
+11	L2	0	1700	0	0	0	2A 2X   START=0	4
+12	L1	0	1700	0	0	0	FULL  START=0	5
+13	L2	0	1700	0	0	0	FULL  START=0	5
+14	L3	0	1700	0	0	0	2B 5X   START=0	5
+15	L1	0	1700	0	0	0	8B 8X   START=1	6
+16	L2	0	1700	0	0	0	8X 8B   START=0	6
+17	L2	0	1700	0	0	0	8A 8X   START=0	6
+18	L3	0	1700	0	0	0	8X 8A   START=0	6
+19	L1	13.9	1161	588	10	5880	FULL  START=0	7
+20	L2	28.7	2397	588	10	5880	1A 2X   START=0	7
+21	L3	28.7	2397	588	10	5880	1A 2X   START=1	7
+22	L4	28.7	2397	588	10	5880	1A 2X   START=2	7
+23	L1	9.48	1100	588	10	5880	FULL  START=0	8
+24	L2	45.26	1400	588	10	5880	7B 3X 7B 13X   START=0	8
+25	L3	45.26	1400	588	10	5880	7B 3X 7B 13X   START=0	8
+26	L1	18.36	1100	586	6	1758	FULL  START=0	9
+27	L2	40.82	1400	273	6	819	7B 3X 7B 13X   START=0	9
+28	L3	40.82	1400	273	6	819	7B 4X 6B 13X   START=15	9
+29	L1	18.36	1100	586	6	1758	FULL  START=0	10
+30	L2	40.82	1400	273	6	819	7B 3X 7B 13X   START=0	10
+31	L3	40.82	1400	273	6	819	7B 3X 7B 13X   START=15	10
+32	L1	50	1320	432	8	1728	3A 1X   START=0	11
+33	L2	50	1320	432	8	1728	3A 1X   START=2	11
+34	L1	0	1700	0	0	0	11A 1X   START=0	12
+35	L2	0	1700	0	0	0	11A 1X   START=6	12
+36	L1	45.33	1320	588	10	5880	5A 1X 5A 1X   START=0	13
+37	L2	45.33	1320	588	10	5880	5B 1X 5B 1X   START=0	13
+38	L3	9.34	272	588	10	5880	FULL  START=0	13
+39	L1	10.24	1140	192	8	768	4A 5X 4A 11X   START=0	14
+40	L2	39.76	1180	360	8	1440	4X 2B 1X 2B 4X 11B   START=0	14
+41	L3	10.24	1140	192	8	768	4A 5X 4A 11X   START=9	14
+42	L4	39.76	1180	360	8	1440	4X 2B 1X 2B 4X 11B   START=9	14
+43	L1	50	1750	488	4	1952	5A 1X   START=3	15
+44	L2	50	1750	488	4	1952	5A 1X   START=0	15
+45	L1	18.33	1100	735	8	5880	FULL  START=0	16
+46	L2	40.83	1400	343	8	2744	7B 3X 7B 13X   START=0	16
+47	L3	40.83	1400	343	8	2744	7B 3X 7B 13X   START=15	16
+48	L1	0	1700	0	0	0	16A 1X 1A 1X 1A 1X 1A 1X 1A 1X 1A 1X 1A 1X 1A 1X   START=0	17
+49	L2	0	1700	0	0	0	16B 1X 1B 1X 1B 1X 1B 1X 1B 1X 1B 1X 1B 1X 1B 1X   START=1	17
+50	L3	0	1700	0	0	0	16C 1X 1C 1X 1C 1X 1C 1X 1C 1X 1C 1X 1C 1X 1C 1X   START=0	17
+51	L1	15.11	950	586	5	2930	FULL  START=0	18
+52	L2	50.81	1600	585	5	2925	FULL  START=0	18
+53	L3	34.08	4300	146	5	730	7B 21X   START=0	18
+54	L1	23.24	1700	588	10	5880	FULL  START=0	19
+55	L2	23.24	1700	588	10	5880	FULL  START=0	19
+56	L3	13.38	522	588	10	5880	6B 2C   START=0	19
+57	L3	13.38	522	588	10	5880	2B 6C   START=2	19
+58	L1	20.83	1700	288	5	1440	7A 3B 2A 3B 7A 1X 8B 1X   START=0	20
+59	L1	18.23	1700	252	5	1260	22X 1C 8X 1C   START=0	20
+60	L2	10.94	1700	36	5	180	22X 1C 8X 1C   START=16	20
+61	L3	10.94	1700	36	5	180	7A 3B 2A 3B 7A 1X 8B 1X   START=16	20
+62	L1	37.05	1683	585	7	2047	FULL  START=0	21
+63	L2	35.95	1633	585	7	2047	FULL  START=0	21
+64	L3	8.99	2466	97	7	339	1C 1X 1B 1X 1B 1X   START=0	21
+65	L1	0	1700	0	0	0	2B 10X   START=14	22
+66	L2	0	1700	0	0	0	10B 2X   START=4	22
+67	L2	0	1700	0	0	0	2C 10X   START=14	22
+68	L3	0	1700	0	0	0	2X 10C   START=2	22
+69	L1	0	1700	0	0	0	FULL  START=0	25
+70	L2	0	1700	0	0	0	1A 11X   START=6	25
+71	L3	0	1700	0	0	0	1A 11X   START=0	25
+\.
+
+
+--
+-- Name: FSTY_CAD_Layer_CAD_Layer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"FSTY_CAD_Layer_CAD_Layer_id_seq"', 71, true);
+
+
+--
+-- Data for Name: FSTY_CAD_Production; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "FSTY_CAD_Production" ("CAD_Production_id", "CAD_Production_quota_per_day", "CAD_Production_machine_name", "CAD_Production_note", "CAD_Production_design_data_id") FROM stdin;
+1	1770 X 24h X 60 X 0.85 / 20 / 91.44 X 2 = 2369.29		True	1
+2	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35		True	2
+3	0 X 24h X 60 X 0.85 / 5 / 91.44 X 2 = 0		True	3
+4	1770 X 24h X 60 X 0.85 / 20 / 91.44 X 2 = 2369.29		True	4
+5	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35		True	5
+6	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35		True	6
+7	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35	KS-3 210"	True	7
+8	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35	KS-3 210"	True	8
+9	700 X 21.5h X 60 X 0.8 / 28 / 91.44 X 2 = 564.3	KS-3 210"	True	9
+10	700 X 24h X 60 X 0.85 / 20 / 91.44 X 2 = 937.01	KS-3 210"	True	10
+11	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35	KS-3 210"	True	11
+12	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35	KS-3 210"	True	12
+13	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35	KS-3 210"	True	13
+14	800 X 21.5h X 60 X 0.8 / 21 / 91.44 X 2 = 859.89	KS-3 210"	True	14
+15	800 X 24h X 60 X 0.85 / 15 / 91.44 X 2 = 1427.82	HKS3-210	True	15
+16	1800 X 24h X 60 X 0.85 / 20 / 91.44 X 2 = 2409.45	KS-3 210"	True	16
+17	0 X 24h X 60 X 0.85 / 20 / 91.44 X 2 = 0		True	17
+18	700 X 21.5h X 60 X 0.8 / 20 / 91.44 X 1 = 395.01	KS3 EBC	True	18
+19	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35	KS-3 210"	True	19
+20	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35	KS4 EBC	True	20
+21	8000 X 24h X 60 X 0.85 / 20 / 91.44 X 2 = 10708.66	KS-3   210"	True	21
+22	1770 X 24h X 60 X 0.85 / 5 / 91.44 X 2 = 9477.17		True	22
+23	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35		True	25
+\.
+
+
+--
+-- Name: FSTY_CAD_Production_CAD_Production_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"FSTY_CAD_Production_CAD_Production_id_seq"', 23, true);
+
+
+--
+-- Data for Name: FSTY_CAD_Yarn; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "FSTY_CAD_Yarn" ("CAD_Yarn_id", "CAD_Yarn_idx", "CAD_Yarn_maker", "CAD_Yarn_spec", "CAD_Yarn_code", "CAD_Yarn_rgb_color", "CAD_Yarn_lab_color", "CAD_Yarn_pantone_color", "CAD_Yarn_layer_id") FROM stdin;
+1	C		SPANDEX 10/20 SD		0,128,128	48/-30/-9	PANTONE 18-4434 TCX	1
+2	A		SPANDEX 10/20 SDN/F 10/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	2
+3	A		SPANDEX 10/20 SDN/F 10/20 SDN/F 10/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	3
+4	A		P/F 40/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	4
+5	A		P/F 40/20 SDP/F 40/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	5
+6	A		P/F 40/20 SDP/F 40/20 SDP/F 40/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	6
+7	B		P/F 10/20 SD		255,0,51	55/81/50	PANTONE 17-1463 TCX	7
+8	A		P/F 10/20 SDP/F 10/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	8
+9	A		P/F 10/20 SDP/F 10/20 SDP/F 10/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	9
+10	A		P/F 40/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	10
+11	A		P/F 40/20 SDP/F 40/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	11
+12	A		P/F 40/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	12
+13	A		P/F 40/20 SDP/F 40/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	13
+14	B		P/F 40/20 SDP/F 40/20 SDP/F 40/20 SD		214,0,147	48/76/-18	PANTONE 18-2140 TCX	14
+15	B		SPANDEX 20/20 FD		214,0,147	48/76/-18	PANTONE 18-2140 TCX	15
+16	A		SPANDEX 20/20 FDP/F 20/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	16
+17	B		SPANDEX 20/20 FDP/F 20/20 SDSPANDEX 20/20 FD		214,0,147	48/76/-18	PANTONE 18-2140 TCX	17
+18	A		SPANDEX 20/20 FDP/F 20/20 SDSPANDEX 20/20 FDP/F 20/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	18
+19	A	KO	SAMPLE	CODE-00	166,202,240	80/-6/-23	PANTONE 14-4311 TCX	19
+20	A	KO	SAMPLE	CODE-00	166,202,240	80/-6/-23	PANTONE 14-4311 TCX	20
+21	A	KO	SAMPLE	CODE-00	166,202,240	80/-6/-23	PANTONE 14-4311 TCX	21
+22	A	KO	SAMPLE	CODE-00	166,202,240	80/-6/-23	PANTONE 14-4311 TCX	22
+23	A	TS	P/F  20/1	0300	215,192,161	79/5/19	PANTONE 15-1218 TCX	23
+24	B	KO	P/F 75/36	8880	215,192,161	79/5/19	PANTONE 15-1218 TCX	24
+25	B	KO	P/F 75/36	8880	215,192,161	79/5/19	PANTONE 15-1218 TCX	25
+26	A	TS	P/F 20/1	0300	221,206,175	83/2/18	PANTONE 12-0709 TCX	26
+27	B	KO	P/F 75/36	8880	221,206,175	83/2/18	PANTONE 12-0709 TCX	27
+28	B	KO	P/F 75/36	8880	221,206,175	83/2/18	PANTONE 12-0709 TCX	28
+29	A	TS	P/F  20/1	0300	214,0,147	48/76/-18	PANTONE 18-2140 TCX	29
+30	B	KO	P/F 75/36	8880	255,80,80	60/67/40	PANTONE 17-1360 TCX	30
+31	B	KO	P/F 75/36	8880	255,80,80	60/67/40	PANTONE 17-1360 TCX	31
+32	A	KO	H/S P/P 50/24	CODE-00	0,0,0	0/0/0	PANTONE 19-4008 TCX	32
+33	A	KO	H/S P/P 50/24	CODE-00	0,0,0	0/0/0	PANTONE 19-4008 TCX	33
+34	A		P/F 100/36 		207,47,57	47/62/36	PANTONE 18-1564 TCX	34
+35	A		P/F 100/36 P/F 100/36 		207,47,57	47/62/36	PANTONE 18-1564 TCX	35
+36	A	KO	SAMPLE 1	CODE-00	132,91,26	42/13/42	PANTONE 18-1148 TCX	36
+37	B	KO	SAMPLE 2	CODE-01	130,103,62	46/7/27	PANTONE 18-1029 TCX	37
+38	C	KO	SAMPLE 3	CODE-04	160,129,84	56/8/29	PANTONE 17-1038 TCX	38
+39	A	TS	N/F 20/1	0785	242,0,23	52/78/60	PANTONE 18-1564 TCX	39
+40	B	KO	N/F 40/10	1205	223,0,13	48/73/59	PANTONE 19-1757 TCX	40
+41	A	TS	N/F 20/1	0785	242,0,23	52/78/60	PANTONE 18-1564 TCX	41
+42	B	KO	N/F 40/10	1205	223,0,13	48/73/59	PANTONE 19-1757 TCX	42
+43	A	KO	P/F75/36	0321	252,255,112	98/-14/66	PANTONE 12-0737 TCX	43
+44	A	KO	P/F75/36	0321	252,255,112	98/-14/66	PANTONE 12-0737 TCX	44
+45	A	KOR	Name A	0020	0,0,128	11/42/-68	PANTONE 19-3953 TCX	45
+46	B	CHA	Name B	0075	0,128,128	48/-30/-9	PANTONE 18-4434 TCX	46
+47	B	CHA	Name B	0075	0,128,128	48/-30/-9	PANTONE 18-4434 TCX	47
+48	A		SPANDEX 40/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	48
+49	B		SPANDEX 40/20 SDP/F 75/36 SD		0,128,128	48/-30/-9	PANTONE 18-4434 TCX	49
+50	C		SPANDEX 40/20 SDP/F 75/36 SDP/F 75/36 SD		0,128,128	48/-30/-9	PANTONE 18-4434 TCX	50
+51	A	TK	SAMPLE 1	CODE-00	255,255,255	100/0/0	PANTONE 11-1001 TCX	51
+52	B	KO	SAMPLE 2	CODE-02	36,36,142	21/30/-60	PANTONE 19-3964 TCX	52
+53	B	KO	SAMPLE 2	CODE-02	36,36,142	21/30/-60	PANTONE 19-3964 TCX	53
+54	A	KO	SAMPLE 0	CODE-00	255,255,255	100/0/0	PANTONE 11-1001 TCX	54
+55	A	KO	SAMPLE 0	CODE-00	255,255,255	100/0/0	PANTONE 11-1001 TCX	55
+56	B	KO	SAMPLE 2	CODE-78	0,81,184	36/13/-62	PANTONE 18-4434 TCX	56
+57	C	KO	SAMPLE X	CODE-45	255,255,255	100/0/0	PANTONE 11-1001 TCX	57
+58	A	KO	SAMPLE 0	CODE-0X	255,255,255	100/0/0	PANTONE 11-1001 TCX	58
+59	B	KO	SAMPLE 2	CODE-09	230,9,215	54/85/-48	PANTONE 18-2140 TCX	59
+60	C	KO	SAMPLE 3	CODE-00	255,255,255	100/0/0	PANTONE 11-1001 TCX	60
+61	C	KO	SAMPLE 3	CODE-00	255,255,255	100/0/0	PANTONE 11-1001 TCX	61
+62	A	KO	P/F 75/36	8860	37,40,43	16/-1/-2	PANTONE 19-4004 TCX	62
+63	A	KO	P/F 75/36	8860	37,40,43	16/-1/-2	PANTONE 19-4004 TCX	63
+64	C	KO	P/F 75/36	0375	0,0,0	0/0/0	PANTONE 19-4008 TCX	64
+65	B		P/F 30/20 SD		204,204,102	81/-10/50	PANTONE 12-0758 TCX	65
+66	A		P/F 30/20 SDP/F 30/20 SD		255,251,240	99/0/6	PANTONE 11-1001 TCX	66
+67	B		P/F 30/20 SDP/F 30/20 SDP/F 30/20 SD		204,204,102	81/-10/50	PANTONE 12-0758 TCX	67
+68	C		P/F 30/20 SDP/F 30/20 SDP/F 30/20 SDP/F 10/20 SD		214,0,147	48/76/-18	PANTONE 18-2140 TCX	68
+69	A		P/F 40/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	69
+70	A		P/F 40/20 SDP/F 40/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	70
+71	A		P/F 40/20 SDP/F 40/20 SDP/F 40/20 SD		255,255,255	100/0/0	PANTONE 11-1001 TCX	71
+\.
+
+
+--
+-- Name: FSTY_CAD_Yarn_CAD_Yarn_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"FSTY_CAD_Yarn_CAD_Yarn_id_seq"', 71, true);
+
+
+--
+-- Data for Name: Fabric_Beam; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Fabric_Beam" (id, name, yarn_qty, size, yarn_id) FROM stdin;
+1	빔1	0	522	\N
+2	빔2	0	15	\N
+3	빔3	0	20	\N
+\.
+
+
+--
+-- Name: Fabric_Beam_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Fabric_Beam_id_seq"', 3, true);
+
+
+--
+-- Data for Name: Fabric_Order; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Fabric_Order" (id, company, code, buyer, type, state, order_date, due_date, order_round, order_inout, manager_id) FROM stdin;
+1	영우	19102510463700	TNS	0	0	2019-10-25 10:46:37.842452+09	2019-10-31 00:00:00+09	1	0	1
+2	영우	19102810380711	보강	1	0	2019-10-28 10:38:07.829035+09	2019-10-31 00:00:00+09	1	1	1
+3	영우	19110410545300	의류지능화연구소	0	0	2019-11-04 10:54:53.240943+09	2019-11-30 00:00:00+09	1	0	1
+4	영우	19111816032000	pjs	0	0	2019-11-18 16:03:20.790273+09	2019-12-31 00:00:00+09	50	0	1
+5	영우	19111909152000	YW	0	0	2019-11-19 09:15:20.695964+09	2019-11-30 00:00:00+09	1	0	1
+\.
+
+
+--
+-- Data for Name: Fabric_Order_DesignData; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Fabric_Order_DesignData" (id, code, design_qty, qr_code, design_data_id_id, order_id_id) FROM stdin;
+1	19102510463700-1	33		21	1
+2	19102510463700-2	3		19	1
+3	19102510463700-3	44		14	1
+4	19102810380711-1	1		21	2
+5	19102810380711-2	2		12	2
+6	19102810380711-3	3		10	2
+7	19102810380711-4	4		9	2
+8	19102810380711-5	5		8	2
+9	19102810380711-6	6		7	2
+10	19102810380711-7	7		6	2
+11	19102810380711-8	8		5	2
+12	19102810380711-9	9		4	2
+13	19102810380711-10	10		3	2
+14	19102810380711-11	11		2	2
+15	19110410545300-1	2000		22	3
+16	19110410545300-2	1000		16	3
+17	19110410545300-3	2000		12	3
+18	19111816032000-1	1		16	4
+19	19111816032000-2	1		13	4
+20	19111816032000-3	1		11	4
+21	19111909152000-1	12		20	5
+\.
+
+
+--
+-- Name: Fabric_Order_DesignData_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Fabric_Order_DesignData_id_seq"', 21, true);
+
+
+--
+-- Name: Fabric_Order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Fabric_Order_id_seq"', 5, true);
+
+
+--
+-- Data for Name: Fabric_Raw; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Fabric_Raw" (id, qty, "designData_id_id") FROM stdin;
+\.
+
+
+--
+-- Name: Fabric_Raw_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Fabric_Raw_id_seq"', 1, false);
+
+
+--
+-- Data for Name: Fabric_Yarn; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Fabric_Yarn" (id, name, code, type, maker, count, filament, contraction, material, kind, color, qty) FROM stdin;
+1	test1	11231	\N	yw	22	1	1	ㅂ	ㅁ	#000000	12
+\.
+
+
+--
+-- Name: Fabric_Yarn_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Fabric_Yarn_id_seq"', 1, true);
+
+
+--
+-- Data for Name: Knit_Beam; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Knit_Beam" (id, beam_id, knit_process_id, knit_current_external, knit_current_turn_cnt, knit_external, knit_turn_cnt, knit_yarn_id, knit_yarn_thick) FROM stdin;
+\.
+
+
+--
+-- Name: Knit_Beam_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Knit_Beam_id_seq"', 1, false);
+
+
+--
+-- Data for Name: Knit_Machine; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Knit_Machine" (id, trs_code, user_id, company_code, trs_installation_time, trs_model_name, trs_beam_cnt, trs_bar_cnt, trs_eac_enable, trs_tempo, trs_lowmotor_enable, trs_gauge, trs_ip) FROM stdin;
+1	R19509	tns	999999	2019-06-04 13:24:58+09	KS3	5	6	1	4	1	24	192.168.0.36
+2	R19500	tns	\N	2018-11-12 13:47:14+09	test_model	5	6	1	4	1	10	\N
+3	R19501	tns	\N	2019-01-16 18:19:39+09	\N	5	7	30	2	0	20	\N
+4	R19502	tns	\N	\N	\N	0	0	0	0	0	0	\N
+5	R19503	tns	\N	\N	\N	0	0	0	0	0	0	\N
+6	R19504	tns	\N	\N	\N	0	0	0	0	0	0	\N
+7	R19505	tns	\N	\N	\N	0	0	0	0	0	0	\N
+8	R19506	tns	\N	\N	\N	0	0	0	0	0	0	\N
+9	R19507	tns	\N	\N	\N	0	0	0	0	0	0	\N
+10	R19488/TnS-A	tns	999999	2019-06-21 16:57:32+09	Ex-Electronic Control System TRS_T1_5_1_3	3	4	1	2	0	28	95.215.123.96
+\.
+
+
+--
+-- Data for Name: Knit_Machine_Realtime; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Knit_Machine_Realtime" (id, trs_operation_number, trs_total_run_course, trs_state, trs_stopmark, trs_onetime_prdt, trs_set_prdt, trs_run_course, trs_total_oper_time, trs_total_accum_time, trs_meter, trs_total_meter, trs_accumulate_meter, trs_key_angle, trs_rpm_main, trs_sensor_01, trs_sensor_02, trs_sensor_03, trs_sensor_04, trs_sensor_05, trs_sensor_06, trs_sensor_07, trs_sensor_08, trs_sensor_09, trs_sensor_10, knit_process_id, trs_onoff) FROM stdin;
+\.
+
+
+--
+-- Name: Knit_Machine_Realtime_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Knit_Machine_Realtime_id_seq"', 1, false);
+
+
+--
+-- Name: Knit_Machine_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Knit_Machine_id_seq"', 10, true);
+
+
+--
+-- Data for Name: Knit_Process; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Knit_Process" (id, start_time, end_time, knit_machine_id_id, order_designdata_id, real_end_time, real_start_time) FROM stdin;
+4	2019-11-11 10:00:00+09	2019-11-14 13:00:00+09	3	14	\N	\N
+5	2019-11-11 09:00:00+09	2019-11-13 11:00:00+09	10	8	\N	\N
+6	2019-11-11 10:00:00+09	2019-11-12 09:00:00+09	10	9	\N	\N
+7	2019-11-25 09:00:00+09	2019-11-26 16:00:00+09	7	6	\N	\N
+8	2019-11-23 15:00:00+09	2019-11-25 17:00:00+09	4	1	\N	\N
+9	2019-11-18 13:00:00+09	2019-11-19 11:00:00+09	2	2	\N	\N
+\.
+
+
+--
+-- Name: Knit_Process_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Knit_Process_id_seq"', 9, true);
+
+
+--
+-- Data for Name: Warp_Beam; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Warp_Beam" (id, beam_id, warp_process_id, current_external, current_turn_cnt, external, turn_cnt, yarn_id, yarn_count, yarn_current_meter, yarn_meter, yarn_thick) FROM stdin;
+\.
+
+
+--
+-- Name: Warp_Beam_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Warp_Beam_id_seq"', 1, false);
+
+
+--
+-- Data for Name: Warp_Machine; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Warp_Machine" (id, tws_code, user_id, company_code, tws_name, tws_installation_time, tws_ip) FROM stdin;
+1	WSE4#4578	tns	999999	MC1	2019-09-09 14:06:56+09	\N
+2	WSE4#7103	tns	999999	MC2	2019-09-09 14:06:57+09	\N
+3	WSE4#9547	tns	999999	MC3	2019-09-09 14:06:58+09	192.168.0.111
+\.
+
+
+--
+-- Data for Name: Warp_Machine_Realtime; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Warp_Machine_Realtime" (id, tws_start_date, tws_start_time, tws_meter, tws_state, tws_hoist_state, tws_oiling_state, tws_clamp_state, tws_w_inverter_state, tws_s_inverter_state, tws_c_inverter_state, tws_current_turncnt, tws_runtime, tws_current_meter, tws_kia, tws_warper_speed, tws_warper_outside, tws_warper_total_length, tws_creel_total_length, tws_creel_speed, tws_elongation_rate, tws_relax_deviation, tws_error, warp_process_id, tws_onoff) FROM stdin;
+\.
+
+
+--
+-- Name: Warp_Machine_Realtime_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Warp_Machine_Realtime_id_seq"', 1, false);
+
+
+--
+-- Name: Warp_Machine_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Warp_Machine_id_seq"', 3, true);
+
+
+--
+-- Data for Name: Warp_Process; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Warp_Process" (id, start_time, end_time, order_designdata_id, warp_machine_id_id, real_end_time, real_start_time) FROM stdin;
+6	2019-11-06 10:00:00+09	2019-11-08 15:00:00+09	14	1	\N	\N
+7	2019-11-07 09:00:00+09	2019-11-08 17:00:00+09	8	3	\N	\N
+8	2019-11-07 17:00:00+09	2019-11-08 18:00:00+09	9	2	\N	\N
+9	2019-11-08 18:00:00+09	2019-11-11 10:00:00+09	6	1	\N	\N
+10	2019-11-18 13:00:00+09	2019-11-20 10:00:00+09	1	2	\N	\N
+11	2019-11-18 09:00:00+09	2019-11-18 11:00:00+09	2	1	\N	\N
+\.
+
+
+--
+-- Name: Warp_Process_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Warp_Process_id_seq"', 11, true);
+
+
+--
+-- Data for Name: account_company; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY account_company (id, name, code) FROM stdin;
+1	영우	1
+\.
+
+
+--
+-- Name: account_company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('account_company_id_seq', 1, false);
+
+
+--
+-- Data for Name: account_department; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY account_department (id, name) FROM stdin;
+1	개발팀
+\.
+
+
+--
+-- Name: account_department_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('account_department_id_seq', 1, true);
+
+
+--
+-- Data for Name: account_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY account_user (id, password, last_login, is_superuser, username, name, company_code_id, level, email, phone, create_date, theme_code, lang_code, propic, is_staff, is_active, group_code_id) FROM stdin;
+2	pbkdf2_sha256$36000$Vk1asusoQjBl$Bt/aCHvrPJmIe9//M4NZ0MTUkpTKT6+ofI6f+IivCQI=	2019-11-12 16:38:53.6015+09	f	tns	tns	\N	0	123@naver.com	01082347218	2019-11-12 16:16:57.676517+09	0	0		t	t	\N
+1	pbkdf2_sha256$36000$q9ibMGzw9UDI$946PQxTqhNFLYlxvi0n4nli9448pOqJbNuMCHI/z2MM=	2019-11-20 09:32:55.230393+09	t	admin	admin	\N	0	webmaster@texclub.com	\N	2019-10-25 09:30:18.241653+09	0	0		t	t	\N
+\.
+
+
+--
+-- Data for Name: account_user_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY account_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: account_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('account_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: account_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('account_user_id_seq', 2, true);
+
+
+--
+-- Data for Name: account_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY account_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: account_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('account_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can add permission	2	add_permission
+5	Can change permission	2	change_permission
+6	Can delete permission	2	delete_permission
+7	Can add group	3	add_group
+8	Can change group	3	change_group
+9	Can delete group	3	delete_group
+10	Can add content type	4	add_contenttype
+11	Can change content type	4	change_contenttype
+12	Can delete content type	4	delete_contenttype
+13	Can add session	5	add_session
+14	Can change session	5	change_session
+15	Can delete session	5	delete_session
+16	Can add user	6	add_user
+17	Can change user	6	change_user
+18	Can delete user	6	delete_user
+19	Can add company	7	add_company
+20	Can change company	7	change_company
+21	Can delete company	7	delete_company
+22	Can add department	8	add_department
+23	Can change department	8	change_department
+24	Can delete department	8	delete_department
+25	Can add fst y_ca d_ chain_ link	9	add_fsty_cad_chain_link
+26	Can change fst y_ca d_ chain_ link	9	change_fsty_cad_chain_link
+27	Can delete fst y_ca d_ chain_ link	9	delete_fsty_cad_chain_link
+28	Can add fst y_ca d_ design_ data	10	add_fsty_cad_design_data
+29	Can change fst y_ca d_ design_ data	10	change_fsty_cad_design_data
+30	Can delete fst y_ca d_ design_ data	10	delete_fsty_cad_design_data
+31	Can add fst y_ca d_ fabric	11	add_fsty_cad_fabric
+32	Can change fst y_ca d_ fabric	11	change_fsty_cad_fabric
+33	Can delete fst y_ca d_ fabric	11	delete_fsty_cad_fabric
+34	Can add fst y_ca d_ layer	12	add_fsty_cad_layer
+35	Can change fst y_ca d_ layer	12	change_fsty_cad_layer
+36	Can delete fst y_ca d_ layer	12	delete_fsty_cad_layer
+37	Can add fst y_ca d_ production	13	add_fsty_cad_production
+38	Can change fst y_ca d_ production	13	change_fsty_cad_production
+39	Can delete fst y_ca d_ production	13	delete_fsty_cad_production
+40	Can add fst y_ca d_ yarn	14	add_fsty_cad_yarn
+41	Can change fst y_ca d_ yarn	14	change_fsty_cad_yarn
+42	Can delete fst y_ca d_ yarn	14	delete_fsty_cad_yarn
+43	Can add order	15	add_order
+44	Can change order	15	change_order
+45	Can delete order	15	delete_order
+46	Can add order_ design data	16	add_order_designdata
+47	Can change order_ design data	16	change_order_designdata
+48	Can delete order_ design data	16	delete_order_designdata
+49	Can add beam	17	add_beam
+50	Can change beam	17	change_beam
+51	Can delete beam	17	delete_beam
+52	Can add raw	18	add_raw
+53	Can change raw	18	change_raw
+54	Can delete raw	18	delete_raw
+55	Can add yarn	19	add_yarn
+56	Can change yarn	19	change_yarn
+57	Can delete yarn	19	delete_yarn
+58	Can add knit_ machine	20	add_knit_machine
+59	Can change knit_ machine	20	change_knit_machine
+60	Can delete knit_ machine	20	delete_knit_machine
+61	Can add warp_ machine	21	add_warp_machine
+62	Can change warp_ machine	21	change_warp_machine
+63	Can delete warp_ machine	21	delete_warp_machine
+64	Can add knit_ machine_ realtime	22	add_knit_machine_realtime
+65	Can change knit_ machine_ realtime	22	change_knit_machine_realtime
+66	Can delete knit_ machine_ realtime	22	delete_knit_machine_realtime
+67	Can add knit_ process	23	add_knit_process
+68	Can change knit_ process	23	change_knit_process
+69	Can delete knit_ process	23	delete_knit_process
+70	Can add warp_ machine_ realtime	24	add_warp_machine_realtime
+71	Can change warp_ machine_ realtime	24	change_warp_machine_realtime
+72	Can delete warp_ machine_ realtime	24	delete_warp_machine_realtime
+73	Can add warp_ process	25	add_warp_process
+74	Can change warp_ process	25	change_warp_process
+75	Can delete warp_ process	25	delete_warp_process
+76	Can add raw roll	26	add_rawroll
+77	Can change raw roll	26	change_rawroll
+78	Can delete raw roll	26	delete_rawroll
+79	Can add knit_ beam	27	add_knit_beam
+80	Can change knit_ beam	27	change_knit_beam
+81	Can delete knit_ beam	27	delete_knit_beam
+82	Can add warp_ beam	28	add_warp_beam
+83	Can change warp_ beam	28	change_warp_beam
+84	Can delete warp_ beam	28	delete_warp_beam
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 84, true);
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 1, false);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	contenttypes	contenttype
+5	sessions	session
+6	account	user
+7	account	company
+8	account	department
+9	design_data	fsty_cad_chain_link
+10	design_data	fsty_cad_design_data
+11	design_data	fsty_cad_fabric
+12	design_data	fsty_cad_layer
+13	design_data	fsty_cad_production
+14	design_data	fsty_cad_yarn
+15	order	order
+16	order	order_designdata
+17	materials	beam
+18	materials	raw
+19	materials	yarn
+20	machine	knit_machine
+21	machine	warp_machine
+22	schedule	knit_machine_realtime
+23	schedule	knit_process
+24	schedule	warp_machine_realtime
+25	schedule	warp_process
+26	materials	rawroll
+27	schedule	knit_beam
+28	schedule	warp_beam
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 28, true);
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2019-10-25 09:24:51.379375+09
+2	contenttypes	0002_remove_content_type_name	2019-10-25 09:29:19.439434+09
+3	auth	0001_initial	2019-10-25 09:29:19.549714+09
+4	auth	0002_alter_permission_name_max_length	2019-10-25 09:29:19.554728+09
+5	auth	0003_alter_user_email_max_length	2019-10-25 09:29:19.56077+09
+6	auth	0004_alter_user_username_opts	2019-10-25 09:29:19.566825+09
+7	auth	0005_alter_user_last_login_null	2019-10-25 09:29:19.572776+09
+8	auth	0006_require_contenttypes_0002	2019-10-25 09:29:19.574781+09
+9	auth	0007_alter_validators_add_error_messages	2019-10-25 09:29:19.579795+09
+10	auth	0008_alter_user_username_max_length	2019-10-25 09:29:19.585832+09
+11	auth	0009_remove_user_last_name	2019-10-25 09:29:19.590824+09
+12	auth	0010_user_last_name	2019-10-25 09:29:19.59684+09
+13	account	0001_initial	2019-10-25 09:29:19.781356+09
+14	admin	0001_initial	2019-10-25 09:29:19.835474+09
+15	admin	0002_logentry_remove_auto_add	2019-10-25 09:29:19.843496+09
+16	design_data	0001_initial	2019-10-25 09:29:20.019965+09
+17	machine	0001_initial	2019-10-25 09:29:20.047061+09
+18	materials	0001_initial	2019-10-25 09:29:20.126246+09
+19	order	0001_initial	2019-10-25 09:29:20.198439+09
+20	schedule	0001_initial	2019-10-25 09:29:20.381927+09
+21	sessions	0001_initial	2019-10-25 09:29:20.42316+09
+22	account	0002_auto_20191101_1715	2019-11-01 17:15:21.617289+09
+23	order	0002_auto_20191101_1715	2019-11-01 17:15:21.632329+09
+24	machine	0002_auto_20191111_1429	2019-11-11 14:29:22.106821+09
+25	materials	0002_rawroll	2019-11-11 14:29:22.18102+09
+26	schedule	0002_auto_20191111_1429	2019-11-11 14:29:22.405615+09
+27	account	0003_auto_20191118_1248	2019-11-18 12:48:30.4254+09
+28	schedule	0003_auto_20191118_1248	2019-11-18 12:48:30.641976+09
+\.
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_migrations_id_seq', 28, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+oz5qrmf858ilg73x4vjgigu5g4jiq2eo	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-08 09:30:55.715685+09
+nezy15870w0cqbwzrw5iodpk9f1pkosa	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-08 09:40:50.444545+09
+s8xwyusp5k4z75md43n45ne3mxuuhbbl	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-08 15:13:00.299826+09
+hpixlar3bc2m9dg80sumkhmb4jo7gzzb	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-11 09:20:23.323317+09
+ha7rfe7n8rm9k47u382a3gv4knli680k	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-11 17:23:26.989516+09
+rs7sgfst8l1kf2kuz3snvc3sqgtetjde	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-11 17:43:35.693039+09
+sfsdqqkac1gfm9hidppnkj0ttdzl6lp9	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-12 09:50:41.818926+09
+mplft402ueoz429ndek6gqzdnlqctyah	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-15 10:44:01.458081+09
+qsof5s4v52tt5okm86d2l4ry9fbt2xs9	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-15 11:43:23.229405+09
+9v3jae8p36vtz82q9nkvuxtrpqagv6k4	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-18 08:59:19.237073+09
+2v9yks8brse9vhmeby07l24ub1f274v2	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-18 08:59:23.739042+09
+xulzjq5pppv0hens4wbcwhfpu68sn5c6	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-18 09:03:58.180677+09
+6nlh8vtb6stlfifp1ivrm9epcxpul3f7	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-18 09:04:26.427274+09
+ve8lneur2x39p8t6w8c1gbv2nkhdbz1n	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-18 10:58:14.780285+09
+s1akv9ojh5czg79sb4ysrujg4pe83y6t	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-18 11:33:23.115844+09
+xmtlv2w4lzetueh53xphgbqkyzfoczoc	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-19 08:58:57.26916+09
+lax5cdrcwkm2d30759kfc78go2l21ifu	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-20 09:01:58.072657+09
+ru8ya1kl0taf9ueqgwiq6aulp7tbkjzq	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-20 14:22:23.529689+09
+7pgb3sjsh6b539df34nlnjyq1eafcf98	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-21 09:00:53.46953+09
+v30mqzxur02skynwmrz494ojwan1hqbo	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-22 08:59:11.536223+09
+fqfvi5pj1bfkfdxexhot2rlbxpss3bka	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-25 09:04:32.833516+09
+ywtf3ofa5eng3f4qko80hv7srcxpkx0m	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-25 09:18:32.237242+09
+i483rni9bkspnkr9hnym5g6vecp1bffw	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-25 11:35:55.326686+09
+b374hhrcoygpwym4ljtfbx2nwtdsaxp1	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-25 16:57:30.819043+09
+ip7fqkhkspucylq0efenwnq00se0wpef	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-26 14:01:24.943392+09
+ls5tf1lja353imqfcx7ckjp7ir1ep203	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-26 14:47:21.128953+09
+295nq0usq5pcmdc73h9ubonrgz0frool	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-26 16:06:14.473058+09
+y1bpjwfumn4ydlkc1lcaqauimc3yvgsl	ZGQwYmYzNDczNzI2MTczMTQ3YzNhYTUzMjVhYmY5NTAxOTNjZTA5Yzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiNjk0OTAwOGY3N2Q0MmQ4Yjg5NjQwNmYzOTQ3N2FmZDFjZjY5OTgzIn0=	2019-11-26 16:18:56.775169+09
+nc2od9ea8en5a42xi1k0wbimwgk0miel	ZGQwYmYzNDczNzI2MTczMTQ3YzNhYTUzMjVhYmY5NTAxOTNjZTA5Yzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiNjk0OTAwOGY3N2Q0MmQ4Yjg5NjQwNmYzOTQ3N2FmZDFjZjY5OTgzIn0=	2019-11-26 16:38:53.603518+09
+71p0aazhfw7sylfs6037cax7hx6h656e	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-27 10:07:07.969393+09
+9gvg2kkqv9m1mfe2p2dosh77ynkjjqc1	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-29 09:32:47.250403+09
+tezhbxhwk3qsxlmqyq8unsfp515wnu7j	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-11-29 09:33:21.390264+09
+rc1bel1bxcsjkstyzqdi9pn83nctbcqc	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-12-02 09:01:00.896206+09
+x1ffwl9b1h8kcg5i1ut80xbv3iq1prub	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-12-02 13:01:45.449626+09
+4el4bz9yvnhmxhq9gm2ypbbru5fdzdcu	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-12-03 09:06:55.318374+09
+hxtx2hvdr9cvnxwujrvwgn1a4kaaat0k	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-12-03 16:16:40.170149+09
+odi82ne8df2dbegmhzfnehax3lwsoxtn	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-12-03 17:08:09.258118+09
+bcdnpbgukfbp21idvvniyxs8jsb4w2gd	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-12-04 09:01:41.714649+09
+9qea81cyfh1qln88swpv5phpjaa331lp	YjdmMjMwY2VlOGIxMmI3ZmI2ZDEyZGNlZDQ5NjM5OTRlZmQ2NzdlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNDQ3Mjk2MjdmM2ZhMmE4NjcyNmVhYjM1Njg5NjM2NjkwYmExZmY4In0=	2019-12-04 09:32:55.234405+09
+\.
+
+
+--
+-- Data for Name: materials_rawroll; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY materials_rawroll (id, raw_qty, raw_id_id) FROM stdin;
+\.
+
+
+--
+-- Name: materials_rawroll_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('materials_rawroll_id_seq', 1, false);
+
+
+--
+-- Name: FSTY_CAD_Chain_Link_CAD_Chain_Link_layer_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Chain_Link"
+    ADD CONSTRAINT "FSTY_CAD_Chain_Link_CAD_Chain_Link_layer_id_key" UNIQUE ("CAD_Chain_Link_layer_id");
+
+
+--
+-- Name: FSTY_CAD_Chain_Link_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Chain_Link"
+    ADD CONSTRAINT "FSTY_CAD_Chain_Link_pkey" PRIMARY KEY ("CAD_Chain_Link_id");
+
+
+--
+-- Name: FSTY_CAD_Design_Data_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Design_Data"
+    ADD CONSTRAINT "FSTY_CAD_Design_Data_pkey" PRIMARY KEY ("CAD_Design_Data_id");
+
+
+--
+-- Name: FSTY_CAD_Fabric_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Fabric"
+    ADD CONSTRAINT "FSTY_CAD_Fabric_pkey" PRIMARY KEY ("CAD_Fabric_id");
+
+
+--
+-- Name: FSTY_CAD_Layer_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Layer"
+    ADD CONSTRAINT "FSTY_CAD_Layer_pkey" PRIMARY KEY ("CAD_Layer_id");
+
+
+--
+-- Name: FSTY_CAD_Production_CAD_Production_design_data_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Production"
+    ADD CONSTRAINT "FSTY_CAD_Production_CAD_Production_design_data_id_key" UNIQUE ("CAD_Production_design_data_id");
+
+
+--
+-- Name: FSTY_CAD_Production_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Production"
+    ADD CONSTRAINT "FSTY_CAD_Production_pkey" PRIMARY KEY ("CAD_Production_id");
+
+
+--
+-- Name: FSTY_CAD_Yarn_CAD_Yarn_layer_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Yarn"
+    ADD CONSTRAINT "FSTY_CAD_Yarn_CAD_Yarn_layer_id_key" UNIQUE ("CAD_Yarn_layer_id");
+
+
+--
+-- Name: FSTY_CAD_Yarn_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Yarn"
+    ADD CONSTRAINT "FSTY_CAD_Yarn_pkey" PRIMARY KEY ("CAD_Yarn_id");
+
+
+--
+-- Name: Fabric_Beam_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Fabric_Beam"
+    ADD CONSTRAINT "Fabric_Beam_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Fabric_Order_DesignData_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Fabric_Order_DesignData"
+    ADD CONSTRAINT "Fabric_Order_DesignData_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Fabric_Order_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Fabric_Order"
+    ADD CONSTRAINT "Fabric_Order_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Fabric_Raw_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Fabric_Raw"
+    ADD CONSTRAINT "Fabric_Raw_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Fabric_Yarn_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Fabric_Yarn"
+    ADD CONSTRAINT "Fabric_Yarn_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Knit_Beam_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Knit_Beam"
+    ADD CONSTRAINT "Knit_Beam_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Knit_Machine_Realtime_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Knit_Machine_Realtime"
+    ADD CONSTRAINT "Knit_Machine_Realtime_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Knit_Machine_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Knit_Machine"
+    ADD CONSTRAINT "Knit_Machine_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Knit_Process_order_designdata_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Knit_Process"
+    ADD CONSTRAINT "Knit_Process_order_designdata_id_key" UNIQUE (order_designdata_id);
+
+
+--
+-- Name: Knit_Process_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Knit_Process"
+    ADD CONSTRAINT "Knit_Process_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Warp_Beam_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Warp_Beam"
+    ADD CONSTRAINT "Warp_Beam_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Warp_Machine_Realtime_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Warp_Machine_Realtime"
+    ADD CONSTRAINT "Warp_Machine_Realtime_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Warp_Machine_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Warp_Machine"
+    ADD CONSTRAINT "Warp_Machine_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Warp_Process_order_designdata_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Warp_Process"
+    ADD CONSTRAINT "Warp_Process_order_designdata_id_key" UNIQUE (order_designdata_id);
+
+
+--
+-- Name: Warp_Process_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Warp_Process"
+    ADD CONSTRAINT "Warp_Process_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: account_company_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_company
+    ADD CONSTRAINT account_company_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_department_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_department
+    ADD CONSTRAINT account_department_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_user_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_user
+    ADD CONSTRAINT account_user_email_key UNIQUE (email);
+
+
+--
+-- Name: account_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_user_groups
+    ADD CONSTRAINT account_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_user_groups_user_id_group_id_4d09af3e_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_user_groups
+    ADD CONSTRAINT account_user_groups_user_id_group_id_4d09af3e_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: account_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_user
+    ADD CONSTRAINT account_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_user_user_permis_user_id_permission_id_48bdd28b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_user_user_permissions
+    ADD CONSTRAINT account_user_user_permis_user_id_permission_id_48bdd28b_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: account_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_user_user_permissions
+    ADD CONSTRAINT account_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_user
+    ADD CONSTRAINT account_user_username_key UNIQUE (username);
+
+
+--
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: materials_rawroll_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY materials_rawroll
+    ADD CONSTRAINT materials_rawroll_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: FSTY_CAD_Fabric_CAD_Fabric_production_id_84c127c6; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "FSTY_CAD_Fabric_CAD_Fabric_production_id_84c127c6" ON "FSTY_CAD_Fabric" USING btree ("CAD_Fabric_production_id");
+
+
+--
+-- Name: FSTY_CAD_Layer_CAD_Layer_design_data_id_ac5ba9ea; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "FSTY_CAD_Layer_CAD_Layer_design_data_id_ac5ba9ea" ON "FSTY_CAD_Layer" USING btree ("CAD_Layer_design_data_id");
+
+
+--
+-- Name: Fabric_Beam_yarn_id_98c3fa9b; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Fabric_Beam_yarn_id_98c3fa9b" ON "Fabric_Beam" USING btree (yarn_id);
+
+
+--
+-- Name: Fabric_Order_DesignData_design_data_id_id_359f4546; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Fabric_Order_DesignData_design_data_id_id_359f4546" ON "Fabric_Order_DesignData" USING btree (design_data_id_id);
+
+
+--
+-- Name: Fabric_Order_DesignData_order_id_id_22320ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Fabric_Order_DesignData_order_id_id_22320ad4" ON "Fabric_Order_DesignData" USING btree (order_id_id);
+
+
+--
+-- Name: Fabric_Order_manager_id_5160b7ce; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Fabric_Order_manager_id_5160b7ce" ON "Fabric_Order" USING btree (manager_id);
+
+
+--
+-- Name: Fabric_Raw_designData_id_id_89d801c9; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Fabric_Raw_designData_id_id_89d801c9" ON "Fabric_Raw" USING btree ("designData_id_id");
+
+
+--
+-- Name: Knit_Beam_beam_id_74d6cc02; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Knit_Beam_beam_id_74d6cc02" ON "Knit_Beam" USING btree (beam_id);
+
+
+--
+-- Name: Knit_Beam_knit_process_id_4e59ced5; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Knit_Beam_knit_process_id_4e59ced5" ON "Knit_Beam" USING btree (knit_process_id);
+
+
+--
+-- Name: Knit_Beam_knit_yarn_id_3c0efafa; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Knit_Beam_knit_yarn_id_3c0efafa" ON "Knit_Beam" USING btree (knit_yarn_id);
+
+
+--
+-- Name: Knit_Machine_Realtime_knit_process_id_e82149cd; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Knit_Machine_Realtime_knit_process_id_e82149cd" ON "Knit_Machine_Realtime" USING btree (knit_process_id);
+
+
+--
+-- Name: Knit_Process_knit_machine_id_id_3f92a4df; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Knit_Process_knit_machine_id_id_3f92a4df" ON "Knit_Process" USING btree (knit_machine_id_id);
+
+
+--
+-- Name: Warp_Beam_beam_id_2aa14cf7; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Warp_Beam_beam_id_2aa14cf7" ON "Warp_Beam" USING btree (beam_id);
+
+
+--
+-- Name: Warp_Beam_warp_process_id_eb4165ab; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Warp_Beam_warp_process_id_eb4165ab" ON "Warp_Beam" USING btree (warp_process_id);
+
+
+--
+-- Name: Warp_Beam_yarn_id_a1a1e09b; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Warp_Beam_yarn_id_a1a1e09b" ON "Warp_Beam" USING btree (yarn_id);
+
+
+--
+-- Name: Warp_Machine_Realtime_warp_process_id_c7daa5db; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Warp_Machine_Realtime_warp_process_id_c7daa5db" ON "Warp_Machine_Realtime" USING btree (warp_process_id);
+
+
+--
+-- Name: Warp_Process_warp_machine_id_id_5d1eb8eb; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Warp_Process_warp_machine_id_id_5d1eb8eb" ON "Warp_Process" USING btree (warp_machine_id_id);
+
+
+--
+-- Name: account_user_company_code_id_26ac39fc; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_company_code_id_26ac39fc ON account_user USING btree (company_code_id);
+
+
+--
+-- Name: account_user_email_0bd7c421_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_email_0bd7c421_like ON account_user USING btree (email varchar_pattern_ops);
+
+
+--
+-- Name: account_user_group_code_id_35e7d8c2; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_group_code_id_35e7d8c2 ON account_user USING btree (group_code_id);
+
+
+--
+-- Name: account_user_groups_group_id_6c71f749; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_groups_group_id_6c71f749 ON account_user_groups USING btree (group_id);
+
+
+--
+-- Name: account_user_groups_user_id_14345e7b; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_groups_user_id_14345e7b ON account_user_groups USING btree (user_id);
+
+
+--
+-- Name: account_user_user_permissions_permission_id_66c44191; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_user_permissions_permission_id_66c44191 ON account_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: account_user_user_permissions_user_id_cc42d270; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_user_permissions_user_id_cc42d270 ON account_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: account_user_username_d393f583_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_username_d393f583_like ON account_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: materials_rawroll_raw_id_id_3a09ea00; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX materials_rawroll_raw_id_id_3a09ea00 ON materials_rawroll USING btree (raw_id_id);
+
+
+--
+-- Name: FSTY_CAD_Chain_Link_CAD_Chain_Link_layer_8b94fe72_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Chain_Link"
+    ADD CONSTRAINT "FSTY_CAD_Chain_Link_CAD_Chain_Link_layer_8b94fe72_fk_FSTY_CAD_" FOREIGN KEY ("CAD_Chain_Link_layer_id") REFERENCES "FSTY_CAD_Layer"("CAD_Layer_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: FSTY_CAD_Fabric_CAD_Fabric_productio_84c127c6_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Fabric"
+    ADD CONSTRAINT "FSTY_CAD_Fabric_CAD_Fabric_productio_84c127c6_fk_FSTY_CAD_" FOREIGN KEY ("CAD_Fabric_production_id") REFERENCES "FSTY_CAD_Production"("CAD_Production_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: FSTY_CAD_Layer_CAD_Layer_design_dat_ac5ba9ea_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Layer"
+    ADD CONSTRAINT "FSTY_CAD_Layer_CAD_Layer_design_dat_ac5ba9ea_fk_FSTY_CAD_" FOREIGN KEY ("CAD_Layer_design_data_id") REFERENCES "FSTY_CAD_Design_Data"("CAD_Design_Data_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: FSTY_CAD_Production_CAD_Production_desig_7d3b4358_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Production"
+    ADD CONSTRAINT "FSTY_CAD_Production_CAD_Production_desig_7d3b4358_fk_FSTY_CAD_" FOREIGN KEY ("CAD_Production_design_data_id") REFERENCES "FSTY_CAD_Design_Data"("CAD_Design_Data_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: FSTY_CAD_Yarn_CAD_Yarn_layer_id_e294f386_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "FSTY_CAD_Yarn"
+    ADD CONSTRAINT "FSTY_CAD_Yarn_CAD_Yarn_layer_id_e294f386_fk_FSTY_CAD_" FOREIGN KEY ("CAD_Yarn_layer_id") REFERENCES "FSTY_CAD_Layer"("CAD_Layer_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Fabric_Beam_yarn_id_98c3fa9b_fk_Fabric_Yarn_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Fabric_Beam"
+    ADD CONSTRAINT "Fabric_Beam_yarn_id_98c3fa9b_fk_Fabric_Yarn_id" FOREIGN KEY (yarn_id) REFERENCES "Fabric_Yarn"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Fabric_Order_DesignD_design_data_id_id_359f4546_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Fabric_Order_DesignData"
+    ADD CONSTRAINT "Fabric_Order_DesignD_design_data_id_id_359f4546_fk_FSTY_CAD_" FOREIGN KEY (design_data_id_id) REFERENCES "FSTY_CAD_Design_Data"("CAD_Design_Data_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Fabric_Order_DesignData_order_id_id_22320ad4_fk_Fabric_Order_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Fabric_Order_DesignData"
+    ADD CONSTRAINT "Fabric_Order_DesignData_order_id_id_22320ad4_fk_Fabric_Order_id" FOREIGN KEY (order_id_id) REFERENCES "Fabric_Order"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Fabric_Order_manager_id_5160b7ce_fk_account_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Fabric_Order"
+    ADD CONSTRAINT "Fabric_Order_manager_id_5160b7ce_fk_account_user_id" FOREIGN KEY (manager_id) REFERENCES account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Fabric_Raw_designData_id_id_89d801c9_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Fabric_Raw"
+    ADD CONSTRAINT "Fabric_Raw_designData_id_id_89d801c9_fk_FSTY_CAD_" FOREIGN KEY ("designData_id_id") REFERENCES "FSTY_CAD_Design_Data"("CAD_Design_Data_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Knit_Beam_beam_id_74d6cc02_fk_Fabric_Beam_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Knit_Beam"
+    ADD CONSTRAINT "Knit_Beam_beam_id_74d6cc02_fk_Fabric_Beam_id" FOREIGN KEY (beam_id) REFERENCES "Fabric_Beam"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Knit_Beam_knit_process_id_4e59ced5_fk_Knit_Process_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Knit_Beam"
+    ADD CONSTRAINT "Knit_Beam_knit_process_id_4e59ced5_fk_Knit_Process_id" FOREIGN KEY (knit_process_id) REFERENCES "Knit_Process"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Knit_Beam_knit_yarn_id_3c0efafa_fk_Fabric_Yarn_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Knit_Beam"
+    ADD CONSTRAINT "Knit_Beam_knit_yarn_id_3c0efafa_fk_Fabric_Yarn_id" FOREIGN KEY (knit_yarn_id) REFERENCES "Fabric_Yarn"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Knit_Machine_Realtim_knit_process_id_e82149cd_fk_Knit_Proc; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Knit_Machine_Realtime"
+    ADD CONSTRAINT "Knit_Machine_Realtim_knit_process_id_e82149cd_fk_Knit_Proc" FOREIGN KEY (knit_process_id) REFERENCES "Knit_Process"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Knit_Process_knit_machine_id_id_3f92a4df_fk_Knit_Machine_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Knit_Process"
+    ADD CONSTRAINT "Knit_Process_knit_machine_id_id_3f92a4df_fk_Knit_Machine_id" FOREIGN KEY (knit_machine_id_id) REFERENCES "Knit_Machine"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Knit_Process_order_designdata_id_84ed091f_fk_Fabric_Or; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Knit_Process"
+    ADD CONSTRAINT "Knit_Process_order_designdata_id_84ed091f_fk_Fabric_Or" FOREIGN KEY (order_designdata_id) REFERENCES "Fabric_Order_DesignData"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Warp_Beam_beam_id_2aa14cf7_fk_Fabric_Beam_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Warp_Beam"
+    ADD CONSTRAINT "Warp_Beam_beam_id_2aa14cf7_fk_Fabric_Beam_id" FOREIGN KEY (beam_id) REFERENCES "Fabric_Beam"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Warp_Beam_warp_process_id_eb4165ab_fk_Warp_Process_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Warp_Beam"
+    ADD CONSTRAINT "Warp_Beam_warp_process_id_eb4165ab_fk_Warp_Process_id" FOREIGN KEY (warp_process_id) REFERENCES "Warp_Process"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Warp_Beam_yarn_id_a1a1e09b_fk_Fabric_Yarn_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Warp_Beam"
+    ADD CONSTRAINT "Warp_Beam_yarn_id_a1a1e09b_fk_Fabric_Yarn_id" FOREIGN KEY (yarn_id) REFERENCES "Fabric_Yarn"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Warp_Machine_Realtim_warp_process_id_c7daa5db_fk_Warp_Proc; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Warp_Machine_Realtime"
+    ADD CONSTRAINT "Warp_Machine_Realtim_warp_process_id_c7daa5db_fk_Warp_Proc" FOREIGN KEY (warp_process_id) REFERENCES "Warp_Process"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Warp_Process_order_designdata_id_a7a21278_fk_Fabric_Or; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Warp_Process"
+    ADD CONSTRAINT "Warp_Process_order_designdata_id_a7a21278_fk_Fabric_Or" FOREIGN KEY (order_designdata_id) REFERENCES "Fabric_Order_DesignData"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Warp_Process_warp_machine_id_id_5d1eb8eb_fk_Warp_Machine_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Warp_Process"
+    ADD CONSTRAINT "Warp_Process_warp_machine_id_id_5d1eb8eb_fk_Warp_Machine_id" FOREIGN KEY (warp_machine_id_id) REFERENCES "Warp_Machine"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_company_code_id_26ac39fc_fk_account_company_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_user
+    ADD CONSTRAINT account_user_company_code_id_26ac39fc_fk_account_company_id FOREIGN KEY (company_code_id) REFERENCES account_company(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_group_code_id_35e7d8c2_fk_account_department_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_user
+    ADD CONSTRAINT account_user_group_code_id_35e7d8c2_fk_account_department_id FOREIGN KEY (group_code_id) REFERENCES account_department(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_groups_group_id_6c71f749_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_user_groups
+    ADD CONSTRAINT account_user_groups_group_id_6c71f749_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_groups_user_id_14345e7b_fk_account_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_user_groups
+    ADD CONSTRAINT account_user_groups_user_id_14345e7b_fk_account_user_id FOREIGN KEY (user_id) REFERENCES account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_user_pe_permission_id_66c44191_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_user_user_permissions
+    ADD CONSTRAINT account_user_user_pe_permission_id_66c44191_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_user_pe_user_id_cc42d270_fk_account_u; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_user_user_permissions
+    ADD CONSTRAINT account_user_user_pe_user_id_cc42d270_fk_account_u FOREIGN KEY (user_id) REFERENCES account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6_fk_account_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_account_user_id FOREIGN KEY (user_id) REFERENCES account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: materials_rawroll_raw_id_id_3a09ea00_fk_Fabric_Raw_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY materials_rawroll
+    ADD CONSTRAINT "materials_rawroll_raw_id_id_3a09ea00_fk_Fabric_Raw_id" FOREIGN KEY (raw_id_id) REFERENCES "Fabric_Raw"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

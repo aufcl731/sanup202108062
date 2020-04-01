@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>정경표</title>
+    <style>
+        #warpSheet {
+            width:800px;
+            margin:0 auto;
+            text-align:center;
+        }
+
+
+        table {
+            width:100%;
+            border-collapse: collapse;
+            margin-bottom:10px;
+        }
+
+        table:last-child {
+            margin-bottom:0;
+        }
+
+        table th, table td {
+            font-size:12px;
+            border:1px solid #a2a3a4;
+            padding:5px 0;
+            text-align:center;
+        }
+
+        #botTable tr {
+            height:20px;
+        }
+
+        #title {
+            position:relative;
+        }
+
+        #printIcon {
+            position:absolute;
+            top:0;
+            right:20px;
+            cursor:pointer;
+        }
+
+    </style>
+</head>
+<body>
+<div id="warpSheet">
+    <div id="title">
+        <h2>정경표</h2>
+        <span id="printIcon" onclick="window.print()"><img src="{% static 'image/print2.png' %}" width="30px"></span>
+    </div>
+    <table id="topTable">
+        <colgroup>
+            <col width="20%">
+            <col width="30%">
+            <col width="20%">
+            <col width="30%">
+        </colgroup>
+        <tr>
+            <th colspan="2"></th>
+            <th>SET No.</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>원사명</th>
+            <td></td>
+            <th>LOT.No.</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>원사메이커</th>
+            <td></td>
+            <th>원사규격</th>
+            <td></td>
+        </tr>
+    </table>
+
+    <table id="midTable">
+        <colgroup>
+            <col width="13%">
+            <col width="20%">
+            <col width="13%">
+            <col width="20%">
+            <col width="13%">
+            <col width="21%">
+        </colgroup>
+        <tr>
+            <th>본수</th>
+            <td></td>
+            <th>크릴속도</th>
+            <td></td>
+            <th>드리프트</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>빔수</th>
+            <td></td>
+            <th>정경속도</th>
+            <td></td>
+            <th>텐션</th>
+            <td></td>
+        </tr>
+    </table>
+
+    <table id="botTable">
+        <colgroup>
+            <col width="10%">
+            <col width="15%">
+            <col width="15%">
+            <col width="15%">
+            <col width="15%">
+            <col width="10%">
+            <col width="10%">
+            <col width="10%">
+        </colgroup>
+        <tr>
+            <th>빔 No.</th>
+            <th>정경 Meter</th>
+            <th>회전수</th>
+            <th colspan="2">정경시간</th>
+            <th>빔둘레</th>
+            <th>결점</th>
+            <th>정경자</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+</table>
+</div>
+</body>
+</html>

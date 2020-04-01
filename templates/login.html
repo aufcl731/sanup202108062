@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Knit Total System</title>
+      <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+<div id="loginWrap">
+    <div id="loginBox">
+        <h1>Knit Total System</h1>
+        <div id="loginTab">
+            <form action="/" method="POST">
+            <div id="loginInputBox">
+                <!--
+                <div>
+                    <input type="text" autocomplete="off" id="username" placeholder="ID" name="username">
+                </div>
+                <div>
+                    <input type="password" id="user_password" placeholder="Password" name="user_password">
+                </div>
+                -->
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="loginBtn">
+                    <input id="signupBtn" type="submit" value="Continue">
+                </div>
+                <div class="loginBot">
+                    <p>Forgot <a href="javascript:void(0)">Password ?</a></p>
+                </div>
+                <div class="loginBot">
+                    <p>Not a Member? <a href="/signup">Sign Up</a></p>
+                </div>
+            </div>
+            </form>
+            <div class="rightDeco">
+                <div class="decorationLBar"></div>
+                <div class="decorationSBar"></div>
+            </div>
+            <div class="leftDeco">
+                <div class="decorationLBar"></div>
+                <div class="decorationSBar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

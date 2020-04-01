@@ -1,0 +1,684 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#ContentWrap {
+    width:1470px;
+    color: black;
+    font-size:12px;
+    background-color: rgb(219, 221, 224);
+    margin-left: 240px;
+    margin-top: 60px;
+    padding: 15px 20px;
+    min-height: calc(100vh - 90px);
+}
+
+h4 {
+    font-size: 16px;
+}
+
+hr {
+    margin-bottom: 10px;
+}
+
+.calendarMachine {
+    width: 480px;
+    background-color: white;
+    height: 815px;
+}
+
+#calendar {
+    padding: 20px 15px 0 15px;
+    height: 400px;
+    width: 450px;
+}
+
+#ContentWrap > div:nth-child(1){
+    float: left;
+    margin-right: 15px;
+}
+
+#ContentWrap > div:nth-child(2){
+    float: left;
+}
+
+.orderMaterial {
+    width: 975px;
+    height: 815px;
+    background-color: white;
+}
+
+.orderDesign {
+    width: 900px;
+    height: 390px;
+}
+
+.orderMaterial > div > div {
+    float: left;
+}
+
+.scheduleOrder > h4 {
+    margin: 10px 0 10px 15px;
+}
+
+.calendarMachine > h4 {
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+.material {
+    height: 290px;
+    width: 975px;
+}
+
+.material > div {
+    float: left;
+}
+
+.yarnMaterial {
+    width: 485px;
+}
+
+.yarnMaterial > div {
+    height: 260px;
+    background-color: white;
+}
+
+.beamMaterial {
+    width: 280px;
+    margin: 0 15px;
+}
+
+.beamMaterial > div {
+    height: 260px;
+    background-color: white;
+}
+
+.rawMaterial {
+    width: 180px;
+}
+
+.rawMaterial > div {
+    height: 260px;
+    background-color: white;
+}
+
+.machine {
+    width: 465px;
+    height: 420px;
+}
+
+.machine > div {
+    float: left;
+}
+
+.machine > div > h4 {
+    color: #000;
+    margin: 10px 0 10px 0;
+}
+
+.machine > div > div {
+    height: 375px;
+    width: 205px;
+}
+
+.warpMachineList {
+    margin: 0 15px;
+}
+
+.knitMachineList {
+    margin: 0 0 0 15px;
+}
+
+div.division {
+    margin-top: 20px;
+    width: 3px;
+    height: 360px;
+    background-color: rgb(221, 221, 221);
+}
+
+.order {
+    width: 480px;
+    height: 380px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#orderDesign {
+    height: 420px;
+    width: 975px;
+}
+
+#orderDesign table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    display: block;
+}
+
+#orderDesign table th {
+    background: rgb(62, 67, 88);
+    color: #fff;
+}
+
+#orderDesign tr {
+    height: 25px;
+}
+
+#orderDesign tr:hover {
+    cursor: pointer;
+}
+
+#orderDesign table th, #orderDesign table td {
+    border: 1px solid #a2a3a4;
+    padding: 7px 0;
+}
+
+#orderDesign tbody {
+    display: block;
+    overflow: auto;
+    max-height: 349px;
+}
+
+#orderDesign tr > th:nth-child(1) {
+    width: 124px;
+}
+
+#orderDesign tr > td:nth-child(1) {
+    width: 124px;
+}
+
+#orderDesign tr > th:nth-child(2) {
+    width: 94px;
+}
+
+#orderDesign tr > td:nth-child(2) {
+    width: 95px;
+}
+
+#orderDesign tr > td:nth-child(3), #orderDesign tr > th:nth-child(3) {
+    width: 67px;
+}
+
+#orderDesign tr > th:nth-child(4) {
+    width: 93px;
+}
+
+#orderDesign tr > td:nth-child(4) {
+    width: 94px;
+}
+
+#orderDesign tr > th:nth-child(5) {
+    width: 93px;
+}
+
+#orderDesign tr > td:nth-child(5) {
+    width: 94px;
+}
+
+.createScheduleForm > div {
+    float: left;
+    margin: 5px 0 0 15px;
+}
+
+.createScheduleForm > div input {
+    width: 205px;
+    margin-bottom: 5px;
+}
+
+.createScheduleForm button {
+    width: 100px;
+    margin-top: 20px;
+    background: rgb(62, 67, 88);
+    color: #fff;
+    border: 0;
+    padding: 5px 0;
+}
+
+.order .selected{
+    background-color: rgb(187, 231, 255);
+}
+
+.warpMachine.selected{
+    background-color: rgb(187, 231, 255);
+}
+
+.knitMachine.selected{
+    background-color: rgb(187, 231, 255);
+}
+
+.warpMachineList > div, .knitMachineList > div {
+    overflow: auto;
+}
+
+.warpMachine, .knitMachine {
+    width: 100%;
+    height: 85px;
+    margin-bottom: 10px;
+    background-color: rgb(221, 221, 221);
+}
+
+.warpMachine:hover, .knitMachine:hover {
+    cursor: pointer;
+}
+
+.warpMachine > div, .knitMachine > div {
+    height: 25px;
+}
+
+.warpMachine > div > div, .knitMachine > div > div {
+    margin: 10px 0 0 15px;
+    font-size: 13px;
+    display: inline-block;
+}
+
+.warpMachine > div > img, .knitMachine > div > img {
+    float: right;
+    margin: 10px 15px 0 0;
+}
+
+#machineSchedule {
+    height: 345px;
+    padding: 0 10px 10px 10px;
+}
+
+#machineSchedule > div {
+    float: left;
+}
+
+.calendarMachine .division {
+    margin: 0 12px;
+}
+
+#warpMachineSchedule, #knitMachineSchedule {
+    width: 215px;
+    height: 100%;
+}
+
+#warpMachineSchedule h4, #knitMachineSchedule h4 {
+    margin-top: 10px;
+}
+
+#warpMachineSchedule > div > div, #knitMachineSchedule > div > div {
+    height: 312px;
+    width: 100%;
+    overflow: auto;
+}
+
+.processTable {
+    margin-bottom: 10px;
+    background-color: rgb(221, 221, 221);
+    width: 100%;
+    font-size: 13px;
+    text-align: center;
+}
+
+.processTable td {
+    padding: 3px 2px;
+}
+
+.infoBtn {
+    width: 15px;
+}
+
+#subModalBtnBox {
+    width:607px;
+    margin:0 auto 10px auto;
+    border-top:1px solid #444;
+    padding-top:10px;
+    text-align:right;
+}
+
+#subModalBtnBox >span {
+    display:inline-block;
+    width:61px;
+    text-align:center;
+    padding:8px;
+    font-size:12px;
+    background-color:#3e437e;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+#subModalBtnBoxYarn {
+    width:607px;
+    margin: 0 auto 10px auto;
+    border-top:1px solid #444;
+    padding-top:10px;
+    text-align:right;
+}
+
+#subModalBtnBoxYarn >span {
+    display:inline-block;
+    width:61px;
+    text-align:center;
+    padding:8px;
+    font-size:12px;
+    background-color:#3e437e;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+.inputTab > div {
+    float:left;
+    margin: 10px 0 0 20px
+}
+
+#detailOrderModalWarp {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-200px;
+    margin-left:-240px;
+    width:647px;
+    background-color:#fff;
+    z-index:100000;
+    display:none;
+}
+
+#detailOrderModalWarp h3 {
+    background:#3e4358;
+    padding:10px 0 10px 30px;
+}
+
+#detailOrderModalWarp .line {
+    margin-bottom:10px;
+}
+
+#detailOrderModalWarp label {
+    display:inline-block;
+    width:113px;
+    text-align:center;
+    padding:8px;
+    font-size:12px;
+    background-color:rgb(62, 67, 88);
+    font-weight: bold;
+}
+
+#detailOrderModalWarp .line div {
+    width:150px;
+    border: solid #a2a3a4 1px;
+    text-align:center;
+    padding: 4px;
+    height:20px;
+    float: right;
+    margin-left: 4px;
+    color: black;
+}
+
+
+#detailOrderModalKnit {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-200px;
+    margin-left:-240px;
+    width:647px;
+    background-color:#fff;
+    z-index:100000;
+    display:none;
+}
+
+#detailOrderModalKnit h3 {
+    background:#3e4358;
+    padding:10px 0 10px 30px;
+}
+
+#detailOrderModalKnit .line {
+    margin-bottom:10px;
+}
+
+#detailOrderModalKnit label {
+    display:inline-block;
+    width:113px;
+    text-align:center;
+    padding:8px;
+    font-size:12px;
+    background-color:rgb(62, 67, 88);
+    font-weight: bold;
+}
+
+#detailOrderModalKnit .line div {
+    width:150px;
+    border: solid #a2a3a4 1px;
+    text-align:center;
+    padding: 4px;
+    height:20px;
+    float: right;
+    margin-left: 4px;
+    color: black;
+}
+
+.line > div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.warpMachine > div:nth-child(1) > div, .knitMachine > div:nth-child(1) > div {
+    width: 130px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.warpMachine > div:nth-child(2) > div, .knitMachine > div:nth-child(2) > div {
+    width: 160px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#materialDiv {
+    height: 275px;
+}
+
+#yarnDiv {
+    margin-top: 5px;
+    height: 120px;
+}
+
+#yarnDiv > div {
+    float: left;
+}
+
+#yarnDiv > div:nth-child(1) {
+    padding: 0 20px 0 15px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#yarnTableDIv {
+    width: 870px;
+    padding: 0 15px;
+}
+
+#yarnTable{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    display: block;
+}
+
+#yarnTable th {
+    background: rgb(62, 67, 88);
+    color: #fff;
+}
+
+#yarnTable tr {
+    height: 25px;
+}
+
+#yarnTable th, #yarnTable td {
+    border: 1px solid #a2a3a4;
+    padding: 7px 0;
+}
+
+#yarnTable tbody {
+    display: block;
+    overflow: auto;
+    max-height: 94px;
+}
+
+#yarnTable tr > th:nth-child(1), #yarnTable tr > td:nth-child(1) {
+    width: 139px;
+}
+
+#yarnTable tr > th:nth-child(2), #yarnTable tr > td:nth-child(2) {
+    width: 139px;
+}
+
+#yarnTable tr > th:nth-child(3), #yarnTable tr > td:nth-child(3) {
+    width: 86px;
+}
+
+#yarnTable tr > th:nth-child(4), #yarnTable tr > td:nth-child(4) {
+    width: 51px;
+}
+
+#yarnTable tr > th:nth-child(5), #yarnTable tr > td:nth-child(5) {
+    width: 51px;
+}
+
+#yarnTable tr > th:nth-child(6), #yarnTable tr > td:nth-child(6) {
+    width: 51px;
+}
+
+#yarnTable tr > th:nth-child(7), #yarnTable tr > td:nth-child(7) {
+    width: 70px;
+}
+
+#yarnTable tr > th:nth-child(8), #yarnTable tr > td:nth-child(8) {
+    width: 61px;
+}
+
+#yarnTable tr > th:nth-child(9), #yarnTable tr > td:nth-child(9) {
+    width: 110px;
+}
+
+#yarnTable tr > th:nth-child(10), #yarnTable tr > td:nth-child(10) {
+    width: 101px;
+}
+
+#beamRawDiv {
+    margin-top: 15px;
+    height: 130px;
+}
+
+#beamRawDiv > div {
+    float: left;
+}
+
+#beamRawDiv > div:nth-child(1){
+    padding: 0 25px 0 15px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#beamRawDiv > div:nth-child(3) {
+    padding: 0 20px 0 30px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#beamTableDiv {
+    width: 500px;
+}
+
+#beamTable{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    display: block;
+}
+
+#beamTable th, #beamTable td {
+    border: 1px solid #a2a3a4;
+    padding: 7px 0;
+}
+
+#beamTable th {
+    background: rgb(62, 67, 88);
+    color: #fff;
+}
+
+#beamTable tr {
+    height: 25px;
+}
+
+#beamTable tbody {
+    display: block;
+    overflow: auto;
+    max-height: 94px;
+}
+
+#beamTable tr > th:nth-child(1), #beamTable tr > td:nth-child(1) {
+    width: 149px;
+}
+
+#beamTable tr > th:nth-child(2), #beamTable tr > td:nth-child(2) {
+    width: 149px;
+}
+
+#beamTable tr > th:nth-child(3), #beamTable tr > td:nth-child(3) {
+    width: 99px;
+}
+
+#beamTable tr > th:nth-child(4), #beamTable tr > td:nth-child(4) {
+    width: 98px;
+}
+
+#rawTableDiv {
+    width: 290px;
+}
+
+#rawTable{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    display: block;
+}
+
+#rawTable th {
+    background: rgb(62, 67, 88);
+    color: #fff;
+}
+
+#rawTable tr {
+    height: 25px;
+}
+
+#rawTable th, #rawTable td {
+    border: 1px solid #a2a3a4;
+    padding: 7px 0;
+}
+
+#rawTable tbody {
+    display: block;
+    overflow: auto;
+    max-height: 94px;
+}
+
+#rawTable tr > th:nth-child(1), #rawTable tr > td:nth-child(1){
+    width: 127px;
+}
+
+#rawTable tr > th:nth-child(2), #rawTable tr > td:nth-child(2) {
+    width: 80px;
+}
+
+#rawTable tr > th:nth-child(3), #rawTable tr > td:nth-child(3) {
+    width: 80px;
+}
+
+#yarnTable .yarnOver > td:nth-child(10) {
+    width: 84px;
+}
+
+#beamTable .beamOver > td:nth-child(4) {
+    width: 81px;
+}
+
+#rawTable .rawOver > td:nth-child(3) {
+    width: 63px;
+}

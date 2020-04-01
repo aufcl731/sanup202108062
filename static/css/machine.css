@@ -1,0 +1,338 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#ContentWrap {
+    width:1470px;
+    color: black;
+    font-size:12px;
+    background-color: rgb(219, 221, 224);
+    margin-left: 240px;
+    margin-top: 60px;
+    padding: 15px 20px;
+    min-height: calc(100vh - 90px);
+}
+
+#createMachineWrap > div {
+    float:left;
+    height:240px;
+    margin-bottom:30px;
+    background:#fff;
+}
+
+#createWarp, #createKnit {
+    padding:0 40px 20px 40px;
+}
+
+#listWrap > div {
+    float:left;
+}
+
+.firstDiv {
+    width:505px;
+}
+
+.secDiv {
+    width:950px;
+}
+
+#createWarp, #createKnit {
+    background:#fff;
+}
+
+.line {
+    margin-top:20px;
+}
+
+.h3line {
+    margin-top:10px;
+}
+
+label {
+    display:inline-block;
+    width:150px;
+    text-align:center;
+    padding:8px;
+    font-size:12px;
+    background-color:rgb(62, 67, 88);
+    font-weight: bold;
+    color:#fff;
+    margin-right:10px;
+}
+
+input {
+    width:200px;
+    text-align:center;
+    padding: 3px;
+    height:20px;
+}
+
+.btnBox {
+    text-align:right;
+    padding:0;
+    height:30px;
+    line-height:25px;
+    border-top:1px solid #444;
+}
+
+.btnBox > button {
+    margin-right:55px;
+    display:inline-block;
+    margin-top:7px;
+    width:100px;
+    text-align:center;
+    height:25px;
+    font-size:12px;
+    background-color:rgb(62, 67, 88);
+    font-weight: bold;
+    color:#fff;
+    border: 0px;
+}
+
+.btnBox > button:hover {
+    cursor: pointer;
+}
+
+.firstDiv {
+    margin-right:15px;
+}
+
+#knit_model, #knit_company, #knit_bar_cnt {
+    margin-right:70px;
+}
+
+.btnBox > .warpBtn {
+    margin-right:75px;
+}
+
+/* Table */
+table {
+    width:100%;
+    border-collapse: collapse;
+    color:#000;
+}
+
+table td, table th {
+    border:1px solid #a2a3a4;
+    padding:5px 0;
+    font-size:11px;
+    text-align:center;
+}
+
+table th {
+    background:rgb(62, 67, 88);
+    color:#fff;
+    height:20px;
+}
+
+table td {
+    height:20px;
+}
+table tr {
+    background:#fff;
+}
+
+table tr:nth-child(2n+1){
+   background:rgb(239,242,245);
+}
+
+.machineTitle {
+    padding-left:5px;
+    font-size:23px;
+    margin-bottom:5px;
+}
+
+#listWrap span {
+    width: 50px;
+    color: #444;
+    border: 1px solid #a9a9a9;
+    padding: 3px;
+    background: #fff;
+    font-size: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+#noKnitMachineTable{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    display: block;
+}
+
+#noKnitMachineTable th, #noKnitMachineTable td {
+    padding: 5px 0;
+}
+
+#noKnitMachineTable tbody {
+    display: block;
+    overflow: auto;
+    max-height: 466px;
+}
+
+#noKnitMachineTable tr > td:nth-child(1), #noKnitMachineTable tr > th:nth-child(1) {
+    width: 47px;
+}
+
+#noKnitMachineTable tr > td:nth-child(2), #noKnitMachineTable tr > th:nth-child(2) {
+    width: 189px;
+}
+
+#noKnitMachineTable tr > td:nth-child(3), #noKnitMachineTable tr > th:nth-child(3) {
+    width: 189px;
+}
+
+#noKnitMachineTable tr > td:nth-child(4), #noKnitMachineTable tr > th:nth-child(4) {
+    width: 94px;
+}
+
+#noKnitMachineTable tr > td:nth-child(5), #noKnitMachineTable tr > th:nth-child(5) {
+    width: 94px;
+}
+
+#noKnitMachineTable tr > td:nth-child(6), #noKnitMachineTable tr > th:nth-child(6) {
+    width: 94px;
+}
+
+#noKnitMachineTable tr > td:nth-child(7), #noKnitMachineTable tr > th:nth-child(7) {
+    width: 141px;
+}
+
+#noKnitMachineTable tr > td:nth-child(8), #noKnitMachineTable tr > th:nth-child(8) {
+    width: 93px;
+}
+
+
+
+#noWarpMachineTable{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    display: block;
+}
+
+#noWarpMachineTable th, #noWarpMachineTable td {
+    padding: 5px 0;
+}
+
+#noWarpMachineTable tbody {
+    display: block;
+    overflow: auto;
+    max-height: 466px;
+}
+
+#noWarpMachineTable tr > td:nth-child(1), #noWarpMachineTable tr > th:nth-child(1) {
+    width: 45px;
+}
+
+#noWarpMachineTable tr > td:nth-child(2), #noWarpMachineTable tr > th:nth-child(2) {
+    width: 141px;
+}
+
+#noWarpMachineTable tr > td:nth-child(3), #noWarpMachineTable tr > th:nth-child(3) {
+    width: 140px;
+}
+
+#noWarpMachineTable tr > td:nth-child(4), #noWarpMachineTable tr > th:nth-child(4) {
+    width: 99px;
+}
+
+#noWarpMachineTable tr > td:nth-child(5), #noWarpMachineTable tr > th:nth-child(5) {
+    width: 74px;
+}
+
+
+#warpMachineTable{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    display: block;
+}
+
+#warpMachineTable th, #warpMachineTable td {
+    padding: 5px 0;
+}
+
+#warpMachineTable tbody {
+    display: block;
+    overflow: auto;
+    max-height: 776px;
+}
+
+#warpMachineTable tr > td:nth-child(1), #warpMachineTable tr > th:nth-child(1) {
+    width: 45px;
+}
+
+#warpMachineTable tr > td:nth-child(2), #warpMachineTable tr > th:nth-child(2) {
+    width: 141px;
+}
+
+#warpMachineTable tr > td:nth-child(3), #warpMachineTable tr > th:nth-child(3) {
+    width: 140px;
+}
+
+#warpMachineTable tr > td:nth-child(4), #warpMachineTable tr > th:nth-child(4) {
+    width: 99px;
+}
+
+#warpMachineTable tr > td:nth-child(5), #warpMachineTable tr > th:nth-child(5) {
+    width: 74px;
+}
+
+
+
+#knitMachineTable{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    display: block;
+}
+
+#knitMachineTable th, #knitMachineTable td {
+    padding: 5px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#knitMachineTable tbody {
+    display: block;
+    overflow: auto;
+    max-height: 776px;
+}
+
+#knitMachineTable tr > td:nth-child(1), #knitMachineTable tr > th:nth-child(1) {
+    width: 47px;
+}
+
+#knitMachineTable tr > td:nth-child(2), #knitMachineTable tr > th:nth-child(2) {
+    width: 189px;
+    max-width: 189px;
+}
+
+#knitMachineTable tr > td:nth-child(3), #knitMachineTable tr > th:nth-child(3) {
+    width: 189px;
+}
+
+#knitMachineTable tr > td:nth-child(4), #knitMachineTable tr > th:nth-child(4) {
+    width: 94px;
+}
+
+#knitMachineTable tr > td:nth-child(5), #knitMachineTable tr > th:nth-child(5) {
+    width: 94px;
+}
+
+#knitMachineTable tr > td:nth-child(6), #knitMachineTable tr > th:nth-child(6) {
+    width: 94px;
+}
+
+#knitMachineTable tr > td:nth-child(7), #knitMachineTable tr > th:nth-child(7) {
+    width: 141px;
+}
+
+#knitMachineTable tr > td:nth-child(8), #knitMachineTable tr > th:nth-child(8) {
+    width: 93px;
+}

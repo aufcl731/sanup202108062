@@ -1,0 +1,378 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block staticfile %}
+<link rel="stylesheet" href="{% static 'css/material.css' %}">
+<link rel="stylesheet" href="{% static 'css/jquery.minicolors.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery.minicolors.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/materials.js' %}"></script>
+{% endblock staticfile %}
+
+{% block content %}
+            <div id="ContentWrap">
+                <div id="materialsTop">
+                    <div class="conTitle">
+                        <h3>원사</h3>
+                        <div class="searchBox">
+                            <span onclick="createModal('yarn')">Add</span>
+                            <span>Name</span>
+                            <input type="text" class="yarnseach" placeholder="Search" id="searchYarn" name="searchYarn" onkeyup="searchYarn()">
+                            <span onclick="delyarnsearch()">reset</span>
+                        </div>
+                    </div>
+                    <div id="yarnTableBox">
+                        <table>
+                            <colgroup>
+                                <col width="3%"> <!-- No. -->
+                                <col width="13%"> <!-- 이름 -->
+                                <col width="13%"> <!-- 코드 -->
+                                <col width="9%"> <!-- 메이커 -->
+                                <col width="6%"> <!-- 굵기 -->
+                                <col width="6%"> <!-- 필라멘트 -->
+                                <col width="6%"> <!-- 수축률 -->
+                                <col width="6%"> <!-- 재료 -->
+                                <col width="6%"> <!-- 종류 -->
+                                <col width="8%"> <!-- RGB -->
+                                <col width="8%"> <!-- LAB -->
+                                <col width="8%"> <!-- 수량 -->
+                                <col width="8%"> <!-- 삭제 -->
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>이름</th>
+                                    <th>코드</th>
+                                    <th>메이커</th>
+                                    <th>굵기</th>
+                                    <th>필라멘트</th>
+                                    <th>수축률</th>
+                                    <th>재료</th>
+                                    <th>종류</th>
+                                    <th>RGB</th>
+                                    <th>LAB</th>
+                                    <th>수량</th>
+                                    <th>입고일</th>
+                                    <th>삭제</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for yarn in yarnList %}
+                                <tr class="yarnTr">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ yarn.name }}</td>
+                                    <td>{{ yarn.code }}</td>
+                                    <td>{{ yarn.maker }}</td>
+                                    <td>{{ yarn.count }}</td>
+                                    <td>{{ yarn.filament }}</td>
+                                    <td>{{ yarn.contraction }}%</td>
+                                    <td>{{ yarn.material }}</td>
+                                    <td>{{ yarn.kind }}</td>
+                                    <td>{{ yarn.color }}</td>
+                                    <td>{{ yarn.lab }}</td>
+                                    <td>{{ yarn.qty }}</td>
+                                    <td>{{ yarn.Receivingdate}}</td>
+                                    <td><span class='removeBtn' onclick='delYarnData("{{ yarn.id }}")'>Remove</span></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="materialsBot" class="fix">
+                    <!-- Beam Table -->
+                    <div>
+                        <div class="conTitle">
+                            <h3>빔</h3>
+                            <div class="searchBox">
+                                <span onclick="createModal('beam')">ADD</span>
+                                <span>Name</span>
+                                <input type="text" class="beamsearch" placeholder="Search" id="searchBeam" name="searchBeam" onkeyup="searchBeam()">
+                                <span onclick="delbeamsearch()">reset</span>
+                            </div>
+                        </div>
+                        <div id="beamTableBox">
+                            <table>
+                                <colgroup>
+                                    <col width="10%"> <!-- No. -->
+                                    <col width="20%"> <!-- 이름 -->
+                                    <col width="15%"> <!-- 코드 -->
+                                    <col width="15%"> <!-- 굵기 -->
+                                    <col width="20%"> <!-- 필라멘트 -->
+                                    <col width="20%"> <!-- 삭제 -->
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>품명</th>
+                                        <th>실</th>
+                                        <th>실수량</th>
+                                        <th>크기</th>
+                                        <th>입고일</th>
+                                        <th>삭제</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for beam in beamList %}
+                                    <tr class="beamTr">
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ beam.name }}</td>
+                                        {% if beam.yarn == None %}
+                                            <td></td>
+                                        {% else %}
+                                            <td>{{ beam.yarn.name }}</td>
+                                        {% endif %}
+                                        <td>{{ beam.yarn_qty }}</td>
+                                        <td>{{ beam.size }} inch</td>
+                                        <td>{{ beam.Receivingdate}}</td>
+                                        <td><span class='removeBtn' onclick='delBeamData("{{ beam.id }}")'>Remove</span></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- Raw Table -->
+                    <div>
+                        <div class="conTitle">
+                            <h3>생지</h3>
+                            <div class="searchBox">
+                                <span>Name</span>
+                                <input type="text" class="rawsearch" placeholder="Search" id="searchRaw" name="searchRaw">
+                                <span onclick="delrawsearch()">reset</span>
+                            </div>
+                        </div>
+                        <div id="rawWrap" class="fix">
+                            <div id="rawTableBox">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>품명</th>
+                                            <th>디자인</th>
+                                            <th>재고</th>
+                                            <th>입고일</th>
+                                            <th>삭제</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="designInfo">
+                                <div id="designInfoTitle">Product Data</div>
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="conTitle">
+                            <h3>롤</h3>
+                            <div class="searchBox">
+                                <span onclick="createModal('roll')">ADD</span>
+                                <span>Name</span>
+                                <input type="text" placeholder="Search" id="searchRaw" name="searchRaw">
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>품명</th>
+                                            <th>생지품명</th>
+                                            <th>생지출고일</th>
+                                            <th>입고일</th>
+                                            <th>출고예정일</th>
+                                            <th>수량</th>
+                                            <th>난단</th>
+                                            <th>정단</th>
+                                            <th>길이(Yard)</th>
+                                            <th>무게(Kg)</th>
+                                            <th>삭제</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+                                    {% for roll in rollList %}
+                                        <tr>
+                                            <td>{{ roll.id }}</td>
+                                            <td>{{ roll.rollname }}</td>
+                                            <td>{{ roll.rollfabricname }}</td>
+                                            <td>{{ roll.rollfabricdate }}</td>
+                                            <td>{{ roll.receivingdate }}</td>
+                                            <td>{{ roll.rolloutdate }}</td>
+                                            <td>{{ roll.rollcount }}</td>
+                                            <td>{{ roll.rollfabricerror }}</td>
+                                            <td>{{ roll.rollfabrictrue }}</td>
+                                            <td>{{ roll.rollfabriclength }}</td>
+                                            <td>{{ roll.rollfabricweight }}</td>
+                                            <td><span class='removeBtn' onclick='delRollData("{{ roll.id }}")'>Remove</span></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yarn Modal -->
+            <div id="yarnModal">
+                <div class="modalTitle">
+                    <h2>원사 등록</h2>
+                </div>
+                <form action="/material/createYarn" method="POST" name="yarnForm" id="yarnForm">{% csrf_token %}
+                <div class="yarnData fix">
+                    <div>
+                        <div class="line">
+                            <label>이름</label>
+                            <input type="text" id="yarnName" name="yarnName">
+                        </div>
+                        <div class="line">
+                            <label>코드</label>
+                            <input type="text" id="yarnCode" name="yarnCode">
+                        </div>
+                        <div class="line">
+                            <label>메이커</label>
+                            <input type="text" id="yarnMaker" name="yarnMaker">
+                        </div>
+                        <div class="line">
+                            <label>굵기</label>
+                            <input type="text" id="yarnCount" name="yarnCount">
+                        </div>
+                        <div class="line">
+                            <label>필라멘트</label>
+                            <input type="text" id="yarnFilament" name="yarnFilament">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="line">
+                            <label>수축률</label>
+                            <input type="text" id="yarnContraction" name="yarnContraction">
+                        </div>
+                        <div class="line">
+                            <label>재료</label>
+                            <input type="text" id="yarnMaterial" name="yarnMaterial">
+                        </div>
+                        <div class="line">
+                            <label>종류</label>
+                            <input type="text" id="yarnKind" name="yarnKind">
+                        </div>
+                        <div class="line">
+                            <label>색</label>
+                            <!--
+                            <input type="text" id="yarnColor" name="yarnColor">
+                            -->
+                            <input type="text" id="yarnColor" name="yarnColor" class="form-control" data-control="hue" value="#000">
+                        </div>
+                        <div class="line">
+                            <label>수량</label>
+                            <input type="text" id="yarnQty" name="yarnQty">
+                        </div>
+                    </div>
+                </div>
+                <div class="createBtnBox">
+                    <span class="createBtn" onclick="createYarn()">등록</span>
+                    <span class="closeBtn" onclick="closeModal('yarn')">닫기</span>
+                </div>
+                </form>
+            </div>
+
+            <!-- Beam Modal -->
+            <div id="beamModal">
+                <div class="modalTitle">
+                    <h2>빈 빔 등록</h2>
+                </div>
+                <form action="/material/createBeam" method="POST" name="beamForm" id="beamForm">{% csrf_token %}
+                <div class="beamData fix">
+                    <div class="fix">
+                        <div class="line">
+                            <label>이름</label>
+                            <input type="text" id="beamName" name="beamName">
+                        </div>
+                        <div class="line">
+                            <label>사이즈</label>
+                            <input type="text" id="beamSize" name="beamSize">
+                        </div>
+                    </div>
+                </div>
+                <div class="createBtnBox">
+                    <span class="createBtn" onclick="createBeam()">등록</span>
+                    <span class="closeBtn" onclick="closeModal('beam')">닫기</span>
+                </div>
+                </form>
+            </div>
+
+            <div id="rollModal">
+                <div class="modalTitle">
+                    <h2>롤 등록</h2>
+                </div>
+                <form action="/material/createroll" method="POST" name="rollForm" id="rollForm">{% csrf_token %}
+                <div class="rollData fix">
+                    <div class="fix">
+                        <div class="line">
+                            <label>품명</label>
+                            <input type="text" id="rollname" name="rollname">
+                        </div>
+                        <div class="line">
+                            <label>생지품명</label>
+                            <input type="text" id="rollfabricname" name="rollfabricname">
+                        </div>
+                         <div class="line">
+                            <label>생지출고일</label>
+                            <input type="date" id="rollfabricdate" name="rollfabricdate">
+                        </div>
+                         <div class="line">
+                            <label>출고예정일</label>
+                            <input type="date" id="rolloutdate" name="rolloutdate">
+                        </div>
+                         <div class="line">
+                            <label>수량</label>
+                            <input type="text" id="rollcount" name="rollcount">
+                        </div>
+                         <div class="line">
+                            <label>난단</label>
+                            <input type="text" id="rollfabricerror" name="rollfabricerror">
+                        </div>
+                         <div class="line">
+                            <label>길이(Yard)</label>
+                            <input type="text" id="rollfabriclength" name="rollfabriclength">
+                        </div>
+                         <div class="line">
+                            <label>무게(Kg)</label>
+                            <input type="text" id="rollfabricweight" name="rollfabricweight">
+                        </div>
+                    </div>
+                    <div class="createBtnBox">
+                        <span class="createBtn" onclick="createRoll()">등록</span>
+                        <span class="closeBtn" onclick="closeModal('roll')">닫기</span>
+                    </div>
+
+                </div>
+                </form>
+            </div>
+
+            <script>
+
+            $(document).ready( function() {
+                $('#yarnColor').minicolors();
+            });
+
+            </script>
+{% endblock content %}

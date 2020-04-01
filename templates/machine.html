@@ -1,0 +1,297 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block staticfile %}
+<link rel="stylesheet" href="{% static 'css/machine.css' %}">
+<script>
+    var yarnList = [];
+    $(document).ready(function() {
+        var platform = window.navigator.platform;
+        var os;
+        var macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+        var warpMachineList = {{ warpMachineList|safe }};
+        var knitMachineList = {{ knitMachineList|safe }};
+        var company = {{ company|safe }}
+
+        if (macosPlatforms.indexOf(platform) !== -1) {
+            os = 'Mac OS';
+        }
+
+        if(company.machineyn == True && warpMachineList.length > 25 && os != 'Mac OS')
+            $('#warpMachineTable > tbody td:last-child').css('width', '76px');
+
+        if(company.machineyn == False && warpMachineList.length > 15 && os != 'Mac OS')
+            $('#noWarpMachineTable > tbody td:last-child').css('width', '76px');
+
+        if(company.machineyn == True && knitMachineList.length > 25 && os != 'Mac OS')
+            $('#knitMachineTable > tbody td:last-child').css('width', '57px');
+
+        if(company.machineyn == False && knitMachineList.length > 15 && os != 'Mac OS')
+            $('#noKnitMachineTable > tbody td:last-child').css('width', '57px');
+    });
+</script>
+{% endblock staticfile %}
+
+{% block content %}
+    <div id="ContentWrap">
+        {% if company.machineyn == True %}
+        <div id="listWrap" class="fix">
+            <div id="warpList" class="firstDiv">
+                <h3 class="machineTitle">정경기 리스트</h3>
+                <table id="warpMachineTable">
+                    <colgroup>
+                        <col width="9%">
+                        <col width="28%">
+                        <col width="28%">
+                        <col width="20%">
+                        <col width="15%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Model</th>
+                            <th>Code</th>
+                            <th>Create Date</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for warpMachineObj in warpMachineList %}
+                        <tr>
+                            <td>{{ warpMachineObj.pk }}</td>
+                            <td>{{ warpMachineObj.tws_name }}</td>
+                            <td>{{ warpMachineObj.tns_code }}</td>
+                            <td>{{ warpMachineObj.tws_installation_time|date:'Y-m-d H:i' }}</td>
+                            <td><span onclick="deleteWarpMachine(1,{{ warpMachineObj.pk }})">remove</span></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="knitList" class="secDiv">
+                <h3 class="machineTitle">경편기 리스트</h3>
+                <table id="knitMachineTable">
+                    <colgroup>
+                        <col width="5%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="15%">
+                        <col width="10%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Model</th>
+                            <th>Code</th>
+                            <th>RPM</th>
+                            <th>Bar Count</th>
+                            <th>Gauge</th>
+                            <th>Create Date</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for knitMachineObj in knitMachineList %}
+                        <tr>
+                            <td>{{ knitMachineObj.pk }}</td>
+                            <td>{{ knitMachineObj.trs_model_name }}</td>
+                            <td>{{ knitMachineObj.tns_code }}</td>
+                            <td>{{ knitMachineObj.rpm }}</td>
+                            <td>{{ knitMachineObj.trs_bar_cnt }}</td>
+                            <td>{{ knitMachineObj.trs_gauge }}</td>
+                            <td>{{ knitMachineObj.trs_installation_time|date:'Y-m-d H:i' }}</td>
+                            <td><span onclick="deleteKnitMachine(1,{{ knitMachineObj.pk }})">remove</span></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <div id="createMachineWrap" class="fix">
+            <h3 class="machineTitle">Machine Register</h3>
+            <div class="firstDiv">
+                <form action="/machine/setWarpMachine" method="post">
+                    {% csrf_token %}
+                    <div id="createWarp">
+                        <h3 class="h3line">정경</h3>
+                        <div class="line">
+                            <label for="warp_model">Model</label>
+                            <input type="text" id="warp_model" name="warp_model">
+                        </div>
+                        <div class="line">
+                            <label for="warp_code">Code</label>
+                            <input type="text" id="warp_code" name="warp_code">
+                        </div>
+                        <div class="line">
+                            <label for="warp_company">Company</label>
+                            <input type="text" disabled name="warp_company" id="warp_company" value="{{ company.name }}">
+                        </div>
+                    </div>
+                    <div class="btnBox">
+                        <button class="warpBtn">등록</button>
+                    </div>
+                </form>
+            </div>
+            <div class="secDiv">
+                <form action="/machine/setKnitMachine" method="post">
+                    {% csrf_token %}
+                    <div id="createKnit">
+                        <h3 class="h3line">경편기</h3>
+                        <div class="line">
+                            <label for="knit_model">Model</label>
+                            <input type="text" id="knit_model" name="knit_model">
+                            <label for="knit_code">Code</label>
+                            <input type="text" id="knit_code" name="knit_code">
+                        </div>
+                        <div class="line">
+                            <label for="knit_company">Company</label>
+                            <input type="text" disabled id="knit_company" name="knit_company" value="{{ company.name }}">
+                            <label for="knit_rpm">RPM</label>
+                            <input type="text" id="knit_rpm" name="knit_rpm">
+                        </div>
+                        <div class="line">
+                            <label for="knit_bar_cnt">Bar Count</label>
+                            <input type="text" id="knit_bar_cnt" name="knit_bar_cnt">
+                            <label for="knit_gauge">Gauge</label>
+                            <input type="text" id="knit_gauge" name="knit_gauge">
+                        </div>
+                    </div>
+                    <div class="btnBox">
+                        <button class="knitBtn">등록</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="listWrap" class="fix">
+            <div id="warpList" class="firstDiv">
+                <h3 class="machineTitle">정경기 리스트</h3>
+                <table id="noWarpMachineTable">
+                    <colgroup>
+                        <col width="9%">
+                        <col width="28%">
+                        <col width="28%">
+                        <col width="20%">
+                        <col width="15%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Model</th>
+                            <th>Code</th>
+                            <th>Create Date</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for warpMachineObj in warpMachineList %}
+                        <tr>
+                            <td>{{ warpMachineObj.pk }}</td>
+                            <td>{{ warpMachineObj.name }}</td>
+                            <td>{{ warpMachineObj.code }}</td>
+                            <td>{{ warpMachineObj.create_date|date:'Y-m-d H:i' }}</td>
+                            <td><span onclick="deleteWarpMachine(2,{{ warpMachineObj.pk }})">remove</span></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="knitList" class="secDiv">
+                <h3 class="machineTitle">경편기 리스트</h3>
+                <table id="noKnitMachineTable">
+                    <colgroup>
+                        <col width="5%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="15%">
+                        <col width="10%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Model</th>
+                            <th>Code</th>
+                            <th>RPM</th>
+                            <th>Bar Count</th>
+                            <th>Gauge</th>
+                            <th>Create Date</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for knitMachineObj in knitMachineList %}
+                        <tr>
+                            <td>{{ knitMachineObj.pk }}</td>
+                            <td>{{ knitMachineObj.name }}</td>
+                            <td>{{ knitMachineObj.code }}</td>
+                            <td>{{ knitMachineObj.rpm }}</td>
+                            <td>{{ knitMachineObj.bar_cnt }}</td>
+                            <td>{{ knitMachineObj.gauge }}</td>
+                            <td>{{ knitMachineObj.create_data|date:'Y-m-d H:i' }}</td>
+                            <td><span onclick="deleteKnitMachine(2,{{ knitMachineObj.pk }})">remove</span></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+
+    <script>
+        function setMachine() {
+            $.ajax({
+                url: '/machine/setmachine',
+                type: 'GET',
+                cache: false,
+                data: {
+                },
+                dataType: 'json',
+                async: false,
+                success: function (response) {
+                    console.log(response);
+                }
+            });
+        }
+
+        function deleteWarpMachine(type, id) {
+            var deleteMachineForm = document.createElement('form');
+            deleteMachineForm.action = '/machine/deleteWarpMachine';
+            deleteMachineForm.method = 'post';
+            var typeInput = document.createElement('input');
+            typeInput.name = 'type';
+            typeInput.value = type;
+            deleteMachineForm.append(typeInput);
+            var idInput = document.createElement('input');
+            idInput.name = 'id';
+            idInput.value = id;
+            deleteMachineForm.append(idInput);
+            $('body').append(deleteMachineForm);
+            deleteMachineForm.submit();
+        }
+
+        function deleteKnitMachine(type, id) {
+            var deleteMachineForm = document.createElement('form');
+            deleteMachineForm.action = '/machine/deleteKnitMachine';
+            deleteMachineForm.method = 'post';
+            var typeInput = document.createElement('input');
+            typeInput.name = 'type';
+            typeInput.value = type;
+            deleteMachineForm.append(typeInput);
+            var idInput = document.createElement('input');
+            idInput.name = 'id';
+            idInput.value = id;
+            deleteMachineForm.append(idInput);
+            $('body').append(deleteMachineForm);
+            deleteMachineForm.submit();
+        }
+    </script>
+{% endblock content %}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Knit Total System</title>
+      <script type='text/javascript' src="{% static 'js/jquery-1.12.3.min.js' %}"></script>
+      <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+<div id="loginWrap">
+    <div id="loginBox">
+        <h1>Knit Total System</h1>
+        <div id="serverTab">
+            <div id="serverChoiceBox">
+                <!--
+                <div>
+                    <input type="text" autocomplete="off" id="username" placeholder="ID" name="username">
+                </div>
+                <div>
+                    <input type="password" id="user_password" placeholder="Password" name="user_password">
+                </div>
+                -->
+                <a id="pdmServer" class="serverBtn" href="/dashboard">TexDDM</a>
+                <a id="popServer" class="serverBtn" onclick="sendUserPOP()" href="javascript:void(0)">WDMS</a>
+            </div>
+            <div class="rightDeco">
+                <div class="decorationLBar"></div>
+                <div class="decorationSBar"></div>
+            </div>
+            <div class="leftDeco">
+                <div class="decorationLBar"></div>
+                <div class="decorationSBar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+function sendUserPOP() {
+    $.ajax({
+        url: 'http://tnswebserver.iptime.org:24685/Home/GetData',
+        //url: 'http://tnswebserver.iptime.org:24685/post_Test.aspx',
+        type: 'POST',
+        cache: false,
+        data: {
+            username : '{{ user.username }}',
+            name : '{{ user.name }}',
+            email : '{{ user.email }}',
+            phone : '{{ user.phone }}',
+            create_date : '{{ user.create_date|date:"Y-m-d" }}',
+            theme_code : '{{ user.theme_code }}',
+            lang_code : '{{ user.lang_code }}'
+        },
+        dataType: 'json',
+        async: false,
+        success: function (response) {
+            //console.log(response)
+            var popMain = response.split('"');
+            //console.log(popMain[1]);
+            location.href=popMain[1];
+        },
+        error: function(jqXHR, exception) {
+        if (jqXHR.status === 0) {
+            alert('Not connect.\n Verify Network.');
+        }
+        else if (jqXHR.status == 400) {
+            alert('Server understood the request, but request content was invalid. [400]');
+        }
+        else if (jqXHR.status == 401) {
+            alert('Unauthorized access. [401]');
+        }
+        else if (jqXHR.status == 403) {
+            alert('Forbidden resource can not be accessed. [403]');
+        }
+        else if (jqXHR.status == 404) {
+            alert('Requested page not found. [404]');
+        }
+        else if (jqXHR.status == 500) {
+            alert('Internal server error. [500]');
+        }
+        else if (jqXHR.status == 503) {
+            alert('Service unavailable. [503]');
+        }
+        else if (exception === 'parsererror') {
+            alert('Requested JSON parse failed. [Failed]');
+        }
+        else if (exception === 'timeout') {
+            alert('Time out error. [Timeout]');
+        }
+        else if (exception === 'abort') {
+            alert('Ajax request aborted. [Aborted]');
+        }
+        else {
+            alert('Uncaught Error.n' + jqXHR.responseText);
+        }
+    }
+    });
+}
+
+</script>
+
+
+
+</body>
+</html>

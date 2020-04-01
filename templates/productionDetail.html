@@ -1,0 +1,643 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+
+
+{% block staticfile %}
+<link rel="stylesheet" href="{% static 'css/productionDetail.css' %}">
+<script type="text/javascript" src="{% static 'js/production.js' %}"></script>
+<script>
+var yarnList = [];
+$(document).ready(function() {
+    var platform = window.navigator.platform;
+    var os;
+    var macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+    var beamCount = '{{ totalBeamCount }}';
+    yarnList = {{ desingYarnList|safe }};
+
+    if (macosPlatforms.indexOf(platform) !== -1) {
+        os = 'Mac OS';
+    }
+
+    if(beamCount > 20 && os != 'Mac OS'){
+        $('#totalBeamTable tr > td:nth-child(4)').css('width', '77px');
+    }
+});
+
+function selectBeam(id) {
+    $('.beamTr').removeClass('selected');
+    $('#beamTr' + id).addClass('selected');
+}
+
+function submitBeam() {
+    $('#beamForm').submit();
+}
+
+function delOrderDesign(removeDesign) {
+    removeDesign.parentNode.parentNode.remove();
+}
+
+function addDesignData(type) {
+    if(type == 1){
+        var id = parseInt($('.beamTr.selected').attr('id').substring(6));
+        var name = $('.beamTr.selected>td:eq(0)').text();
+        var size = $('.beamTr.selected>td:eq(2)').text();
+        var qty = $('.beamTr.selected>td:eq(3)').text();
+
+        var options = "";
+
+        console.log(yarnList.length);
+
+        yarnList.forEach(function (yarnObj) {
+            options += "<option value='" + yarnObj.pk + "'>" + yarnObj.code + "</option>";
+        });
+
+        var selectDesign = "<tr id='warpBeamTr"+id+"'><td>"+name+"</td><td class='designQtyTd'><input type='hidden' name='warpBeamId' class='warpBeamId' value="+id+"><select class='warpYarn' name='warpYarn'>" + options + "</select></td><td>" + size + "</td><td><input type='text' name='wBeamQty' id='wBeamQty'></td><td><span class='removeBtn' onclick='delOrderDesign(this)'>Remove</span></td></tr>";
+        if($("#warpBeamTr"+id).length == 0){
+            if($('.beamTr.selected').hasClass("forWarp") === true) {
+                $('#warpBeamTable tbody').append(selectDesign);
+            }else{
+                alert('비어있는 빔을 선택하세요.');
+            }
+        }else{
+            alert('이미 선택된 빔입니다.');
+        }
+        /*
+        if(os != 'Mac OS' && $('#designOrderTable > tbody > tr').length > 4){
+            $('#designOrderTable td:nth-of-type(3)').css('width', '83px');
+        }
+        */
+    }else{
+        var id = parseInt($('.beamTr.selected').attr('id').substring(6));
+        var name = $('.beamTr.selected>td:eq(0)').text();
+        var size = $('.beamTr.selected>td:eq(2)').text();
+        var qty = $('.beamTr.selected>td:eq(3)').text();
+
+        var options = "";
+
+        console.log(yarnList.length);
+
+        yarnList.forEach(function (yarnObj) {
+            options += "<option value='" + yarnObj.pk + "'>" + yarnObj.code + "</option>";
+        });
+
+        var selectDesign = "<tr id='knitBeamTr"+id+"'><td>"+name+"</td><td class='designQtyTd'><input type='hidden' name='knitBeamId' class='knitBeamId' value="+id+">" + $('.beamTr.selected>td:eq(1)').text() + "</td><td>" + size + "</td><td>" + qty + "</td><td><span class='removeBtn' onclick='delOrderDesign(this)'>Remove</span></td></tr>";
+        if($("#knitBeamTr"+id).length == 0){
+            if($('.beamTr.selected').hasClass("forKnit") === true) {
+                $('#knitBeamTable tbody').append(selectDesign);
+            }else{
+                alert('비어있는 빔은 선택하실 수 없습니다.');
+            }
+        }else{
+            alert('이미 선택된 빔입니다.');
+        }
+        /*
+        if(os != 'Mac OS' && $('#designOrderTable > tbody > tr').length > 4){
+            $('#designOrderTable td:nth-of-type(3)').css('width', '83px');
+        }
+        */
+    }
+}
+</script>
+{% endblock staticfile %}
+
+{% block content %}
+            <div id="ContentWrap" class="fix">
+            {% if kSchedule and wSchedule %}
+                <div id="warpWrap">
+                    <h3>Warper</h3>
+                    <div class="fix"> <!-- 윗줄 -->
+                        <div class="warpGrid fix">
+                            <div class="sectionBox mr">
+                                <div class="halfBoxCol2">
+                                    <div id="circle2">
+                                        <span class="e_text">정경 진행률</span>
+                                    </div>
+                                    <div class="e_botText">
+                                        <p>총 빔수량: <span class="warpTotalQty">{{ warp_Beam.count }}</span></p>
+                                        <p>현재 빔수량: <span class="warpQty">0</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sectionBox">
+                                <div class="halfBox mb">
+                                    <div class="knitTitle">Order</div>
+                                    <div class="knitMachineCode">{{ designOrder.code }}</div>
+                                    <div class="orderLine">
+                                        <!-- <span>Design</span> -->
+                                        <span>{{ designOrder.design_data_id }}</span>
+                                    </div>
+                                </div>
+                                <div class="halfBox">
+                                    <div class="knitTitle">Machine</div>
+                                    <div class="knitMachineCode">{{ wProcess.warp_machine_id.tns_code }}</div>
+                                    <div class="machineLine">
+                                        <span>Beam</span>
+                                        <span>500</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- 1con -->
+                        <div class="warpGrid fix">
+                            <div class="sectionBox mr">
+                                <div class="halfBox mb">
+                                    <p class="knitTitle">Warper Speed</p>
+                                    <p class="knitContent">{{ wMachine.tws_warper_speed }}</p>
+                                </div>
+                                <div class="halfBox">
+                                    <p class="knitTitle">tws_current_turncnt</p>
+                                    <p class="knitContent">{{ wMachine.tws_current_turncnt }}</p>
+                                </div>
+                            </div>
+                            <div class="sectionBox">
+                                <div class="halfBox mb">
+                                    <p class="knitTitle">Operator</p>
+                                    <p class="knitContent">{{ wMachine.user_id }}</p>
+                                </div>
+                                <div class="halfBox">
+                                    <p class="knitTitle">Current Meter</p>
+                                    <p class="knitContent">{{ wMachine.tws_current_meter }}</p>
+                                </div>
+                            </div>
+                        </div> <!-- 2con -->
+                        <div class="warpGrid fix">
+                            <div class="beamTable">
+                                <div class="halfBoxCol2">
+                                    <table>
+                                        <colgroup>
+                                            <col width="20%">
+                                            <col width="20%">
+                                            <col width="12%">
+                                            <col width="13%">
+                                            <col width="15%">
+                                            <col width="20%">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>Machine Code</th>
+                                                <th>Beam Code</th>
+                                                <th>Internal</th>
+                                                <th>External</th>
+                                                <th>Turn</th>
+                                                <th>Current Turn</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for beam in warp_Beam %}
+                                        <tr>
+                                            <td>{{ wProcess.warp_machine_id.tns_code }}</td>
+                                            <td>{{ beam.beam.name }}</td>
+                                            <td>None</td>
+                                            <td>{{ beam.external }}</td>
+                                            <td>{{ beam.turn_cnt }}</td>
+                                            <td>{{ beam.current_turn_cnt }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        <!--
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                         -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> <!-- 3con -->
+                    </div>
+                </div>
+                <div id="knitWrap">
+                    <h3>편직</h3>
+                    <div class="fix"> <!-- 윗줄 -->
+                        <div class="knitGrid fix">
+                            <div class="sectionBox mr">
+                                <div class="halfBoxCol2">
+                                    <!--
+                                    <div id="circle1">
+                                        <span class="e_text">편직 진행률</span>
+                                    </div>
+                                    -->
+                                    <div id="circle1">
+                                        <div>편직 진행률</div>
+                                        <div id="knitPer"></div>
+                                    </div>
+                                    <div class="e_botText">
+                                        <p>총 오더수량: <span class="knitTotalQty">{{ designOrder.design_qty }}</span></p>
+                                        <p>현재 재직수량: <span class="knitQty">{{ kMachine.trs_meter }}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sectionBox">
+                                <div class="halfBox mb">
+                                    <div class="knitTitle">Order</div>
+                                    <div class="knitMachineCode">{{ designOrder.code }}</div>
+                                    <div class="orderLine">
+                                        <!-- <span>Design</span> -->
+                                        <span>{{ designOrder.design_data_id }}</span>
+                                    </div>
+                                </div>
+                                <div class="halfBox">
+                                    <div class="knitTitle">Machine</div>
+                                    <div class="knitMachineCode">{{ kProcess.knit_machine_id.tns_code }}</div>
+                                    <div class="machineLine">
+                                        <span>RPM</span>
+                                        <span id="knitRpm">{{ kMachine.trs_rpm_main }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- 1con -->
+                        <div class="knitGrid fix">
+                            <div class="sectionBox mr">
+                                <div class="halfBox mb">
+                                    <p class="knitTitle">Daily Output</p>
+                                    <p class="knitContent dailyOutPut">{{ kMachine.dailyOutPut }}</p>
+                                </div>
+                                <div class="halfBox">
+                                    <p class="knitTitle">One-Time Output</p>
+                                    <p class="knitContent">{{ kMachine.trs_onetime_prdt }}</p>
+                                </div>
+                            </div>
+                            <div class="sectionBox">
+                                <div class="halfBox mb">
+                                    <p class="knitTitle">Operator</p>
+                                    <p class="knitContent">{{ kMachine.user_id }}</p>
+                                </div>
+                                <div class="halfBox">
+                                    <p class="knitTitle">남은 시간</p>
+                                    <p class="knitContent lostTime">{{ kMachine.lostHour }}:{{ kMachine.lostMin }}</p>
+                                </div>
+                            </div>
+                        </div> <!-- 2con -->
+                        <div class="knitGrid fix">
+                            <div class="beamTable">
+                                <div class="halfBoxCol2">
+                                    <table>
+                                        <colgroup>
+                                            <col width="20%">
+                                            <col width="20%">
+                                            <col width="12%">
+                                            <col width="13%">
+                                            <col width="15%">
+                                            <col width="20%">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>Machine Code</th>
+                                                <th>Beam Code</th>
+                                                <th>Internal</th>
+                                                <th>External</th>
+                                                <th>Turn</th>
+                                                <th>Current Turn</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for beam in knit_Beam %}
+                                        <tr>
+                                            <td>{{ kProcess.knit_machine_id.tns_code }}</td>
+                                            <td>{{ beam.beam.name }}</td>
+                                            <td>None</td>
+                                            <td>{{ beam.knit_external }}</td>
+                                            <td>{{ beam.knit_turn_cnt }}</td>
+                                            <td>{{ beam.knit_current_turn_cnt }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        <!--
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TRS-0042</td>
+                                                <td>R19509@1</td>
+                                                <td>660</td>
+                                                <td>1320</td>
+                                                <td>28900</td>
+                                                <td>28900</td>
+                                            </tr>
+                                        -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> <!-- 3con -->
+                    </div>
+                </div>
+            {% else %}
+                    <div id="warpWarpKnit">
+                        <div id="warpKnitGrid" class="fix">
+                            <form action="/schedule/saveBeam" method="POST" id="beamForm">
+                                <input type="hidden" name="designOrderId" value="{{ designOrder.pk }}">
+                                <div id="warpGrid">
+                                <h3>Warp</h3>
+                                <div id="warpBeamDiv">
+                                    <table id="warpBeamTable">
+                                        <col width="25%">
+                                        <col width="25%">
+                                        <col width="15%">
+                                        <col width="20%">
+                                        <col width="15%">
+                                        <thead>
+                                            <tr>
+                                                <th>이름</th>
+                                                <th>원사</th>
+                                                <th>크기</th>
+                                                <th>감을양</th>
+                                                <th>삭제</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                                <div id="knitGrid">
+                                <h3>Knit</h3>
+                                <div id="knitBeamDiv">
+                                    <table id="knitBeamTable">
+                                        <col width="25%">
+                                        <col width="25%">
+                                        <col width="15%">
+                                        <col width="20%">
+                                        <col width="15%">
+                                        <thead>
+                                            <tr>
+                                                <th>이름</th>
+                                                <th>원사</th>
+                                                <th>크기</th>
+                                                <th>감긴양</th>
+                                                <th>삭제</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="totalBeamTableDiv">
+                        <h3>Beam</h3>
+                        <div id="BeamTableDiv">
+                            <table id="totalBeamTable">
+                                <col width="30%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <thead>
+                                    <tr>
+                                        <th>이름</th>
+                                        <th>원사</th>
+                                        <th>크기</th>
+                                        <th>감긴양</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for beamObj in beamList %}
+                                        {% if beamObj.yarn != None %}
+                                            <tr id="beamTr{{ beamObj.pk }}" class="beamTr forKnit" onclick="selectBeam({{ beamObj.pk }})">
+                                        {% else %}
+                                            <tr id="beamTr{{ beamObj.pk }}" class="beamTr forWarp" onclick="selectBeam({{ beamObj.pk }})">
+                                        {% endif %}
+                                            <td>{{ beamObj.name }}</td>
+                                            <td>{{ beamObj.yarn.name }}</td>
+                                            <td>{{ beamObj.size }}</td>
+                                            <td>{{ beamObj.yarn_qty }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <button type="button" onclick="addDesignData(1)">정경 빔 추가</button>
+                            <button type="button" onclick="addDesignData(2)">편직 빔 추가</button>
+                            <button type="button" onclick="submitBeam()">빔정보 저장</button>
+                        </div>
+                    </div>
+            {% endif %}
+            </div>
+    <script>
+        $(document).ready(function(){
+
+            console.log('{{kSchedule}}');
+            var knitMachine = '{{ kProcess.knit_machine_id.tns_code }}';
+
+            var knitProgress = $('.knitQty').text() / $('.knitTotalQty').text() * 100;
+            var warpProgress = $('.warpQty').text() / $('.warpTotalQty').text() * 100;
+
+            $('#knitPer').html(parseInt(knitProgress) + '%');
+
+            /*$("#circle1").circliful({
+                animationStep: 3,
+                backgroundColor: '#e4e4e4',
+                foregroundColor: '#3D56A6',
+                percent: knitProgress
+            });*/
+
+            $('#circle2').circliful({
+                animationStep: 3,
+                backgroundColor: '#e4e4e4',
+                foregroundColor: '#A4CCED',
+                percent: warpProgress
+            });
+
+            if('{{kSchedule}}' == 'True' && '{{wSchedule}}' == 'True'){
+                setInterval(function(){
+                    $.ajax({
+                        url:'http://tnswebserver.iptime.org:1978/values/trs',
+                        type: 'GET',
+                        cache:false,
+                        data:{},
+                        dataType:'json',
+                        async: false,
+                        success: function(res){
+                            res.trs.forEach(function (machineObj) {
+                                if(machineObj.tns_code == knitMachine){
+                                    $('#knitRpm').html(machineObj.trs_rpm_main);
+                                    $('.knitQty').text(parseInt(machineObj.trs_meter));
+
+                                    console.log(parseInt(machineObj.trs_meter));
+                                    console.log(parseInt(parseInt($('.knitTotalQty').text())));
+
+                                    knitProgress = parseInt(machineObj.trs_meter) / parseInt($('.knitTotalQty').text()) * 100;
+
+                                    console.log(parseInt(knitProgress));
+
+                                    $('#knitPer').html(parseInt(knitProgress) + '%');
+
+                                    var output = 0;
+                                    var outputPerMin = 0;
+                                    var lostMin = 0;
+                                    var lostHour = 0;
+
+                                    if(machineObj.trs_rpm_main != 0){
+                                        output = parseInt(machineObj.trs_rpm_main * 24 * 60 / parseInt('{{ cpi }}') / 91.44 * parseInt('{{ width }}'));
+
+                                        outputPerMin = output/24/60;
+
+                                        lostMin = parseInt((parseInt('{{ designOrder.design_qty }}')-machineObj.trs_meter)/outputPerMin);
+
+                                        lostHour = parseInt(lostMin/60);
+
+                                        lostMin = lostMin%60;
+                                    }
+
+                                    $('.dailyOutPut').html(output);
+                                    $('.lostTime').html(lostHour + ":" + lostMin);
+
+
+1
+                                    //$('#circle1').empty();
+
+                                    //$('#circle1').append('<span class="e_text">편직 진행률</span>');
+
+
+
+                                    /*$("#circle1").circliful({
+                                        animationStep: 3,
+                                        backgroundColor: '#e4e4e4',
+                                        foregroundColor: '#3D56A6',
+                                        percent: knitProgress
+                                    });*/
+                                }
+                            });
+                        },
+                        error: function(e){
+                            console.log(e)
+                        }
+                    });
+                }, 1500);
+            }
+
+        })
+    </script>
+{% endblock content %}
