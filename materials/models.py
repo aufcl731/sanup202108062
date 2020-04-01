@@ -14,7 +14,11 @@ class Yarn(models.Model):
     material = models.CharField(max_length=10, null=True) #재료
     kind = models.CharField(max_length=25, null=True) #종류
     color = models.CharField(max_length=25, null=True) #색
+<<<<<<< HEAD
     weght = models.IntegerField(default=0)#무게
+=======
+    weight = models.IntegerField(default=0)#무게
+>>>>>>> master
     qty = models.IntegerField(default=0) #수
     Receivingdate = models.CharField(default=datetime.now().strftime('%Y-%m-%d %H:%M'), max_length=30)#입고날짜
 
