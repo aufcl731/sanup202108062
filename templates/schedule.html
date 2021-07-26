@@ -5,6 +5,49 @@
 <link rel="stylesheet" href="{% static 'css/schedule.css' %}">
 <link rel="stylesheet" href="{% static 'css/simple-calendar.css' %}">
 <script>
+lang_code = {{ userlang.lang_code }};
+    const lang = {
+        ko:{
+            warper:"정경기", warpknittingmachine:"경편기", selectorder:"order를 선택하세요", name:"이름", code:"코드",
+            maker:"메이커", thickness:"굵기", filament:"필라멘트", shrinkage:"수축률", material:"재료", spec:"종류",
+            color:"색", weight:"중량", quantity:"수량", realquantity:"실수량", yarn:"실", rollcode:"롤코드",
+            wrappedquantity:"감긴량", schedulesave:"스케쥴저장", warperdetail:"정경기상세보기", pic:"작업자",
+            company:"회사", installationtime:"설치시간", warpknittingmachinedetail:"경편기상세보기", beamcount:"빔개수",
+            tempo:"템포", barcount:"바개수", gauge:"게이지", size:"크기", close:"닫기", Calendar:"달력", Schedule:"일정",
+            order:'주문', beam:"빔", macsc:"기계 일정", raw:'롤', warping:'정경 일정', knitting:"편직 일정",
+
+        },
+        en:{
+            warper:"Warper", warpknittingmachine:"Warp knitting machine", selectorder:"Select order", name:"Name",
+            code:"Code",maker:"Maker", thickness: "Thickness", filament:"Filament", shrinkage:"Shrinkage",
+            material:"Material", spec:"Spec", color:"Color", weight:"Weight", quantity:"Quantity",
+            realquantity:"Real quantity", yarn:"Yarn", rollcode:"Roll code", wrappedquantity:"Wrapped quantity",
+            schedulesave:"Schedule save", warperdetail:"Warper detail", pic:"PIC", company:"Company",
+            installationtime:"Installation time", warpknittingmachinedetail:"Warp knitting machine detail",
+            beamcount:"Beam count", tempo:"Tempo", barcount:"Bar count", gauge:"Gauge", size:"size", close:"close",
+            Calendar:"Calendar", Schedule:"Schedule", beam:"Beam", macsc:"Machine Schedule", raw:"Raw",
+            warping:'Warping', knitting:"Knitting",
+        }
+    };
+    // 언어별 렌더링
+    function render(locale) {
+        const $lang = document.querySelectorAll("[data-lang]");
+        $lang.forEach(el => {
+            const code = el.dataset.lang;
+            el.textContent = lang[locale][code]
+        })
+    };
+    if(lang_code==0){
+        render("ko");
+    };
+    if(lang_code==1){
+        render("en");
+        $("#rawTable tr > th:nth-child(3)").css({width:180});
+        $("#rawTable tr > th:nth-child(1)").css({width:90});
+        $("#rawTable tr > td:nth-child(3)").css({width:240});
+        $("#rawTable tr > td:nth-child(1)").css({width:107});
+        $("#rawTable tr > td:nth-child(2)").css({width:103});
+    };
     var machineType;
     if('{{ machine }}' == 'False')
         machineType = 2;
@@ -96,13 +139,10 @@
                     tr.append(td);
 
                     td = document.createElement('td');
-<<<<<<< HEAD
-=======
                     td.innerHTML = obj.weight;
                     tr.append(td);
 
                     td = document.createElement('td');
->>>>>>> master
                     td.innerHTML = obj.qty;
                     tr.append(td);
 
@@ -295,15 +335,15 @@
 {% block content %}
 <div id="ContentWrap" class="fix">
     <div>
-        <h4>Calendar</h4>
+        <h4 data-lang="Calendar">[Calendar]</h4>
         <div class="calendarMachine">
             <div id="calendar"></div>
             <hr>
-            <h4>Machine Schedule</h4>
+            <h4 data-lang="macsc">[macsc]</h4>
             <div id="machineSchedule">
                 <div id="warpMachineSchedule">
                     <div>
-                        <h4>정경기</h4>
+                        <h4 data-lang="warper">[warper]</h4>
                         <div>
 
                         </div>
@@ -312,7 +352,7 @@
                 <div class="division"></div>
                 <div id="knitMachineSchedule">
                     <div>
-                        <h4>경편기</h4>
+                        <h4 data-lang="warpknittingmachine">[warpknittingmachine]</h4>
                         <div>
 
                         </div>
@@ -322,11 +362,12 @@
         </div>
     </div>
     <div>
-        <h4>Schedule</h4>
+        <h4 data-lang="Schedule">[Schedule]</h4>
+        <input type="hidden" id="calendarlang" name="calendarlang" value="{{ userlang.lang_code }}">
         <div class="orderMaterial">
             <div id="orderDesign">
                 <div class="scheduleOrder">
-                    <h4>Order</h4>
+                    <h4 data-lang="order">[order]</h4>
                     <div class="order">
                         <table>
                             <col width="26%">
@@ -369,7 +410,7 @@
                 </div>
                 <div class="machine">
                     <div class="warpMachineList">
-                        <h4>정경기</h4>
+                        <h4 data-lang="warper">[warper]</h4>
                         <div>
                             {% for warpMachineObj in warpMachineList %}
                                 {% if machine %}
@@ -379,7 +420,7 @@
                                             <img class="infoBtn" onclick="showWarpMachineInfo('{{ warpMachineObj.pk }}', 1)" src="{% static 'image/information.png' %}">
                                         </div>
                                         <div><div>{{ warpMachineObj.tws_name }}</div></div>
-                                        <div><div id="warpMachine{{ warpMachineObj.tns_code }}">Order를 선택하세요</div></div>
+                                        <div><div id="warpMachine{{ warpMachineObj.tns_code }}"><lang data-lang="selectorder">[selectorder]</lang></div></div>
                                     </div>
                                 {% else %}
                                     <div class="warpMachine" id="warpMachine{{ warpMachineObj.pk }}" onclick="selectMachine(1, {{ warpMachineObj.pk }})">
@@ -388,7 +429,7 @@
                                             <img class="infoBtn" onclick="showWarpMachineInfo('{{ warpMachineObj.pk }}', 2)" src="{% static 'image/information.png' %}">
                                         </div>
                                         <div><div>{{ warpMachineObj.name }}</div></div>
-                                        <div><div id="warpMachine{{ warpMachineObj.code }}">Order를 선택하세요</div></div>
+                                        <div><div id="warpMachine{{ warpMachineObj.code }}"><lang data-lang="selectorder">[selectorder]</lang></div></div>
                                     </div>
                                 {% endif %}
                             {% endfor %}
@@ -396,7 +437,7 @@
                     </div>
                     <div class="division"></div>
                     <div class="knitMachineList">
-                        <h4>경편기</h4>
+                        <h4 data-lang="warpknittingmachine">[warpknittingmachine]</h4>
                         <div>
                             {% for knitMachineObj in knitMachineList %}
                                 {% if machine %}
@@ -406,7 +447,7 @@
                                             <img class="infoBtn" onclick="showKnitMachineInfo('{{ knitMachineObj.pk }}', 1)" src="{% static 'image/information.png' %}">
                                         </div>
                                         <div><div>{{ knitMachineObj.trs_model_name }}</div></div>
-                                        <div><div id="knitMachineOutput{{ knitMachineObj.pk }}">Order를 선택하세요</div></div>
+                                        <div><div id="knitMachineOutput{{ knitMachineObj.pk }}"><lang data-lang="selectorder">[selectorder]</lang></div></div>
                                     </div>
                                 {% else %}
                                     <div class="knitMachine" id="knitMachine{{ knitMachineObj.pk }}" onclick="selectMachine(2, {{ knitMachineObj.pk }})">
@@ -415,7 +456,7 @@
                                             <img class="infoBtn" onclick="showKnitMachineInfo('{{ knitMachineObj.pk }}', 2)" src="{% static 'image/information.png' %}">
                                         </div>
                                         <div><div>{{ knitMachineObj.name }}</div></div>
-                                        <div><div id="knitMachineOutput{{ knitMachineObj.pk }}">Order를 선택하세요</div></div>
+                                        <div><div id="knitMachineOutput{{ knitMachineObj.pk }}"><lang data-lang="selectorder">[selectorder]</lang></div></div>
                                     </div>
                                 {% endif %}
                             {% endfor %}
@@ -426,25 +467,35 @@
             <hr>
             <div id="materialDiv">
                 <div id="yarnDiv">
-                    <div>Yarn</div>
+                    <div data-lang="yarn">[yarn]</div>
                     <div id="yarnTableDIv">
                         <table id="yarnTable">
+                              <colgroup>
+                                    <col width="11%"> <!-- 이름 -->
+                                    <col width="11%"> <!-- 코드 -->
+                                    <col width="11%"> <!-- 메이커 -->
+                                    <col width="9%"> <!-- 굵기 -->
+                                    <col width="9%"> <!-- 필라멘트 -->
+                                    <col width="9%"> <!-- 수축률 -->
+                                    <col width="8%"> <!-- 재료 -->
+                                    <col width="8%"> <!-- 종류 -->
+                                    <col width="7%"> <!-- 색 -->
+                                    <col width="10%"> <!-- 중량 -->
+                                    <col width="7%"> <!-- 수량 -->
+                              </colgroup>
                             <thead>
                                 <tr>
-                                    <th>이름</th>
-                                    <th>코드</th>
-                                    <th>메이커</th>
-                                    <th>굵기</th>
-                                    <th>필라멘트</th>
-                                    <th>수축률</th>
-                                    <th>재료</th>
-                                    <th>종류</th>
-                                    <th>색</th>
-<<<<<<< HEAD
-=======
-                                    <th>중량</th>
->>>>>>> master
-                                    <th>수량</th>
+                                    <th data-lang="name">[name]</th>
+                                    <th data-lang="code">[code]</th>
+                                    <th data-lang="maker">[maker]</th>
+                                    <th data-lang="thickness">[thickness]</th>
+                                    <th data-lang="filament">[filament]</th>
+                                    <th data-lang="shrinkage">[shrinkage]</th>
+                                    <th data-lang="material">[material]</th>
+                                    <th data-lang="spec">[spec]</th>
+                                    <th data-lang="color">[color]</th>
+                                    <th data-lang="weight">[weight]</th>
+                                    <th data-lang="quantity">[quantity]</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -469,7 +520,7 @@
                     </div>
                 </div>
                 <div id="beamRawDiv">
-                    <div>Beam</div>
+                    <div data-lang="beam">[beam]</div>
                     <div id="beamTableDiv">
                             <table id="beamTable">
                                 <colgroup>
@@ -480,27 +531,38 @@
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th>이름</th>
-                                        <th>실</th>
-                                        <th>실수량</th>
-                                        <th>크기</th>
+                                        <th data-lang="name">[name]</th>
+                                        <th data-lang="yarn">[yarn]</th>
+                                        <th data-lang="realquantity">[realquantity]</th>
+                                        <th data-lang="size">[size]</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
                                 </tbody>
                             </table>
                     </div>
-                    <div>Raw</div>
+                    <div data-lang="raw">[raw]</div>
                     <div id="rawTableDiv">
                         <table id="rawTable">
                             <thead>
                                 <tr>
-                                    <th>롤 코드</th>
-                                    <th>중량</th>
-                                    <th>감긴량</th>
+                                    <th data-lang="rollcode">[rollcode]</th>
+                                    <th data-lang="weight">[weight]</th>
+                                    <th data-lang="wrappedquantity">[wrappedquantity]</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -514,9 +576,9 @@
                     <input type="hidden" name="machine" value="2">
                 {% endif %}
                 <div class="createScheduleForm">
-                    <div>Order</div>
+                    <div data-lang="order">[order]</div>
                     <div><input type="text" id="orderName" disabled><input type="hidden" name="orderId" id="orderId"> </div>
-                    <div>Warping</div>
+                    <div data-lang="warping">[warping]</div>
                     <div>
                         <div>
                             <input type="text" id="warpMachineName" disabled><input type="hidden" id="warpMachineId" name="warpMachineId">
@@ -528,8 +590,8 @@
                             <input type="datetime-local" id="warpEndTime" name="warpEndTime">
                         </div>
                     </div>
-                    <div>
-                        Knitting
+                    <div data-lang="knitting">
+                        [knitting]
                     </div>
                     <div>
                         <div>
@@ -543,7 +605,7 @@
                         </div>
                     </div>
                     <div>
-                        <button>스케줄저장</button>
+                        <button data-lang="schedulesave">[schedulesave]</button>
                     </div>
                 </div>
             </form>
@@ -552,24 +614,24 @@
 </div>
 <div id="detailOrderModalKnit">
     <div>
-        <h3>경편기 상세보기</h3>
+        <h3 data-lang="warpknittingmachinedetail">[warpknittingmachinedetail]</h3>
     </div>
     <div class="inputTab fix">
         <div>
             <div class="line">
-                <label for="knitName">이름</label>
+                <label for="knitName" data-lang="name">[name]</label>
                 <div id="knitName"></div>
             </div>
             <div class="line">
-                <label for="knitCompany">회사</label>
+                <label for="knitCompany" data-lang="company">[company]</label>
                 <div id="knitCompany"></div>
             </div>
             <div class="line">
-                <label for="knitInstallationTime">설치시간</label>
+                <label for="knitInstallationTime" data-lang="installationtime">[installationtime]</label>
                 <div id="knitInstallationTime"></div>
             </div>
             <div class="line">
-                <label for="knitBeamCount">빔개수</label>
+                <label for="knitBeamCount" data-lang="beamcount">[beamcount]</label>
                 <div id="knitBeamCount"></div>
             </div>
             <div class="line">
@@ -583,23 +645,23 @@
         </div>
         <div>
             <div class="line margin_exempt">
-                <label for="knitCode">코드</label>
+                <label for="knitCode" data-lang="code">[code]</label>
                 <div id="knitCode"></div>
             </div>
             <div class="line margin_exempt">
-                <label for="knitUser">작업자</label>
+                <label for="knitUser" data-lang="pic">[pic]</label>
                 <div id="knitUser"></div>
             </div>
             <div class="line">
-                <label for="knitTempo">템포</label>
+                <label for="knitTempo" data-lang="tempo">[tempo]</label>
                 <div id="knitTempo"></div>
             </div>
             <div class="line">
-                <label for="knitBarCount">바개수</label>
+                <label for="knitBarCount" data-lang="barcount">[barcount]</label>
                 <div id="knitBarCount"></div>
             </div>
             <div class="line">
-                <label for="knitGauge">게이지</label>
+                <label for="knitGauge" data-lang="gauge">[gauge]</label>
                 <div id="knitGauge"></div>
             </div>
             <div class="line">
@@ -609,35 +671,35 @@
         </div>
     </div>
     <div id="subModalBtnBox">
-        <span onclick="closeModal()">닫기</span>
+        <span onclick="closeModal()" data-lang="close">[close]</span>
     </div>
 </div>
 <div id="detailOrderModalWarp">
     <div>
-        <h3>정경기 상세보기</h3>
+        <h3 data-lang="warperdetail">[warperdetail]</h3>
     </div>
     <div class="inputTab fix">
         <div>
             <div class="line">
-                <label for="warpName">이름</label>
+                <label for="warpName" data-lang="name">[name]</label>
                 <div id="warpName"></div>
             </div>
             <div class="line">
-                <label for="warpUser">작업자</label>
+                <label for="warpUser" data-lang="pic">[pic]</label>
                 <div id="warpUser"></div>
             </div>
             <div class="line">
-                <label for="warpInstallationTime">설치시간</label>
+                <label for="warpInstallationTime" data-lang="installationtime">[installationtime]</label>
                 <div id="warpInstallationTime"></div>
             </div>
         </div>
         <div>
             <div class="line margin_exempt">
-                <label for="warpCode">코드</label>
+                <label for="warpCode" data-lang="code">[code]</label>
                 <div id="warpCode"></div>
             </div>
             <div class="line margin_exempt">
-                <label for="warpCompany">회사</label>
+                <label for="warpCompany" data-lang="company">[company]</label>
                 <div id="warpCompany"></div>
             </div>
             <div class="line">
@@ -647,7 +709,7 @@
         </div>
     </div>
     <div id="subModalBtnBoxYarn">
-        <span onclick="closeModal1()">닫기</span>
+        <span onclick="closeModal1()" data-lang="close">[close]</span>
     </div>
 </div>
 {% endblock content %}

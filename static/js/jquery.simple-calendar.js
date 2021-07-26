@@ -1,7 +1,7 @@
 // the semi-colon before function invocation is a safety net against concatenated
 // scripts and/or other plugins which may not be closed properly.
 var selectedYear, selectedMonth, selectedDate;
-
+var language = $('#calendarlang').val();
 (function ( $, window, document, undefined ) {
 
 	"use strict";
@@ -9,8 +9,8 @@ var selectedYear, selectedMonth, selectedDate;
     // Create the defaults once
     var pluginName = "simpleCalendar",
         defaults = {
-            months: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], //string of months starting from january
-            days: ['일','월','화','수','목','금','토'], //string of days starting from sunday
+            months: ['January','February','March','April','May','June','July','August','September','October','November','December'], //string of months starting from january
+            days: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], //string of days starting from sunday
             minDate : "YYYY-MM-DD", // minimum date
             maxDate : "YYYY-MM-DD", // maximum date
             insertEvent: true, // can insert events

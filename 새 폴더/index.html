@@ -1,0 +1,321 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+{% block content %}
+            <div id="contentsWrap" class="fix">
+                <div class="content fix">
+                    <div id="orderWrap" class="fix">
+                        <h4>Order</h4>
+                        <div class="orderDiv">
+                            <div>
+                                <div class="orderImg"><img src="{% static 'image/bell.png' %}" height="100%"></div>
+                                <div class="orderText">
+                                    <p><strong>{{ totalOrder }}</strong></p>
+                                    <p>total Order</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="orderImg"><img src="{% static 'image/bell.png' %}" height="100%"></div>
+                                <div class="orderText">
+                                    <p><strong>{{ pendingOrder }}</strong></p>
+                                    <p>pending Order</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="orderDiv">
+                            <div>
+                                <div class="orderImg"><img src="{% static 'image/bell.png' %}" height="100%"></div>
+                                <div class="orderText">
+                                    <p><strong>{{ progressOrder }}</strong></p>
+                                    <p>Order in progress</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="orderImg"><img src="{% static 'image/bell.png' %}" height="100%"></div>
+                                <div class="orderText">
+                                    <p><strong>{{ compOrder }}</strong></p>
+                                    <p>completed Order</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="efficiencyWrap" class="fix">
+                        <h4>Efficiency</h4>
+                        <div>
+                            <div id="circle1">
+                                <span class="e_text">시간 가동률</span>
+                            </div>
+                            <div class="e_botText">
+                                <p>설비보유시간: <span class="machineTime1">9000</span></p>
+                                <p>가동작업시간: <span class="machineTime2">3000</span></p>
+                            </div>
+                        </div>
+                        <div>
+                            <div id="circle2">
+                                <span class="e_text">설비 가동률121212</span>
+                            </div>
+                            <div class="e_botText">
+                                <p>설비보유대수: <span class="machineQty1">{{ all_machine_count }}</span></p>
+                                <p>가동설비대수: <span class="machineQty2">{{ on_machine_count }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="resultWrap">
+                        <h4>Production Results</h4>
+                        <div>
+                            <canvas id="myChart" style="padding-top: 60px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="content fix">
+                    <div id="con1">
+                        <h4>Weather</h4>
+                        <div id="weatherWrap">
+                            <div class="weatherDiv">
+                                <div>
+                                    <div class="date">
+                                        <span>{{ weatherList.0.hour }}:00</span>
+                                        {% if ts >= 7 %}
+                                            {{ tomorrow|date:'M. d D' }}
+                                        {% else %}
+                                            {{ now|date:'M. d D' }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="weatherImg">
+                                        {% if weatherList.0.wfEn ==  'Clear'%}
+                                            <img src="{% static 'image/clear.png' %}">
+                                        {% elif weatherList.0.wfEn ==  'Partly Cloudy' %}
+                                            <img src="{% static 'image/partlyCloudy.png' %}">
+                                        {% elif weatherList.0.wfEn ==  'Mostly Cloudy' %}
+                                            <img src="{% static 'image/mostlyCloudy.png' %}">
+                                        {% elif weatherList.0.wfEn ==  'Cloudy' %}
+                                            <img src="{% static 'image/cloudy.png' %}">
+                                        {% elif weatherList.0.wfEn ==  'Rain' %}
+                                            <img src="{% static 'image/rain.png' %}">
+                                        {% elif weatherList.0.wfEn ==  'Snow/Rain' %}
+                                            <img src="{% static 'image/snowRain.png' %}">
+                                        {% else %}
+                                            <img src="{% static 'image/snow.png' %}">
+                                        {% endif %}
+                                        <div>
+                                            <span>{{ weatherList.0.temp }}℃</span>
+                                        </div>
+                                    </div>
+                                    <div class="weatherText">
+                                        <span>{{ weatherList.0.wfEn }}</span>
+                                    </div>
+                                    <div class="humidityText">
+                                        <img src="{% static 'image/humidity.png' %}"><span>humidity : {{ weatherList.0.reh }}%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="date">
+                                        <span>{{ weatherList.2.hour }}:00</span>
+                                        {% if ts >= 5 %}
+                                            {{ tomorrow|date:'M. d D' }}
+                                        {% else %}
+                                            {{ now|date:'M. d D' }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="weatherImg">
+                                        {% if weatherList.2.wfEn ==  'Clear'%}
+                                            <img src="{% static 'image/clear.png' %}">
+                                        {% elif weatherList.2.wfEn ==  'Partly Cloudy' %}
+                                            <img src="{% static 'image/partlyCloudy.png' %}">
+                                        {% elif weatherList.2.wfEn ==  'Mostly Cloudy' %}
+                                            <img src="{% static 'image/mostlyCloudy.png' %}">
+                                        {% elif weatherList.2.wfEn ==  'Cloudy' %}
+                                            <img src="{% static 'image/cloudy.png' %}">
+                                        {% elif weatherList.2.wfEn ==  'Rain' %}
+                                            <img src="{% static 'image/rain.png' %}">
+                                        {% elif weatherList.2.wfEn ==  'Snow/Rain' %}
+                                            <img src="{% static 'image/snowRain.png' %}">
+                                        {% else %}
+                                            <img src="{% static 'image/snow.png' %}">
+                                        {% endif %}
+                                        <div>
+                                            <span>{{ weatherList.2.temp }}℃</span>
+                                        </div>
+                                    </div>
+                                    <div class="weatherText">
+                                        <span>{{ weatherList.2.wfEn }}</span>
+                                    </div>
+                                    <div class="humidityText">
+                                        <img src="{% static 'image/humidity.png' %}"><span>humidity : {{ weatherList.2.reh }}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="weatherDiv">
+                                <div>
+                                    <div class="date">
+                                        <span>{{ weatherList.1.hour }}:00</span>
+                                        {% if ts >= 6 %}
+                                            {{ tomorrow|date:'M. d D' }}
+                                        {% else %}
+                                            {{ now|date:'M. d D' }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="weatherImg">
+                                        {% if weatherList.1.wfEn ==  'Clear'%}
+                                            <img src="{% static 'image/clear.png' %}">
+                                        {% elif weatherList.1.wfEn ==  'Partly Cloudy' %}
+                                            <img src="{% static 'image/partlyCloudy.png' %}">
+                                        {% elif weatherList.1.wfEn ==  'Mostly Cloudy' %}
+                                            <img src="{% static 'image/mostlyCloudy.png' %}">
+                                        {% elif weatherList.1.wfEn ==  'Cloudy' %}
+                                            <img src="{% static 'image/cloudy.png' %}">
+                                        {% elif weatherList.1.wfEn ==  'Rain' %}
+                                            <img src="{% static 'image/rain.png' %}">
+                                        {% elif weatherList.1.wfEn ==  'Snow/Rain' %}
+                                            <img src="{% static 'image/snowRain.png' %}">
+                                        {% else %}
+                                            <img src="{% static 'image/snow.png' %}">
+                                        {% endif %}
+                                        <div>
+                                            <span>{{ weatherList.1.temp }}℃</span>
+                                        </div>
+                                    </div>
+                                    <div class="weatherText">
+                                        <span>{{ weatherList.1.wfEn }}</span>
+                                    </div>
+                                    <div class="humidityText">
+                                        <img src="{% static 'image/humidity.png' %}"><span>humidity : {{ weatherList.1.reh }}%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="date">
+                                        <span>{{ weatherList.3.hour }}:00</span>
+                                        {% if ts >= 4 %}
+                                            {{ tomorrow|date:'M. d D' }}
+                                        {% else %}
+                                            {{ now|date:'M. d D' }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="weatherImg">
+                                        {% if weatherList.3.wfEn ==  'Clear'%}
+                                            <img src="{% static 'image/clear.png' %}">
+                                        {% elif weatherList.3.wfEn ==  'Partly Cloudy' %}
+                                            <img src="{% static 'image/partlyCloudy.png' %}">
+                                        {% elif weatherList.3.wfEn ==  'Mostly Cloudy' %}
+                                            <img src="{% static 'image/mostlyCloudy.png' %}">
+                                        {% elif weatherList.3.wfEn ==  'Cloudy' %}
+                                            <img src="{% static 'image/cloudy.png' %}">
+                                        {% elif weatherList.3.wfEn ==  'Rain' %}
+                                            <img src="{% static 'image/rain.png' %}">
+                                        {% elif weatherList.3.wfEn ==  'Snow/Rain' %}
+                                            <img src="{% static 'image/snowRain.png' %}">
+                                        {% else %}
+                                            <img src="{% static 'image/snow.png' %}">
+                                        {% endif %}
+                                        <div>
+                                            <span>{{ weatherList.3.temp }}℃</span>
+                                        </div>
+                                    </div>
+                                    <div class="weatherText">
+                                        <span>{{ weatherList.3.wfEn }}</span>
+                                    </div>
+                                    <div class="humidityText">
+                                        <img src="{% static 'image/humidity.png' %}"><span>humidity : {{ weatherList.3.reh }}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="order_status">
+                        <h4>Production Status by Order</h4>
+                        <div>
+                            <table>
+                                <col width="14%">
+                                <col width="12%">
+                                <col width="12%">
+                                <col width="12%">
+                                <col width="12%">
+                                <col width="19%">
+                                <col width="19%">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Design</th>
+                                    <th>Warping</th>
+                                    <th>Knitting</th>
+                                    <th>Manager</th>
+                                    <th>Order Date</th>
+                                    <th>Due Date</th>
+                                </tr>
+                                {% for order in designOrderList %}
+                                    <tr>
+                                        <td>{{ order.code }}</td>
+                                        <td>{{ order.design_data_id.CAD_Design_Data_name }}</td>
+                                        <td>30.5%</td>
+                                        <td>10.1%</td>
+                                        <td>{{ order.order_id.manager.name }}</td>
+                                        <td>{{ order.order_id.order_date|date:"Y-m-d" }}</td>
+                                        <td>{{ order.order_id.due_date|date:"Y-m-d" }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <script>
+
+    $('document').ready(function(){
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var data = {
+            labels: [
+                'A000!',
+                'B',
+                'C',
+                'D',
+                'E'
+            ],
+            datasets: [
+                {
+                    data:[180, 50, 120, 119, 13],
+                    backgroundColor: [
+                        'rgb(175,203,233)',
+                        'rgb(148,148,196)',
+                        'rgb(157,166,208)',
+                        'rgb(191,223,230)',
+                        'rgb(188,219,202)'
+                    ],
+                    hoverBackgroundColor: [
+                        'rgb(109,169,218)',
+                        'rgb(72,88,161)',
+                        'rgb(88,114,178)',
+                        'rgb(139,200,211)',
+                        'rgb(132,193,165)'
+                    ]
+                }
+            ]
+        };
+
+
+        var chart = new Chart(ctx, {
+            type:'pie',
+            data:data,
+            options:{}
+        });
+
+    var averageTime = $('.machineTime2').text() / $('.machineTime1').text() * 100;
+    var averageMachine = $('.machineQty2').text() / $('.machineQty1').text() * 100;
+
+    $("#circle1").circliful({
+            animationStep: 3,
+            backgroundColor: '#838383',
+            foregroundColor: '#3D56A6',
+            percent: averageTime
+    });
+
+    $("#circle2").circliful({
+            animationStep: 3,
+            backgroundColor: '#838383',
+            foregroundColor: '#A4CCED',
+            percent: averageMachine
+    });
+
+
+    });
+  </script>
+{% endblock content %}

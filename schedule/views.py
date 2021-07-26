@@ -1,21 +1,22 @@
-import datetime
 import json
 import qrcode
 import requests
+import datetime
 
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import viewsets, serializers, permissions
 
 from materials.models import *
 from machine.models import *
 from schedule.models import Knit_Process, Warp_Process, Warp_Beam, Knit_Beam
 from order.models import *
+from .serializers import *
 from django.forms import model_to_dict
 from design_data.models import *
 
@@ -31,9 +32,9 @@ def selectOrder(request):
             infoObj = obj
 
     if type == 1:
-        twsJsonData = requests.get("http://tnswebserver.iptime.org:1978/values/tws").json()
+        twsJsonData = requests.get("http://tnswebserver.iptime.org:1978/api/tws").json()
 
-        trsJsonData = requests.get("http://tnswebserver.iptime.org:1978/values/trs").json()
+        trsJsonData = requests.get("http://tnswebserver.iptime.org:1978/api/trs").json()
 
 
         for obj in twsJsonData['tws']:
@@ -61,15 +62,16 @@ def selectOrder(request):
 
     for obj in desingYarnObj:
         yarnCodeList.append(obj.fsty_cad_yarn.CAD_Yarn_code)
-
+    print(yarnCodeList)
     yarnList = Yarn.objects.filter(code__in=yarnCodeList)
+    print('--------------')
+    print(yarnList)
     beamList = Beam.objects.filter(yarn__in=yarnList)
 
     beamDictList = list(Beam.objects.filter(yarn__in=yarnList).values())
     for i, obj in enumerate(beamDictList):
         obj['yarnName'] = beamList[i].yarn.name
 
-    print(beamList)
 
     return HttpResponse(json.dumps({'machineJsonList': machineJsonList, 'beamList': beamDictList, 'yarnList': list(yarnList.values())}), content_type='application/json')
 
@@ -81,17 +83,11 @@ def saveBeam(request):
     knitBeamId = request.POST.getlist('knitBeamId')
     designOrderId = request.POST['designOrderId']
 
-    print('warpBeamId', warpBeamId)
-    print('warpYarn', warpYarn)
-    print('knitBeamId', knitBeamId)
-    print('designId', designOrderId)
-
     warpBeamList = []
     try:
         for i in range(len(warpBeamId)):
             beam = Beam.objects.get(pk=int(warpBeamId[i]))
             warpProcess = Order_DesignData.objects.get(pk=int(designOrderId)).warp_process
-            print('yarnId', int(warpYarn[i]))
             yarnObj = Yarn.objects.get(pk=int(warpYarn[i]))
             warpBeam = Warp_Beam(warp_process=warpProcess, beam=beam)
             warpBeam.save()
@@ -122,6 +118,10 @@ def showSchedule(request):
     orderList = Order.objects.all()
     companyMachine = Company.objects.get(id=1)
     yarnList = Yarn.objects.all()
+    print("디자인리스트",designOrderList.values_list())
+    # print(orderList.values_list())
+    # print(yarnList.values_list())
+
 
     if companyMachine.machineyn == True:
         warpMachineList = Warp_Machine.objects.all()
@@ -129,9 +129,43 @@ def showSchedule(request):
     else:
         warpMachineList = YW_Warp_Machine.objects.all()
         knitMachineList = YW_Knit_Machine.objects.all()
+    oid = designOrderList.values('order_id')
+    oid2 =oid.values_list('order_id')
+    print("oid:", oid)
+    print("oid:", oid2)
+    for val in range(len(oid2)):
+        print(list(oid2[val]))
+        orderid= list(oid2[val]).pop()
+        print("오더 아이디",orderid)
+        # orderid_Obj=
+        oerder_designObj = Order.objects.get(id=orderid)
 
+        # print("oerder_designObj.order_id.order_inout :", oerder_designObj.order_id.order_inout)
+        # if oerder_designObj.order_id.order_inout == 1:
+        today = datetime.today()
+        objs = {}
+        objs['Div'] = 'KnitWork'
+        objs['WorkKey'] = oerder_designObj.knitWorkKey
+        objs['Status'] = 'RECEIVE'
+        objs['WorkDate'] = today.strftime('%Y-%m-%d')
+        content = bytes(json.dumps(objs), encoding='utf-8')
+        print("스케쥴 편직생산의뢰 data:", content)
+        # content = json.dumps(objs)
+        try:
+            headers = {
+                'Content-Type': "application/json",
+                'ApiKey': '4eeca0624bd04dbba644963e2819b89c',
+            }
+            # 편직 생산 의뢰 접수
+            order_ck = requests.post('http://api.lookiss.com:9403/api/SCC/ChangeWorkStatus', headers=headers,
+                                     data=content)
 
-    return render(request, 'schedule.html', {'orderList' : orderList ,'title': 'Schedule', 'machine': companyMachine.machineyn, 'designOrderList': designOrderList, 'designOrderCount': designOrderList.count(), 'warpMachineList': warpMachineList, 'knitMachineList': knitMachineList, 'yarnList': yarnList})
+            print("편직 생산 의뢰 접수 : ", order_ck.status_code)
+        except:
+            pass
+
+    return render(request, 'schedule.html', {'title': 'Schedule', 'machine': companyMachine.machineyn, 'designOrderList': designOrderList, 'designOrderCount': designOrderList.count(), 'warpMachineList': warpMachineList, 'knitMachineList': knitMachineList, 'yarnList': yarnList, 'orderList' : orderList, 'userlang':request.user})
+
 
 @csrf_exempt
 def getMachineByDate(request):
@@ -216,8 +250,6 @@ def getProcessByJson(request):
 
     endDate = datetime.datetime(year, month, date, 23, 59, 59)
     startDate = datetime.datetime(year, month, date, 0, 0, 0)
-    print(endDate)
-    print(startDate)
 
 
     if warpMachine != None:
@@ -253,6 +285,7 @@ def getProcessByJson(request):
 @csrf_exempt
 def createSchedule(request):
     try:
+        print("스케쥴 통과는 하나?")
         orderId = int(float(request.POST['orderId']))
         warpMachineId = int(request.POST['warpMachineId'])
         warpingStart = request.POST['warpStartTime']
@@ -261,8 +294,35 @@ def createSchedule(request):
         knitingStart = request.POST['knitStartTime']
         knitingEnd = request.POST['knitEndTime']
         machine = int(request.POST['machine'])
-
+        print("여기까지인가?",orderId)
         oerder_designObj = Order_DesignData.objects.get(id=orderId)
+        oid = oerder_designObj.order_id
+        print("oid ? ",oid.knitWorkKey)
+        print("여기까지인가?")
+        # order_workObj = Order.objects.get(id=orderId)
+        print("oerder_designObj.order_id.order_inout :", oerder_designObj.order_id.order_inout)
+        # if oerder_designObj.order_id.order_inout == 1:
+        today = datetime.today()
+        objs = {}
+        objs['Div'] = 'KnitWork'
+        objs['WorkKey'] = oid.knitWorkKey
+        objs['Status'] = 'WORK'
+        objs['WorkDate'] = today.strftime('%Y-%m-%d')
+        content = bytes(json.dumps(objs), encoding='utf-8')
+        print("스케쥴 편직 생산 지시 data:",content)
+        # content = json.dumps(objs)
+        try:
+            headers = {
+                'Content-Type': "application/json",
+                'ApiKey': '4eeca0624bd04dbba644963e2819b89c',
+            }
+            #편직 생산 지시
+            order_ck = requests.post('http://api.lookiss.com:9403/api/SCC/ChangeWorkStatus', headers=headers,
+                                     data=content)
+
+            print("편직 생산 지시 : ", order_ck.status_code)
+        except:
+            pass
 
         if machine == 1:
             warpMachineObj = Warp_Machine.objects.get(id=warpMachineId)
@@ -309,7 +369,6 @@ def createSchedule(request):
         qr_code_image = qr.make_image()
         buffer = BytesIO()
         qr_code_image.save(buffer)
-        print('qr End')
         filebuffer = InMemoryUploadedFile(buffer, None, 'qr_code_image.png', 'image/png', buffer.getbuffer().nbytes, None)
 
         qr_code_image_path = 'data/qrcode/' + str(orderId) + '/qr_code_image.png'
@@ -319,3 +378,49 @@ def createSchedule(request):
     except ValueError:
         msg = '스케쥴정보를 입력해주세요'
         return render(request, 'msg/errorPage.html', {'msg': msg})
+
+
+
+@csrf_exempt
+def ChangeWorkStatus(request, orderId):
+    style_order = Style_orders.objects.get(pk=orderId)
+    order_workObj = Order.objects.get(id=orderId)
+    jsonobj = {}
+    jsonobj['StyleKey'] = style_order.style_key
+    jsonobj['']
+    jsonobj['Status'] = 'WORK'
+
+    jsonobj['Div'] = 'KnitWork'
+    jsonobj['WorkKey'] = order_workObj.knitWorkKey
+    jsonobj['Status'] = 'WORK'
+    jsonobj['WorkDate'] = datetime.today.strftime('%Y-%m-%d')
+    content = bytes(json.dumps(jsonobj), encoding='utf-8')
+    print("스케쥴 편직 생산 지시 data:", content)
+    content = json.dumps(jsonobj)
+    headers = {
+        'Content-Type': "application/json",
+        'ApiKey': '4eeca0624bd04dbba644963e2819b89c',
+    }
+    #스타일 개발의뢰 상태 변경완료
+    print("content : ", content)
+    style_ck = requests.post('http://api.lookiss.com:9404/api/SCC/ChangeWorkStatus', headers=headers, data=content)
+    print("스타일 개발의뢰 상태 변경 :", style_ck.status_code)
+    # style_ckJSON = requests.get("http://api.lookiss.com:9403/api/SCC/ChangeStyleStatus").json()  # 1번
+    # print("스타일 개발의뢰 상태 변경 메세지", style_ckJSON)
+    return HttpResponse(json.dumps(jsonobj), content_type='application/json')
+
+
+
+
+
+class Knit_process_api(viewsets.ModelViewSet):
+
+    queryset = Knit_Process.objects.all()
+    serializer_class = Knit_process_Serializer
+
+class Warp_process_api(viewsets.ModelViewSet):
+
+    queryset = Warp_Process.objects.all()
+    serializer_class = Warp_process_Serializer
+
+

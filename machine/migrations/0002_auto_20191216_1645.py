@@ -12,14 +12,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name='knit_machine',
-            old_name='trs_code',
-            new_name='tns_code',
-        ),
-        migrations.RenameField(
-            model_name='warp_machine',
-            old_name='tws_code',
-            new_name='tns_code',
-        ),
+
     ]

@@ -5,15 +5,18 @@ from django.core.files.base import ContentFile
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from xml.etree.ElementTree import parse
+from .serializer import *
 
 from django.views.generic import DetailView
+from rest_framework import viewsets
 
 import config.settings as settings
 from design_data.models import *
 
 from django.shortcuts import render, redirect
 from order.models import *
-from design_data.style_for_us_image_upload import style_for_us_image_upload
+from design_data.url_image_upload import url_image_upload
+#from design_data.style_for_us_image_upload import style_for_us_image_upload
 
 
 @csrf_exempt
@@ -97,17 +100,14 @@ def showList(request):
     designList = FSTY_CAD_Design_Data.objects.all().order_by("-CAD_Design_Data_id")
     orderList = Order.objects.all()
 
-    return render(request, 'designList.html', {'designList': designList, 'count': designList.count(), 'title': 'Design','orderList':orderList})
+    return render(request, 'designList.html', {'designList': designList, 'count': designList.count(), 'title': 'Design','orderList':orderList, 'userlang':request.user})
 
 @csrf_exempt
 @login_required(login_url='/')
 def showDesign(request, designId):
-
-    print(designId)
-
     designObj = FSTY_CAD_Design_Data.objects.get(CAD_Design_Data_id=designId)
 
-    return render(request, 'designDetail.html', {'object': designObj, 'title': 'Design'})
+    return render(request, 'designDetail.html', {'object': designObj, 'title': 'Design', 'userlang':request.user})
 
 @csrf_exempt
 @login_required(login_url='/')
@@ -115,7 +115,7 @@ def showDesignProduction(request, designId):
 
     designObj = FSTY_CAD_Design_Data.objects.get(CAD_Design_Data_id=designId)
 
-    return render(request, 'worksheet/knit.html', {'object': designObj})
+    return render(request, 'worksheet/knit.html', {'object': designObj, 'userlang':request.user})
 
 
 @csrf_exempt
@@ -137,8 +137,6 @@ def designListByJson(request):
 @csrf_exempt
 def upload(request):
     if 'project' in request.FILES:
-        print('xml file exist')
-
         # file catch
         xml_file = request.FILES['project']
         pattern_image = request.FILES['design']
@@ -147,7 +145,6 @@ def upload(request):
         # project save
         cad_design_data = FSTY_CAD_Design_Data()
         cad_design_data.save()
-
         xml_file_name = 'data/project/' + str(cad_design_data.CAD_Design_Data_id) + '/xml/' + xml_file.name
         cad_design_data.CAD_Design_Data_xml.save(xml_file_name, ContentFile(xml_file.read()))
 
@@ -157,7 +154,8 @@ def upload(request):
         simulation_image_path = 'data/project/' + str(cad_design_data.CAD_Design_Data_id) + '/img/' + simulation_image.name
         cad_design_data.CAD_Design_Data_simulation_image.save(simulation_image_path, ContentFile(simulation_image.read()))
 
-        reselt = style_for_us_image_upload(request.build_absolute_uri(cad_design_data.CAD_Design_Data_simulation_image.url), simulation_image.name)
+        #0506 수정부분 현재 style_for_us_가 작동중이지 않아 넘기는 부분이 없으니 무한 반복으로 인한 코드 진행이 되질않음 추후에 style for us 재구동시 주석문 헤제
+
 
         # qr_code_image = qrcode.make('http://211.238.177.143:8888/design_data/'+str(cad_design_data.id)+'/')
         # qr_code_image_path = 'data/project/' + str(cad_design_data.id) + '/img/qr_code_image.png'
@@ -180,28 +178,21 @@ def upload(request):
         #trc = request.FILES['trc']
         #trc_name = 'data/project/' + str(cad_design_data.id) + '/trc/' + trc.name
         #cad_design_data.trc_file.save(trc_name, ContentFile(trc.read()))
-
-        print(settings.MEDIA_ROOT + '/' + cad_design_data.CAD_Design_Data_xml.__str__())
         with open(settings.MEDIA_ROOT + '/' + cad_design_data.CAD_Design_Data_xml.__str__(), encoding='UTF-8') as xml:
             doc = parse(xml)
         root = doc.getroot()
         cad_design_data.CAD_Design_Data_name = root.get("name")
-        print('cad_name'+cad_design_data.CAD_Design_Data_name)
         cad_design_data.CAD_Design_Data_code = root.get("code")
         cad_design_data.CAD_Design_Data_magnification = root.find("production").find("magnification_ratio").get("value")
-        print('cad_code' + cad_design_data.CAD_Design_Data_code)
         cad_design_data.save()
 
-        # Git 테스트 161205
         # production save
         xml_production = root.find("production")
         cad_production = FSTY_CAD_Production()
-        print(cad_production)
         cad_production.CAD_Production_quota_per_day = xml_production.find("quota_per_day").get("value")
         cad_production.CAD_Production_machine_name = xml_production.find("machine_name").get("value")
         cad_production.CAD_Production_note = xml_production.find("note").get("value")
         cad_production.CAD_Production_design_data = cad_design_data
-        print('aaa')
         cad_production.save()
 
         # production row save
@@ -260,6 +251,16 @@ def upload(request):
             cad_chain_link.CAD_Chain_Link_layer = cad_layer
             cad_chain_link.save()
 
+    #reselt = url_image_upload(request.build_absolute_uri(cad_design_data.CAD_Design_Data_pattern_image.url),
+    #                         pattern_image,
+    #                          request.build_absolute_uri(cad_design_data.CAD_Design_Data_simulation_image.url),
+    #                          simulation_image.name,
+    #                          cad_design_data.CAD_Design_Data_name)
     print('Upload End')
     variables = {'success': True}
     return HttpResponse(variables)
+
+class Design_data_api(viewsets.ModelViewSet):
+
+    queryset = FSTY_CAD_Design_Data.objects.all()
+    serializer_class = Design_Serializer

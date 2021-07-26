@@ -1,5 +1,9 @@
+import json
+
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.urls import reverse
 import requests
 
 # Create your views here.
@@ -18,7 +22,7 @@ def showDesignProduction(request, productionId):
     orderObj = Order_DesignData.objects.get(pk=productionId)
     designObj = orderObj.design_data_id
 
-    return render(request, 'worksheet/knit.html', {'object': designObj, 'qrCode':orderObj.qr_code, 'orderQty':orderObj.design_qty})
+    return render(request, 'worksheet/knit.html', {'object': designObj, 'qrCode':orderObj.qr_code, 'orderQty':orderObj.design_qty, 'userlang':request.user})
 
 
 def production(request):
@@ -41,22 +45,18 @@ def production(request):
             kSchedule = True
             #kRealTime = Knit_Machine_Realtime.objects.get(knit_process=kProcess)
 
-            jsonData = requests.get("http://tnswebserver.iptime.org:1978/values/trs").json()
+            jsonData = requests.get("http://tnswebserver.iptime.org:1978/api/trs").json()
             for obj in jsonData['trs']:
                 if obj['tns_code'] == kProcess.knit_machine_id.tns_code:
-                    print(kProcess.knit_machine_id.tns_code, '     nameemememeeme')
-                    print(obj['trs_meter'], '     machine')
                     designOrder.trs_total_meter = obj['trs_meter']
-                    print(designOrder['trs_total_meter'])
         except:
             kSchedule = False
 
         if kSchedule | wSchedule:
             order.append(designOrder)
 
-        print(order)
 
-    return render(request, 'production.html', {'title':title, 'designOrderList':order, 'orderList':orderList})
+    return render(request, 'production.html', {'title':title, 'designOrderList':order, 'orderList':orderList, 'userlang':request.user})
 
 
 
@@ -70,12 +70,10 @@ def productionDetail(request, pk):
 
         wProcess = Warp_Process.objects.get(order_designdata=pk)
 
-
-
         if Warp_Beam.objects.filter(warp_process=wProcess).count() > 0:
             wSchedule = True
             #wRealTime = Warp_Machine_Realtime.objects.get(knit_process=wProcess)
-            jsonData = requests.get("http://tnswebserver.iptime.org:1978/values/tws").json()
+            jsonData = requests.get("http://tnswebserver.iptime.org:1978/api/tws").json()
             for obj in jsonData['tws']:
                 try:
                     if obj['tns_code'] == wProcess.warp_machine_id.tns_code:
@@ -86,47 +84,51 @@ def productionDetail(request, pk):
             kProcess = Knit_Process.objects.get(order_designdata=pk)
             kSchedule = True
             #kRealTime = Knit_Machine_Realtime.objects.get(knit_process=kProcess)
-            jsonData = requests.get("http://tnswebserver.iptime.org:1978/values/trs").json()
+            jsonData = requests.get("http://tnswebserver.iptime.org:1978/api/trs").json()
             for obj in jsonData['trs']:
                 if obj['tns_code'] == kProcess.knit_machine_id.tns_code:
                     kMachine = obj
 
             designFabricObj = designOrder.design_data_id.fsty_cad_production.fsty_cad_fabric_set.all()
-
             for obj in designFabricObj:
                 if obj.CAD_Fabric_type == 'R':
                     infoObj = obj
+            try:
+                if int(kMachine['trs_rpm_main']) != 0:
+                    kMachine['dailyOutPut'] = int(
+                        int(kMachine['trs_rpm_main']) * 24 * 60 / int(infoObj.CAD_Fabric_cpi) / 91.44 * int(
+                            infoObj.CAD_Fabric_width))
 
-            if int(kMachine['trs_rpm_main']) != 0:
-                kMachine['dailyOutPut'] = int(int(kMachine['trs_rpm_main']) * 24 * 60 / int(infoObj.CAD_Fabric_cpi) / 91.44 * int(infoObj.CAD_Fabric_width))
+                    outputPerMin = kMachine['dailyOutPut'] / 24 / 60
 
-                outputPerMin = kMachine['dailyOutPut']/24/60
+                    kMachine['trs_meter'] = int(kMachine['trs_meter'])
 
-                kMachine['trs_meter'] = int(kMachine['trs_meter'])
+                    kMachine['lostMin'] = int((designOrder.design_qty - kMachine['trs_meter']) / outputPerMin)
 
-                kMachine['lostMin'] = int((designOrder.design_qty-kMachine['trs_meter'])/outputPerMin)
+                    kMachine['lostHour'] = kMachine['lostMin'] // 60
 
-                kMachine['lostHour'] = kMachine['lostMin']//60
+                    kMachine['lostMin'] = kMachine['lostMin'] % 60
 
-                kMachine['lostMin'] = kMachine['lostMin']%60
+                    warp_Beam = Warp_Beam.objects.filter(warp_process=wProcess)
+                    knit_Beam = Knit_Beam.objects.filter(knit_process=kProcess)
+                else:
+                    kMachine['dailyOutPut'] = 0
 
-                warp_Beam = Warp_Beam.objects.filter(warp_process=wProcess)
-                knit_Beam = Knit_Beam.objects.filter(knit_process=kProcess)
-            else:
-                kMachine['dailyOutPut'] = 0
+                    outputPerMin = kMachine['dailyOutPut'] / 24 / 60
 
-                outputPerMin = kMachine['dailyOutPut'] / 24 / 60
+                    kMachine['trs_meter'] = int(kMachine['trs_meter'])
 
-                kMachine['trs_meter'] = int(kMachine['trs_meter'])
+                    kMachine['lostMin'] = 0
 
-                kMachine['lostMin'] = 0
+                    kMachine['lostHour'] = kMachine['lostMin'] // 60
 
-                kMachine['lostHour'] = kMachine['lostMin'] // 60
+                    kMachine['lostMin'] = kMachine['lostMin'] % 60
 
-                kMachine['lostMin'] = kMachine['lostMin'] % 60
-
-                warp_Beam = Warp_Beam.objects.filter(warp_process=wProcess)
-                knit_Beam = Knit_Beam.objects.filter(knit_process=kProcess)
+                    warp_Beam = Warp_Beam.objects.filter(warp_process=wProcess)
+                    knit_Beam = Knit_Beam.objects.filter(knit_process=kProcess)
+            except:
+                msg = '기계가 가동 중이지 않습니다.'
+                return render(request, 'msg/errorPage.html', {'msg': msg})
 
             variables = {'title':'Production', 'designOrder':designOrder, 'knit_Beam':knit_Beam, 'warp_Beam':warp_Beam, 'kSchedule':kSchedule, 'wSchedule':wSchedule, 'wProcess':wProcess, 'kProcess':kProcess, 'kMachine':kMachine, 'wMachine':wMachine, 'cpi':infoObj.CAD_Fabric_cpi, 'width':infoObj.CAD_Fabric_width}
         else:
@@ -143,14 +145,10 @@ def productionDetail(request, pk):
 
             yarnJsonList = []
 
-            print('yarnCodeList', yarnCodeList)
-
             yarnList = Yarn.objects.filter(code__in=yarnCodeList)
-            print('count', yarnList.count())
+
             for obj in yarnList:
                 yarnJsonList.append({'pk': obj.pk, 'code': obj.code})
-
-            print('yarnJsonList', yarnJsonList)
 
             variables = {'title':'Production', 'designOrder':designOrder, 'kSchedule':kSchedule, 'wSchedule':wSchedule, 'beamList': beamList, 'totalBeamCount': beamList.count(), 'desingYarnList': yarnJsonList}
 
@@ -160,3 +158,12 @@ def productionDetail(request, pk):
         variables = {'title':'Production', 'designOrder':designOrder}
 
         return render(request, 'productionNoMachine.html', variables)
+
+
+def setOrders(request):
+    try:
+        warptopJSON = requests.get("http://tnswebserver.iptime.org:1978/api/tws_chart").json()
+    except Exception as e:
+        print(e)
+
+    return HttpResponse(json.dump({'success':True}),content_type='applications')

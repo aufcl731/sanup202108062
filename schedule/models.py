@@ -7,7 +7,7 @@ from materials.models import Beam, Yarn
 # Create your models here.
 class Knit_Process(models.Model):
     order_designdata = models.OneToOneField(Order_DesignData, on_delete=models.CASCADE)
-    knit_machine_id = models.ForeignKey(Knit_Machine, null=True, on_delete=models.CASCADE)
+    knit_machine_id = models.ForeignKey(Knit_Machine, related_name='knit_machine_code', null=True, on_delete=models.CASCADE)
     yw_knit_machine_id = models.ForeignKey(YW_Knit_Machine, null=True, on_delete=models.CASCADE)
     start_time = models.DateTimeField(null=True, default=None)
     end_time = models.DateTimeField(null=True, default=None)

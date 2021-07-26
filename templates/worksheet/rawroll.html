@@ -61,7 +61,7 @@
         }
 
         .rollWrap > table {
-            width:300px;
+            width:500px;
         }
 
         #rollWrap {
@@ -76,11 +76,18 @@
             right:20px;
             cursor:pointer;
         }
+        .centerobj{
+            margin-top: 10px;
+            text-align: right;
+            height: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 <div id="rawrollWrap">
-    <h1>거 래 명 세 표</h1>
+    <h1>거 래 명 세 서</h1>
     <span id="printIcon" onclick="window.print()"><img src="{% static 'image/print2.png' %}" width="30px"></span>
     <div class="fix">
         <div class="topTable">
@@ -95,23 +102,23 @@
                 <tr>
                     <th rowspan="4" class="text-vertical">공 급 자</th>
                    <th>사업자등록번호</th>
-                    <td colspan="3"></td>
+                    <td colspan="3" contenteditable='true'>{{ company.num }}</td>
                 </tr>
                 <tr>
                     <th>상호</th>
-                    <td></td>
-                    <th>성명</th>
-                    <td></td>
+                    <td contenteditable='true'>{{ company.name }}</td>
+                    <th>담당자</th>
+                    <td contenteditable='true'>{{ order.manager.name }}</td>
                 </tr>
                 <tr>
                     <th>사업장주소</th>
-                    <td colspan="3">서울시 구로구 구로동 디지털로31길 20 에이스테크노타워 5차 9층 901호</td>
+                    <td colspan="3" contenteditable='true'>서울시 구로구 구로동 디지털로31길 20 에이스테크노타워 5차 9층 901호</td>
                 </tr>
                 <tr>
                     <th>업태</th>
-                    <td></td>
+                    <td contenteditable='true'>원단 제작</td>
                     <th>종목</th>
-                    <td></td>
+                    <td contenteditable='true'>Tricot</td>
                 </tr>
             </table>
         </div>
@@ -128,35 +135,41 @@
                 <tr>
                     <th rowspan="4" class="text-vertical">공 급 받 는 자</th>
                    <th>사업자등록번호</th>
-                    <td colspan="3"></td>
+                    <td colspan="3" contenteditable='true'>{{ orderaccount.accountnum }}</td>
                 </tr>
                 <tr>
                     <th>상호</th>
-                    <td></td>
+                    <td contenteditable='true'>{{ orderaccount.accountname }}</td>
                     <th>성명</th>
-                    <td></td>
+                    <td contenteditable='true'>{{ orderaccount.accountmanager }}</td>
                 </tr>
                 <tr>
                     <th>출고처</th>
-                    <td colspan="3"></td>
+                    <td colspan="3" contenteditable='true'>{{ orderaccount.accountaddress }}</td>
                 </tr>
                 <tr>
                     <th>업태</th>
-                    <td></td>
+                    <td contenteditable='true'>{{ orderaccount.accountwork }}</td>
                     <th>종목</th>
-                    <td></td>
+                    <td contenteditable='true'>{{ orderaccount.accounttype }}</td>
                 </tr>
             </table>
+
         </div>
+    </div>
+    <div class="centerobj">
+        품명 : {{ order_sub.design_data_id }}
+        Yard : {{ order_sub.design_qty }}y
     </div>
     <div id="rollWrap" class="fix">
         <div class="rollWrap">
             <table>
                 <colgroup>
-                    <col width="16%">
-                    <col width="28%">
-                    <col width="28%">
-                    <col width="28%">
+                    <col width="10%">
+                    <col width="22%">
+                    <col width="22%">
+                    <col width="22%">
+                    <col width="24%">
                 </colgroup>
                 <thead>
                     <tr>
@@ -164,430 +177,266 @@
                         <th>절번</th>
                         <th>수량(yd)</th>
                         <th>중량(kg)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </div>
-        <div class="rollWrap">
-            <table>
-                <colgroup>
-                    <col width="16%">
-                    <col width="28%">
-                    <col width="28%">
-                    <col width="28%">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>절번</th>
-                        <th>수량(yd)</th>
-                        <th>중량(kg)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </div>
-        <div class="rollWrap">
-            <table>
-                <colgroup>
-                    <col width="16%">
-                    <col width="28%">
-                    <col width="28%">
-                    <col width="28%">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>절번</th>
-                        <th>수량(yd)</th>
-                        <th>중량(kg)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </div>
-        <div class="etcWrap">
-            <table>
-                <thead>
-                    <tr>
                         <th>비고</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="rollWrap">
+            <table>
+                <colgroup>
+                    <col width="10%">
+                    <col width="22%">
+                    <col width="22%">
+                    <col width="22%">
+                    <col width="24%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>절번</th>
+                        <th>수량(yd)</th>
+                        <th>중량(kg)</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
                     </tr>
+
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                        <td contenteditable='true'></td>
+                    </tr>
+
                 </tbody>
             </table>
         </div>

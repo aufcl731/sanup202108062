@@ -3,6 +3,33 @@
 
 {% block staticfile %}
 <link rel="stylesheet" href="{% static 'css/machine.css' %}">
+<script type="text/javascript">
+lang_code = {{ userlang.lang_code }};
+    const lang = {
+        ko:{
+            warperlist:"정경기 리스트", delete:"삭제", warpknittingmachinelist:"경편기", warper:"정경", register:"등록", warpknittingmachine:"경편기"
+
+        },
+        en:{
+            warperlist:"Warper list", delete:"Delete", warpknittingmachinelist:"Warp knitting machine list", warper:"Warper",
+            register:"Register", warpknittingmachine:"Warp knitting machine"
+        }
+    };
+    // 언어별 렌더링
+    function render(locale) {
+        const $lang = document.querySelectorAll("[data-lang]");
+        $lang.forEach(el => {
+            const code = el.dataset.lang;
+            el.textContent = lang[locale][code]
+        })
+    };
+    if(lang_code==0){
+        render("ko");
+    };
+    if(lang_code==1){
+        render("en");
+    };
+</script>
 <script>
     var yarnList = [];
     $(document).ready(function() {
@@ -29,6 +56,7 @@
         if(company.machineyn == False && knitMachineList.length > 15 && os != 'Mac OS')
             $('#noKnitMachineTable > tbody td:last-child').css('width', '57px');
     });
+
 </script>
 {% endblock staticfile %}
 
@@ -37,7 +65,7 @@
         {% if company.machineyn == True %}
         <div id="listWrap" class="fix">
             <div id="warpList" class="firstDiv">
-                <h3 class="machineTitle">정경기 리스트</h3>
+                <h3 class="machineTitle" data-lang="warperlist">[warperlist]</h3>
                 <table id="warpMachineTable">
                     <colgroup>
                         <col width="9%">
@@ -49,18 +77,18 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Model</th>
                             <th>Code</th>
+                            <th>Model</th>
                             <th>Create Date</th>
-                            <th>삭제</th>
+                            <th data-lang="delete">[delete]</th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for warpMachineObj in warpMachineList %}
                         <tr>
                             <td>{{ warpMachineObj.pk }}</td>
-                            <td>{{ warpMachineObj.tws_name }}</td>
                             <td>{{ warpMachineObj.tns_code }}</td>
+                            <td>{{ warpMachineObj.tws_name }}</td>
                             <td>{{ warpMachineObj.tws_installation_time|date:'Y-m-d H:i' }}</td>
                             <td><span onclick="deleteWarpMachine(1,{{ warpMachineObj.pk }})">remove</span></td>
                         </tr>
@@ -69,7 +97,7 @@
                 </table>
             </div>
             <div id="knitList" class="secDiv">
-                <h3 class="machineTitle">경편기 리스트</h3>
+                <h3 class="machineTitle" data-lang="warpknittingmachinelist">[warpknittingmachinelist]</h3>
                 <table id="knitMachineTable">
                     <colgroup>
                         <col width="5%">
@@ -84,13 +112,13 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Model</th>
                             <th>Code</th>
+                            <th>Model</th>
                             <th>RPM</th>
                             <th>Bar Count</th>
                             <th>Gauge</th>
                             <th>Create Date</th>
-                            <th>삭제</th>
+                            <th data-lang="delete">[delete]</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,7 +127,7 @@
                             <td>{{ knitMachineObj.pk }}</td>
                             <td>{{ knitMachineObj.trs_model_name }}</td>
                             <td>{{ knitMachineObj.tns_code }}</td>
-                            <td>{{ knitMachineObj.rpm }}</td>
+                            <td>{{ knitMachineObj.trs_rpm_main }}</td>
                             <td>{{ knitMachineObj.trs_bar_cnt }}</td>
                             <td>{{ knitMachineObj.trs_gauge }}</td>
                             <td>{{ knitMachineObj.trs_installation_time|date:'Y-m-d H:i' }}</td>
@@ -117,14 +145,14 @@
                 <form action="/machine/setWarpMachine" method="post">
                     {% csrf_token %}
                     <div id="createWarp">
-                        <h3 class="h3line">정경</h3>
-                        <div class="line">
-                            <label for="warp_model">Model</label>
-                            <input type="text" id="warp_model" name="warp_model">
-                        </div>
+                        <h3 class="h3line" data-lang="warper">[warper]</h3>
                         <div class="line">
                             <label for="warp_code">Code</label>
                             <input type="text" id="warp_code" name="warp_code">
+                        </div>
+                        <div class="line">
+                            <label for="warp_model">Model</label>
+                            <input type="text" id="warp_model" name="warp_model">
                         </div>
                         <div class="line">
                             <label for="warp_company">Company</label>
@@ -132,7 +160,7 @@
                         </div>
                     </div>
                     <div class="btnBox">
-                        <button class="warpBtn">등록</button>
+                        <button class="warpBtn" data-lang="register">[register]</button>
                     </div>
                 </form>
             </div>
@@ -140,12 +168,12 @@
                 <form action="/machine/setKnitMachine" method="post">
                     {% csrf_token %}
                     <div id="createKnit">
-                        <h3 class="h3line">경편기</h3>
+                        <h3 class="h3line" data-lang="warpknittingmachine">[warpknittingmachine]</h3>
                         <div class="line">
-                            <label for="knit_model">Model</label>
-                            <input type="text" id="knit_model" name="knit_model">
                             <label for="knit_code">Code</label>
                             <input type="text" id="knit_code" name="knit_code">
+                            <label for="knit_model">Model</label>
+                            <input type="text" id="knit_model" name="knit_model">
                         </div>
                         <div class="line">
                             <label for="knit_company">Company</label>
@@ -161,14 +189,14 @@
                         </div>
                     </div>
                     <div class="btnBox">
-                        <button class="knitBtn">등록</button>
+                        <button class="knitBtn" data-lang="register">[register]</button>
                     </div>
                 </form>
             </div>
         </div>
         <div id="listWrap" class="fix">
             <div id="warpList" class="firstDiv">
-                <h3 class="machineTitle">정경기 리스트</h3>
+                <h3 class="machineTitle" data-lang="warperlist">[warperlist]</h3>
                 <table id="noWarpMachineTable">
                     <colgroup>
                         <col width="9%">
@@ -183,7 +211,7 @@
                             <th>Model</th>
                             <th>Code</th>
                             <th>Create Date</th>
-                            <th>삭제</th>
+                            <th data-lang="delete">[delete]</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -200,7 +228,7 @@
                 </table>
             </div>
             <div id="knitList" class="secDiv">
-                <h3 class="machineTitle">경편기 리스트</h3>
+                <h3 class="machineTitle" data-lang="warpknittingmachinelist">[warpknittingmachinelist]</h3>
                 <table id="noKnitMachineTable">
                     <colgroup>
                         <col width="5%">
@@ -221,7 +249,7 @@
                             <th>Bar Count</th>
                             <th>Gauge</th>
                             <th>Create Date</th>
-                            <th>삭제</th>
+                            <th data-lang="delete">[delete]</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -500,6 +500,7 @@ CREATE TABLE "Knit_Machine" (
     trs_installation_time timestamp with time zone,
     trs_model_name character varying(50),
     trs_beam_cnt integer,
+    trs_rpm_main integet,
     trs_bar_cnt integer,
     trs_eac_enable integer,
     trs_tempo integer,

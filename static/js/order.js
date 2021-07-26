@@ -1,43 +1,43 @@
 function searchDesign() {
-            $('#designListTable tbody tr').remove();
-            $.ajax({
-                url: '/design_data/getList',
-                type: 'POST',
-                cache: false,
-                data: {
-                    searchName: $('#designSearchBox input').val()
-                },
-                dataType: 'json',
-                async: false,
-                success: function (response) {
-                    console.log(response);
-                    response.forEach(function (obj) {
-                        var tr = document.createElement('tr');
-                        tr.setAttribute('onclick', 'setDesignData(' + obj.id + ')');
-                        tr.id = 'designData' + obj.id;
-                        tr.className = 'designDataTr';
+    $('#designListTable tbody tr').remove();
+    $.ajax({
+        url: '/design_data/getList',
+        type: 'POST',
+        cache: false,
+        data: {
+            searchName: $('#designSearchBox input').val()
+        },
+        dataType: 'json',
+        async: false,
+        success: function (response) {
+            console.log(response);
+            response.forEach(function (obj) {
+                var tr = document.createElement('tr');
+                tr.setAttribute('onclick', 'setDesignData(' + obj.id + ')');
+                tr.id = 'designData' + obj.id;
+                tr.className = 'designDataTr';
 
-                        var td = document.createElement('td');
-                        td.innerHTML = obj.name;
-                        tr.append(td);
+                var td = document.createElement('td');
+                td.innerHTML = obj.name;
+                tr.append(td);
 
-                        td = document.createElement('td');
-                        td.innerHTML = obj.date;
-                        tr.append(td);
+                td = document.createElement('td');
+                td.innerHTML = obj.date;
+                tr.append(td);
 
-                        td = document.createElement('td');
-                        td.innerHTML = obj.date;
-                        tr.append(td);
+                td = document.createElement('td');
+                td.innerHTML = obj.date;
+                tr.append(td);
 
-                        $('#designListTable tbody').append(tr);
-                    });
-
-                    if(response.length > 13 && os != 'Mac OS'){
-                        $('#designListTable td:last-child').css('width', '105px');
-                    }
-                }
+                $('#designListTable tbody').append(tr);
             });
+
+            if(response.length > 13 && os != 'Mac OS'){
+                $('#designListTable td:last-child').css('width', '105px');
+            }
         }
+    });
+}
 
 function setDesignData(id) {
     $('.selected').removeClass('selected');
@@ -155,7 +155,7 @@ function createOrder() {
 
         if(designQty[i].value == ''){
             alert('디자인수량을 입력해주세요');
-            designQty[i].focus
+            designQty[i].focus();
             return;
         }
     }
@@ -222,7 +222,66 @@ function deleteOrder(){
     $('body').append(orderForm);
     orderForm.submit();
 }
+function modifyStyle(){
+    var oid = $('#stoid').val();
+    $.ajax({
+        url:'/order/style_modify/'+oid,
+        type:'POST',
+        data:{
+            FabricVersion:$('#FabricVersion').val(),
+            FabricCode:$('#FabricCode').val(),
+            FabricName:$('#FabricName').val(),
+            FabricSize:$('#FabricSize').val(),
+            SMeterWeight:$('#SMeterWeight').val(),
+            YardWeight:$('#YardWeight').val(),
+            FabricPart:$('#FabricPart').val(),
+            FabricConstruction:$('#FabricConstruction').val(),
+            FabricWidth:$('#FabricWidth').val(),
+            CuttableWidth:$('#CuttableWidth').val(),
+            Unit:$('#Unit').val(),
+            FabricCsm:$('#FabricCsm').val(),
+            FabricLoss:$('#FabricLoss').val(),
+            DyeProcessTypeCode:$('#DyeProcessTypeCode').val(),
+            ContentRate:$('#ContentRate').val(),
+            YarnCode:$('#YarnCode').val(),
+            YarnName:$('#YarnName').val(),
+            YarnColor:$('#YarnColor').val(),
+            YarnCount:$('#YarnCount').val(),
+            YnDye:$('#YnDye').val(),
+        },
+        dataType:'json',
+        success:function (res){
+          alert('suc')
+        },
 
-function openRawRoll(){
-    window.open('/order/rawroll', 'RawRoll', 'width=1100, height=800', encoding='UTF-8');
+    })
+}
+function deleteStyle(){
+    var oid = $('#stoid').val();
+    $.ajax({
+        url:'/order/style_suc/'+oid,
+        type:'POST',
+        dataType:'json',
+        success:function (res){
+            alert('suc')
+        }
+    })
+}
+function chagneStyle(){
+    var oid = $('#stoid').val();
+    $.ajax({
+        url:'/order/change_style/'+oid,
+        type:'POST',
+        dataType:'json',
+        success:function (res){
+            alert('suc')
+        }
+    })
+}
+function openRawRoll(id){
+    window.open('/order/rawroll/'+id,'RawRoll', 'width=1100, height=800', encoding='UTF-8');
+}
+
+function openRawRoll(id){
+    window.open('/order/rawroll/'+id,'RawRoll', 'width=1100, height=800', encoding='UTF-8');
 }

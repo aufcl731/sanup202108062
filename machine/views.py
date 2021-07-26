@@ -10,6 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 from order.models import *
 from account.models import Company
 from machine.models import Warp_Machine, Knit_Machine,YW_Knit_Machine, YW_Warp_Machine
+from rest_framework import viewsets
+from .serializer import *
 
 # Create your views here.
 
@@ -39,8 +41,6 @@ def getWarpInfoByJson(request):
         warpMachineObj['create_date'] = create_date
         warpMachineObj['company_id'] = companyName
 
-    print(warpMachineObj)
-
     return HttpResponse(json.dumps(warpMachineObj), content_type='application/json')
 
 def getKnitInfoByJson(request):
@@ -69,8 +69,6 @@ def getKnitInfoByJson(request):
         knitMachineObj['company_id'] = companyName
 
 
-    print(knitMachineObj)
-
     return HttpResponse(json.dumps(knitMachineObj), content_type='application/json')
 
 
@@ -81,10 +79,10 @@ def showMachine(request):
     company = Company.objects.get(id=1)
 
     if company.machineyn == True:
-        jsonData = requests.get("http://tnswebserver.iptime.org:1978/values/trs").json()
+        jsonData = requests.get("http://tnswebserver.iptime.org:1978/api/trs").json()
+
 
         for trsObj in jsonData["trs"]:
-            print(trsObj["tns_code"])
 
             if Knit_Machine.objects.filter(tns_code=trsObj["tns_code"]).count() == 0:
                 trsMachineObj = Knit_Machine()
@@ -96,21 +94,20 @@ def showMachine(request):
                 trsMachineObj.trs_model_name = trsObj["trs_model_name"] if trsObj["trs_model_name"] != "" else None
                 trsMachineObj.trs_beam_cnt = trsObj["trs_beam_cnt"] if trsObj["trs_beam_cnt"] != "" else None
                 trsMachineObj.trs_bar_cnt = trsObj["trs_bar_cnt"] if trsObj["trs_bar_cnt"] != "" else None
+                trsMachineObj.trs_rpm_main = trsObj["trs_rpm_main"] if trsObj["trs_rpm_main"] != "" else None
                 trsMachineObj.trs_eac_enable = trsObj["trs_eac_enable"] if trsObj["trs_eac_enable"] != "" else None
                 trsMachineObj.trs_tempo = trsObj["trs_tempo"] if trsObj["trs_tempo"] != "" else None
                 trsMachineObj.trs_lowmotor_enable = trsObj["trs_lowmotor_enable"] if trsObj[
                                                                                          "trs_lowmotor_enable"] != "" else None
                 trsMachineObj.trs_gauge = trsObj["trs_gauge"] if trsObj["trs_gauge"] != "" else None
-                trsMachineObj.trs_ip = trsObj["trs_ip"] if trsObj["trs_ip"] != "" else None
+                trsMachineObj.trs_ip = trsObj["trs_ipPort"] if trsObj["trs_ipPort"] != "" else None
 
                 trsMachineObj.save()
 
-        print("")
 
-        jsonData = requests.get("http://tnswebserver.iptime.org:1978/values/tws").json()
+        jsonData = requests.get("http://tnswebserver.iptime.org:1978/api/tws").json()
 
         for tswObj in jsonData["tws"]:
-            print(tswObj["tns_code"])
 
             if Warp_Machine.objects.filter(tns_code=tswObj["tns_code"]).count() == 0:
                 trsMachineObj = Warp_Machine()
@@ -120,7 +117,7 @@ def showMachine(request):
                 trsMachineObj.tws_name = tswObj["tws_name"] if tswObj["tws_name"] != "" else None
                 trsMachineObj.tws_installation_time = tswObj["tws_installation_time"] if tswObj[
                                                                                              "tws_installation_time"] != "" else None
-                trsMachineObj.tws_ip = tswObj["tws_ip"] if tswObj["tws_ip"] != "" else None
+                trsMachineObj.tws_ip = tswObj["tws_ip_port"] if tswObj["tws_ip_port"] != "" else None
 
                 trsMachineObj.save()
 
@@ -128,13 +125,15 @@ def showMachine(request):
         knitMachineList = Knit_Machine.objects.all()
         orderList = Order.objects.all()
 
-        variables = {'title': 'Machine', 'company': company, 'warpMachineList': warpMachineList, 'knitMachineList': knitMachineList,'orderList':orderList}
+        variables = {'title': 'Machine', 'company': company, 'warpMachineList': warpMachineList, 'knitMachineList': knitMachineList,
+                     'orderList':orderList, 'userlang':request.user}
     else:
         warpMachineList = YW_Warp_Machine.objects.all()
         knitMachineList = YW_Knit_Machine.objects.all()
         orderList = Order.objects.all()
 
-        variables = {'title': 'Machine', 'company': company, 'warpMachineList': warpMachineList, 'knitMachineList': knitMachineList,'orderList':orderList}
+        variables = {'title': 'Machine', 'company': company, 'warpMachineList': warpMachineList, 'knitMachineList': knitMachineList,'orderList':orderList,
+                     'userlang':request.user}
 
     return render(request, 'machine.html', variables)
 
@@ -144,9 +143,6 @@ def setWarpMachine(request):
     if model and code != '':
         company = Company.objects.get(id=1)
 
-        print('model', model)
-        print('code', code)
-
         warpMachinObj = YW_Warp_Machine(name=model, code=code, company=company)
         warpMachinObj.save()
 
@@ -155,6 +151,7 @@ def setWarpMachine(request):
         msg = "정경기의 정보를 입력해주세요"
         return render(request, 'msg/errorPage.html', {'msg':msg})
 
+#기계사용 안할시
 def setKnitMachine(request):
     model = request.POST['knit_model']
     code = request.POST['knit_code']
@@ -185,12 +182,11 @@ def setKnitMachine(request):
         return render(request, 'msg/errorPage.html', {'msg':msg})
 
 def setMachine(request):
-    jsonData = requests.get("http://tnswebserver.iptime.org:1978/values/trs").json()
+    jsonData = requests.get("http://tnswebserver.iptime.org:1978/api/trs").json()
 
     for trsObj in jsonData["trs"]:
-        print(trsObj["tns_code"])
-
         if Knit_Machine.objects.filter(tns_code=trsObj["tns_code"]).count() == 0:
+
             trsMachineObj = Knit_Machine()
             trsMachineObj.tns_code = trsObj["tns_code"] if trsObj["tns_code"] != "" else None
             trsMachineObj.user_id = trsObj["user_id"] if trsObj["user_id"] != "" else None
@@ -199,21 +195,20 @@ def setMachine(request):
             trsMachineObj.trs_model_name = trsObj["trs_model_name"] if trsObj["trs_model_name"] != "" else None
             trsMachineObj.trs_beam_cnt = trsObj["trs_beam_cnt"] if trsObj["trs_beam_cnt"] != "" else None
             trsMachineObj.trs_bar_cnt = trsObj["trs_bar_cnt"] if trsObj["trs_bar_cnt"] != "" else None
+            trsMachineObj.trs_rpm_main = trsObj["trs_rpm_main"] if trsObj["trs_rpm_main"] != "" else None
             trsMachineObj.trs_eac_enable = trsObj["trs_eac_enable"] if trsObj["trs_eac_enable"] != "" else None
             trsMachineObj.trs_tempo = trsObj["trs_tempo"] if trsObj["trs_tempo"] != "" else None
             trsMachineObj.trs_lowmotor_enable = trsObj["trs_lowmotor_enable"] if trsObj["trs_lowmotor_enable"] != "" else None
             trsMachineObj.trs_gauge = trsObj["trs_gauge"] if trsObj["trs_gauge"] != "" else None
-            trsMachineObj.trs_ip = trsObj["trs_ip"] if trsObj["trs_ip"] != "" else None
+            trsMachineObj.trs_ip = trsObj["trs_ipPort"] if trsObj["trs_ipPort"] != "" else None
 
             trsMachineObj.save()
 
-    print("")
 
-    jsonData = requests.get("http://tnswebserver.iptime.org:1978/values/tws").json()
+    jsonData = requests.get("http://tnswebserver.iptime.org:1978/api/tws").json()
 
     for tswObj in jsonData["tws"]:
         print(tswObj["tns_code"])
-
         if Warp_Machine.objects.filter(tns_code=tswObj["tns_code"]).count() == 0:
             trsMachineObj = Warp_Machine()
             trsMachineObj.tns_code = tswObj["tns_code"] if tswObj["tns_code"] != "" else None
@@ -221,7 +216,7 @@ def setMachine(request):
             trsMachineObj.company_code = tswObj["company_code"] if tswObj["company_code"] != "" else None
             trsMachineObj.tws_name = tswObj["tws_name"] if tswObj["tws_name"] != "" else None
             trsMachineObj.tws_installation_time = tswObj["tws_installation_time"] if tswObj["tws_installation_time"] != "" else None
-            trsMachineObj.tws_ip = tswObj["tws_ip"] if tswObj["tws_ip"] != "" else None
+            trsMachineObj.tws_ip = tswObj["tws_ip_port"] if tswObj["tws_ip_port"] != "" else None
 
             trsMachineObj.save()
 
@@ -268,3 +263,22 @@ def deleteKnitMachine(request):
         knitMachineObj.delete()
 
     return redirect('/machine')
+
+
+class Knit_machine_api(viewsets.ModelViewSet):
+
+    queryset = Knit_Machine.objects.all()
+    serializer_class = Knit_machine_Serializer
+
+class Warp_machine_api(viewsets.ModelViewSet):
+
+    queryset = Warp_Machine.objects.all()
+    serializer_class = Warp_machine_Serializer
+
+
+
+@csrf_exempt
+def get_machine_run(request):
+    jsonData = requests.get("http://tnswebserver.iptime.org:1978/api/tws").json()
+
+    return HttpResponse(json.dumps('{success: true}'), content_type='application/json')

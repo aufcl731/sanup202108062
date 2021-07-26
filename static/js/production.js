@@ -1,5 +1,5 @@
-function warpSheet(){
-    window.open('/order/warpWorkSheet', 'WorkSheet', 'width=900, height=800')
+function warpSheet(id){
+    window.open('/order/warpWorkSheet/'+id, 'WorkSheet', 'width=900, height=800')
 }
 
 function knitSheet(id){
@@ -9,7 +9,6 @@ function knitSheet(id){
 function showQrCode(id) {
     window.open('/order/showQr/'+id, 'showQr', 'width=200, height=200')
 }
-
 /*
 IE 접속 막기
 

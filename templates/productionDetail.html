@@ -573,7 +573,7 @@ function addDesignData(type) {
             if('{{kSchedule}}' == 'True' && '{{wSchedule}}' == 'True'){
                 setInterval(function(){
                     $.ajax({
-                        url:'http://tnswebserver.iptime.org:1978/values/trs',
+                        url:'http://tnswebserver.iptime.org:1978/api/trs',
                         type: 'GET',
                         cache:false,
                         data:{},

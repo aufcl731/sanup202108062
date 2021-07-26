@@ -1,5 +1,39 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% block staticfile %}
+    <script type="text/javascript">
+        lang_code = {{ userlang.lang_code }};
+        const lang = {
+            ko:{
+                warperchart:"정경표", yarnname:"원사명", yarnmaker:"원사메이커", boncount:"boncount", beamcount:"빔수",
+                creelspeed:"크릴속도", warperspeed:"정경속도", tention:"텐션", drift:"드리프트", beamno:"빔 No.",
+                warpermeter:"정경 meter", turncount:"회전수", warpertime:"정경시간", beamround:"빔둘레", fault:"결점",
+                manager:"정경자"
+
+            },
+            en:{
+                warperchart:"Warper chart", yarnname:"Yarn name", yarnmaker:"Yarn maker", boncount:"Bon count", beamcount:"Beam count",
+                creelspeed:"Creel speed", warperspeed:"Warper speed", tention:"Tention", drift:"Drift", beamno:"Beam No.",
+                warpermeter:"Warper meter", turncount:"Turn count", warpertime:"Warper time", beamround:"Beam round", fault:"fault",
+                manager:"Manager"
+            }
+        };
+        // 언어별 렌더링
+        function render(locale) {
+            const $lang = document.querySelectorAll("[data-lang]");
+            $lang.forEach(el => {
+                const code = el.dataset.lang;
+                el.textContent = lang[locale][code]
+            })
+        };
+        if(lang_code==0){
+            render("ko");
+        };
+        if(lang_code==1){
+            render("en");
+        };
+    </script>
+{% endblock staticfile %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -49,7 +83,7 @@
 <body>
 <div id="warpSheet">
     <div id="title">
-        <h2>정경표</h2>
+        <h2 data-lang="warperchart">[warperchart]</h2>
         <span id="printIcon" onclick="window.print()"><img src="{% static 'image/print2.png' %}" width="30px"></span>
     </div>
     <table id="topTable">
@@ -62,19 +96,19 @@
         <tr>
             <th colspan="2"></th>
             <th>SET No.</th>
-            <td></td>
+            <td contenteditable='true'>{{ top.setno }}</td>
         </tr>
         <tr>
             <th>원사명</th>
-            <td></td>
+            <td contenteditable='true'>{{ top.yarn_name }}</td>
             <th>LOT.No.</th>
-            <td></td>
+            <td contenteditable='true'>{{ top.lotno }}</td>
         </tr>
         <tr>
             <th>원사메이커</th>
-            <td></td>
+            <td contenteditable='true'>none data</td>
             <th>원사규격</th>
-            <td></td>
+            <td contenteditable='true'>none data</td>
         </tr>
     </table>
 
@@ -89,22 +123,21 @@
         </colgroup>
         <tr>
             <th>본수</th>
-            <td></td>
+            <td contenteditable='true'>{{ top.bon_number }}</td>
             <th>크릴속도</th>
-            <td></td>
+            <td contenteditable='true'>{{ top.creel_speed }}</td>
             <th>드리프트</th>
-            <td></td>
+            <td contenteditable='true'>{{ top.drift }}</td>
         </tr>
         <tr>
             <th>빔수</th>
-            <td></td>
+            <td contenteditable='true'>{{ top.bim_number }}</td>
             <th>정경속도</th>
-            <td></td>
+            <td contenteditable='true'>{{ top.warper_speed }}</td>
             <th>텐션</th>
-            <td></td>
+            <td contenteditable='true'>{{ top.tention }}</td>
         </tr>
     </table>
-
     <table id="botTable">
         <colgroup>
             <col width="10%">
@@ -125,96 +158,39 @@
             <th>결점</th>
             <th>정경자</th>
         </tr>
+        {% for bottable in bot %}
+            <tr>
+                <td contenteditable='true'>{{ bottable.beam_no }}</td>
+                <td contenteditable='true'>{{ bottable.meter }}</td>
+                <td contenteditable='true'>{{ bottable.turn_count }}</td>
+                <td contenteditable='true'>{{ bottable.warp_time1 }}</td>
+                <td contenteditable='true'>{{ bottable.warp_time2 }}</td>
+                <td contenteditable='true'>{{ bottable.beam_circum }}</td>
+                <td contenteditable='true'>none data</td>
+                <td contenteditable='true'>{{ bottable.warp_manage }}</td>
+            </tr>
+        {% endfor %}
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+
 </table>
 </div>
 </body>

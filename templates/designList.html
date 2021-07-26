@@ -4,6 +4,37 @@
 {% block staticfile %}
 <link rel="stylesheet" href="{% static 'css/design.css' %}">
 <script type="text/javascript">
+lang_code = {{ userlang.lang_code }};
+    const lang = {
+        ko:{
+            warpplan:"경 편 설 계 도", yarnnumber:"사번", yarnmaker:"원사메이커", yarntype:"사종", color:"색상", uniquecode:"고유코드",
+            ratio:"비율(%)", transmission:"송출(mm/rack)", boncount:"본수", beamcount:"빔수", totalboncount:"총 본수", fabric:"원단",
+            waledensity:"웨일밀도", coursedensity:"코스밀도", width:"폭", weightwidth:"중량/폭", arrangement:"배열", remark:"비고",
+            weavechart:"조직도", magnification:"배율 : ", processingpaper:"가공지", greige:"생지"
+
+        },
+        en:{
+            warpplan:"Warp plan chart", yarnnumber:"Yarn number", yarnmaker:"Yarn maker", yarntype:"Yarn type", color:"Color",
+            uniquecode:"unique code", ratio:"ratio(%)", transmission:"transmission(mm/rack)", boncount:"bon count", beamcount:"beam count",
+            totalboncount:"total bon count", fabric:"Fabric", waledensity:"Wake density", coursedensity:"Course density", width:"Width",
+            weightwidth:"Weight/Width", arrangement:"Arrangement", remark:"Remark", weavechart:"Weave chart", magnification:"Magnification : ",
+            processingpaper:"processing paper", greige:"Greige"
+        }
+    };
+    // 언어별 렌더링
+    function render(locale) {
+        const $lang = document.querySelectorAll("[data-lang]");
+        $lang.forEach(el => {
+            const code = el.dataset.lang;
+            el.textContent = lang[locale][code]
+        })
+    };
+    if(lang_code==0){
+        render("ko");
+    };
+    if(lang_code==1){
+        render("en");
+    };
     var os = null;
 
     $(document).ready(function () {
@@ -52,7 +83,7 @@
                             </thead>
                             {% for designObj in designList %}
                                 <tr onclick="setDesignData({{designObj.CAD_Design_Data_id}})" id="designData{{designObj.CAD_Design_Data_id}}" class="designDataTr">
-                                    <td>{{designObj.CAD_Design_Data_id}}</td>
+                                    <td>{{ forloop.counter0|add:1 }}</td>
                                     <td>{{designObj.CAD_Design_Data_name}}</td>
                                     <td>{{designObj.CAD_Design_Data_create_date|date:"Y-m-d"}}</td>
                                 </tr>
@@ -63,7 +94,7 @@
                 <div id="showDesingData">
                     <div id="designData">
                         <div id="orderWrap">
-                            <h2>경 편 설 계 도</h2>
+                            <h2 data-lang="warpplan">[warpplan]</h2>
                             <div id="designName">Name : {{ object.CAD_Design_Data_name }}</div>
                             <div id="topSecond">
                                 <div id="designCode">CODE : {{ object.CAD_Design_Data_code }}</div>
@@ -88,16 +119,16 @@
                                 <thead>
                                     <tr>
                                         <th>BAR</th>
-                                        <th>사번</th>
-                                        <th>원사메이커</th>
-                                        <th>사종</th>
-                                        <th>색상</th>
-                                        <th>고유코드</th>
-                                        <th>비율(%)</th>
-                                        <th>송출(mm/Rank)</th>
-                                        <th>본수</th>
-                                        <th>빔수</th>
-                                        <th>총본수</th>
+                                        <th data-lang="yarnnumber">[yarnnumber]</th>
+                                        <th data-lang="yarnmaker">[yarnmaker]</th>
+                                        <th data-lang="yarntype">[yarntype]</th>
+                                        <th data-lang="color">[color]</th>
+                                        <th data-lang="uniquecode">[uniquecode]</th>
+                                        <th data-lang="ratio">[ratio]</th>
+                                        <th data-lang="transmission">[transmission]</th>
+                                        <th data-lang="boncount">[boncount]</th>
+                                        <th data-lang="beamcount">[beamcount]</th>
+                                        <th data-lang="totalboncount">[totalboncount]</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -131,17 +162,17 @@
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th>원단</th>
-                                        <th>웨일밀도</th>
-                                        <th>코스밀도</th>
-                                        <th>폭</th>
-                                        <th>중량/폭</th>
+                                        <th data-lang="fabric">[fabric]</th>
+                                        <th data-lang="waledensity">[waledensity]</th>
+                                        <th data-lang="coursedensity">[coursedensity]</th>
+                                        <th data-lang="width">[width]</th>
+                                        <th data-lang="weightwidth">[weightwidth]</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for fabric in object.fsty_cad_production.fsty_cad_fabric_set.all %}
                                     <tr>
-                                        <td>{% if fabric.CAD_Fabric_type == 'R' %}생지{% else %}가공지{% endif %}</td>
+                                        {% if fabric.CAD_Fabric_type == 'R' %}<td data-lang="greige">[greige]</td>{% else %}<td data-lang="processingpaper">[processingpaper]</td>{% endif %}
                                         <td>{{ fabric.CAD_Fabric_wpi }} w/inch</td>
                                         <td>{{ fabric.CAD_Fabric_cpi }} c/cm</td>
                                         <td>{{ fabric.CAD_Fabric_width }} inch</td>
@@ -217,11 +248,11 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>배&nbsp&nbsp&nbsp&nbsp열</td>
+                                            <td data-lang="arrangement">[arrangement]</td>
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td>비&nbsp&nbsp&nbsp&nbsp고</td>
+                                            <td data-lang="remark">[remark]</td>
                                             <td></td>
                                         </tr>
                                     </tbody>
@@ -233,8 +264,8 @@
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th>조직도</th>
-                                            <th>배율</th>
+                                            <th data-lang="weavechart">[weabechart]</th>
+                                            <th data-lang="magnification">[Magnification]</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -281,7 +312,7 @@
                     </div>
                     <div id="designDataDelete">
                         <hr>
-                        <span id="deleteButton">삭제</span>
+                        <span id="deleteButton" data-lang="delete">[delete]</span>
                     </div>
                 </div>
             </div>

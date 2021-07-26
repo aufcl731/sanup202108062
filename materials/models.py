@@ -14,11 +14,7 @@ class Yarn(models.Model):
     material = models.CharField(max_length=10, null=True) #재료
     kind = models.CharField(max_length=25, null=True) #종류
     color = models.CharField(max_length=25, null=True) #색
-<<<<<<< HEAD
-    weght = models.IntegerField(default=0)#무게
-=======
     weight = models.IntegerField(default=0)#무게
->>>>>>> master
     qty = models.IntegerField(default=0) #수
     Receivingdate = models.CharField(default=datetime.now().strftime('%Y-%m-%d %H:%M'), max_length=30)#입고날짜
 
@@ -38,8 +34,11 @@ class Beam(models.Model):
 
 
 class Raw(models.Model):
+    item_name = models.CharField(max_length=300, default=None, null=False)
     designData_id = models.ForeignKey(FSTY_CAD_Design_Data, on_delete=models.CASCADE)
     qty = models.IntegerField(default=0)
+    input_date = models.CharField(max_length=300, default=None, null=False)
+    request_com = models.CharField(max_length=300, default=None, null=False)
 
     class Meta:
         db_table = 'Fabric_Raw'
@@ -47,9 +46,9 @@ class Raw(models.Model):
 class Roll(models.Model):
     rollname = models.CharField(max_length=25, null=True)
     rollfabricname = models.CharField(max_length=30, null=True)
-    rollfabricdate = models.DateField(null=True, default=None)
-    rolloutdate = models.DateField(null=True, default=None)
-    receivingdate =models.DateField(default=datetime.now())
+    rollfabricdate = models.DateField(null=True, default=None, blank=True)
+    rolloutdate = models.DateField(null=True, default=None, blank=True)
+    receivingdate = models.DateTimeField(default=datetime.now().strftime('%Y-%m-%d %H:%M'), blank=True, null=True)
     rollcount = models.IntegerField(null=False)
     rollfabricerror = models.IntegerField(null=False)
     rollfabrictrue = models.IntegerField(null=False)

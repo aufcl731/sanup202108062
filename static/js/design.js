@@ -78,7 +78,6 @@ function setDesignData(id) {
     $('.selected').removeClass('selected');
     $('#designData' + id).addClass('selected');
     $('.new').remove();
-
     $.ajax({
         url: '/design_data/designdata',
         type: 'POST',
@@ -161,9 +160,9 @@ function setDesignData(id) {
 
                 var td = document.createElement('td');
                 if(fabric.CAD_Fabric_type == 'R')
-                    td.innerHTML = '생지';
+                    td.innerHTML = 'greige';
                 else
-                    td.innerHTML = '가공지';
+                    td.innerHTML = '[processingpaper]';
                 tr.append(td);
 
                 td = document.createElement('td');

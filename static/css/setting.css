@@ -5,7 +5,12 @@
 }
 
 
-#settingContentWrap input[type='text'], #settingContentWrap input[type='password'], #settingContentWrap input[type='email'] {
+#settingWrap input[type='text'], #settingWrap input[type='password'], #settingWrap input[type='email'] {
+    height:12px;
+    width:200px;
+    padding:5px;
+}
+.companyadd input[type='text']{
     height:12px;
     width:200px;
     padding:5px;
@@ -24,8 +29,8 @@
 
 .line {
    /* margin:30px 0 30px 130px; */
-    width:220px;
-    margin:25px auto;
+    width:400px;
+    margin:15px auto;
 }
 
 .line p {
@@ -38,6 +43,9 @@
 
 
 /* 테마탭 */
+#themeTap{
+    margin-top: 10px;
+}
 #themeTap > div {
     float:left;
 }
@@ -61,11 +69,38 @@ h3#settingHeadLine {
 
 /* 부서등록 */
 
+.accountArea1{
+    position: relative;
+    padding-left: 10px;
+    width:229px;
+    height:300px;
+    float: left;
+    margin-top: 25px;
+}
+
+.accountTitle1{
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+}
+.accountArea2{
+    width:50%;
+    height:300px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 25px;
+}
+.accountArea2>p{
+    margin-top:5px;
+}
+
 #departmentList {
+    margin-top:15px;
     width:214px;
     text-align:center;
-    height:90px;
+    height:250px;
 }
+
 
 .settingPropic > img{
     display:inline-block;
@@ -794,4 +829,166 @@ tbody{
     cursor: pointer;
     border-radius: 5px;
     text-align: center;
+}
+/* 유저 디테일*/
+
+#userdetail{
+    display:none;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-200px;
+    margin-left:-240px;
+    width:600px;
+    height: auto;
+    background-color:#f0f0f0;
+    z-index:100000;
+    padding-bottom: 15px;
+}
+.detailusertop{
+    margin-top: -15px;
+    height: 50px;
+    text-align: left;
+    background: #3e4358;
+
+}
+.detailusertop h3{
+    padding-top: 9px;
+    padding-left: 10px;
+    font-size: 22px;
+    color: #fff;
+}
+#userdetail .line{
+    margin-bottom: 10px;
+}
+.User_Title{
+    width: 120px;
+    text-align: center;
+    padding: 8px;
+    font-size: 12px;
+    background-color: rgb(62, 67, 88);
+    font-weight: bold;
+    color: #fff;
+    margin:0 auto;
+}
+#userdetail input{
+    width: 150px;
+    text-align: center;
+    padding: 3px;
+    height: 20px;
+    margin-top: 3px;
+}
+#userdetail .userdlevelsel{
+    text-align: center;
+    margin-top: 3px;
+    cursor: pointer;
+    background: #fff;
+    color: #202020;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    transition: 150ms linear all;
+    width: 214px;
+    height: 26px;
+    padding: 3px;
+    font-size: 12px;
+}
+#userdetail .line div{
+    color: #fff;
+    font-weight: bold;
+    width: 100px;
+    height: 20px;
+    text-align: center;
+    padding-top: 5px;
+    background-color: rgb(62, 67, 88);
+}
+.User_wrapper1{
+    width: 50%;
+    height: 80%;
+    float:left;
+    padding-top: 55px;
+    text-align: center;
+    font-weight: bold;
+}
+.User_wrapper1 div img{
+    margin: 10px;
+}
+.User_wrapper2{
+    width: 50%;
+    height: 80%;
+    margin-top:-10px;
+    margin-bottom: 10px;
+    float:left;
+}
+.userdetailmodalcon{
+    margin-right: 10px;
+}
+.userdetailmodalcon span{
+    float: right;
+    color: #fff;
+    margin-right: 10px;
+    width: 61px;
+    text-align: center;
+    padding: 8px;
+    font-size: 12px;
+    background-color: #3e437e;
+    font-weight: bold;
+    cursor: pointer;
+}
+#userdid h3{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* 거래처 */
+
+.accountline1{
+    margin-top: 10px;
+    float: left;
+    width: 50%;
+}
+.accountline1 input{
+    width: 100px;
+    height: 18px;
+}
+.accountline2{
+    margin-top: 10px;
+    float: left;
+    width: 50%;
+}
+
+.accountline2 input{
+    width: 100px;
+    height: 18px;
+}
+
+#accountnum{
+    width:215px;
+    height: 18px;
+}
+#accountaddress{
+    width:215px;
+    height: 18px;
+}
+.accountArea1 input[type=submit], .accountArea1 button{
+    margin-top: 20px;
+    width:70px;
+    height:30px;
+
+}
+.accountline3{
+    margin-top: 105px;
+}
+.accountline4{
+    margin-top: 10px;
+}
+.edit_btn{
+    position: absolute;
+    bottom:38px;
+    left: 85px;
+}
+.del_btn{
+    position: absolute;
+    left:160px;
+    bottom: 38px;
 }

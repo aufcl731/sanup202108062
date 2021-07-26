@@ -8,8 +8,11 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
+
+from machine.models import Warp_Machine, Knit_Machine
 from order.models import *
-from materials.models import Yarn, Beam, Roll
+from materials.models import *
+from schedule.models import Warp_Process, Knit_Process
 
 
 @login_required(login_url='/')
@@ -21,18 +24,15 @@ def showMaterial(request):
         yarnObj.lab = RGBtoLAB(yarnObj.color)
     beamList = Beam.objects.all()
     rollList = Roll.objects.all()
+    raw = Raw.objects.all()
 
-    return render(request, 'material.html', {'title': 'Materials', 'yarnList': yarnList, 'beamList': beamList, 'orderList':orderList, 'rollList':rollList})
+    return render(request, 'material.html', {'title': 'Materials', 'yarnList': yarnList, 'beamList': beamList, 'orderList':orderList, 'rollList':rollList, 'userlang':request.user, 'raw':raw})
 
 def RGBtoLAB(hexCode):
 
     R = int(hexCode[1:3], 16)
     G = int(hexCode[3:5], 16)
     B = int(hexCode[5:7], 16)
-
-    print('R ', R)
-    print('G ', G)
-    print('B ', B)
 
     var_R = float(R) / 255
     var_G = float(G) / 255
@@ -105,7 +105,6 @@ def searchYarn(request):
     yarnDictList = []
 
     yarnList = Yarn.objects.filter(name__contains=searchName).values()
-    print(yarnList)
     for yarnObj in yarnList:
         yarnObj['lab'] = RGBtoLAB(yarnObj['color'])
         yarnDictList.append(yarnObj)
@@ -120,7 +119,6 @@ def searchBeam(request):
 
     beamList = Beam.objects.filter(name__contains=searchName).values()
 
-    print(beamList)
     for beamObj in beamList:
 
         if beamObj['yarn_id'] != None:
@@ -199,6 +197,18 @@ def beamDelete(request):
 
         return HttpResponse(json.dumps({'success': False}), content_type='application/json')
 
+@csrf_exempt
+def greigeDelete(request):
+    gpk = request.POST['gpk']
+    try:
+        delGreige = Raw.objects.get(id=gpk)
+        delGreige.delete()
+
+        return HttpResponse(json.dumps({'success':True}), content_type='application/json')
+
+    except:
+
+        return HttpResponse(json.dumps({'success': False}), content_type='application/json')
 
 
 
@@ -212,3 +222,27 @@ def yarnDelete(request):
         return HttpResponse(json.dumps({'success':True}), content_type='application/json')
     except:
         return HttpResponse(json.dumps({'success': False}), content_type='application/json')
+
+
+@csrf_exempt
+def createRaw(request):
+    if request.method == 'POST':
+        print(request)
+        order_id = request.POST['order_id']
+        machine_id = request.POST['machine_id']
+        print(order_id)
+        print(machine_id)
+        context = {'success':True}
+        return HttpResponse(json.dumps(context), content_type='application/json')
+        #today = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+        #knit_mc = Knit_Machine.objects.get(tns_code=machine_id).id
+        #order_process = Knit_Process.objects.get(knit_machine_id=knit_mc)
+        #order_process.real_end_time = today
+        #order = Order_DesignData.objects.get(code=order_id)
+        #order_set = Order.objects.get(code=order_id)
+        #order_set.cheack = True
+        #raw_create = Raw.objects.create(qty=order.design_qty, designData_id=order.design_data_id, item_name=order.design_data_id.CAD_Design_Data_name, input_date=today)
+        #order_set.save()
+        #raw_create.save()
+        #order_process.save()
+        # api 데이터 넘기는 소

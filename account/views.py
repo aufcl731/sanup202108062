@@ -1,6 +1,8 @@
-import datetime
-import json
+#-*- coding:utf-8 -*-
 
+import json
+import datetime
+import time
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import requests
@@ -16,9 +18,6 @@ from account.models import User, Company
 from machine.models import Warp_Machine, Knit_Machine
 from order.models import Order, Order_DesignData
 
-def aaaa(request):
-    return render(request, 'schedule20191101.html')
-
 #tns test용
 @csrf_exempt
 def pjs1234(request):
@@ -32,7 +31,6 @@ def pjs1234(request):
 
     sendUser = {'username':username, 'name':name, 'email':email, 'phone':phone, 'create_date':create_date, 'theme_code':theme_code, 'lang_code':lang_code}
 
-    print(sendUser)
     return HttpResponse(json.dumps(sendUser), content_type='application/json')
 
 def signUo(request):
@@ -42,14 +40,17 @@ def signUo(request):
             if form.is_valid():
                 user = form.save(commit=False)
                 company = Company.objects.get(id=1)
-                User.objects.create_user(username=user.username, email=user.email, phone=user.phone, password=user.password, name=user.name, is_active=False, company_code=company)
+                level = 1
+                User.objects.create_user(username=user.username, email=user.email, phone=user.phone, password=user.password, level=level , name=user.name, is_active=False, company_code=company)
                 return redirect('/')
         else:
             form = UserForm()
         return render(request, 'signup.html', {'form': form})
     else:
         return redirect('/')
+def userratingset(request, id):
 
+    return render(request, 'order.html')
 def login_site(request):
     if request.user.is_anonymous:
         if request.method == "POST":
@@ -62,7 +63,6 @@ def login_site(request):
             except Exception:
                 msg = '아이디, 비밀번호를 확인해주세요'
                 return render(request, 'msg/errorPage.html', {'msg': msg})
-
 
             if user_active.is_active:
                 user = authenticate(username = username, password = password)
@@ -88,6 +88,8 @@ def dashboard(request):
     pendingOrder = Order.objects.filter(state=0).count()
     progressOrder = Order.objects.filter(state=1).count()
     compOrder = Order.objects.filter(state=2).count()
+    knit_machine = Knit_Machine.objects.all()
+
     #warp_Machine = Warp_Machine.objects.all().count()
     #on_warp_Machine = Warp_Machine.objects.filter(tws_onoff='on').count()
 
@@ -105,14 +107,28 @@ def dashboard(request):
     y = str(user.company_code.y)
 
     weatherList = []
-
     try:
-        knitJsonData = requests.get("http://tnswebserver.iptime.org:1978/values/trs").json()
-        warpJsonData = requests.get("http://tnswebserver.iptime.org:1978/values/tws").json()
-        weatherXml = requests.get('http://www.kma.go.kr/wid/queryDFS.jsp?gridx=' + x +'&gridy=' + y)
+        knitJsonData = requests.get("http://tnswebserver.iptime.org:1978/api/trs").json()
+        warpJsonData = requests.get("http://tnswebserver.iptime.org:1978/api/tws").json()
+        weatherXml = requests.get('http://www.kma.go.kr/wid/queryDFS.jsp?gridx=' + x + '&gridy=' + y)
 
+        totalplaytime = 0
+        ttrsmachineplaytime = 0
+        ttwsmachineplaytime = 0
+        for trsplay in knitJsonData['trs']:
+            if trsplay['date_to_time'] != None:
+                trsmachineplaytime = trsplay['date_to_time']
+                ttrsmachineplaytime = ttrsmachineplaytime + trsmachineplaytime
+        for twsplay in warpJsonData['tws']:
+            if twsplay['date_to_time'] != None:
+                twsmachineplaytime = twsplay['date_to_time']
+                ttwsmachineplaytime = ttwsmachineplaytime + twsmachineplaytime
+
+        totalplaytime = ttrsmachineplaytime + ttwsmachineplaytime
         root = ET.fromstring(weatherXml.text).find('body')
-
+        totaltime = 0
+        trstotaltime = 0
+        twstotaltime = 0
         for weatherObj in root.findall('data'):
             weatherDict = {}
             weatherDict['hour'] = weatherObj.find('hour').text
@@ -129,6 +145,28 @@ def dashboard(request):
         on_knit_machine = 0
         on_warp_machine = 0
 
+        # 경편기 및 정경기 보유기간
+
+        for knittime in knitJsonData['trs']:
+            if knittime['trs_installation_time'] != '':
+                nowtimech = str(datetime.datetime.today().strftime("%y-%m-%d %H:%M:%S"))
+                nowtimecount = datetime.datetime.strptime(nowtimech, "%y-%m-%d %H:%M:%S")
+                stringtime = knittime['trs_installation_time']
+                machinetime = datetime.datetime.strptime(stringtime, "%Y-%m-%d %H:%M:%S")
+                totalminetime = (nowtimecount - machinetime).days * 24
+                trstotaltime = trstotaltime + totalminetime
+
+        for warptime in warpJsonData['tws']:
+            if warptime['tws_installation_time'] != '':
+                twsnowtimech = str(datetime.datetime.today().strftime("%y-%m-%d %H:%M:%S"))
+                twsnowtimecount = datetime.datetime.strptime(twsnowtimech, "%y-%m-%d %H:%M:%S")
+                twsstringtime = warptime['tws_installation_time']
+                twsmachinetime = datetime.datetime.strptime(twsstringtime, "%Y-%m-%d %H:%M:%S")
+                twstotalminetime = (twsnowtimecount - twsmachinetime).days *24
+                twstotaltime = twstotaltime + twstotalminetime
+
+        totaltime = twstotaltime + trstotaltime
+
         # 경편기 On 카운트
         for knitOn in knitJsonData["trs"]:
             if knitOn["trs_onoff"] == "ON":
@@ -142,20 +180,22 @@ def dashboard(request):
         all_machine_count = all_knit_machine + all_warp_machine
         on_machine_count = on_knit_machine + on_warp_machine
 
-    except:
+    except Exception as e:
 
-        print('except')
+        print(e)
         all_machine_count = 0
         on_machine_count = 0
 
-    print(type(weatherList), 'list')
 
     title = 'Dashboard'
 
     now = datetime.datetime.now()
     tomorrow = now + datetime.timedelta(days=1)
 
-    variables = {'title':title, 'totalOrder':totalOrder, 'pendingOrder':pendingOrder, 'progressOrder':progressOrder, 'compOrder':compOrder, 'designOrderList': designOrderList, 'all_machine_count':all_machine_count, 'on_machine_count':on_machine_count, 'weatherList': weatherList, 'ts': ts, 'now': now, 'tomorrow': tomorrow, 'orderList':orderList}
+    variables = {'title':title, 'totalOrder':totalOrder, 'pendingOrder':pendingOrder, 'progressOrder':progressOrder,
+                 'compOrder': compOrder, 'designOrderList': designOrderList,'all_machine_count':all_machine_count,
+                 'on_machine_count':on_machine_count, 'weatherList': weatherList, 'now': now, 'tomorrow': tomorrow,
+                 'orderList': orderList, 'ts': ts, 'totaltime': totaltime , 'totalplaytime': totalplaytime, 'userlang':request.user}
 
     return render(request, 'index.html', variables)
 
@@ -165,5 +205,4 @@ def logout_site(request):
 
 @login_required(login_url='/')
 def server(request):
-
     return render(request, 'server.html', {})

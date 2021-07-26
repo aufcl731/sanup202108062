@@ -1,0 +1,3352 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: FSTY_CAD_Chain_Link; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."FSTY_CAD_Chain_Link" (
+    "CAD_Chain_Link_id" integer NOT NULL,
+    "CAD_Chain_Link_course" character varying(2000) NOT NULL,
+    "CAD_Chain_Link_layer_id" integer
+);
+
+
+ALTER TABLE public."FSTY_CAD_Chain_Link" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq" OWNED BY public."FSTY_CAD_Chain_Link"."CAD_Chain_Link_id";
+
+
+--
+-- Name: FSTY_CAD_Design_Data; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."FSTY_CAD_Design_Data" (
+    "CAD_Design_Data_id" integer NOT NULL,
+    "CAD_Design_Data_name" character varying(100),
+    "CAD_Design_Data_code" character varying(100),
+    "CAD_Design_Data_xml" character varying(100),
+    "CAD_Design_Data_pattern_image" character varying(100),
+    "CAD_Design_Data_simulation_image" character varying(100),
+    "CAD_Design_Data_create_date" timestamp with time zone NOT NULL,
+    "CAD_Design_Data_trc_file" character varying(100),
+    "CAD_Design_Data_magnification" character varying(10)
+);
+
+
+ALTER TABLE public."FSTY_CAD_Design_Data" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Design_Data_CAD_Design_Data_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."FSTY_CAD_Design_Data_CAD_Design_Data_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."FSTY_CAD_Design_Data_CAD_Design_Data_id_seq" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Design_Data_CAD_Design_Data_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."FSTY_CAD_Design_Data_CAD_Design_Data_id_seq" OWNED BY public."FSTY_CAD_Design_Data"."CAD_Design_Data_id";
+
+
+--
+-- Name: FSTY_CAD_Fabric; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."FSTY_CAD_Fabric" (
+    "CAD_Fabric_id" integer NOT NULL,
+    "CAD_Fabric_type" character varying(1),
+    "CAD_Fabric_wpi" character varying(100),
+    "CAD_Fabric_cpi" character varying(100),
+    "CAD_Fabric_width" character varying(100),
+    "CAD_Fabric_weight_per_width" character varying(100),
+    "CAD_Fabric_production_id" integer
+);
+
+
+ALTER TABLE public."FSTY_CAD_Fabric" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Fabric_CAD_Fabric_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."FSTY_CAD_Fabric_CAD_Fabric_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."FSTY_CAD_Fabric_CAD_Fabric_id_seq" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Fabric_CAD_Fabric_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."FSTY_CAD_Fabric_CAD_Fabric_id_seq" OWNED BY public."FSTY_CAD_Fabric"."CAD_Fabric_id";
+
+
+--
+-- Name: FSTY_CAD_Layer; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."FSTY_CAD_Layer" (
+    "CAD_Layer_id" integer NOT NULL,
+    "CAD_Layer_name" character varying(100),
+    "CAD_Layer_ratio" character varying(100),
+    "CAD_Layer_mm_rack" character varying(100),
+    "CAD_Layer_use" character varying(100),
+    "CAD_Layer_beam" character varying(100),
+    "CAD_Layer_total" character varying(100),
+    "CAD_Layer_iodata" character varying(2000),
+    "CAD_Layer_design_data_id" integer
+);
+
+
+ALTER TABLE public."FSTY_CAD_Layer" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Layer_CAD_Layer_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."FSTY_CAD_Layer_CAD_Layer_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."FSTY_CAD_Layer_CAD_Layer_id_seq" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Layer_CAD_Layer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."FSTY_CAD_Layer_CAD_Layer_id_seq" OWNED BY public."FSTY_CAD_Layer"."CAD_Layer_id";
+
+
+--
+-- Name: FSTY_CAD_Production; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."FSTY_CAD_Production" (
+    "CAD_Production_id" integer NOT NULL,
+    "CAD_Production_quota_per_day" character varying(100),
+    "CAD_Production_machine_name" character varying(100),
+    "CAD_Production_note" character varying(100),
+    "CAD_Production_design_data_id" integer
+);
+
+
+ALTER TABLE public."FSTY_CAD_Production" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Production_CAD_Production_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."FSTY_CAD_Production_CAD_Production_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."FSTY_CAD_Production_CAD_Production_id_seq" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Production_CAD_Production_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."FSTY_CAD_Production_CAD_Production_id_seq" OWNED BY public."FSTY_CAD_Production"."CAD_Production_id";
+
+
+--
+-- Name: FSTY_CAD_Yarn; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."FSTY_CAD_Yarn" (
+    "CAD_Yarn_id" integer NOT NULL,
+    "CAD_Yarn_idx" character varying(100),
+    "CAD_Yarn_maker" character varying(100),
+    "CAD_Yarn_spec" character varying(100),
+    "CAD_Yarn_code" character varying(100),
+    "CAD_Yarn_rgb_color" character varying(100),
+    "CAD_Yarn_lab_color" character varying(100),
+    "CAD_Yarn_pantone_color" character varying(100),
+    "CAD_Yarn_layer_id" integer
+);
+
+
+ALTER TABLE public."FSTY_CAD_Yarn" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Yarn_CAD_Yarn_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."FSTY_CAD_Yarn_CAD_Yarn_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."FSTY_CAD_Yarn_CAD_Yarn_id_seq" OWNER TO postgres;
+
+--
+-- Name: FSTY_CAD_Yarn_CAD_Yarn_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."FSTY_CAD_Yarn_CAD_Yarn_id_seq" OWNED BY public."FSTY_CAD_Yarn"."CAD_Yarn_id";
+
+
+--
+-- Name: Fabric_Beam; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Fabric_Beam" (
+    id integer NOT NULL,
+    name character varying(25),
+    yarn_qty integer NOT NULL,
+    size integer,
+    yarn_id integer,
+    "Receivingdate" character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public."Fabric_Beam" OWNER TO postgres;
+
+--
+-- Name: Fabric_Beam_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Fabric_Beam_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fabric_Beam_id_seq" OWNER TO postgres;
+
+--
+-- Name: Fabric_Beam_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Fabric_Beam_id_seq" OWNED BY public."Fabric_Beam".id;
+
+
+--
+-- Name: Fabric_Order; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Fabric_Order" (
+    id integer NOT NULL,
+    company character varying(25),
+    code character varying(25),
+    buyer character varying(10),
+    type integer,
+    state integer,
+    order_date timestamp with time zone,
+    due_date timestamp with time zone,
+    order_round integer,
+    order_inout integer,
+    cheack boolean NOT NULL,
+    manager_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Fabric_Order" OWNER TO postgres;
+
+--
+-- Name: Fabric_Order_DesignData; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Fabric_Order_DesignData" (
+    id integer NOT NULL,
+    code character varying(25),
+    design_qty integer,
+    qr_code character varying(100),
+    design_data_id_id integer NOT NULL,
+    order_id_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Fabric_Order_DesignData" OWNER TO postgres;
+
+--
+-- Name: Fabric_Order_DesignData_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Fabric_Order_DesignData_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fabric_Order_DesignData_id_seq" OWNER TO postgres;
+
+--
+-- Name: Fabric_Order_DesignData_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Fabric_Order_DesignData_id_seq" OWNED BY public."Fabric_Order_DesignData".id;
+
+
+--
+-- Name: Fabric_Order_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Fabric_Order_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fabric_Order_id_seq" OWNER TO postgres;
+
+--
+-- Name: Fabric_Order_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Fabric_Order_id_seq" OWNED BY public."Fabric_Order".id;
+
+
+--
+-- Name: Fabric_Raw; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Fabric_Raw" (
+    id integer NOT NULL,
+    qty integer NOT NULL,
+    "designData_id_id" integer NOT NULL
+);
+
+
+ALTER TABLE public."Fabric_Raw" OWNER TO postgres;
+
+--
+-- Name: Fabric_RawRoll; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Fabric_RawRoll" (
+    id integer NOT NULL,
+    raw_yard integer NOT NULL,
+    raw_weight integer NOT NULL,
+    raw_id_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Fabric_RawRoll" OWNER TO postgres;
+
+--
+-- Name: Fabric_RawRoll_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Fabric_RawRoll_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fabric_RawRoll_id_seq" OWNER TO postgres;
+
+--
+-- Name: Fabric_RawRoll_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Fabric_RawRoll_id_seq" OWNED BY public."Fabric_RawRoll".id;
+
+
+--
+-- Name: Fabric_Raw_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Fabric_Raw_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fabric_Raw_id_seq" OWNER TO postgres;
+
+--
+-- Name: Fabric_Raw_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Fabric_Raw_id_seq" OWNED BY public."Fabric_Raw".id;
+
+
+--
+-- Name: Fabric_Roll; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Fabric_Roll" (
+    id integer NOT NULL,
+    rollname character varying(25),
+    rollfabricname character varying(30),
+    rollfabricdate date,
+    rolloutdate date,
+    receivingdate date NOT NULL,
+    rollcount integer NOT NULL,
+    rollfabricerror integer NOT NULL,
+    rollfabrictrue integer NOT NULL,
+    rollfabriclength integer NOT NULL,
+    rollfabricweight integer NOT NULL
+);
+
+
+ALTER TABLE public."Fabric_Roll" OWNER TO postgres;
+
+--
+-- Name: Fabric_Roll_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Fabric_Roll_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fabric_Roll_id_seq" OWNER TO postgres;
+
+--
+-- Name: Fabric_Roll_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Fabric_Roll_id_seq" OWNED BY public."Fabric_Roll".id;
+
+
+--
+-- Name: Fabric_Yarn; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Fabric_Yarn" (
+    id integer NOT NULL,
+    name character varying(25),
+    code character varying(25),
+    type character varying(25),
+    maker character varying(25),
+    count integer,
+    filament integer,
+    contraction integer,
+    material character varying(10),
+    kind character varying(25),
+    color character varying(25),
+    qty integer NOT NULL,
+    "Receivingdate" character varying(30) NOT NULL,
+    weight integer NOT NULL
+);
+
+
+ALTER TABLE public."Fabric_Yarn" OWNER TO postgres;
+
+--
+-- Name: Fabric_Yarn_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Fabric_Yarn_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fabric_Yarn_id_seq" OWNER TO postgres;
+
+--
+-- Name: Fabric_Yarn_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Fabric_Yarn_id_seq" OWNED BY public."Fabric_Yarn".id;
+
+
+--
+-- Name: Knit_Beam; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Knit_Beam" (
+    id integer NOT NULL,
+    knit_external integer,
+    knit_current_external integer,
+    knit_turn_cnt integer,
+    knit_current_turn_cnt integer,
+    knit_yarn_thick integer,
+    beam_id integer NOT NULL,
+    knit_process_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Knit_Beam" OWNER TO postgres;
+
+--
+-- Name: Knit_Beam_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Knit_Beam_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Knit_Beam_id_seq" OWNER TO postgres;
+
+--
+-- Name: Knit_Beam_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Knit_Beam_id_seq" OWNED BY public."Knit_Beam".id;
+
+
+--
+-- Name: Knit_Machine; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Knit_Machine" (
+    id integer NOT NULL,
+    tns_code character varying(50),
+    user_id character varying(50),
+    company_code character varying(50),
+    trs_installation_time timestamp with time zone,
+    trs_model_name character varying(50),
+    trs_beam_cnt integer,
+    trs_bar_cnt integer,
+    trs_eac_enable integer,
+    trs_tempo integer,
+    trs_lowmotor_enable integer,
+    trs_gauge integer,
+    trs_ip character varying(50)
+);
+
+
+ALTER TABLE public."Knit_Machine" OWNER TO postgres;
+
+--
+-- Name: Knit_Machine_Realtime; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Knit_Machine_Realtime" (
+    id integer NOT NULL,
+    trs_operation_number integer,
+    trs_total_run_course integer,
+    trs_state integer,
+    trs_stopmark integer,
+    trs_onetime_prdt integer,
+    trs_set_prdt integer,
+    trs_run_course integer,
+    trs_total_oper_time timestamp with time zone,
+    trs_total_accum_time timestamp with time zone,
+    trs_meter double precision,
+    trs_total_meter integer,
+    trs_accumulate_meter integer,
+    trs_key_angle integer,
+    trs_rpm_main integer,
+    trs_sensor_01 integer,
+    trs_sensor_02 integer,
+    trs_sensor_03 integer,
+    trs_sensor_04 integer,
+    trs_sensor_05 integer,
+    trs_sensor_06 integer,
+    trs_sensor_07 integer,
+    trs_sensor_08 integer,
+    trs_sensor_09 integer,
+    trs_sensor_10 integer,
+    trs_onoff character varying(10),
+    knit_process_id integer
+);
+
+
+ALTER TABLE public."Knit_Machine_Realtime" OWNER TO postgres;
+
+--
+-- Name: Knit_Machine_Realtime_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Knit_Machine_Realtime_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Knit_Machine_Realtime_id_seq" OWNER TO postgres;
+
+--
+-- Name: Knit_Machine_Realtime_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Knit_Machine_Realtime_id_seq" OWNED BY public."Knit_Machine_Realtime".id;
+
+
+--
+-- Name: Knit_Machine_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Knit_Machine_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Knit_Machine_id_seq" OWNER TO postgres;
+
+--
+-- Name: Knit_Machine_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Knit_Machine_id_seq" OWNED BY public."Knit_Machine".id;
+
+
+--
+-- Name: Knit_Process; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Knit_Process" (
+    id integer NOT NULL,
+    start_time timestamp with time zone,
+    end_time timestamp with time zone,
+    real_start_time timestamp with time zone,
+    real_end_time timestamp with time zone,
+    knit_machine_id_id integer,
+    order_designdata_id integer NOT NULL,
+    yw_knit_machine_id_id integer
+);
+
+
+ALTER TABLE public."Knit_Process" OWNER TO postgres;
+
+--
+-- Name: Knit_Process_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Knit_Process_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Knit_Process_id_seq" OWNER TO postgres;
+
+--
+-- Name: Knit_Process_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Knit_Process_id_seq" OWNED BY public."Knit_Process".id;
+
+
+--
+-- Name: Warp_Beam; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Warp_Beam" (
+    id integer NOT NULL,
+    external integer,
+    current_external integer,
+    turn_cnt integer,
+    current_turn_cnt integer,
+    yarn_thick integer,
+    yarn_count integer,
+    yarn_meter integer,
+    yarn_current_meter integer,
+    beam_id integer NOT NULL,
+    warp_process_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Warp_Beam" OWNER TO postgres;
+
+--
+-- Name: Warp_Beam_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Warp_Beam_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Warp_Beam_id_seq" OWNER TO postgres;
+
+--
+-- Name: Warp_Beam_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Warp_Beam_id_seq" OWNED BY public."Warp_Beam".id;
+
+
+--
+-- Name: Warp_Machine; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Warp_Machine" (
+    id integer NOT NULL,
+    tns_code character varying(50),
+    user_id character varying(50),
+    company_code character varying(50),
+    tws_name character varying(50),
+    tws_installation_time timestamp with time zone,
+    tws_ip character varying(50)
+);
+
+
+ALTER TABLE public."Warp_Machine" OWNER TO postgres;
+
+--
+-- Name: Warp_Machine_Realtime; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Warp_Machine_Realtime" (
+    id integer NOT NULL,
+    tws_start_date timestamp with time zone,
+    tws_start_time timestamp with time zone,
+    tws_meter integer,
+    tws_state integer,
+    tws_hoist_state integer,
+    tws_oiling_state integer,
+    tws_clamp_state integer,
+    tws_w_inverter_state integer,
+    tws_s_inverter_state integer,
+    tws_c_inverter_state integer,
+    tws_current_turncnt integer,
+    tws_runtime timestamp with time zone,
+    tws_current_meter integer,
+    tws_kia integer,
+    tws_warper_speed double precision,
+    tws_warper_outside integer,
+    tws_warper_total_length double precision,
+    tws_creel_total_length integer,
+    tws_creel_speed integer,
+    tws_elongation_rate integer,
+    tws_relax_deviation integer,
+    tws_error timestamp with time zone,
+    tws_onoff character varying(10),
+    warp_process_id integer
+);
+
+
+ALTER TABLE public."Warp_Machine_Realtime" OWNER TO postgres;
+
+--
+-- Name: Warp_Machine_Realtime_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Warp_Machine_Realtime_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Warp_Machine_Realtime_id_seq" OWNER TO postgres;
+
+--
+-- Name: Warp_Machine_Realtime_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Warp_Machine_Realtime_id_seq" OWNED BY public."Warp_Machine_Realtime".id;
+
+
+--
+-- Name: Warp_Machine_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Warp_Machine_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Warp_Machine_id_seq" OWNER TO postgres;
+
+--
+-- Name: Warp_Machine_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Warp_Machine_id_seq" OWNED BY public."Warp_Machine".id;
+
+
+--
+-- Name: Warp_Process; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public."Warp_Process" (
+    id integer NOT NULL,
+    start_time timestamp with time zone,
+    end_time timestamp with time zone,
+    real_start_time timestamp with time zone,
+    real_end_time timestamp with time zone,
+    order_designdata_id integer NOT NULL,
+    warp_machine_id_id integer,
+    yw_warp_machine_id_id integer
+);
+
+
+ALTER TABLE public."Warp_Process" OWNER TO postgres;
+
+--
+-- Name: Warp_Process_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Warp_Process_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Warp_Process_id_seq" OWNER TO postgres;
+
+--
+-- Name: Warp_Process_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Warp_Process_id_seq" OWNED BY public."Warp_Process".id;
+
+
+--
+-- Name: account_company; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.account_company (
+    id integer NOT NULL,
+    name character varying(25) NOT NULL,
+    code character varying(25),
+    machineyn boolean NOT NULL,
+    x integer,
+    y integer
+);
+
+
+ALTER TABLE public.account_company OWNER TO postgres;
+
+--
+-- Name: account_company_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.account_company_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_company_id_seq OWNER TO postgres;
+
+--
+-- Name: account_company_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.account_company_id_seq OWNED BY public.account_company.id;
+
+
+--
+-- Name: account_department; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.account_department (
+    id integer NOT NULL,
+    name character varying(25) NOT NULL
+);
+
+
+ALTER TABLE public.account_department OWNER TO postgres;
+
+--
+-- Name: account_department_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.account_department_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_department_id_seq OWNER TO postgres;
+
+--
+-- Name: account_department_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.account_department_id_seq OWNED BY public.account_department.id;
+
+
+--
+-- Name: account_user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.account_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    name character varying(20) NOT NULL,
+    level integer,
+    email character varying(254) NOT NULL,
+    phone character varying(20),
+    create_date timestamp with time zone NOT NULL,
+    theme_code integer NOT NULL,
+    lang_code integer NOT NULL,
+    propic character varying(100),
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    company_code_id integer,
+    group_code_id integer
+);
+
+
+ALTER TABLE public.account_user OWNER TO postgres;
+
+--
+-- Name: account_user_groups; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.account_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.account_user_groups OWNER TO postgres;
+
+--
+-- Name: account_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.account_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_user_groups_id_seq OWNER TO postgres;
+
+--
+-- Name: account_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.account_user_groups_id_seq OWNED BY public.account_user_groups.id;
+
+
+--
+-- Name: account_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.account_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_user_id_seq OWNER TO postgres;
+
+--
+-- Name: account_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.account_user_id_seq OWNED BY public.account_user.id;
+
+
+--
+-- Name: account_user_user_permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.account_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.account_user_user_permissions OWNER TO postgres;
+
+--
+-- Name: account_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.account_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_user_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: account_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.account_user_user_permissions_id_seq OWNED BY public.account_user_user_permissions.id;
+
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- Name: yw_knit_machine; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.yw_knit_machine (
+    id integer NOT NULL,
+    name character varying(50),
+    code character varying(50),
+    create_data timestamp with time zone NOT NULL,
+    rpm integer,
+    gauge integer,
+    bar_cnt integer,
+    company_id integer NOT NULL
+);
+
+
+ALTER TABLE public.yw_knit_machine OWNER TO postgres;
+
+--
+-- Name: yw_knit_machine_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.yw_knit_machine_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.yw_knit_machine_id_seq OWNER TO postgres;
+
+--
+-- Name: yw_knit_machine_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.yw_knit_machine_id_seq OWNED BY public.yw_knit_machine.id;
+
+
+--
+-- Name: yw_warp_machine; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.yw_warp_machine (
+    id integer NOT NULL,
+    name character varying(50),
+    code character varying(50),
+    create_date timestamp with time zone NOT NULL,
+    company_id integer NOT NULL
+);
+
+
+ALTER TABLE public.yw_warp_machine OWNER TO postgres;
+
+--
+-- Name: yw_warp_machine_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.yw_warp_machine_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.yw_warp_machine_id_seq OWNER TO postgres;
+
+--
+-- Name: yw_warp_machine_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.yw_warp_machine_id_seq OWNED BY public.yw_warp_machine.id;
+
+
+--
+-- Name: CAD_Chain_Link_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Chain_Link" ALTER COLUMN "CAD_Chain_Link_id" SET DEFAULT nextval('public."FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq"'::regclass);
+
+
+--
+-- Name: CAD_Design_Data_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Design_Data" ALTER COLUMN "CAD_Design_Data_id" SET DEFAULT nextval('public."FSTY_CAD_Design_Data_CAD_Design_Data_id_seq"'::regclass);
+
+
+--
+-- Name: CAD_Fabric_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Fabric" ALTER COLUMN "CAD_Fabric_id" SET DEFAULT nextval('public."FSTY_CAD_Fabric_CAD_Fabric_id_seq"'::regclass);
+
+
+--
+-- Name: CAD_Layer_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Layer" ALTER COLUMN "CAD_Layer_id" SET DEFAULT nextval('public."FSTY_CAD_Layer_CAD_Layer_id_seq"'::regclass);
+
+
+--
+-- Name: CAD_Production_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Production" ALTER COLUMN "CAD_Production_id" SET DEFAULT nextval('public."FSTY_CAD_Production_CAD_Production_id_seq"'::regclass);
+
+
+--
+-- Name: CAD_Yarn_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Yarn" ALTER COLUMN "CAD_Yarn_id" SET DEFAULT nextval('public."FSTY_CAD_Yarn_CAD_Yarn_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_Beam" ALTER COLUMN id SET DEFAULT nextval('public."Fabric_Beam_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_Order" ALTER COLUMN id SET DEFAULT nextval('public."Fabric_Order_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_Order_DesignData" ALTER COLUMN id SET DEFAULT nextval('public."Fabric_Order_DesignData_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_Raw" ALTER COLUMN id SET DEFAULT nextval('public."Fabric_Raw_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_RawRoll" ALTER COLUMN id SET DEFAULT nextval('public."Fabric_RawRoll_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_Roll" ALTER COLUMN id SET DEFAULT nextval('public."Fabric_Roll_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_Yarn" ALTER COLUMN id SET DEFAULT nextval('public."Fabric_Yarn_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Knit_Beam" ALTER COLUMN id SET DEFAULT nextval('public."Knit_Beam_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Knit_Machine" ALTER COLUMN id SET DEFAULT nextval('public."Knit_Machine_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Knit_Machine_Realtime" ALTER COLUMN id SET DEFAULT nextval('public."Knit_Machine_Realtime_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Knit_Process" ALTER COLUMN id SET DEFAULT nextval('public."Knit_Process_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Warp_Beam" ALTER COLUMN id SET DEFAULT nextval('public."Warp_Beam_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Warp_Machine" ALTER COLUMN id SET DEFAULT nextval('public."Warp_Machine_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Warp_Machine_Realtime" ALTER COLUMN id SET DEFAULT nextval('public."Warp_Machine_Realtime_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Warp_Process" ALTER COLUMN id SET DEFAULT nextval('public."Warp_Process_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_company ALTER COLUMN id SET DEFAULT nextval('public.account_company_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_department ALTER COLUMN id SET DEFAULT nextval('public.account_department_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_user ALTER COLUMN id SET DEFAULT nextval('public.account_user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_user_groups ALTER COLUMN id SET DEFAULT nextval('public.account_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.account_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.yw_knit_machine ALTER COLUMN id SET DEFAULT nextval('public.yw_knit_machine_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.yw_warp_machine ALTER COLUMN id SET DEFAULT nextval('public.yw_warp_machine_id_seq'::regclass);
+
+
+--
+-- Data for Name: FSTY_CAD_Chain_Link; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."FSTY_CAD_Chain_Link" ("CAD_Chain_Link_id", "CAD_Chain_Link_course", "CAD_Chain_Link_layer_id") FROM stdin;
+1	1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 1,0 / 2,3 / 2,1 /  =   21 COS	1
+2	1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 1,0 / 1,2 / 2,1 /  =   21 COS	2
+3	1,0 / 11,12 / 2,1 / 12,13 / 3,2 / 13,14 / 4,3 / 14,15 / 5,4 / 15,16 / 6,5 / 16,17 / 7,6 / 17,18 / 8,7 / 18,19 / 9,8 / 19,20 / 10,9 / 20,21 / 11,10 /  =   21 COS	3
+4	1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 /  =   48 COS	4
+5	4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 / 4,5 / 4,3 / 4,5 / 4,3 / 2,1 / 3,4 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 2,1 /  =   48 COS	5
+8	1,0 / 1,2 /  =   40 COS	8
+9	2,3 / 1,0 /  =   40 COS	9
+10	2,3 / 1,0 /  =   40 COS	10
+11	1,0 / 1,2 / 2,3 / 3,4 / 4,5 / 5,6 / 6,7 / 7,8 / 8,9 / 8,7 / 7,6 / 6,5 / 5,4 / 4,3 / 3,2 / 2,1 / 1,0 / 1,2 / 2,3 / 3,4 / 4,5 / 5,6 / 6,7 / 7,8 / 8,9 / 8,7 / 7,6 / 6,5 / 5,4 / 4,3 / 3,2 / 2,1 /  =   32 COS	11
+12	16,17 / 15,14 / 13,12 / 11,10 / 9,8 / 7,6 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 8,9 / 10,11 / 12,13 / 14,15 / 16,17 / 15,14 / 13,12 / 11,10 / 9,8 / 7,6 / 5,4 / 3,2 / 1,0 / 2,3 / 4,5 / 6,7 / 8,9 / 10,11 / 12,13 / 14,15 /  =   32 COS	12
+13	1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 5,6 / 7,8 / 7,6 / 7,8 / 7,6 / 5,4 / 3,2 /  =   12 COS	13
+14	8,7 / 7,6 / 7,8 / 7,6 / 5,4 / 3,2 / 1,0 / 1,2 / 1,0 / 1,2 / 3,4 / 5,6 /  =   12 COS	14
+\.
+
+
+--
+-- Name: FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."FSTY_CAD_Chain_Link_CAD_Chain_Link_id_seq"', 14, true);
+
+
+--
+-- Data for Name: FSTY_CAD_Design_Data; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."FSTY_CAD_Design_Data" ("CAD_Design_Data_id", "CAD_Design_Data_name", "CAD_Design_Data_code", "CAD_Design_Data_xml", "CAD_Design_Data_pattern_image", "CAD_Design_Data_simulation_image", "CAD_Design_Data_create_date", "CAD_Design_Data_trc_file", "CAD_Design_Data_magnification") FROM stdin;
+1	ST446	YW446	data/project/1/xml/ST446.xml	data/project/1/img/ST446_design.jpg	data/project/1/img/ST446_simulation.jpg	2020-03-26 09:37:47.376554+09		2.0
+2	\N	\N	data/project/2/xml/TENSION.xml	data/project/2/img/TENSION_design.jpg	data/project/2/img/TENSION_simulation.jpg	2020-05-06 17:18:43.535155+09		\N
+3	OT-B106	DP1060	data/project/3/xml/OT-B106.xml	data/project/3/img/OT-B106_design.jpg	data/project/3/img/OT-B106_simulation.jpg	2020-05-07 09:47:48.091778+09		1.0
+5	TENSION	YW-TENSION	data/project/5/xml/TENSION.xml	data/project/5/img/TENSION_design.jpg	data/project/5/img/TENSION_simulation.jpg	2020-05-07 10:12:07.094504+09		1.2
+6	SP-8116	YW8116	data/project/6/xml/SP-8116.xml	data/project/6/img/SP-8116_design.jpg	data/project/6/img/SP-8116_simulation.jpg	2020-05-07 14:02:07.091244+09		1.0
+7	OT9017		data/project/7/xml/OT9017.xml	data/project/7/img/OT9017_design.jpg	data/project/7/img/OT9017_simulation.jpg	2020-05-07 14:18:11.316683+09		2.0
+\.
+
+
+--
+-- Name: FSTY_CAD_Design_Data_CAD_Design_Data_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."FSTY_CAD_Design_Data_CAD_Design_Data_id_seq"', 7, true);
+
+
+--
+-- Data for Name: FSTY_CAD_Fabric; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."FSTY_CAD_Fabric" ("CAD_Fabric_id", "CAD_Fabric_type", "CAD_Fabric_wpi", "CAD_Fabric_cpi", "CAD_Fabric_width", "CAD_Fabric_weight_per_width", "CAD_Fabric_production_id") FROM stdin;
+1	R	28	28	42	2,823.4	1
+2	S	28	20	42	2,016.7	1
+3	R	28	15	84	81.3	2
+4	S	47.04	18	50	97.6	2
+7	R	28	20	105	253.9	4
+8	S	28	20	105	253.9	4
+9	R	28	25	105	105.4	5
+10	S	43.24	40	68	168.6	5
+11	R	28	28	42	0.0	6
+12	S	29.4	29	40	0.0	6
+\.
+
+
+--
+-- Name: FSTY_CAD_Fabric_CAD_Fabric_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."FSTY_CAD_Fabric_CAD_Fabric_id_seq"', 12, true);
+
+
+--
+-- Data for Name: FSTY_CAD_Layer; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."FSTY_CAD_Layer" ("CAD_Layer_id", "CAD_Layer_name", "CAD_Layer_ratio", "CAD_Layer_mm_rack", "CAD_Layer_use", "CAD_Layer_beam", "CAD_Layer_total", "CAD_Layer_iodata", "CAD_Layer_design_data_id") FROM stdin;
+1	L1	6.72	1541	588	10	5880	FULL  START=0	1
+2	L2	5	1146	588	10	5880	FULL  START=0	1
+3	L3	44.14	5401	588	10	5880	5B 5C   START=0	1
+4	L1	50	1750	488	4	1952	5A 1X   START=3	3
+5	L2	50	1750	488	4	1952	5A 1X   START=0	3
+8	L1	27.05	1261	588	10	5880	FULL  START=0	5
+9	L2	36.47	1700	588	10	5880	14A 14X   START=0	5
+10	L3	36.47	1700	588	10	5880	14X 14A   START=0	5
+11	L1	17.81	1350	586	5	2930	FULL  START=11	6
+12	L2	22.42	1670	159	5	795	4B 3C 5D   START=0	6
+13	L1	0	1700	0	0	0	11A 1X   START=0	7
+14	L2	0	1700	0	0	0	11A 1X   START=6	7
+\.
+
+
+--
+-- Name: FSTY_CAD_Layer_CAD_Layer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."FSTY_CAD_Layer_CAD_Layer_id_seq"', 14, true);
+
+
+--
+-- Data for Name: FSTY_CAD_Production; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."FSTY_CAD_Production" ("CAD_Production_id", "CAD_Production_quota_per_day", "CAD_Production_machine_name", "CAD_Production_note", "CAD_Production_design_data_id") FROM stdin;
+1	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35	KS-3 210"	True	1
+2	800 X 24h X 60 X 0.85 / 15 / 91.44 X 2 = 1427.82	HKS3-210	True	3
+4	1770 X 24h X 60 X 0.85 / 20 / 91.44 X 2 = 2369.29		True	5
+5	700 X 21.5h X 60 X 0.8 / 25 / 91.44 X 2 = 632.02	KS-3 210"	True	6
+6	1770 X 24h X 60 X 0.85 / 28 / 91.44 X 2 = 1692.35	KS-3 210"	True	7
+\.
+
+
+--
+-- Name: FSTY_CAD_Production_CAD_Production_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."FSTY_CAD_Production_CAD_Production_id_seq"', 6, true);
+
+
+--
+-- Data for Name: FSTY_CAD_Yarn; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."FSTY_CAD_Yarn" ("CAD_Yarn_id", "CAD_Yarn_idx", "CAD_Yarn_maker", "CAD_Yarn_spec", "CAD_Yarn_code", "CAD_Yarn_rgb_color", "CAD_Yarn_lab_color", "CAD_Yarn_pantone_color", "CAD_Yarn_layer_id") FROM stdin;
+1	A	KO	SAMPLE 0	CODE-00	255,255,255	100/0/0	PANTONE 11-1001 TCX	1
+2	A	KO	SAMPLE 0	CODE-00	255,255,255	100/0/0	PANTONE 11-1001 TCX	2
+3	B	KO	SAMPLE 2	CODE-03	255,255,255	100/0/0	PANTONE 11-1001 TCX	3
+4	A	KO	P/F75/36	0321	252,255,112	98/-14/66	PANTONE 12-0737 TCX	4
+5	A	KO	P/F75/36	0321	252,255,112	98/-14/66	PANTONE 12-0737 TCX	5
+8	A	KO	SAMPLE	CODE-00	128,0,128	30/56/-36	PANTONE 19-2045 TCX	8
+9	A	KO	SAMPLE	CODE-00	128,0,128	30/56/-36	PANTONE 19-2045 TCX	9
+10	A	KO	SAMPLE	CODE-00	128,0,128	30/56/-36	PANTONE 19-2045 TCX	10
+11	A	KO	SAMPLE 00	 	255,255,255	100/0/0	PANTONE 11-1001 TCX	11
+12	B	KO	SAMPLE 09	RED	188,7,4	40/63/54	PANTONE 19-1757 TCX	12
+13	A		P/F 100/36 		214,0,147	48/76/-18	PANTONE 18-2140 TCX	13
+14	A		P/F 100/36 P/F 100/36 		214,0,147	48/76/-18	PANTONE 18-2140 TCX	14
+\.
+
+
+--
+-- Name: FSTY_CAD_Yarn_CAD_Yarn_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."FSTY_CAD_Yarn_CAD_Yarn_id_seq"', 14, true);
+
+
+--
+-- Data for Name: Fabric_Beam; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Fabric_Beam" (id, name, yarn_qty, size, yarn_id, "Receivingdate") FROM stdin;
+1	test	0	1	2	2020-03-20 14:57
+2	BEAM3	0	23	2	2020-03-26 09:58
+\.
+
+
+--
+-- Name: Fabric_Beam_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Fabric_Beam_id_seq"', 2, true);
+
+
+--
+-- Data for Name: Fabric_Order; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Fabric_Order" (id, company, code, buyer, type, state, order_date, due_date, order_round, order_inout, cheack, manager_id) FROM stdin;
+4	youngwooCNI	20032614002100	testt	0	0	2020-03-26 14:00:21.587929+09	2020-03-31 00:00:00+09	1	0	f	2
+1	youngwooCNI	20032609381000	yongwoo	0	0	2020-03-26 09:38:10.504808+09	2020-03-31 00:00:00+09	1	0	t	1
+2	youngwooCNI	20032609391300	yongwoo	0	0	2020-03-26 09:39:13.427101+09	2020-03-28 00:00:00+09	1	0	t	1
+3	youngwooCNI	20032609425900	yongwoo	0	0	2020-03-26 09:42:59.195383+09	2020-03-31 00:00:00+09	1	0	t	1
+\.
+
+
+--
+-- Data for Name: Fabric_Order_DesignData; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Fabric_Order_DesignData" (id, code, design_qty, qr_code, design_data_id_id, order_id_id) FROM stdin;
+1	20032609381000-1	10	data/qrcode/1/qr_code_image_ybzg47U.png	1	1
+2	20032609391300-1	30	data/qrcode/2/qr_code_image.png	1	2
+3	20032609425900-1	15		1	3
+4	20032614002100-1	10	data/qrcode/4/qr_code_image.png	1	4
+\.
+
+
+--
+-- Name: Fabric_Order_DesignData_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Fabric_Order_DesignData_id_seq"', 4, true);
+
+
+--
+-- Name: Fabric_Order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Fabric_Order_id_seq"', 4, true);
+
+
+--
+-- Data for Name: Fabric_Raw; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Fabric_Raw" (id, qty, "designData_id_id") FROM stdin;
+\.
+
+
+--
+-- Data for Name: Fabric_RawRoll; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Fabric_RawRoll" (id, raw_yard, raw_weight, raw_id_id) FROM stdin;
+\.
+
+
+--
+-- Name: Fabric_RawRoll_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Fabric_RawRoll_id_seq"', 1, false);
+
+
+--
+-- Name: Fabric_Raw_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Fabric_Raw_id_seq"', 1, false);
+
+
+--
+-- Data for Name: Fabric_Roll; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Fabric_Roll" (id, rollname, rollfabricname, rollfabricdate, rolloutdate, receivingdate, rollcount, rollfabricerror, rollfabrictrue, rollfabriclength, rollfabricweight) FROM stdin;
+1	test	1	2020-03-20	2020-03-21	2020-03-20	1	1	0	1	1
+2	test2	2	2020-03-21	2020-03-22	2020-03-20	1	1	0	1	1
+\.
+
+
+--
+-- Name: Fabric_Roll_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Fabric_Roll_id_seq"', 2, true);
+
+
+--
+-- Data for Name: Fabric_Yarn; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Fabric_Yarn" (id, name, code, type, maker, count, filament, contraction, material, kind, color, qty, "Receivingdate", weight) FROM stdin;
+1	test	11	\N	1	1	1	1	1	1	#000000	1	2020-03-20 14:57	0
+2	SAMPLE 0	CODE-03	\N	ko	20	5	40	P	SD	#ffffff	11	2020-03-26 09:34	0
+3	SAMPLE 0	yw002	\N	KO	11	3	100	P	SD	#471c1c	11	2020-03-26 09:58	0
+4	test111	11	\N	11	11	11	11	11	11	#000000	11	2020-04-01 11:05	11
+5	test	123	\N	123	12	1	12	asd	132	#dbb2b2	123	2020-04-01 14:09	1
+6	test	123	\N	123	12	1	12	asd	132	#000000	123	2020-04-01 14:09	1
+7	asdfasdf	123	\N	123	12	12	12	asd	132	#000000	123	2020-04-01 14:09	1
+8	asdfasdf	123	\N	123	12	12	12	asd	132	#000000	123	2020-04-01 14:09	1
+9	test	123	\N	123	12	1	12	asd	132	#000000	123	2020-04-01 14:09	1
+10	test123	123	\N	123	12	1	12	asd	132	#000000	123	2020-04-01 14:09	1
+11	SAMPLE0	CODE-03	\N	ko	20	5	40	P	SD	#ffffff	11	2020-04-02 08:23	0
+\.
+
+
+--
+-- Name: Fabric_Yarn_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Fabric_Yarn_id_seq"', 11, true);
+
+
+--
+-- Data for Name: Knit_Beam; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Knit_Beam" (id, knit_external, knit_current_external, knit_turn_cnt, knit_current_turn_cnt, knit_yarn_thick, beam_id, knit_process_id) FROM stdin;
+1	\N	\N	\N	\N	\N	1	1
+2	\N	\N	\N	\N	\N	1	3
+3	\N	\N	\N	\N	\N	2	3
+\.
+
+
+--
+-- Name: Knit_Beam_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Knit_Beam_id_seq"', 3, true);
+
+
+--
+-- Data for Name: Knit_Machine; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Knit_Machine" (id, tns_code, user_id, company_code, trs_installation_time, trs_model_name, trs_beam_cnt, trs_bar_cnt, trs_eac_enable, trs_tempo, trs_lowmotor_enable, trs_gauge, trs_ip) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Knit_Machine_Realtime; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Knit_Machine_Realtime" (id, trs_operation_number, trs_total_run_course, trs_state, trs_stopmark, trs_onetime_prdt, trs_set_prdt, trs_run_course, trs_total_oper_time, trs_total_accum_time, trs_meter, trs_total_meter, trs_accumulate_meter, trs_key_angle, trs_rpm_main, trs_sensor_01, trs_sensor_02, trs_sensor_03, trs_sensor_04, trs_sensor_05, trs_sensor_06, trs_sensor_07, trs_sensor_08, trs_sensor_09, trs_sensor_10, trs_onoff, knit_process_id) FROM stdin;
+\.
+
+
+--
+-- Name: Knit_Machine_Realtime_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Knit_Machine_Realtime_id_seq"', 1, false);
+
+
+--
+-- Name: Knit_Machine_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Knit_Machine_id_seq"', 1, false);
+
+
+--
+-- Data for Name: Knit_Process; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Knit_Process" (id, start_time, end_time, real_start_time, real_end_time, knit_machine_id_id, order_designdata_id, yw_knit_machine_id_id) FROM stdin;
+1	2020-03-31 05:04:00+09	2020-04-08 06:00:00+09	\N	\N	\N	1	1
+2	2020-03-17 01:01:00+09	2020-03-31 01:01:00+09	\N	\N	\N	2	1
+3	2020-03-30 01:01:00+09	2020-03-31 01:01:00+09	\N	\N	\N	4	1
+\.
+
+
+--
+-- Name: Knit_Process_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Knit_Process_id_seq"', 3, true);
+
+
+--
+-- Data for Name: Warp_Beam; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Warp_Beam" (id, external, current_external, turn_cnt, current_turn_cnt, yarn_thick, yarn_count, yarn_meter, yarn_current_meter, beam_id, warp_process_id) FROM stdin;
+1	\N	\N	\N	\N	\N	\N	\N	\N	1	1
+2	\N	\N	\N	\N	\N	\N	\N	\N	2	3
+\.
+
+
+--
+-- Name: Warp_Beam_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Warp_Beam_id_seq"', 2, true);
+
+
+--
+-- Data for Name: Warp_Machine; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Warp_Machine" (id, tns_code, user_id, company_code, tws_name, tws_installation_time, tws_ip) FROM stdin;
+1	WSE4#4578	id1	999999	MC1	2019-09-09 14:06:56+09	\N
+2	WSE4#7103	id1	999999	MC2	2019-09-09 14:06:57+09	\N
+3	WSE4#9547	id1	999999	MC3	2019-09-09 14:06:58+09	192.168.0.111
+\.
+
+
+--
+-- Data for Name: Warp_Machine_Realtime; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Warp_Machine_Realtime" (id, tws_start_date, tws_start_time, tws_meter, tws_state, tws_hoist_state, tws_oiling_state, tws_clamp_state, tws_w_inverter_state, tws_s_inverter_state, tws_c_inverter_state, tws_current_turncnt, tws_runtime, tws_current_meter, tws_kia, tws_warper_speed, tws_warper_outside, tws_warper_total_length, tws_creel_total_length, tws_creel_speed, tws_elongation_rate, tws_relax_deviation, tws_error, tws_onoff, warp_process_id) FROM stdin;
+\.
+
+
+--
+-- Name: Warp_Machine_Realtime_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Warp_Machine_Realtime_id_seq"', 1, false);
+
+
+--
+-- Name: Warp_Machine_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Warp_Machine_id_seq"', 3, true);
+
+
+--
+-- Data for Name: Warp_Process; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Warp_Process" (id, start_time, end_time, real_start_time, real_end_time, order_designdata_id, warp_machine_id_id, yw_warp_machine_id_id) FROM stdin;
+1	2020-03-26 10:10:00+09	2020-03-30 03:05:00+09	\N	\N	1	\N	1
+2	2020-03-17 01:01:00+09	2020-03-31 01:01:00+09	\N	\N	2	\N	1
+3	2020-03-26 01:01:00+09	2020-03-28 01:01:00+09	\N	\N	4	\N	1
+\.
+
+
+--
+-- Name: Warp_Process_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Warp_Process_id_seq"', 3, true);
+
+
+--
+-- Data for Name: account_company; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.account_company (id, name, code, machineyn, x, y) FROM stdin;
+1	youngwooCNI	1	f	53	38
+\.
+
+
+--
+-- Name: account_company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.account_company_id_seq', 1, false);
+
+
+--
+-- Data for Name: account_department; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.account_department (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: account_department_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.account_department_id_seq', 1, false);
+
+
+--
+-- Data for Name: account_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.account_user (id, password, last_login, is_superuser, username, name, level, email, phone, create_date, theme_code, lang_code, propic, is_staff, is_active, company_code_id, group_code_id) FROM stdin;
+2	pbkdf2_sha256$36000$3UfNocqLxmKd$K5Mwpzs+kbhEkGiYFosJnrPvG0xBqbHqJpZoeBcPvaQ=	2020-03-26 14:34:06.270828+09	f	namdi	남지	0	nam_dii@naver.com	01071624113	2020-03-26 13:59:19.485822+09	0	0		f	t	1	\N
+1	pbkdf2_sha256$36000$fcUFrVTEz28W$ZyX07pIgQMb2YLVs4l7ZhDNQB8H/tq54O4x3wd2yu58=	2020-05-19 13:39:24.279792+09	t	admin	admin	0	guswls8859@texclub.com	\N	2020-03-20 14:42:08.328786+09	0	0		t	t	1	\N
+\.
+
+
+--
+-- Data for Name: account_user_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.account_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: account_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.account_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: account_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.account_user_id_seq', 2, true);
+
+
+--
+-- Data for Name: account_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.account_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: account_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.account_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can add permission	2	add_permission
+5	Can change permission	2	change_permission
+6	Can delete permission	2	delete_permission
+7	Can add group	3	add_group
+8	Can change group	3	change_group
+9	Can delete group	3	delete_group
+10	Can add content type	4	add_contenttype
+11	Can change content type	4	change_contenttype
+12	Can delete content type	4	delete_contenttype
+13	Can add session	5	add_session
+14	Can change session	5	change_session
+15	Can delete session	5	delete_session
+16	Can add user	6	add_user
+17	Can change user	6	change_user
+18	Can delete user	6	delete_user
+19	Can add company	7	add_company
+20	Can change company	7	change_company
+21	Can delete company	7	delete_company
+22	Can add department	8	add_department
+23	Can change department	8	change_department
+24	Can delete department	8	delete_department
+25	Can add fst y_ca d_ chain_ link	9	add_fsty_cad_chain_link
+26	Can change fst y_ca d_ chain_ link	9	change_fsty_cad_chain_link
+27	Can delete fst y_ca d_ chain_ link	9	delete_fsty_cad_chain_link
+28	Can add fst y_ca d_ design_ data	10	add_fsty_cad_design_data
+29	Can change fst y_ca d_ design_ data	10	change_fsty_cad_design_data
+30	Can delete fst y_ca d_ design_ data	10	delete_fsty_cad_design_data
+31	Can add fst y_ca d_ fabric	11	add_fsty_cad_fabric
+32	Can change fst y_ca d_ fabric	11	change_fsty_cad_fabric
+33	Can delete fst y_ca d_ fabric	11	delete_fsty_cad_fabric
+34	Can add fst y_ca d_ layer	12	add_fsty_cad_layer
+35	Can change fst y_ca d_ layer	12	change_fsty_cad_layer
+36	Can delete fst y_ca d_ layer	12	delete_fsty_cad_layer
+37	Can add fst y_ca d_ production	13	add_fsty_cad_production
+38	Can change fst y_ca d_ production	13	change_fsty_cad_production
+39	Can delete fst y_ca d_ production	13	delete_fsty_cad_production
+40	Can add fst y_ca d_ yarn	14	add_fsty_cad_yarn
+41	Can change fst y_ca d_ yarn	14	change_fsty_cad_yarn
+42	Can delete fst y_ca d_ yarn	14	delete_fsty_cad_yarn
+43	Can add order	15	add_order
+44	Can change order	15	change_order
+45	Can delete order	15	delete_order
+46	Can add order_ design data	16	add_order_designdata
+47	Can change order_ design data	16	change_order_designdata
+48	Can delete order_ design data	16	delete_order_designdata
+49	Can add beam	17	add_beam
+50	Can change beam	17	change_beam
+51	Can delete beam	17	delete_beam
+52	Can add raw	18	add_raw
+53	Can change raw	18	change_raw
+54	Can delete raw	18	delete_raw
+55	Can add raw roll	19	add_rawroll
+56	Can change raw roll	19	change_rawroll
+57	Can delete raw roll	19	delete_rawroll
+58	Can add yarn	20	add_yarn
+59	Can change yarn	20	change_yarn
+60	Can delete yarn	20	delete_yarn
+61	Can add roll	21	add_roll
+62	Can change roll	21	change_roll
+63	Can delete roll	21	delete_roll
+64	Can add knit_ machine	22	add_knit_machine
+65	Can change knit_ machine	22	change_knit_machine
+66	Can delete knit_ machine	22	delete_knit_machine
+67	Can add warp_ machine	23	add_warp_machine
+68	Can change warp_ machine	23	change_warp_machine
+69	Can delete warp_ machine	23	delete_warp_machine
+70	Can add y w_ knit_ machine	24	add_yw_knit_machine
+71	Can change y w_ knit_ machine	24	change_yw_knit_machine
+72	Can delete y w_ knit_ machine	24	delete_yw_knit_machine
+73	Can add y w_ warp_ machine	25	add_yw_warp_machine
+74	Can change y w_ warp_ machine	25	change_yw_warp_machine
+75	Can delete y w_ warp_ machine	25	delete_yw_warp_machine
+76	Can add knit_ beam	26	add_knit_beam
+77	Can change knit_ beam	26	change_knit_beam
+78	Can delete knit_ beam	26	delete_knit_beam
+79	Can add knit_ machine_ realtime	27	add_knit_machine_realtime
+80	Can change knit_ machine_ realtime	27	change_knit_machine_realtime
+81	Can delete knit_ machine_ realtime	27	delete_knit_machine_realtime
+82	Can add knit_ process	28	add_knit_process
+83	Can change knit_ process	28	change_knit_process
+84	Can delete knit_ process	28	delete_knit_process
+85	Can add warp_ beam	29	add_warp_beam
+86	Can change warp_ beam	29	change_warp_beam
+87	Can delete warp_ beam	29	delete_warp_beam
+88	Can add warp_ machine_ realtime	30	add_warp_machine_realtime
+89	Can change warp_ machine_ realtime	30	change_warp_machine_realtime
+90	Can delete warp_ machine_ realtime	30	delete_warp_machine_realtime
+91	Can add warp_ process	31	add_warp_process
+92	Can change warp_ process	31	change_warp_process
+93	Can delete warp_ process	31	delete_warp_process
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 93, true);
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	contenttypes	contenttype
+5	sessions	session
+6	account	user
+7	account	company
+8	account	department
+9	design_data	fsty_cad_chain_link
+10	design_data	fsty_cad_design_data
+11	design_data	fsty_cad_fabric
+12	design_data	fsty_cad_layer
+13	design_data	fsty_cad_production
+14	design_data	fsty_cad_yarn
+15	order	order
+16	order	order_designdata
+17	materials	beam
+18	materials	raw
+19	materials	rawroll
+20	materials	yarn
+21	materials	roll
+22	machine	knit_machine
+23	machine	warp_machine
+24	machine	yw_knit_machine
+25	machine	yw_warp_machine
+26	schedule	knit_beam
+27	schedule	knit_machine_realtime
+28	schedule	knit_process
+29	schedule	warp_beam
+30	schedule	warp_machine_realtime
+31	schedule	warp_process
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 31, true);
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2020-03-20 14:40:56.27232+09
+2	contenttypes	0002_remove_content_type_name	2020-03-20 14:40:56.27832+09
+3	auth	0001_initial	2020-03-20 14:40:56.32233+09
+4	auth	0002_alter_permission_name_max_length	2020-03-20 14:40:56.326331+09
+5	auth	0003_alter_user_email_max_length	2020-03-20 14:40:56.330332+09
+6	auth	0004_alter_user_username_opts	2020-03-20 14:40:56.334333+09
+7	auth	0005_alter_user_last_login_null	2020-03-20 14:40:56.339334+09
+8	auth	0006_require_contenttypes_0002	2020-03-20 14:40:56.340335+09
+9	auth	0007_alter_validators_add_error_messages	2020-03-20 14:40:56.344335+09
+10	auth	0008_alter_user_username_max_length	2020-03-20 14:40:56.348336+09
+11	account	0001_initial	2020-03-20 14:40:56.426354+09
+12	account	0002_auto_20191216_1645	2020-03-20 14:40:56.436356+09
+13	admin	0001_initial	2020-03-20 14:40:56.462362+09
+14	admin	0002_logentry_remove_auto_add	2020-03-20 14:40:56.469363+09
+15	design_data	0001_initial	2020-03-20 14:40:56.545381+09
+16	machine	0001_initial	2020-03-20 14:40:56.590391+09
+17	machine	0002_auto_20191216_1645	2020-03-20 14:40:56.595392+09
+18	materials	0001_initial	2020-03-20 14:40:56.639401+09
+19	materials	0002_beam_receivingdate	2020-03-20 14:40:56.652404+09
+20	materials	0003_yarn_receivingdate	2020-03-20 14:40:56.660406+09
+21	materials	0004_auto_20200306_1118	2020-03-20 14:40:56.673409+09
+22	materials	0005_auto_20200306_1130	2020-03-20 14:40:56.684412+09
+23	materials	0006_auto_20200306_1131	2020-03-20 14:40:56.696414+09
+24	materials	0007_auto_20200306_1138	2020-03-20 14:40:56.703416+09
+25	materials	0008_auto_20200306_1140	2020-03-20 14:40:56.710417+09
+26	materials	0009_auto_20200306_1141	2020-03-20 14:40:56.717419+09
+27	materials	0010_auto_20200306_1142	2020-03-20 14:40:56.72142+09
+28	materials	0011_auto_20200306_1144	2020-03-20 14:40:56.72542+09
+29	materials	0012_auto_20200306_1145	2020-03-20 14:40:56.729422+09
+30	materials	0013_auto_20200306_1146	2020-03-20 14:40:56.736423+09
+31	materials	0014_auto_20200306_1146	2020-03-20 14:40:56.742424+09
+32	materials	0015_auto_20200310_1021	2020-03-20 14:40:56.749426+09
+33	materials	0016_auto_20200313_1217	2020-03-20 14:40:56.756428+09
+34	materials	0017_auto_20200313_1327	2020-03-20 14:40:56.763429+09
+35	materials	0018_auto_20200317_1130	2020-03-20 14:40:56.769431+09
+36	materials	0019_auto_20200317_1136	2020-03-20 14:40:56.776432+09
+37	materials	0020_auto_20200317_1137	2020-03-20 14:40:56.783433+09
+38	materials	0021_auto_20200320_1347	2020-03-20 14:40:56.798437+09
+39	materials	0022_auto_20200320_1350	2020-03-20 14:40:56.807439+09
+40	materials	0023_auto_20200320_1352	2020-03-20 14:40:56.815441+09
+41	materials	0024_auto_20200320_1352	2020-03-20 14:40:56.818441+09
+42	materials	0025_auto_20200320_1423	2020-03-20 14:40:56.827443+09
+43	order	0001_initial	2020-03-20 14:40:56.870453+09
+44	schedule	0001_initial	2020-03-20 14:40:57.073498+09
+45	sessions	0001_initial	2020-03-20 14:40:57.089502+09
+46	materials	0026_auto_20200401_1044	2020-04-01 10:44:25.087208+09
+47	materials	0027_auto_20200401_1105	2020-04-01 11:05:29.062537+09
+\.
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 47, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+2b03t56cynhpo3dqkfkbjlvn24q4s6gz	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-04-03 14:44:56.456448+09
+uockyfou7pzo1eqv0ukiyfe15blstikm	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-04-09 09:34:41.058197+09
+kq5shyuev6u7mm3qklr1zuaabtlpgq91	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-04-09 09:35:34.467364+09
+j2lzhu0j5wldhzkzx7rcs6qbab42er56	ZGIwNmEzZjBkZGQ5YTI0OTczMTg5Y2I2YzFhN2M0ZjZlMGE4ODA0ZTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3ODM2MTA5OWMzZTg5YWU5OGFiYzk1NDU0NjYxMjc5ZmM4NTJlMDA1In0=	2020-04-09 14:34:06.272828+09
+590aolkwrqvw1u9cb7ssdvyv3ib006g9	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-04-13 09:18:45.722086+09
+w3xwgvflsauuz6wxg96ks4gqhlgcxag5	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-04-15 10:39:27.975058+09
+geck3cinndp3uds4edkenb9bhrcfzqno	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-04-15 14:01:51.983166+09
+135h8y1low5q22urvsg4q5euuveyv52k	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-04-16 08:23:44.201803+09
+bk7zy63jyj6zyv0fig0wbmt4j3b2zs0d	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-04-17 09:53:38.669516+09
+nlhh2f8nl7bl049jei23ng6aks93wuoo	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-04-20 17:49:40.106905+09
+fk8hunsnqx16gzybgu3sznzqmv4n3f70	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-04-21 13:46:04.760569+09
+vtx27q4ods3jf3moupdfn3iky2olod84	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-05-21 09:47:29.250325+09
+o89j60jb72jmdlbi4n2aiu54qt3lo01k	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-05-21 14:18:16.035244+09
+er72dapt19zboqo1qe9ixaby4mspihwu	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-05-21 14:36:43.156189+09
+cxqnypudx6ksz91v9ln5jdc6v87dl56q	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-06-02 13:39:03.693082+09
+fe7m6em012lwafsa07wkb5l7rjxqijn7	MjIzM2UyY2I2M2VlNDRhODQxZjc4ZmU5YjVjY2FlMWIxNGNmNzc4NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1N2FmMmIyM2ZkZWYwYmYxNjUzYzE5NmYwMzY0MWQyYWY5MzA3NDg2In0=	2020-06-02 13:39:24.280807+09
+\.
+
+
+--
+-- Data for Name: yw_knit_machine; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.yw_knit_machine (id, name, code, create_data, rpm, gauge, bar_cnt, company_id) FROM stdin;
+1	machine2	#111	2020-03-26 09:36:15.980794+09	3000	1	4	1
+\.
+
+
+--
+-- Name: yw_knit_machine_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.yw_knit_machine_id_seq', 1, true);
+
+
+--
+-- Data for Name: yw_warp_machine; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.yw_warp_machine (id, name, code, create_date, company_id) FROM stdin;
+1	machine1	#121	2020-03-26 09:35:59.695095+09	1
+\.
+
+
+--
+-- Name: yw_warp_machine_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.yw_warp_machine_id_seq', 1, true);
+
+
+--
+-- Name: FSTY_CAD_Chain_Link_CAD_Chain_Link_layer_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Chain_Link"
+    ADD CONSTRAINT "FSTY_CAD_Chain_Link_CAD_Chain_Link_layer_id_key" UNIQUE ("CAD_Chain_Link_layer_id");
+
+
+--
+-- Name: FSTY_CAD_Chain_Link_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Chain_Link"
+    ADD CONSTRAINT "FSTY_CAD_Chain_Link_pkey" PRIMARY KEY ("CAD_Chain_Link_id");
+
+
+--
+-- Name: FSTY_CAD_Design_Data_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Design_Data"
+    ADD CONSTRAINT "FSTY_CAD_Design_Data_pkey" PRIMARY KEY ("CAD_Design_Data_id");
+
+
+--
+-- Name: FSTY_CAD_Fabric_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Fabric"
+    ADD CONSTRAINT "FSTY_CAD_Fabric_pkey" PRIMARY KEY ("CAD_Fabric_id");
+
+
+--
+-- Name: FSTY_CAD_Layer_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Layer"
+    ADD CONSTRAINT "FSTY_CAD_Layer_pkey" PRIMARY KEY ("CAD_Layer_id");
+
+
+--
+-- Name: FSTY_CAD_Production_CAD_Production_design_data_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Production"
+    ADD CONSTRAINT "FSTY_CAD_Production_CAD_Production_design_data_id_key" UNIQUE ("CAD_Production_design_data_id");
+
+
+--
+-- Name: FSTY_CAD_Production_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Production"
+    ADD CONSTRAINT "FSTY_CAD_Production_pkey" PRIMARY KEY ("CAD_Production_id");
+
+
+--
+-- Name: FSTY_CAD_Yarn_CAD_Yarn_layer_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Yarn"
+    ADD CONSTRAINT "FSTY_CAD_Yarn_CAD_Yarn_layer_id_key" UNIQUE ("CAD_Yarn_layer_id");
+
+
+--
+-- Name: FSTY_CAD_Yarn_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Yarn"
+    ADD CONSTRAINT "FSTY_CAD_Yarn_pkey" PRIMARY KEY ("CAD_Yarn_id");
+
+
+--
+-- Name: Fabric_Beam_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Fabric_Beam"
+    ADD CONSTRAINT "Fabric_Beam_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Fabric_Order_DesignData_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Fabric_Order_DesignData"
+    ADD CONSTRAINT "Fabric_Order_DesignData_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Fabric_Order_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Fabric_Order"
+    ADD CONSTRAINT "Fabric_Order_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Fabric_RawRoll_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Fabric_RawRoll"
+    ADD CONSTRAINT "Fabric_RawRoll_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Fabric_Raw_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Fabric_Raw"
+    ADD CONSTRAINT "Fabric_Raw_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Fabric_Roll_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Fabric_Roll"
+    ADD CONSTRAINT "Fabric_Roll_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Fabric_Yarn_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Fabric_Yarn"
+    ADD CONSTRAINT "Fabric_Yarn_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Knit_Beam_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Knit_Beam"
+    ADD CONSTRAINT "Knit_Beam_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Knit_Machine_Realtime_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Knit_Machine_Realtime"
+    ADD CONSTRAINT "Knit_Machine_Realtime_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Knit_Machine_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Knit_Machine"
+    ADD CONSTRAINT "Knit_Machine_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Knit_Process_order_designdata_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Knit_Process"
+    ADD CONSTRAINT "Knit_Process_order_designdata_id_key" UNIQUE (order_designdata_id);
+
+
+--
+-- Name: Knit_Process_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Knit_Process"
+    ADD CONSTRAINT "Knit_Process_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Warp_Beam_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Warp_Beam"
+    ADD CONSTRAINT "Warp_Beam_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Warp_Machine_Realtime_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Warp_Machine_Realtime"
+    ADD CONSTRAINT "Warp_Machine_Realtime_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Warp_Machine_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Warp_Machine"
+    ADD CONSTRAINT "Warp_Machine_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Warp_Process_order_designdata_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Warp_Process"
+    ADD CONSTRAINT "Warp_Process_order_designdata_id_key" UNIQUE (order_designdata_id);
+
+
+--
+-- Name: Warp_Process_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public."Warp_Process"
+    ADD CONSTRAINT "Warp_Process_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: account_company_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.account_company
+    ADD CONSTRAINT account_company_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_department_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.account_department
+    ADD CONSTRAINT account_department_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_user_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.account_user
+    ADD CONSTRAINT account_user_email_key UNIQUE (email);
+
+
+--
+-- Name: account_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.account_user_groups
+    ADD CONSTRAINT account_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_user_groups_user_id_group_id_4d09af3e_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.account_user_groups
+    ADD CONSTRAINT account_user_groups_user_id_group_id_4d09af3e_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: account_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.account_user
+    ADD CONSTRAINT account_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_user_user_permis_user_id_permission_id_48bdd28b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.account_user_user_permissions
+    ADD CONSTRAINT account_user_user_permis_user_id_permission_id_48bdd28b_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: account_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.account_user_user_permissions
+    ADD CONSTRAINT account_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.account_user
+    ADD CONSTRAINT account_user_username_key UNIQUE (username);
+
+
+--
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: yw_knit_machine_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.yw_knit_machine
+    ADD CONSTRAINT yw_knit_machine_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: yw_warp_machine_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.yw_warp_machine
+    ADD CONSTRAINT yw_warp_machine_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: FSTY_CAD_Fabric_CAD_Fabric_production_id_84c127c6; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "FSTY_CAD_Fabric_CAD_Fabric_production_id_84c127c6" ON public."FSTY_CAD_Fabric" USING btree ("CAD_Fabric_production_id");
+
+
+--
+-- Name: FSTY_CAD_Layer_CAD_Layer_design_data_id_ac5ba9ea; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "FSTY_CAD_Layer_CAD_Layer_design_data_id_ac5ba9ea" ON public."FSTY_CAD_Layer" USING btree ("CAD_Layer_design_data_id");
+
+
+--
+-- Name: Fabric_Beam_yarn_id_98c3fa9b; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Fabric_Beam_yarn_id_98c3fa9b" ON public."Fabric_Beam" USING btree (yarn_id);
+
+
+--
+-- Name: Fabric_Order_DesignData_design_data_id_id_359f4546; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Fabric_Order_DesignData_design_data_id_id_359f4546" ON public."Fabric_Order_DesignData" USING btree (design_data_id_id);
+
+
+--
+-- Name: Fabric_Order_DesignData_order_id_id_22320ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Fabric_Order_DesignData_order_id_id_22320ad4" ON public."Fabric_Order_DesignData" USING btree (order_id_id);
+
+
+--
+-- Name: Fabric_Order_manager_id_5160b7ce; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Fabric_Order_manager_id_5160b7ce" ON public."Fabric_Order" USING btree (manager_id);
+
+
+--
+-- Name: Fabric_RawRoll_raw_id_id_dbe63dbc; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Fabric_RawRoll_raw_id_id_dbe63dbc" ON public."Fabric_RawRoll" USING btree (raw_id_id);
+
+
+--
+-- Name: Fabric_Raw_designData_id_id_89d801c9; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Fabric_Raw_designData_id_id_89d801c9" ON public."Fabric_Raw" USING btree ("designData_id_id");
+
+
+--
+-- Name: Knit_Beam_beam_id_74d6cc02; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Knit_Beam_beam_id_74d6cc02" ON public."Knit_Beam" USING btree (beam_id);
+
+
+--
+-- Name: Knit_Beam_knit_process_id_4e59ced5; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Knit_Beam_knit_process_id_4e59ced5" ON public."Knit_Beam" USING btree (knit_process_id);
+
+
+--
+-- Name: Knit_Machine_Realtime_knit_process_id_e82149cd; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Knit_Machine_Realtime_knit_process_id_e82149cd" ON public."Knit_Machine_Realtime" USING btree (knit_process_id);
+
+
+--
+-- Name: Knit_Process_knit_machine_id_id_3f92a4df; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Knit_Process_knit_machine_id_id_3f92a4df" ON public."Knit_Process" USING btree (knit_machine_id_id);
+
+
+--
+-- Name: Knit_Process_yw_knit_machine_id_id_7faba95c; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Knit_Process_yw_knit_machine_id_id_7faba95c" ON public."Knit_Process" USING btree (yw_knit_machine_id_id);
+
+
+--
+-- Name: Warp_Beam_beam_id_2aa14cf7; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Warp_Beam_beam_id_2aa14cf7" ON public."Warp_Beam" USING btree (beam_id);
+
+
+--
+-- Name: Warp_Beam_warp_process_id_eb4165ab; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Warp_Beam_warp_process_id_eb4165ab" ON public."Warp_Beam" USING btree (warp_process_id);
+
+
+--
+-- Name: Warp_Machine_Realtime_warp_process_id_c7daa5db; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Warp_Machine_Realtime_warp_process_id_c7daa5db" ON public."Warp_Machine_Realtime" USING btree (warp_process_id);
+
+
+--
+-- Name: Warp_Process_warp_machine_id_id_5d1eb8eb; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Warp_Process_warp_machine_id_id_5d1eb8eb" ON public."Warp_Process" USING btree (warp_machine_id_id);
+
+
+--
+-- Name: Warp_Process_yw_warp_machine_id_id_5e3c5664; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "Warp_Process_yw_warp_machine_id_id_5e3c5664" ON public."Warp_Process" USING btree (yw_warp_machine_id_id);
+
+
+--
+-- Name: account_user_company_code_id_26ac39fc; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_company_code_id_26ac39fc ON public.account_user USING btree (company_code_id);
+
+
+--
+-- Name: account_user_email_0bd7c421_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_email_0bd7c421_like ON public.account_user USING btree (email varchar_pattern_ops);
+
+
+--
+-- Name: account_user_group_code_id_35e7d8c2; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_group_code_id_35e7d8c2 ON public.account_user USING btree (group_code_id);
+
+
+--
+-- Name: account_user_groups_group_id_6c71f749; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_groups_group_id_6c71f749 ON public.account_user_groups USING btree (group_id);
+
+
+--
+-- Name: account_user_groups_user_id_14345e7b; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_groups_user_id_14345e7b ON public.account_user_groups USING btree (user_id);
+
+
+--
+-- Name: account_user_user_permissions_permission_id_66c44191; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_user_permissions_permission_id_66c44191 ON public.account_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: account_user_user_permissions_user_id_cc42d270; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_user_permissions_user_id_cc42d270 ON public.account_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: account_user_username_d393f583_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_user_username_d393f583_like ON public.account_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: yw_knit_machine_company_id_2ad6ec88; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX yw_knit_machine_company_id_2ad6ec88 ON public.yw_knit_machine USING btree (company_id);
+
+
+--
+-- Name: yw_warp_machine_company_id_a4e841a0; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX yw_warp_machine_company_id_a4e841a0 ON public.yw_warp_machine USING btree (company_id);
+
+
+--
+-- Name: FSTY_CAD_Chain_Link_CAD_Chain_Link_layer_8b94fe72_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Chain_Link"
+    ADD CONSTRAINT "FSTY_CAD_Chain_Link_CAD_Chain_Link_layer_8b94fe72_fk_FSTY_CAD_" FOREIGN KEY ("CAD_Chain_Link_layer_id") REFERENCES public."FSTY_CAD_Layer"("CAD_Layer_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: FSTY_CAD_Fabric_CAD_Fabric_productio_84c127c6_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Fabric"
+    ADD CONSTRAINT "FSTY_CAD_Fabric_CAD_Fabric_productio_84c127c6_fk_FSTY_CAD_" FOREIGN KEY ("CAD_Fabric_production_id") REFERENCES public."FSTY_CAD_Production"("CAD_Production_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: FSTY_CAD_Layer_CAD_Layer_design_dat_ac5ba9ea_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Layer"
+    ADD CONSTRAINT "FSTY_CAD_Layer_CAD_Layer_design_dat_ac5ba9ea_fk_FSTY_CAD_" FOREIGN KEY ("CAD_Layer_design_data_id") REFERENCES public."FSTY_CAD_Design_Data"("CAD_Design_Data_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: FSTY_CAD_Production_CAD_Production_desig_7d3b4358_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Production"
+    ADD CONSTRAINT "FSTY_CAD_Production_CAD_Production_desig_7d3b4358_fk_FSTY_CAD_" FOREIGN KEY ("CAD_Production_design_data_id") REFERENCES public."FSTY_CAD_Design_Data"("CAD_Design_Data_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: FSTY_CAD_Yarn_CAD_Yarn_layer_id_e294f386_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."FSTY_CAD_Yarn"
+    ADD CONSTRAINT "FSTY_CAD_Yarn_CAD_Yarn_layer_id_e294f386_fk_FSTY_CAD_" FOREIGN KEY ("CAD_Yarn_layer_id") REFERENCES public."FSTY_CAD_Layer"("CAD_Layer_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Fabric_Beam_yarn_id_98c3fa9b_fk_Fabric_Yarn_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_Beam"
+    ADD CONSTRAINT "Fabric_Beam_yarn_id_98c3fa9b_fk_Fabric_Yarn_id" FOREIGN KEY (yarn_id) REFERENCES public."Fabric_Yarn"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Fabric_Order_DesignD_design_data_id_id_359f4546_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_Order_DesignData"
+    ADD CONSTRAINT "Fabric_Order_DesignD_design_data_id_id_359f4546_fk_FSTY_CAD_" FOREIGN KEY (design_data_id_id) REFERENCES public."FSTY_CAD_Design_Data"("CAD_Design_Data_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Fabric_Order_DesignData_order_id_id_22320ad4_fk_Fabric_Order_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_Order_DesignData"
+    ADD CONSTRAINT "Fabric_Order_DesignData_order_id_id_22320ad4_fk_Fabric_Order_id" FOREIGN KEY (order_id_id) REFERENCES public."Fabric_Order"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Fabric_Order_manager_id_5160b7ce_fk_account_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_Order"
+    ADD CONSTRAINT "Fabric_Order_manager_id_5160b7ce_fk_account_user_id" FOREIGN KEY (manager_id) REFERENCES public.account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Fabric_RawRoll_raw_id_id_dbe63dbc_fk_Fabric_Raw_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_RawRoll"
+    ADD CONSTRAINT "Fabric_RawRoll_raw_id_id_dbe63dbc_fk_Fabric_Raw_id" FOREIGN KEY (raw_id_id) REFERENCES public."Fabric_Raw"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Fabric_Raw_designData_id_id_89d801c9_fk_FSTY_CAD_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Fabric_Raw"
+    ADD CONSTRAINT "Fabric_Raw_designData_id_id_89d801c9_fk_FSTY_CAD_" FOREIGN KEY ("designData_id_id") REFERENCES public."FSTY_CAD_Design_Data"("CAD_Design_Data_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Knit_Beam_beam_id_74d6cc02_fk_Fabric_Beam_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Knit_Beam"
+    ADD CONSTRAINT "Knit_Beam_beam_id_74d6cc02_fk_Fabric_Beam_id" FOREIGN KEY (beam_id) REFERENCES public."Fabric_Beam"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Knit_Beam_knit_process_id_4e59ced5_fk_Knit_Process_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Knit_Beam"
+    ADD CONSTRAINT "Knit_Beam_knit_process_id_4e59ced5_fk_Knit_Process_id" FOREIGN KEY (knit_process_id) REFERENCES public."Knit_Process"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Knit_Machine_Realtim_knit_process_id_e82149cd_fk_Knit_Proc; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Knit_Machine_Realtime"
+    ADD CONSTRAINT "Knit_Machine_Realtim_knit_process_id_e82149cd_fk_Knit_Proc" FOREIGN KEY (knit_process_id) REFERENCES public."Knit_Process"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Knit_Process_knit_machine_id_id_3f92a4df_fk_Knit_Machine_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Knit_Process"
+    ADD CONSTRAINT "Knit_Process_knit_machine_id_id_3f92a4df_fk_Knit_Machine_id" FOREIGN KEY (knit_machine_id_id) REFERENCES public."Knit_Machine"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Knit_Process_order_designdata_id_84ed091f_fk_Fabric_Or; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Knit_Process"
+    ADD CONSTRAINT "Knit_Process_order_designdata_id_84ed091f_fk_Fabric_Or" FOREIGN KEY (order_designdata_id) REFERENCES public."Fabric_Order_DesignData"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Knit_Process_yw_knit_machine_id_i_7faba95c_fk_yw_knit_m; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Knit_Process"
+    ADD CONSTRAINT "Knit_Process_yw_knit_machine_id_i_7faba95c_fk_yw_knit_m" FOREIGN KEY (yw_knit_machine_id_id) REFERENCES public.yw_knit_machine(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Warp_Beam_beam_id_2aa14cf7_fk_Fabric_Beam_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Warp_Beam"
+    ADD CONSTRAINT "Warp_Beam_beam_id_2aa14cf7_fk_Fabric_Beam_id" FOREIGN KEY (beam_id) REFERENCES public."Fabric_Beam"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Warp_Beam_warp_process_id_eb4165ab_fk_Warp_Process_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Warp_Beam"
+    ADD CONSTRAINT "Warp_Beam_warp_process_id_eb4165ab_fk_Warp_Process_id" FOREIGN KEY (warp_process_id) REFERENCES public."Warp_Process"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Warp_Machine_Realtim_warp_process_id_c7daa5db_fk_Warp_Proc; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Warp_Machine_Realtime"
+    ADD CONSTRAINT "Warp_Machine_Realtim_warp_process_id_c7daa5db_fk_Warp_Proc" FOREIGN KEY (warp_process_id) REFERENCES public."Warp_Process"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Warp_Process_order_designdata_id_a7a21278_fk_Fabric_Or; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Warp_Process"
+    ADD CONSTRAINT "Warp_Process_order_designdata_id_a7a21278_fk_Fabric_Or" FOREIGN KEY (order_designdata_id) REFERENCES public."Fabric_Order_DesignData"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Warp_Process_warp_machine_id_id_5d1eb8eb_fk_Warp_Machine_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Warp_Process"
+    ADD CONSTRAINT "Warp_Process_warp_machine_id_id_5d1eb8eb_fk_Warp_Machine_id" FOREIGN KEY (warp_machine_id_id) REFERENCES public."Warp_Machine"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Warp_Process_yw_warp_machine_id_i_5e3c5664_fk_yw_warp_m; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Warp_Process"
+    ADD CONSTRAINT "Warp_Process_yw_warp_machine_id_i_5e3c5664_fk_yw_warp_m" FOREIGN KEY (yw_warp_machine_id_id) REFERENCES public.yw_warp_machine(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_company_code_id_26ac39fc_fk_account_company_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_user
+    ADD CONSTRAINT account_user_company_code_id_26ac39fc_fk_account_company_id FOREIGN KEY (company_code_id) REFERENCES public.account_company(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_group_code_id_35e7d8c2_fk_account_department_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_user
+    ADD CONSTRAINT account_user_group_code_id_35e7d8c2_fk_account_department_id FOREIGN KEY (group_code_id) REFERENCES public.account_department(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_groups_group_id_6c71f749_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_user_groups
+    ADD CONSTRAINT account_user_groups_group_id_6c71f749_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_groups_user_id_14345e7b_fk_account_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_user_groups
+    ADD CONSTRAINT account_user_groups_user_id_14345e7b_fk_account_user_id FOREIGN KEY (user_id) REFERENCES public.account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_user_pe_permission_id_66c44191_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_user_user_permissions
+    ADD CONSTRAINT account_user_user_pe_permission_id_66c44191_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_user_pe_user_id_cc42d270_fk_account_u; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_user_user_permissions
+    ADD CONSTRAINT account_user_user_pe_user_id_cc42d270_fk_account_u FOREIGN KEY (user_id) REFERENCES public.account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6_fk_account_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_account_user_id FOREIGN KEY (user_id) REFERENCES public.account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: yw_knit_machine_company_id_2ad6ec88_fk_account_company_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.yw_knit_machine
+    ADD CONSTRAINT yw_knit_machine_company_id_2ad6ec88_fk_account_company_id FOREIGN KEY (company_id) REFERENCES public.account_company(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: yw_warp_machine_company_id_a4e841a0_fk_account_company_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.yw_warp_machine
+    ADD CONSTRAINT yw_warp_machine_company_id_a4e841a0_fk_account_company_id FOREIGN KEY (company_id) REFERENCES public.account_company(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

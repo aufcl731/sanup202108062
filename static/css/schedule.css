@@ -521,45 +521,47 @@ div.division {
 }
 
 #yarnTable tr > th:nth-child(1), #yarnTable tr > td:nth-child(1) {
-    width: 139px;
+    width: 95px;
 }
 
 #yarnTable tr > th:nth-child(2), #yarnTable tr > td:nth-child(2) {
-    width: 139px;
+    width: 95px;
 }
 
 #yarnTable tr > th:nth-child(3), #yarnTable tr > td:nth-child(3) {
-    width: 86px;
+    width: 95px;
 }
 
 #yarnTable tr > th:nth-child(4), #yarnTable tr > td:nth-child(4) {
-    width: 51px;
+    width: 78px;
 }
 
 #yarnTable tr > th:nth-child(5), #yarnTable tr > td:nth-child(5) {
-    width: 51px;
+    width: 78px;
 }
 
 #yarnTable tr > th:nth-child(6), #yarnTable tr > td:nth-child(6) {
-    width: 51px;
+    width: 78px;
 }
 
 #yarnTable tr > th:nth-child(7), #yarnTable tr > td:nth-child(7) {
-    width: 70px;
+    width: 68.89px;
 }
 
 #yarnTable tr > th:nth-child(8), #yarnTable tr > td:nth-child(8) {
-    width: 61px;
+    width: 68.33px;
 }
 
 #yarnTable tr > th:nth-child(9), #yarnTable tr > td:nth-child(9) {
-    width: 110px;
+    width: 59px;
 }
 
 #yarnTable tr > th:nth-child(10), #yarnTable tr > td:nth-child(10) {
-    width: 101px;
+    width: 85.67px;
 }
-
+#yarn Table tr > th:nth-child(11), #yarnTable tr> td:nth-child(11){
+    width:59px
+}
 #beamRawDiv {
     margin-top: 15px;
     height: 130px;
@@ -642,10 +644,12 @@ div.division {
 #rawTable th {
     background: rgb(62, 67, 88);
     color: #fff;
+
 }
 
 #rawTable tr {
     height: 25px;
+
 }
 
 #rawTable th, #rawTable td {

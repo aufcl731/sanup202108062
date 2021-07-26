@@ -20,7 +20,8 @@ class Department(models.Model):
 
 class Company(models.Model):
     name = models.CharField(max_length=25)
-    code = models.CharField(max_length=25, null=True)
+    code = models.CharField(max_length=100, null=True)
+    num = models.CharField(max_length=20 ,null=True)
     machineyn = models.BooleanField(default=True)
     x = models.IntegerField(null=True, default=None)
     y = models.IntegerField(null=True, default=None)
@@ -71,12 +72,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         },
     )
     name = models.CharField(max_length=20)
-    company_code = models.ForeignKey(Company, null=True)
+    company_code = models.ForeignKey(Company, null=True ,on_delete=models.CASCADE)
     level = models.IntegerField(null=True, default=0)
     email = models.EmailField(_('email address'), unique=True)
     phone = models.CharField(max_length=20, null=True)
     create_date = models.DateTimeField(auto_now_add=True)
-    group_code = models.ForeignKey(Department, null=True)
+    group_code = models.ForeignKey(Department, null=True ,on_delete=models.CASCADE)
     theme_code = models.IntegerField(default=0)
     lang_code = models.IntegerField(default=0)
     propic = models.ImageField(upload_to='data/user/', null=True)
@@ -121,4 +122,11 @@ class User(AbstractBaseUser, PermissionsMixin):
             password_validation.password_changed(self._password, self)
             self._password = None
 
+class Account(models.Model):
+    accountname = models.CharField(max_length=30, null=False)
+    accountmanager = models.CharField(max_length=100, null=True)
+    accountwork = models.CharField(max_length=100, null=True)
+    accounttype = models.CharField(max_length=100, null=True)
+    accountnum = models.CharField(max_length=100,null=False)
+    accountaddress = models.CharField(max_length=100, null=True)
 

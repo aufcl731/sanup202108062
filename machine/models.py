@@ -24,6 +24,7 @@ class Knit_Machine(models.Model):
     trs_model_name = models.CharField(max_length=50, null=True)
     trs_beam_cnt = models.IntegerField(null=True)
     trs_bar_cnt = models.IntegerField(null=True)
+    trs_rpm_main = models.IntegerField(null=True)
     trs_eac_enable = models.IntegerField(null=True)
     trs_tempo = models.IntegerField(null=True)
     trs_lowmotor_enable = models.IntegerField(null=True)

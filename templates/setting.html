@@ -5,60 +5,48 @@
 <link rel="stylesheet" href="{% static 'css/setting.css' %}">
 <script type="text/javascript" src="{% static 'js/setting.js' %}"></script>
 <script type="text/javascript">
-
+lang_code = {{ userlang.lang_code }};
+const lang = {
+    ko:{
+        password: "비밀번호", newpassword:"새 비밀번호", newpasswordck: "새 비밀번호 확인", username:"사용자 이름", useremail : "사용자 이메일",
+        userprofile:"사용자 프로필", alramfunction:"알림 기능", language:"언어", hangle:"한글", english:"영어", companynameinput:"회사명 등록",
+        companycode:"회사코드", companynum:"사업자 등록번호", companyadress:"회사 주소", machineactive:"기계 사용", active:"사용", inactive:"사용안함",
+        accountinput:"거래처 등록", accountname:"거래처 상호", accountmanager:"거래처 담당자", accounttype:"거래처 업태", accountevent:"거래처 종목",
+        accountnum:"거래처 사업자 등록번호", acccountadress:"거래처 주소", userlist:"가입 승인 및 유저 리스트", useractive:"사용 중", accept:"수락", save:"저장",
+        order:"주문", design:"디자인",select:"선택해주세요", enrollment:"추가", modified:"수정", delete:"삭제", accountlist:"거래처 목록", close:"닫기",
+        worker:"작업자", manager:"관리자", generalmanager:"총책임자", userinformation:"유저 상세보기", userlevel:"사용자 등급", usernumber:"사용자 번호",
+        userset:"사용자 설정", comset:"회사정보 설정",
+    },
+    en:{
+        password: "password", newpassword:"new password", newpasswordck: "new password check", username:"user name", useremail : "Email",
+        userprofile:"Profile ", alramfunction:"Alarm", language:"Language", hangle:"Korean", english:"English", companynameinput:"Company name",
+        companycode:"Company code", companynum:"Number of trader's registration", companyadress:"Company address", machineactive:"Machine activated", active:"Activation",
+        inactive:"Disabled", accountinput:"Account add", accountname:"Name", accountmanager:"Manager", accounttype:"Business", accountevent:"Type",
+        accountnum:"Number of trader's registration", acccountadress:"Adress", userlist:"Subscription approval and user list", useractive:"in use", accept:"accept", save:"save",
+        order:"Order", design:"Design",select:"Select", enrollment:"Add", modified:"Modify", delete:"Delete", accountlist:"Account list", close:"Close",
+        worker:"PIC", manager:"Administrator", generalmanager:"General manager", userinformation:"User detail information", userlevel:"User level", usernumber:"User number",
+        userset:"User Settings", comset:"Company Settings"
+    }
+};
+// 언어별 렌더링
+function render(locale) {
+    const $lang = document.querySelectorAll("[data-lang]");
+    $lang.forEach(el => {
+        const code = el.dataset.lang;
+        el.textContent = lang[locale][code]
+    })
+};
+if(lang_code==0){
+    render("ko");
+}
+if(lang_code==1){
+    render("en");
+    $(".accountline4").css({marginTop:15.5});
+}
     window.onload = function(){
         var aa='{{ jsonList }}';
         console.log(aa);
-        /*
-        $.ajax({
-            url:'http://www.kma.go.kr/DFSROOT/POINT/DATA/top.json.txt',
-            type: 'GET',
-            cache:false,
-            //data:{},
-            dataType:'jsonp',
-            jsonp : "callback",
-            async: false,
-            success: function(res){
-                console.log('aa');
-            },
-            error: function(jqXHR, exception){
-                        if (jqXHR.status === 0) {
-            alert('Not connect.\n Verify Network.');
-        }
-        else if (jqXHR.status == 400) {
-            alert('Server understood the request, but request content was invalid. [400]');
-        }
-        else if (jqXHR.status == 401) {
-            alert('Unauthorized access. [401]');
-        }
-        else if (jqXHR.status == 403) {
-            alert('Forbidden resource can not be accessed. [403]');
-        }
-        else if (jqXHR.status == 404) {
-            alert('Requested page not found. [404]');
-        }
-        else if (jqXHR.status == 500) {
-            alert('Internal server error. [500]');
-        }
-        else if (jqXHR.status == 503) {
-            alert('Service unavailable. [503]');
-        }
-        else if (exception === 'parsererror') {
-            alert('Requested JSON parse failed. [Failed]');
-        }
-        else if (exception === 'timeout') {
-            alert('Time out error. [Timeout]');
-        }
-        else if (exception === 'abort') {
-            alert('Ajax request aborted. [Aborted]');
-        }
-        else {
-            alert('Uncaught Error.n' + jqXHR.responseText);
-        }
-            }
-        });*/
     };
-
     function setAddress() {
         var value = $('#bottomAddress').val().split(' ');
 
@@ -82,7 +70,6 @@
             code = $('#topAddress').val();
         else if(type == 2)
             code = $('#midAddress').val();
-
         $.ajax({
             url:'/setting/getAddress',
             type: 'POST',
@@ -116,39 +103,39 @@
 
 {% block content %}
             <div id="settingContentWrap">
-                <h3 id="settingHeadLine">User Settings</h3>
+                <h3 id="settingHeadLine" data-lang="userset">[userset]</h3>
                 <div id="settingWrap" class="fix">
                     <div>
                         <form action="/setting/changePassword" method="POST" name="cpf">{% csrf_token %}
                             <div class="line">
-                                <p>비밀번호</p>
+                                <p data-lang="password">[password]</p>
                                 <input type="password" name="password" id="password">
                             </div>
                             <div class="line">
-                                <p>새 비밀번호</p>
+                                <p data-lang="newpassword">[newpassword]</p>
                                 <input type="password" name="change_password" id="change_password">
                             </div>
                             <div class="line">
-                                <p>새 비밀번호 확인</p>
+                                <p data-lang="newpasswordck">[newpasswordck]</p>
                                 <input type="password" name="confirm_password" id="confirm_password">
                             </div>
                             <div class="line">
-                                <button>저장</button>
+                                <button data-lang="save">[save]</button>
                             </div>
                         </form>
                     </div>
                     <div>
                         <form action="/setting/changeUserInfo" method="POST" name="uif" enctype="multipart/form-data">{% csrf_token %}
                             <div class="line">
-                                <p>사용자 이름</p>
+                                <p data-lang="username">[username]</p>
                                 <input type="text" value="{{ user.name }}" name="user_name" id="user_name">
                             </div>
                             <div class="line">
-                                <p>사용자 이메일</p>
+                                <p data-lang="useremail">[useremail]</p>
                                 <input type="email" value="{{ user.email }}" name="user_email" id="user_email">
                             </div>
                             <div class="line">
-                                <p>사용자 프로필</p>
+                                <p data-lang="userprofile">[userprofile]</p>
                                 {% if user.propic %}
                                     <div class="settingPropic"><img src="{{ user.propic.url }}"width="80px"></div>
                                 {% else %}
@@ -157,110 +144,116 @@
                                 <input type="file" name="user_propic" id="user_propic">
                             </div>
                             <div class="line">
-                                <button>저장</button>
+                                <button data-lang="save">[save]</button>
                             </div>
                         </form>
                     </div>
                     <div>
                         <div class="line">
-                            <p>알림 기능</p>
-                            <div id="themeTap" class="fix">
-                                <div>
-                                    <div>
-                                        <input type="radio" name="color_theme"><span>주문</span>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="color_theme"><span>디자인</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <input type="radio" name="color_theme"><span>신규회원</span>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="color_theme"><span>기계</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="submit-btn">
-                                <span><button onclick="alramchange()">저장</button></span>
+                            <div class="line">
+                                <p data-lang="language">[language]</p>
+                                <input type="radio" id="lang_theme" name="lang_theme" value="0"><span data-lang="hangle">[hangle]</span>
+                                <input type="radio" id="lang_theme" name="lang_theme" value="1"><span data-lang="english">[english]</span>
                             </div>
                             <div class="line">
-                                <p>언어</p>
-                                <input type="radio" name="lang_theme"><span>한글</span>
-                                <input type="radio" name="lang_theme"><span>영어</span>
-                            </div>
-                            <div class="line">
-                               <button>저장</button>
+                               <button onclick="langchange()" data-lang="save">[save]</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 {% if user.is_superuser %}
                 <div id="companySettingWrap">
-                    <h3 id="companyHeadLine">Company Settings</h3>
-                    <div>
+                    <h3 id="companyHeadLine" data-lang="comset">[comset]</h3>
+                    <div class="companyadd">
                         <form action="/setting/companyInfo" method="POST" name="cif" id="cif">{% csrf_token %}
                             <div class="line">
-                                <p>회사명 등록</p>
+                                <p data-lang="companynameinput">[companynameinput]</p>
                                 <input type="text" name="company" id="company" value="{{ company.name }}">
                             </div>
                             <div class="line">
-                                <p>회사코드</p>
+                                <p data-lang="companycode">[commpanycode]</p>
                                 <input type="text" name="company_code" id="company_code" value="{{ company.code }}">
                             </div>
                             <div class="line">
-                                <p>회사주소</p>
+                                <p data-lang="companynum">[companynum]</p>
+                                <input type="text" name="company_num" id="company_num" value="">
+                            </div>
+                            <div class="line">
+                                <p data-lang="companyadress">[companyadress]</p>
                                 <select id="topAddress" onchange="changeAddress(1)">
-                                    <option>선택해주세요</option>
+                                    <option data-lang="select">[select]</option>
                                     {% for addressObj in addressList %}
                                         <option value="{{ addressObj.code }}">{{ addressObj.value }}</option>
                                     {% endfor %}
                                 </select>
                                 <select id="midAddress" onchange="changeAddress(2)">
-                                    <option>선택해주세요</option>
+                                    <option data-lang="select">[select]</option>
                                 </select>
                                 <select id="bottomAddress" onchange="setAddress()">
-                                    <option>선택해주세요</option>
+                                    <option data-lang="select">[select]</option>
                                 </select>
                             </div>
                             <div class="line">
-                                <p>기계사용</p>
-                                <input type="radio" name="machineyn" value="1"><span class="machineUse">사용</span>
-                                <input type="radio" name="machineyn" value="2"><span>사용안함</span>
+                                <p data-lang="machineactive">[machineactive]</p>
+                                <input type="radio" name="machineyn" value="1"><span class="machineUse" data-lang="active">[active]</span>
+                                <input type="radio" name="machineyn" value="2"><span data-lang="inactive">inactive</span>
                             </div>
                             <div class="line">
-                               <button>저장</button>
+                               <button data-lang="save">[save]</button>
                             </div>
                         </form>
                     </div>
                     <div>
-                        <form action="/setting/createDepartment" method="POST" name="cif" id="cif">{% csrf_token %}
-                            <div class="line">
-                                <p>부서명 등록</p>
-                                <input type="text" autocomplete="off" name="department" id="department">
+                          <div class="accountArea1">
+                        <form action="/setting/accountadd" method="POST" name="cif" id="cif">{% csrf_token %}
+                                <p class="accountTitle1" data-lang="accountinput">[accountinput]</p>
+                                <div class="accountline1">
+                                    <input type="hidden" id="accountid" name="accountid">
+                                    <p data-lang="accountname">[accountname]</p>
+                                    <input type="text" autocomplete="off" name="accountname" id="accountname">
+                                </div>
+                                <div class="accountline2">
+                                    <p data-lang="accountmanager">[accountmanager]</p>
+                                    <input type="text" autocomplete="off" name="accountmanage" id="accountmanage">
+                                </div>
+                                <div class="accountline1">
+                                    <p data-lang="accounttype">[accounttype]</p>
+                                    <input type="text" autocomplete="off" name="accountwork" id="accountwork">
+                                </div>
+                                <div class="accountline2">
+                                    <p data-lang="accountevent">[accountevent]</p>
+                                    <input type="text" autocomplete="off" name="accounttype" id="accounttype">
+                                </div>
+                                <div class="accountline3">
+                                    <p data-lang="accountnum">[accountnum]</p>
+                                    <input type="text" autocomplete="off" name="accountnum" id="accountnum" maxlength="12">
+                                </div>
+                                <div class="accountline4">
+                                    <p data-lang="acccountadress">[acccountadress]</p>
+                                    <input type="text" autocomplete="off" name="accountaddress" id="accountaddress">
+                                </div>
+                                <button type="submit" data-lang="enrollment">[enrollment]</button>
+                                </form>
+                                   <button onclick="accountmodi()" class="edit_btn" data-lang="modified">[modified]</button>
+                                   <button onclick="accountdel()" class="del_btn" data-lang="delete">[delete]</button>
                             </div>
-                            <div class="line">
-                                <p>부서리스트</p>
-                                <select id="departmentList" size="5">
-                                    {% for department in departmentList %}
-                                        <option value="{{ department.id }}">{{ department.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="line">
-                               <button>저장</button>
-                            </div>
-                        </form>
+                        <div class="accountArea2">
+                            <p data-lang="accountlist">[accountlist]</p>
+                            <select id="departmentList" size="10">
+                                {% for account in accountlist %}
+                                    <option value="{{ account.id }}" onclick="accountselect({{ account.id }})">{{ account.accountname }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
                     <div>
                         <div class="userLine">
-                            <p>유저 리스트</p>
+                            <p data-lang="userlist">[userlist]</p>
 
                             <!-- User List -->
                             <div id="userListWrap">
                                 {% for userInfo in userList %}
-                                <div class="userList fix">
+                                <div class="userList fix" ondblclick="userdetail({{ userInfo.id }})">
                                     <div class="propicBox">
                                         {% if userInfo.propic %}
                                         <img src="{{ userInfo.propic.url }}" width="100px">
@@ -279,14 +272,26 @@
                                             <span>{{ userInfo.create_date|date:"Y-m-d" }}</span>
                                         </div>
                                         <div class="uLine">
-                                            <span>Section</span>
-                                            <span>{{ userInfo.group_code.name }}</span>
+                                            <span>Phone</span>
+                                            <span>{{ userInfo.phone }}</span>
+                                        </div>
+                                        <div class="uLine">
+                                            <span>Rating</span>
+                                            {% if userInfo.level == 1 %}
+                                                <span data-lang="worker">[worker]</span>
+                                            {% endif %}
+                                            {% if userInfo.level == 2 %}
+                                                <span data-lang="manager">[manager]</span>
+                                            {% endif %}
+                                            {% if userInfo.level == 3 %}
+                                                <span data-lang="generalmanager">[generalmanager]</span>
+                                            {% endif %}
                                         </div>
                                         <div class="uLine">
                                             {% if userInfo.is_active == True %}
-                                            <span class="userState">사용중</span>
+                                            <span class="userState" data-lang="useractive">[useractive]</span>
                                             {% else %}
-                                            <span class="uerState stateBtn" onclick="activeUser({{ userInfo.id }})">수락</span>
+                                            <span class="uerState stateBtn" onclick="activeUser({{ userInfo.id }})" data-lang="accept">[accept]</span>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -295,8 +300,6 @@
                             </div>
 
                             <!-- Usre End -->
-
-
                         </div>
                     </div>
                 </div>
@@ -330,7 +333,6 @@
                         <div class="line margin_exempt">
                             <label for="detailOrderType">오더구분</label>
                             <select name="detailOrderType" id="detailOrderType" class="justselect2">
-
                             </select>
                         </div>
                         <div class="line margin_exempt">
@@ -369,20 +371,6 @@
                                     <input type="text" id="subDesignQty" name="subDesignQty">
                                 </div>
                                 <input type="hidden" id="oid" name="oid">
-                                <!--
-                                <div class="subLine subLine_exempt">
-                                    <label class="subLabel">WPI</label>
-                                    <input type="text">
-                                </div>
-                                <div class="subLine">
-                                    <label class="subLabel">CPC</label>
-                                    <input type="text">
-                                </div>
-                                <div class="subLine">
-                                    <label class="subLabel">Width</label>
-                                    <input type="text">
-                                </div>
-                                -->
                             </div>
                             <div id="subModalBtnBox">
                                 <span onclick="modifyOrder()">저장</span>
@@ -394,6 +382,43 @@
                 </div>
             </div>
             </form>
-            </div>
+            <form>
+                <div id="userdetail">
+                    <div class="detailusertop">
+                        <h3 data-lang="userinformation">[userinformation]</h3>
+                    </div>
+                    <div class="User_wrapper1">
+                        <div id="userimg">
 
+                            <img src="{% static 'image/ningen.png' %}" width="120px">
+                            <div id="userdid" name="userdid"></div>
+                         </div>
+                    </div>
+                    <div class="User_wrapper2">
+                        <div class="line">
+                            <div for="userdlevel" data-lang="userlevel">[userlevel]</div>
+                            <select name="userdlevel" id="userdlevel" class="userdlevelsel">
+
+                            </select>
+                        </div>
+                        <div class="line">
+                            <div for="userdphone" data-lang="usernumber">[usernumber]</div>
+                            <input type="text" id="userdphone" name="userdphone">
+                        </div>
+                        <div class="line">
+                            <div for="userdemail" data-lang="useremail">[useremail]</div>
+                            <input type="text" id="userdemail" name="userdemail">
+                            <input type="hidden" id="userids" name="userids">
+                        </div>
+                    </div>
+                    <div class="userdetailmodalcon">
+                        <div>
+                            <span onclick="usermodelclose()" data-lang="close">[close]</span>
+                            <span onclick="userdelete()" data-lang="delete">[delete]</span>
+                            <span onclick="usermodelupdate()" data-lang="modified">[modified]</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
 {% endblock content %}

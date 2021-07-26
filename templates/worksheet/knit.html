@@ -5,8 +5,43 @@
     <meta charset="UTF-8">
     <title>작업설계도</title>
       <script type='text/javascript' src="{% static 'js/jquery-1.12.3.min.js' %}"></script>
+
         <link rel="stylesheet" href="{% static 'css/design.css' %}">
         <script type="text/javascript" src="{% static 'js/design.js' %}"></script>
+        <script type="text/javascript">
+            lang_code = {{ userlang.lang_code }};
+                const lang = {
+                    ko:{
+                        warpplan:"경 편 설 계 도", yarnnumber:"사번", yarnmaker:"원사메이커", yarntype:"사종", color:"색상", uniquecode:"고유코드",
+                        ratio:"비율(%)", transmission:"송출(mm/rack)", boncount:"본수", beamcount:"빔수", totalboncount:"총 본수", fabric:"원단",
+                        waledensity:"웨일밀도", coursedensity:"코스밀도", width:"폭", weightwidth:"중량/폭", arrangement:"배열", remark:"비고",
+                        weavechart:"조직도", magnification:"배율 : ", processingpaper:"가공지", greige:"생지"
+
+                    },
+                    en:{
+                        warpplan:"Warp plan chart", yarnnumber:"Yarn number", yarnmaker:"Yarn maker", yarntype:"Yarn type", color:"Color",
+                        uniquecode:"unique code", ratio:"ratio(%)", transmission:"transmission(mm/rack)", boncount:"bon count", beamcount:"beam count",
+                        totalboncount:"total bon count", fabric:"Fabric", waledensity:"Wake density", coursedensity:"Course density", width:"Width",
+                        weightwidth:"Weight/Width", arrangement:"Arrangement", remark:"Remark", weavechart:"Weave chart", magnification:"Magnification : ",
+                        processingpaper:"processing paper", greige:"Greige"
+                    }
+                };
+                // 언어별 렌더링
+                function render(locale) {
+                    const $lang = document.querySelectorAll("[data-lang]");
+
+                    $lang.forEach(el => {
+                        const code = el.dataset.lang;
+                        el.textContent = lang[locale][code]
+                    });
+                };
+                if(lang_code==0){
+                    render("ko");
+                };
+                if(lang_code==1){
+                    render("en");
+                };
+            </script>
     <style>
         #designData{
             padding:0;
@@ -51,7 +86,7 @@
         <div id="designData">
                     <div id="orderWrap">
                         <div id="designOrderWrap">
-                            <h2 style="text-align:center;">경 편 설 계 도</h2>
+                            <h2 data-lang="warpplan" style="text-align:center;" >[warpplan]</h2>
                             <span id="qrCode"><img src="/media/{{ qrCode }}" width="90"></span>
                             <span id="printIcon" onclick="window.print()"><img src="{% static 'image/print2.png' %}" width="30px"></span>
                         </div>
@@ -81,7 +116,7 @@
                                 <thead>
                                     <tr>
                                         <th>BAR</th>
-                                        <th>사번</th>
+                                        <th data-lang="yarnnumber">[yarnnumber]</th>
                                         <th>원사메이커</th>
                                         <th>사종</th>
                                         <th>색상</th>

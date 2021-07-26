@@ -2,56 +2,54 @@
 {% load staticfiles %}
 {% block content %}
             <div id="contentsWrap" class="fix">
-                <div class="content fix">
+                <div class="contentfix">
                     <div id="orderWrap" class="fix">
-                        <h4>Order</h4>
+                        <h4 style="margin-left: 10px">Order</h4>
                         <div class="orderDiv">
                             <div>
                                 <div class="orderImg"><img src="{% static 'image/bell.png' %}" height="100%"></div>
                                 <div class="orderText">
                                     <p><strong>{{ totalOrder }}</strong></p>
-                                    <p>total Order</p>
+                                    <p id="orderfont">total Order</p>
                                 </div>
                             </div>
                             <div>
                                 <div class="orderImg"><img src="{% static 'image/bell.png' %}" height="100%"></div>
                                 <div class="orderText">
                                     <p><strong>{{ pendingOrder }}</strong></p>
-                                    <p>pending Order</p>
+                                    <p id="orderfont">pending Order</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="orderDiv">
                             <div>
                                 <div class="orderImg"><img src="{% static 'image/bell.png' %}" height="100%"></div>
                                 <div class="orderText">
                                     <p><strong>{{ progressOrder }}</strong></p>
-                                    <p>Order in progress</p>
+                                    <p id="orderfont">Order in progress</p>
                                 </div>
                             </div>
                             <div>
                                 <div class="orderImg"><img src="{% static 'image/bell.png' %}" height="100%"></div>
                                 <div class="orderText">
                                     <p><strong>{{ compOrder }}</strong></p>
-                                    <p>completed Order</p>
+                                    <p id="orderfont">completed Order</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div id="efficiencyWrap" class="fix">
-                        <h4>Efficiency</h4>
+                        <h4 style="margin-left: 10px">Efficiency</h4>
                         <div>
                             <div id="circle1">
-                                <span class="e_text">시간 가동률</span>
+                                <span class="e_text1" data-lang="operating">[operating]</span>
                             </div>
                             <div class="e_botText">
-                                <p>설비보유시간: <span class="machineTime1">9000</span></p>
-                                <p>가동작업시간: <span class="machineTime2">3000</span></p>
+                                <p>설비보유시간: <span class="machineTime1">{{ totaltime }}</span></p>
+                                <p>가동작업시간: <span class="machineTime2">{{ totalplaytime }}</span></p>
                             </div>
                         </div>
                         <div>
                             <div id="circle2">
-                                <span class="e_text">설비 가동률121212</span>
+                                <span class="e_text2" data-lang="facilityoperating">[facilityoperating]</span>
                             </div>
                             <div class="e_botText">
                                 <p>설비보유대수: <span class="machineQty1">{{ all_machine_count }}</span></p>
@@ -59,16 +57,8 @@
                             </div>
                         </div>
                     </div>
-                    <div id="resultWrap">
-                        <h4>Production Results</h4>
-                        <div>
-                            <canvas id="myChart" style="padding-top: 60px;"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="content fix">
                     <div id="con1">
-                        <h4>Weather</h4>
+                        <h4 style="margin-left: 10px">Weather</h4>
                         <div id="weatherWrap">
                             <div class="weatherDiv">
                                 <div>
@@ -220,6 +210,11 @@
                             </div>
                         </div>
                     </div>
+                    <div style="width: 0px;height: 0px">
+                        <canvas id="myChart" style="padding-top: 0px;"></canvas>
+                    </div>
+                </div>
+                <div class="contentfixs">
                     <div id="order_status">
                         <h4>Production Status by Order</h4>
                         <div>
@@ -259,36 +254,36 @@
         </div>
     </div>
   <script>
-
+    lang_code = {{ userlang.lang_code }};
+    const lang = {
+        ko:{
+            operating:"시간 가동률", facilityoperating:"설비 가동률", retention:"설비보유시간", operationtime:"가동작업시간",
+            countof:"설비보유대수", countofoperating:"가동설비대수"
+        },
+        en:{
+            operating:"Time operating rate", facilityoperating:"Facility operating rate", retention:"equipment retention time",
+            operationtime:"operation time", countof:"count of equipment", countofoperating:"count of operating equipment"
+        }
+    };
+    // 언어별 렌더링
+    function render(locale) {
+        const $lang = document.querySelectorAll("[data-lang]");
+        $lang.forEach(el => {
+            const code = el.dataset.lang;
+            el.textContent = lang[locale][code]
+        })
+    };
+    if(lang_code==0){
+        render("ko");
+    };
+    if(lang_code==1){
+        render("en");
+        $(".e_text1").css({left:70});
+        $(".e_text2").css({left:65});
+    };
     $('document').ready(function(){
         var ctx = document.getElementById('myChart').getContext('2d');
         var data = {
-            labels: [
-                'A000!',
-                'B',
-                'C',
-                'D',
-                'E'
-            ],
-            datasets: [
-                {
-                    data:[180, 50, 120, 119, 13],
-                    backgroundColor: [
-                        'rgb(175,203,233)',
-                        'rgb(148,148,196)',
-                        'rgb(157,166,208)',
-                        'rgb(191,223,230)',
-                        'rgb(188,219,202)'
-                    ],
-                    hoverBackgroundColor: [
-                        'rgb(109,169,218)',
-                        'rgb(72,88,161)',
-                        'rgb(88,114,178)',
-                        'rgb(139,200,211)',
-                        'rgb(132,193,165)'
-                    ]
-                }
-            ]
         };
 
 

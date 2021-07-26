@@ -15,6 +15,7 @@ class FSTY_CAD_Design_Data(models.Model):
     CAD_Design_Data_create_date = models.DateTimeField(auto_now_add=True, blank=True)
     CAD_Design_Data_trc_file = models.FileField(upload_to=upload_product_file, null=True)
     CAD_Design_Data_magnification = models.CharField(max_length=10, null=True, blank=True)
+    Linkage_code = models.CharField(max_length=5000, null=True, default=None)
 
     class Meta:
         db_table = 'FSTY_CAD_Design_Data'

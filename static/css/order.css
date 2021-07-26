@@ -15,7 +15,7 @@
     margin-bottom:13px;
 }
 
-#orderContentWrap > div span, #detailOrderModal label {
+#orderContentWrap > div span, #detailOrderModal label,#detailStyleModal label {
     display:inline-block;
     width:113px;
     text-align:center;
@@ -77,7 +77,7 @@
     margin-right:15px;
 }
 
-#orderContentWrap input, #orderContentWrap select, #detailOrderModal input {
+#orderContentWrap input, #orderContentWrap select, #detailOrderModal input , #detailStyleModal input {
     width:150px;
     text-align:center;
     padding: 3px;
@@ -141,7 +141,7 @@
 }
 
 #designOrderTable tr:nth-child(2n+1), #designListTable tr:nth-child(2n+1), #designOrderTable tr:nth-child(2n+1) input{
-   background:rgb(239,242,245);
+    background:rgb(239,242,245);
 }
 
 #designListWrap {
@@ -171,20 +171,20 @@
     border:0;
 }
 
-#orderListWrap table {
+#orderListWrap table, #styleListWrap table {
     text-align:center;
 }
 
-#orderListWrap table tr {
+#orderListWrap table tr, #styleListWrap table tr {
     height:31px;
 }
 
-#orderListWrap table tr:nth-child(2n+1){
+#orderListWrap table tr:nth-child(2n+1), #styleListWrap table tr:nth-child(2n+1){
     background:rgb(239,242,245);
-
 }
 
-#orderListWrap h3 {
+
+#orderListWrap h3,#styleListWrap h3 {
     margin-bottom:5px;
 }
 
@@ -366,8 +366,10 @@
 /* orderList */
 #orderContentWrap #orderListWrap {
     margin-top:15px;
-    height:495px;
+    height:510px;
     overflow:auto;
+    width: 50%;
+    float: left;
 }
 
 #orderContentWrap #designTopInfo span {
@@ -382,15 +384,19 @@
     background:#fff;
     margin-right:15px;
 }
+#orderContentWrap #styleListWrap > div {
+    background:#fff;
+    margin-right:15px;
+}
 
-#orderListWrap table {
+#orderListWrap table, #styleListWrap table  {
     width:100%;
     border-collapse: collapse;
     color:#000;
     font-size:12px;
 }
 
-#orderListWrap table th, #orderListWrap table td {
+#orderListWrap table th, #orderListWrap table td,#styleListWrap table th, #styleListWrap table td {
     border:1px solid #a2a3a4;
     padding:5px 0;
     text-overflow: ellipsis;
@@ -400,7 +406,10 @@
     background:rgb(62, 67, 88);
     color:#fff;
 }
-
+#styleListWrap table th {
+    background:rgb(62, 67, 88);
+    color:#fff;
+}
 /* table */
 table{
     display: block;
@@ -415,8 +424,11 @@ tbody{
     max-height: 140px;
 }
 
-#orderListWrap tbody{
+#orderListWrap tbody,#styleListWrap tbody{
     max-height: 430px;
+    height: 430px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 #designListTable tbody{
@@ -435,28 +447,89 @@ tbody{
     width: 100px;
 }
 
-#orderListWrap th:nth-of-type(1), #orderListWrap td:nth-of-type(1) {
-    width: 65px;
+#orderListWrap th:nth-of-type(1), #orderListWrap td:nth-of-type(1){
+    width: 35px;
 }
 
-#orderListWrap th:nth-of-type(2), #orderListWrap td:nth-of-type(2) {
-    width: 140px;
+#orderListWrap th:nth-of-type(2), #orderListWrap td:nth-of-type(2){
+    width: 107px;
 }
 
-#orderListWrap th:nth-of-type(3), #orderListWrap td:nth-of-type(3) {
-    width: 130px;
+#orderListWrap th:nth-of-type(3), #orderListWrap td:nth-of-type(3){
+    width: 57px;
 }
 
-#orderListWrap th:nth-of-type(4), #orderListWrap td:nth-of-type(4) {
+#orderListWrap th:nth-of-type(4), #orderListWrap td:nth-of-type(4){
+    width: 102px;
+}
+
+#orderListWrap th:nth-of-type(5), #orderListWrap td:nth-of-type(5){
+    width: 102px;
+}
+#orderListWrap th:nth-of-type(6), #orderListWrap td:nth-of-type(6){
+    width: 40px;
+}
+
+
+
+#styleListWrap th:nth-of-type(1), #styleListWrap td:nth-of-type(1){
+    width: 45px;
+}
+
+#styleListWrap th:nth-of-type(2), #styleListWrap td:nth-of-type(2){
+    width: 123px;
+}
+
+#styleListWrap th:nth-of-type(3), #styleListWrap td:nth-of-type(3){
+    width: 70px;
+}
+
+#styleListWrap th:nth-of-type(4), #styleListWrap td:nth-of-type(4){
+    width: 120px;
+}
+
+#styleListWrap th:nth-of-type(5), #styleListWrap td:nth-of-type(5){
+    width: 120px;
+}
+
+
+
+#styleListWrap th:nth-of-type(5){
+    width: 138px;
+}
+
+
+
+
+#orderListWrap td:nth-of-type(6){
     width: 80px;
 }
-
-#orderListWrap th:nth-of-type(5), #orderListWrap td:nth-of-type(5) {
-    width: 80px;
+#orderListWrap th, #orderListWrap td,#styleListWrap th, #styleListWrap td{
+    height: 30px;
 }
 
-#orderListWrap th:nth-of-type(6), #orderListWrap td:nth-of-type(6) {
-    width: 80px;
+
+#orderListWrap th:nth-of-type(1){
+    width: 38px;
+}
+
+#orderListWrap th:nth-of-type(2){
+    width: 123px;
+}
+
+#orderListWrap th:nth-of-type(3){
+    width: 64px;
+}
+
+#orderListWrap th:nth-of-type(4){
+    width: 116px;
+}
+
+#orderListWrap th:nth-of-type(5){
+    width: 115px;
+}
+#orderListWrap th:nth-of-type(6){
+    width: 110px;
 }
 
 #orderListWrap th:nth-of-type(7), #orderListWrap td:nth-of-type(7) {
@@ -514,8 +587,10 @@ tbody{
 #orderContentWrap #orderListWrap tr {
     cursor:pointer;
 }
-
-#orderContentWrap #orderListWrap .listSelected {
+#orderContentWrap #styleListWrap tr{
+    cursor:pointer;
+}
+#orderContentWrap #orderListWrap .listSelected,#orderContentWrap #styleListWrap .listSelected {
     background:#bbe7ff;
 }
 
@@ -523,6 +598,17 @@ tbody{
 
 #detailOrderModal {
     position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-200px;
+    margin-left:-240px;
+    width:647px;
+    background-color:#fff;
+    z-index:100000;
+    display:none;
+}
+#detailStyleModal{
+     position:absolute;
     top:50%;
     left:50%;
     margin-top:-200px;
@@ -545,11 +631,11 @@ tbody{
     margin-right:20px;
 }
 
-#detailOrderModal .line {
+#detailOrderModal .line ,#detailStyleModal .line {
     margin-bottom:10px;
 }
 
-#detailOrderModal h3 {
+#detailOrderModal h3, #detailStyleModal h3 {
     background:#3e4358;
     padding:10px 0 10px 30px;
 }
@@ -598,11 +684,11 @@ tbody{
     margin-bottom:38px;
 }
 
-#detailOrderModal .subLine.lastSubLine {
+#detailOrderModal .subLine.lastSubLine , #detailStyleModal .subLine.lastSubLine{
     margin-bottom:0;
 }
 
-#detailOrderModal .margin_exempt {
+#detailOrderModal .margin_exempt , #detailStyleModal .margin_exemp{
     margin-bottom:8px;
 }
 
@@ -610,7 +696,7 @@ tbody{
     color:#fff;
 }
 
-#detailOrderModal .subLabel {
+#detailOrderModal .subLabel, #detailStyleModal .subLabel {
     background:#3e437e;
 }
 
@@ -634,8 +720,24 @@ tbody{
 }
 
 #orderListWrap table span {
-    width: 50px;
-    color: #444;
+    padding: 3px;
+    font-size: 8px;
+    cursor: pointer;
+    text-align: center;
+    background: #fff;
+    width: auto;
+}
+#styleListWrap table span{
+    padding: 3px;
+    font-size: 8px;
+    cursor: pointer;
+    text-align: center;
+    background: #fff;
+    width: auto;
+}
+.order_btn{
+    margin:0 auto;
+    width: 65px;
     border: 1px solid #a9a9a9;
     padding: 3px;
     background: #fff;
@@ -643,4 +745,10 @@ tbody{
     cursor: pointer;
     border-radius: 5px;
     text-align: center;
+}
+#orderContentWrap #styleListWrap{
+    margin-top: 15px;
+    height: 510px;
+    overflow: auto;
+    width: 50%;
 }

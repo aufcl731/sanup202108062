@@ -30,9 +30,30 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
+#CORS_ALLOW_CREDENTIALS = True
 AUTH_USER_MODEL = 'account.User'
 
 # Application definition
+#CORS_ALLOW_METHODS = (
+#    'DELETE',
+#    'GET',
+#    'OPTIONS',
+#    'PATCH',
+#    'POST',
+#    'PUT',
+#)
+
+#CORS_ALLOW_HEADERS = (
+#    'accept',
+#    'accept-encoding',
+#    'authorization',
+#    'content-type',
+#    'dnt',
+#    'origin',
+#  'user-agent',
+#    'x-csrftoken',
+#    'x-requested-with',
+#)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -49,6 +70,9 @@ INSTALLED_APPS = [
     'setting',
     'machine',
     'schedule',
+    'corsheaders',
+    'rest_framework',
+    'rest_framework_swagger'
 
 ]
 
@@ -98,16 +122,16 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+#orderContentWrap #orderListWrap
 '''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'texddm_2020',                      # Or path to database file if using sqlite3.
+        'NAME': 'texddm_2020_test',                      # Or path to database file if using sqlite3.
         'USER': 'postgres',                      # Not used with sqlite3.
         'PASSWORD': '12351235gg',                  # Not used with sqlite3.
         'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
@@ -135,7 +159,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Seoul'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -153,4 +177,4 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+#SESSION_EXPIRE_AT_BROWSER_CLOSE = True

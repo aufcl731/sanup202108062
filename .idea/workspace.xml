@@ -1,7 +1,593 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e84a9fc7-3522-4770-a2c6-62a5f546bab3" name="Default Changelist" comment="" />
+    <list default="true" id="e84a9fc7-3522-4770-a2c6-62a5f546bab3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/account/migrations/0002_auto_20210409_0831.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/account/migrations/0003_merge_20210609_1641.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/design_data/migrations/0002_fsty_cad_design_data_linkage_code.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/design_data/serializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/design_data/url_image_upload.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dump_20200519" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/machine/serializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/materials/migrations/0002_auto_20201117_1622.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/materials/migrations/0003_auto_20201117_1740.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/materials/migrations/0004_auto_20201117_1948.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/materials/migrations/0005_auto_20201117_1955.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/materials/migrations/0006_auto_20201201_1704.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/materials/migrations/0028_merge_20210408_1540.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/materials/migrations/0029_auto_20210514_1412.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/materials/migrations/0030_auto_20210618_1127.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/1/img/MESH1_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/1/img/MESH1_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/1/img/OT-8013-1_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/1/img/OT-8013-1_design_GfWc0lb.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/1/img/OT-8013-1_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/1/img/OT-8013-1_simulation_mxe5SRP.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/1/img/TENSION_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/1/img/TENSION_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/1/xml/MESH1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/1/xml/OT-8013-1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/1/xml/OT-8013-1_0CQsndE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/1/xml/TENSION.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/10/img/05-09_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/10/img/05-09_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/10/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/10/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/10/img/ST-446-1_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/10/img/ST-446-1_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/10/xml/05-09.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/10/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/10/xml/ST-446-1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/11/img/NO_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/11/img/NO_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/11/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/11/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/11/img/OT-B146_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/11/img/OT-B146_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/11/xml/NO.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/11/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/11/xml/OT-B146.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/12/img/8308_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/12/img/8308_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/12/img/OT-B095_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/12/img/OT-B095_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/12/img/OT9017_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/12/img/OT9017_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/12/xml/8308.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/12/xml/OT-B095.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/12/xml/OT9017.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/13/img/OT-B106_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/13/img/OT-B106_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/13/img/OT9017_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/13/img/OT9017_design_VNWZDsr.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/13/img/OT9017_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/13/img/OT9017_simulation_MqoqQ2V.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/13/xml/OT-B106.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/13/xml/OT9017.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/13/xml/OT9017_IxI60IW.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/14/img/FUZZ1_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/14/img/FUZZ1_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/14/img/OT9017_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/14/img/OT9017_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/14/xml/FUZZ1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/14/xml/OT9017.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/15/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/15/img/OT-8013-2_design_rfAhGFE.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/15/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/15/img/OT-8013-2_simulation_xsX2awS.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/15/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/15/xml/OT-8013-2_4lrSto0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/16/img/8308_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/16/img/8308_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/16/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/16/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/16/xml/8308.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/16/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/17/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/17/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/17/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/18/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/18/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/18/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/19/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/19/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/19/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/img/01-10_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/img/01-10_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/img/08-170-1_LG_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/img/08-170-1_LG_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/img/OT-8013-1_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/img/OT-8013-1_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/img/SP7004_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/img/SP7004_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/img/TENSION_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/img/TENSION_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/xml/01-10.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/xml/08-170-1_LG.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/xml/OT-8013-1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/xml/SP7004.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/2/xml/TENSION.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/20/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/20/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/20/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/21/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/21/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/21/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/22/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/22/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/22/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/23/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/23/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/23/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/24/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/24/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/24/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/25/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/25/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/25/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/26/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/26/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/26/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/27/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/27/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/27/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/28/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/28/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/28/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/29/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/29/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/29/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/3/img/05-14_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/3/img/05-14_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/3/img/OT-8013-1_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/3/img/OT-8013-1_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/3/img/OT-B106_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/3/img/OT-B106_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/3/img/SP9202B_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/3/img/SP9202B_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/3/xml/05-14.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/3/xml/OT-8013-1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/3/xml/OT-B106.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/3/xml/SP9202B.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/30/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/30/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/30/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/31/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/31/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/31/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/32/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/32/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/32/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/33/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/33/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/33/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/34/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/34/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/34/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/35/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/35/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/35/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/36/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/36/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/36/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/37/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/37/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/37/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/38/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/38/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/38/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/39/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/39/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/39/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/img/05-12_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/img/05-12_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/img/123123_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/img/123123_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/img/MESH1_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/img/MESH1_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/img/OT-9183_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/img/OT-9183_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/img/TENSION_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/img/TENSION_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/xml/05-12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/xml/123123.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/xml/MESH1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/xml/OT-9183.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/4/xml/TENSION.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/40/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/40/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/40/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/41/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/41/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/41/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/42/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/42/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/42/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/43/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/43/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/43/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/44/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/44/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/44/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/45/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/45/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/45/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/46/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/46/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/46/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/47/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/47/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/47/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/48/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/48/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/48/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/49/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/49/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/49/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/img/01-10_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/img/01-10_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/img/OT-8013-1_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/img/OT-8013-1_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/img/OT-B106_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/img/OT-B106_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/img/ST446_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/img/ST446_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/img/TENSION_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/img/TENSION_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/img/TR-8530-ROL_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/img/TR-8530-ROL_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/xml/01-10.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/xml/OT-8013-1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/xml/OT-B106.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/xml/ST446.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/xml/TENSION.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/5/xml/TR-8530-ROL.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/50/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/50/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/50/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/51/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/51/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/51/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/52/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/52/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/52/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/53/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/53/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/53/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/54/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/54/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/54/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/55/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/55/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/55/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/56/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/56/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/56/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/57/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/57/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/57/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/58/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/58/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/58/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/59/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/59/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/59/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/img/01-10_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/img/01-10_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/img/OT-8013-1_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/img/OT-8013-1_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/img/S-0426_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/img/S-0426_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/img/SP-8116_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/img/SP-8116_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/img/SP-C001_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/img/SP-C001_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/img/ST446_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/img/ST446_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/xml/01-10.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/xml/OT-8013-1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/xml/S-0426.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/xml/SP-8116.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/xml/SP-C001.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/6/xml/ST446.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/60/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/60/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/60/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/61/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/61/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/61/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/62/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/62/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/62/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/63/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/63/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/63/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/64/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/64/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/64/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/65/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/65/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/65/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/66/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/66/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/66/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/67/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/67/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/67/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/68/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/68/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/68/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/69/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/69/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/69/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/img/01-10_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/img/01-10_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/img/OT-8013-1_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/img/OT-8013-1_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/img/OT-B106_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/img/OT-B106_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/img/OT9017_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/img/OT9017_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/img/ST446_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/img/ST446_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/img/TR-1205-ROL_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/img/TR-1205-ROL_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/xml/01-10.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/xml/OT-8013-1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/xml/OT-B106.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/xml/OT9017.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/xml/ST446.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/7/xml/TR-1205-ROL.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/70/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/70/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/70/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/71/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/71/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/71/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/72/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/72/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/72/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/73/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/73/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/73/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/74/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/74/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/74/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/75/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/75/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/75/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/76/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/76/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/76/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/77/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/77/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/77/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/78/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/78/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/78/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/79/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/79/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/79/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/img/01-10_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/img/01-10_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/img/8308_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/img/8308_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/img/OT-8013-1_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/img/OT-8013-1_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/img/ST446_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/img/ST446_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/img/TR-1205-ROL_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/img/TR-1205-ROL_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/xml/01-10.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/xml/8308.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/xml/OT-8013-1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/xml/ST446.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/8/xml/TR-1205-ROL.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/80/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/80/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/80/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/81/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/81/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/81/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/82/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/82/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/82/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/83/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/83/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/83/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/84/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/84/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/84/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/85/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/85/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/85/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/86/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/86/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/86/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/87/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/87/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/87/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/88/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/88/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/88/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/89/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/89/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/89/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/img/333_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/img/333_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/img/8308_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/img/8308_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/img/OT-8013-1_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/img/OT-8013-1_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/img/ST446_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/img/ST446_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/xml/333.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/xml/8308.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/xml/OT-8013-1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/9/xml/ST446.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/90/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/90/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/90/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/91/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/91/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/91/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/92/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/92/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/92/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/93/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/93/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/93/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/94/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/94/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/94/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/95/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/95/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/95/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/96/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/96/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/96/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/97/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/97/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/97/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/98/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/98/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/98/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/99/img/OT-8013-2_design.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/99/img/OT-8013-2_simulation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/project/99/xml/OT-8013-2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/1/qr_code_image_c8hAy25.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/1/qr_code_image_eXjxKKO.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/1/qr_code_image_fZCRz3M.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/1/qr_code_image_niKabtB.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/12/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/12/qr_code_image_Rdy0QCF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/13/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/14/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/14/qr_code_image_6fuYQlN.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/15/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/16/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/16/qr_code_image_XlDW75W.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/16/qr_code_image_frnDgcL.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/16/qr_code_image_shKCjBn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/17/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/17/qr_code_image_GPrulw4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/17/qr_code_image_e6tD55g.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/19/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/2/qr_code_image_vPnBmMW.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/23/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/3/qr_code_image_N7ns8IR.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/4/qr_code_image_ouxPm8H.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/5/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/5/qr_code_image_APFJBUq.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/5/qr_code_image_yaV8aal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/6/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/6/qr_code_image_iYclPRt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/7/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/8/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/9/qr_code_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/qrcode/9/qr_code_image_hvuRcHq.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/user/20120618202241.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/user/21.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/user/3학년1반4번정준호.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/user/KakaoTalk_20201012_131631021.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/user/figger.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/user/main1-01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/user/까망쓰.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/user/준호증명.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/user/준호증명_ieyXu2b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/user/증명1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/user/캡처.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/data/user/학회.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order/migrations/0002_auto_20201201_1603.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order/migrations/0003_style_order_factory_name.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order/migrations/0004_style_orders.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order/migrations/0005_auto_20210408_1541.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order/migrations/0006_auto_20210408_2035.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order/migrations/0007_auto_20210408_2050.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order/migrations/0008_auto_20210408_2231.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order/migrations/0009_auto_20210408_2236.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order/migrations/0010_auto_20210514_1412.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order/migrations/0011_order_value.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order/serializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirement.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements11.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanup.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schedule/migrations/0002_auto_20201012_1010.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schedule/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/dytec_send.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/새 폴더.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/새 폴더/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/새 폴더/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/새 폴더/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/texddm2019.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/texddm2019.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20191120" beforeDir="false" afterPath="$PROJECT_DIR$/20191120" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/design_data/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/design_data/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/design_data/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/design_data/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/design_data/style_for_us_image_upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/design_data/style_for_us_image_upload.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/design_data/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/design_data/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/design_data/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/design_data/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/machine/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/machine/migrations/0002_auto_20191216_1645.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine/migrations/0002_auto_20191216_1645.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/machine/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/machine/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/machine/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/materials/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/materials/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/materials/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/materials/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/materials/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/materials/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/materials/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/materials/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/production/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setting/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/setting/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setting/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/setting/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/material.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/material.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/order.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/order.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/schedule.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/schedule.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/setting.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/setting.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/design.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/design.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/jquery.simple-calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/jquery.simple-calendar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/materials.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/materials.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/production.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/production.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/setting.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/setting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/designDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/designDetail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/designList.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/designList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/machine.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/machine.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/material.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/material.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/msg/errorPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/msg/errorPage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/order.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/order.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/production.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/production.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/productionDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/productionDetail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/productionNoMachine.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/productionNoMachine.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/schedule.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/schedule.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/server.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/server.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/setting.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/setting.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/worksheet/knit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/worksheet/knit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/worksheet/rawroll.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/worksheet/rawroll.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/worksheet/warp.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/worksheet/warp.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,14 +610,12 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="sanup" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
         <option value="HTML File" />
+        <option value="Python Script" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -40,6 +624,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
+  <component name="JupyterTrust" id="c7bdc7f3-7c0e-47eb-a151-7a1790fc9556" />
   <component name="ProjectId" id="1XKW7L90TFeCoFyNEywDeXcmn7M" />
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -61,7 +646,6 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -71,22 +655,28 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.project" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\www\texddm2019\templates" />
-      <recent name="C:\www\texddm2019\static\css" />
-      <recent name="C:\www\texddm2019\machine" />
-      <recent name="C:\www\texddm2019\static\js" />
-      <recent name="C:\www\texddm2019\schedule" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\www\texddm2019\static\image" />
       <recent name="C:\www\texddm2019\account\migrations" />
       <recent name="C:\www\texddm2019\schedule" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\project\sanup\design_data" />
+      <recent name="C:\project\sanup\machine" />
+      <recent name="C:\project\sanup\materials\migrations" />
+      <recent name="C:\www\texddm2019\templates" />
+      <recent name="C:\www\texddm2019\static\css" />
     </key>
   </component>
   <component name="RunManager">
@@ -125,8 +715,8 @@
         </serviceView>
       </list>
     </option>
-    <option name="showServicesTree" value="false" />
   </component>
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -196,73 +786,304 @@
       <workItem from="1585527505462" duration="2038000" />
       <workItem from="1585612742350" duration="1267000" />
       <workItem from="1585703066943" duration="308000" />
-<<<<<<< HEAD
-=======
+      <workItem from="1585705132876" duration="2363000" />
       <workItem from="1585705132876" duration="2016000" />
->>>>>>> master
+      <workItem from="1585707871497" duration="3172000" />
+      <workItem from="1585871348174" duration="698000" />
+      <workItem from="1585873837386" duration="97000" />
+      <workItem from="1585873942147" duration="616000" />
+      <workItem from="1586150500387" duration="3755000" />
+      <workItem from="1586162823818" duration="668000" />
+      <workItem from="1586227887567" duration="3155000" />
+      <workItem from="1586306138328" duration="71000" />
+      <workItem from="1586484077770" duration="5039000" />
+      <workItem from="1586745495025" duration="1583000" />
+      <workItem from="1586826425335" duration="20000" />
+      <workItem from="1586827749554" duration="658000" />
+      <workItem from="1587084801232" duration="3502000" />
+      <workItem from="1588748471347" duration="6184000" />
+      <workItem from="1588809521300" duration="1057000" />
+      <workItem from="1588811483748" duration="921000" />
+      <workItem from="1588829780857" duration="1199000" />
+      <workItem from="1589181976134" duration="2486000" />
+      <workItem from="1589348224443" duration="3022000" />
+      <workItem from="1589501864826" duration="4000" />
+      <workItem from="1589501874069" duration="1776000" />
+      <workItem from="1589506084002" duration="1236000" />
+      <workItem from="1589786105415" duration="1567000" />
+      <workItem from="1590747327087" duration="20000" />
+      <workItem from="1590986940829" duration="24609000" />
+      <workItem from="1591075375932" duration="1515000" />
+      <workItem from="1591080221738" duration="3985000" />
+      <workItem from="1591141607588" duration="9354000" />
+      <workItem from="1591231233145" duration="8602000" />
+      <workItem from="1591662954496" duration="2188000" />
+      <workItem from="1591665553565" duration="902000" />
+      <workItem from="1591666484304" duration="6692000" />
+      <workItem from="1591690918076" duration="2394000" />
+      <workItem from="1591747076904" duration="47070000" />
+      <workItem from="1592178554894" duration="4328000" />
+      <workItem from="1592266583736" duration="11034000" />
+      <workItem from="1592293907135" duration="10285000" />
+      <workItem from="1592359031265" duration="22867000" />
+      <workItem from="1592456052897" duration="4647000" />
+      <workItem from="1592461778546" duration="8343000" />
+      <workItem from="1592531977181" duration="694000" />
+      <workItem from="1592532888316" duration="2000" />
+      <workItem from="1592555404060" duration="705000" />
+      <workItem from="1592783789932" duration="13253000" />
+      <workItem from="1592871509172" duration="23465000" />
+      <workItem from="1592957339455" duration="11150000" />
+      <workItem from="1592982663540" duration="1212000" />
+      <workItem from="1593067013114" duration="3757000" />
+      <workItem from="1593138996815" duration="6965000" />
+      <workItem from="1593388602785" duration="595000" />
+      <workItem from="1593398690959" duration="1812000" />
+      <workItem from="1593569717605" duration="11000" />
+      <workItem from="1594023544551" duration="835000" />
+      <workItem from="1594085189094" duration="4846000" />
+      <workItem from="1594167643848" duration="15645000" />
+      <workItem from="1594252542956" duration="10342000" />
+      <workItem from="1594342305392" duration="4216000" />
+      <workItem from="1594598235510" duration="8842000" />
+      <workItem from="1594684829138" duration="16224000" />
+      <workItem from="1594707768961" duration="7847000" />
+      <workItem from="1594717229296" duration="37000" />
+      <workItem from="1594774537982" duration="13027000" />
+      <workItem from="1594857297534" duration="21899000" />
+      <workItem from="1594943756954" duration="11110000" />
+      <workItem from="1594970550531" duration="2061000" />
+      <workItem from="1594973573310" duration="1181000" />
+      <workItem from="1595218918454" duration="4585000" />
+      <workItem from="1595291744819" duration="3263000" />
+      <workItem from="1595296839607" duration="41000" />
+      <workItem from="1595467431907" duration="9373000" />
+      <workItem from="1595492528930" duration="1854000" />
+      <workItem from="1595551006516" duration="2478000" />
+      <workItem from="1595568419033" duration="1920000" />
+      <workItem from="1595808165787" duration="1535000" />
+      <workItem from="1595897127981" duration="1814000" />
+      <workItem from="1595980497485" duration="1220000" />
+      <workItem from="1596072959422" duration="1845000" />
+      <workItem from="1596153575547" duration="1998000" />
+      <workItem from="1596180373395" duration="604000" />
+      <workItem from="1596414840345" duration="3193000" />
+      <workItem from="1596436253771" duration="666000" />
+      <workItem from="1596500776204" duration="4449000" />
+      <workItem from="1596612910415" duration="836000" />
+      <workItem from="1596780764766" duration="687000" />
+      <workItem from="1597036074267" duration="1225000" />
+      <workItem from="1597296543665" duration="1582000" />
+      <workItem from="1597363798932" duration="3846000" />
+      <workItem from="1598228622492" duration="1204000" />
+      <workItem from="1598312922961" duration="537000" />
+      <workItem from="1598313473662" duration="1212000" />
+      <workItem from="1598334369454" duration="1787000" />
+      <workItem from="1598419348283" duration="941000" />
+      <workItem from="1598486064448" duration="2183000" />
+      <workItem from="1598597578761" duration="630000" />
+      <workItem from="1598841222749" duration="5972000" />
+      <workItem from="1598852643258" duration="9000" />
+      <workItem from="1598922859839" duration="16000" />
+      <workItem from="1598939083864" duration="735000" />
+      <workItem from="1599004354922" duration="1823000" />
+      <workItem from="1599702195791" duration="2640000" />
+      <workItem from="1600044543728" duration="1828000" />
+      <workItem from="1600143585079" duration="7755000" />
+      <workItem from="1600152119303" duration="1661000" />
+      <workItem from="1600214429456" duration="631000" />
+      <workItem from="1600220470728" duration="3075000" />
+      <workItem from="1600300076833" duration="2728000" />
+      <workItem from="1600320821395" duration="626000" />
+      <workItem from="1600323627612" duration="514000" />
+      <workItem from="1600324815585" duration="1859000" />
+      <workItem from="1600330871485" duration="948000" />
+      <workItem from="1600333194853" duration="1828000" />
+      <workItem from="1600689882308" duration="775000" />
+      <workItem from="1600732208739" duration="612000" />
+      <workItem from="1600999999923" duration="4337000" />
+      <workItem from="1601251952966" duration="4729000" />
+      <workItem from="1601337673442" duration="613000" />
+      <workItem from="1601855792993" duration="863000" />
+      <workItem from="1601950842663" duration="547000" />
+      <workItem from="1601958176191" duration="13846000" />
+      <workItem from="1602114579908" duration="3458000" />
+      <workItem from="1602460301621" duration="26000" />
+      <workItem from="1602460364511" duration="10627000" />
+      <workItem from="1602471462015" duration="2890000" />
+      <workItem from="1602584567437" duration="1724000" />
+      <workItem from="1602654390365" duration="26000" />
+      <workItem from="1602680821884" duration="687000" />
+      <workItem from="1602682821791" duration="2722000" />
+      <workItem from="1602764897668" duration="12000" />
+      <workItem from="1602770268376" duration="669000" />
+      <workItem from="1603088724764" duration="87000" />
+      <workItem from="1603379592252" duration="2814000" />
+      <workItem from="1603858385833" duration="2268000" />
+      <workItem from="1603862190967" duration="5122000" />
+      <workItem from="1603886329808" duration="694000" />
+      <workItem from="1605493896626" duration="3907000" />
+      <workItem from="1605505218348" duration="9232000" />
+      <workItem from="1605597473891" duration="1538000" />
+      <workItem from="1605599254465" duration="9089000" />
+      <workItem from="1605612802298" duration="26000" />
+      <workItem from="1605659597454" duration="21874000" />
+      <workItem from="1605861869052" duration="15000" />
+      <workItem from="1606105041060" duration="3051000" />
+      <workItem from="1606349992615" duration="5115000" />
+      <workItem from="1606780444317" duration="29951000" />
+      <workItem from="1606896389233" duration="1931000" />
+      <workItem from="1607043862517" duration="15000" />
+      <workItem from="1607308752194" duration="10081000" />
+      <workItem from="1608012397234" duration="1285000" />
+      <workItem from="1608076824273" duration="6734000" />
+      <workItem from="1608105608037" duration="247000" />
+      <workItem from="1610500102459" duration="617000" />
+      <workItem from="1610687844227" duration="1940000" />
+      <workItem from="1611017019714" duration="959000" />
+      <workItem from="1611500912512" duration="1263000" />
+      <workItem from="1611826030738" duration="1601000" />
+      <workItem from="1612743457551" duration="653000" />
+      <workItem from="1612857919463" duration="1872000" />
+      <workItem from="1612926044948" duration="521000" />
+      <workItem from="1615338188643" duration="7096000" />
+      <workItem from="1615460227972" duration="121000" />
+      <workItem from="1617147831225" duration="1213000" />
+      <workItem from="1617154113758" duration="630000" />
+      <workItem from="1617319490410" duration="4113000" />
+      <workItem from="1617326076630" duration="19000" />
+      <workItem from="1617588176965" duration="267000" />
+      <workItem from="1617589157341" duration="10803000" />
+      <workItem from="1617704617386" duration="2107000" />
+      <workItem from="1617750578001" duration="8520000" />
+      <workItem from="1617783142528" duration="208000" />
+      <workItem from="1617858146744" duration="1120000" />
+      <workItem from="1617859610718" duration="19253000" />
+      <workItem from="1617922818667" duration="14118000" />
+      <workItem from="1617955778862" duration="237000" />
+      <workItem from="1618355379946" duration="3998000" />
+      <workItem from="1618796355707" duration="790000" />
+      <workItem from="1619405142998" duration="12314000" />
+      <workItem from="1619991345107" duration="51000" />
+      <workItem from="1620968291128" duration="16837000" />
+      <workItem from="1622018588825" duration="606000" />
+      <workItem from="1622438255551" duration="10000" />
+      <workItem from="1622438273283" duration="3635000" />
+      <workItem from="1622447510975" duration="875000" />
+      <workItem from="1622448889971" duration="5163000" />
+      <workItem from="1622677809213" duration="689000" />
+      <workItem from="1622681437764" duration="27004000" />
+      <workItem from="1623369704041" duration="24821000" />
+      <workItem from="1623892480392" duration="40524000" />
+      <workItem from="1624348330527" duration="149517000" />
+      <workItem from="1625633326640" duration="4922000" />
+      <workItem from="1626229889996" duration="14312000" />
+      <workItem from="1626920619657" duration="20880000" />
     </task>
     <servers />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="3200" y="515" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1583740817010">
+    <state x="290" y="188" key="FileChooserDialogImpl" timestamp="1626229901294">
+      <screen x="0" y="0" width="864" height="1496" />
+    </state>
+    <state x="644" y="131" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1621208074799" />
+    <state x="-1276" y="131" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1623901917581" />
+    <state x="644" y="131" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1622442219376" />
+    <state x="2564" y="131" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1618538614064" />
+    <state x="431" y="138" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1621926375716" />
+    <state x="290" y="188" key="FileChooserDialogImpl/0.0.864.1496/-1920.851.1920.1040@0.0.864.1496" timestamp="1626229901294" />
+    <state x="2564" y="131" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040/3840.0.1920.1040@1920.0.1920.1040" timestamp="1622707441859" />
+    <state x="2564" y="131" key="FileChooserDialogImpl/1920.0.1920.1040/3840.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1622786726024" />
+    <state x="368" y="332" key="RollbackChangesDialog" timestamp="1624942781111">
+      <screen x="0" y="0" width="864" height="1496" />
+    </state>
+    <state x="368" y="332" key="RollbackChangesDialog/0.0.864.1496/-1920.851.1920.1040@0.0.864.1496" timestamp="1624942781111" />
+    <state x="2737" y="231" key="RollbackChangesDialog/1920.0.1920.1040/0.0.1920.1040/3840.0.1920.1040@1920.0.1920.1040" timestamp="1623722270829" />
+    <state x="247" y="495" key="com.intellij.ide.util.TipDialog" timestamp="1626229890514">
+      <screen x="0" y="0" width="864" height="1496" />
+    </state>
+    <state x="367" y="622" key="com.intellij.ide.util.TipDialog/0.0.1080.1880/-1920.0.1920.1040@0.0.1080.1880" timestamp="1624348332731" />
+    <state x="653" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1623892480693" />
+    <state x="653" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1622451035051" />
+    <state x="247" y="495" key="com.intellij.ide.util.TipDialog/0.0.864.1496/-1920.851.1920.1040@0.0.864.1496" timestamp="1626229890514" />
+    <state x="653" y="344" key="com.intellij.ide.util.TipDialog/1920.0.1920.1040/0.0.1920.1040/3840.0.1920.1040@0.0.1920.1040" timestamp="1622699344012" />
+    <state x="-1414" y="851" width="929" height="1068" key="dock-window-1" timestamp="1624494448149">
+      <screen x="-1920" y="851" width="1920" height="1040" />
+    </state>
+    <state x="1" y="23" width="1446" height="744" key="dock-window-1/0.0.1440.860@0.0.1440.860" timestamp="1623734722150" />
+    <state x="2291" y="79" width="1144" height="647" key="dock-window-1/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@-1920.0.1920.1040" timestamp="1619408533942" />
+    <state x="2291" y="79" width="1144" height="647" key="dock-window-1/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619412462420" />
+    <state x="1920" y="27" width="1446" height="744" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1623889821785" />
+    <state x="0" y="27" width="1446" height="744" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1623734663032" />
+    <state x="-1414" y="851" width="929" height="1068" key="dock-window-1/0.0.864.1496/-1920.851.1920.1040@0.0.864.1496" timestamp="1624494448149" />
+    <state x="3840" y="27" width="1446" height="744" key="dock-window-1/1920.0.1920.1040/0.0.1920.1040/3840.0.1920.1040@1920.0.1920.1040" timestamp="1623722256431" />
+    <state x="4329" y="0" width="1447" height="744" key="dock-window-2" timestamp="1623220265510">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2076" y="21" width="1144" height="683" key="dock-window-2/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619413196135" />
+    <state x="4329" y="0" width="1447" height="744" key="dock-window-2/1920.0.1920.1040/3840.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1623220265510" />
+    <state x="184" y="324" width="1447" height="744" key="dock-window-3" timestamp="1623219829226">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1920" y="108" width="1144" height="683" key="dock-window-3/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619413319781" />
+    <state x="184" y="324" width="1447" height="744" key="dock-window-3/1920.0.1920.1040/3840.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1623219829226" />
+    <state x="2333" y="229" width="1447" height="744" key="dock-window-4" timestamp="1623220575387">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="1280" y="515" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583469509130" />
-    <state x="3200" y="515" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1583740817010" />
-    <state x="2561" y="550" key="FileChooserDialogImpl" timestamp="1585211700646">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="2193" y="151" width="1144" height="683" maximized="true" key="dock-window-4/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619991389345" />
+    <state x="2193" y="151" width="1144" height="683" key="dock-window-4/0.0.1920.1040@0.0.1920.1040" timestamp="1619588984910" />
+    <state x="2333" y="229" width="1447" height="744" key="dock-window-4/1920.0.1920.1040/3840.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1623220575387" />
+    <state x="3897" y="11" width="1447" height="744" key="dock-window-5" timestamp="1623396339807">
+      <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="641" y="550" key="FileChooserDialogImpl/0.0.1920.1040/1920.-120.1920.1040@0.0.1920.1040" timestamp="1582851441484" />
-    <state x="641" y="550" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585028606160" />
-    <state x="2561" y="550" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1585211700646" />
-    <state x="641" y="550" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1582070139969" />
-    <state x="461" y="162" key="SettingsEditor" timestamp="1582247655579">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="3897" y="11" width="1447" height="744" key="dock-window-5/1920.0.1920.1040/3840.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1623396339807" />
+    <state x="732" y="81" width="796" height="726" key="find.popup" timestamp="1627019752010">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582247655579" />
-    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1580868056618" />
-    <state x="652" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1585009892321">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="335" y="0" width="745" height="1880" key="find.popup/0.0.1080.1880/-1920.0.1920.1040@0.0.1080.1880" timestamp="1624424883269" />
+    <state x="533" y="0" width="745" height="860" key="find.popup/0.0.1440.860@0.0.1440.860" timestamp="1623736382805" />
+    <state x="732" y="81" width="796" height="726" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1627019752010" />
+    <state x="193" y="178" width="746" height="609" key="find.popup/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619422544355" />
+    <state x="-1209" y="0" width="994" height="1040" key="find.popup/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1624274187531" />
+    <state x="711" y="0" width="994" height="1040" key="find.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1624345785789" />
+    <state x="193" y="178" width="746" height="609" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1620969238536" />
+    <state x="-1920" y="875" width="1920" height="934" key="find.popup/0.0.864.1496/-1920.851.1920.1040@-1920.851.1920.1040" timestamp="1625649152638" />
+    <state x="-1361" y="971" width="864" height="920" key="find.popup/0.0.864.1496/-1920.851.1920.1040@0.0.864.1496" timestamp="1626941182710" />
+    <state x="711" y="0" width="994" height="1040" key="find.popup/1920.0.1920.1040/0.0.1920.1040/3840.0.1920.1040@0.0.1920.1040" timestamp="1623710985675" />
+    <state x="2847" y="0" width="993" height="1040" key="find.popup/1920.0.1920.1040/0.0.1920.1040/3840.0.1920.1040@1920.0.1920.1040" timestamp="1623723860511" />
+    <state x="2630" y="243" width="746" height="609" key="find.popup/1920.0.1920.1040/3840.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1623400926583" />
+    <state x="270" y="354" width="598" height="763" key="recent.locations.popup" timestamp="1624508060603">
+      <screen x="0" y="0" width="864" height="1496" />
     </state>
-    <state x="571" y="334" key="com.intellij.ide.util.TipDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1584453772398" />
-    <state x="652" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.-120.1920.1040@0.0.1920.1040" timestamp="1582847971215" />
-    <state x="652" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585009892321" />
-    <state x="2572" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1583734703717" />
-    <state x="652" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582070112171" />
-    <state x="764" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584603988191">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="601" y="246" width="700" height="530" key="recent.locations.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1624340744108" />
+    <state x="270" y="354" width="598" height="763" key="recent.locations.popup/0.0.864.1496/-1920.851.1920.1040@0.0.864.1496" timestamp="1624508060603" />
+    <state x="280" y="323" width="672" height="977" key="search.everywhere.popup" timestamp="1625113037737">
+      <screen x="0" y="0" width="864" height="1496" />
     </state>
-    <state x="764" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584603988191" />
-    <state x="460" y="80" width="1556" height="711" key="dock-window-1" timestamp="1585033872362">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="91" y="230" width="1582" height="716" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584670740175" />
-    <state x="460" y="80" width="1556" height="711" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1585033872362" />
-    <state x="2038" y="163" width="1556" height="663" key="dock-window-2" timestamp="1585182922178">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2038" y="163" width="1556" height="663" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585182922178" />
-    <state x="193" y="178" width="745" height="608" key="find.popup" timestamp="1584670148085">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="169" y="173" width="652" height="591" key="find.popup/0.0.1680.1010@0.0.1680.1010" timestamp="1584453387856" />
-    <state x="193" y="178" width="745" height="608" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584670148085" />
-    <state x="653" y="251" width="613" height="538" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1581928929753" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1584318291009">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584318291009" />
+    <state x="498" y="178" width="538" height="538" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1623998541281" />
+    <state x="280" y="323" width="672" height="977" key="search.everywhere.popup/0.0.864.1496/-1920.851.1920.1040@0.0.864.1496" timestamp="1625113037737" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/static/js/common.js</url>
+          <line>69</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/schedule/views.py</url>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/order/views.py</url>
+          <line>39</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

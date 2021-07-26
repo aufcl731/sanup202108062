@@ -22,7 +22,6 @@ from config import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^dashboard', views.dashboard, name='dashboard'),
-    url(r'^aaaa', views.aaaa, name='dashboard'),
     url(r'^pjs1234', views.pjs1234),
     url(r'^$', views.login_site, name='login_site'),
     url(r'^server/', views.server, name='server'),
@@ -36,8 +35,6 @@ urlpatterns = [
     url(r'^machine/', include('machine.urls', namespace='machine')),
     url(r'^production/', include('production.urls', namespace='production')),
     #url(r'^ordercheack$', views.ordercheack),
-
-
 ]
 
 

@@ -282,14 +282,12 @@ function createYarn() {
         yarnForm.yarnContraction.focus();
         return;
     }
-<<<<<<< HEAD
-=======
+
     if(!exp_number.test(yarnForm.yarnWeight.value)){
         alert('무게은 숫자만 입력가능합니다.');
         yarnForm.yarnWeight.focus();
         return;
     }
->>>>>>> master
     if(!exp_number.test(yarnForm.yarnQty.value)){
         alert('입고량은 숫자만 입력가능합니다.');
         yarnForm.yarnQty.focus();
@@ -345,6 +343,61 @@ function delBeamData(bid) {
                 }else{
                     alert('실패하였습니다.')
                 }
+                window.location.reload();
+            },
+            error: function (e) {
+
+            }
+        })
+    }
+}
+
+function delGreigeData(gpk){
+    var result = confirm('생지를 삭제하시겠습니까?');
+    if(result){
+        $.ajax({
+            url: '/material/greigeDelete',
+            type: 'POST',
+            cache: false,
+            data: {
+                gpk: gpk
+            },
+            dataType: 'json',
+            async: false,
+            success: function (response) {
+                if(response.success){
+                    alert('삭제되었습니다.')
+                }else{
+                    alert('실패하였습니다.')
+                }
+                window.location.reload();
+            },
+            error: function (e) {
+
+            }
+        })
+    }
+}
+
+function delRollData(rid){
+    var result = confirm('롤을 삭제하시겠습니까?');
+    if(result){
+        $.ajax({
+            url: '/material/rollDelete',
+            type: 'POST',
+            cache: false,
+            data: {
+                rid: rid
+            },
+            dataType: 'json',
+            async: false,
+            success: function (response) {
+                if(response.success){
+                    alert('삭제되었습니다.')
+                }else{
+                    alert('실패하였습니다.')
+                }
+                window.location.reload();
             },
             error: function (e) {
 
@@ -371,6 +424,7 @@ function delYarnData(id) {
                 }else{
                     alert('실패하였습니다.')
                 }
+                window.location.reload();
             },
             error: function (e) {
 
@@ -421,4 +475,22 @@ function createRoll() {
     }
 
     rollForm.submit();
+}
+
+function createDiplay1(type){
+    $('#'+type).css('display','block');
+    $("#materialsBot").css('display','none');
+    $("#rollFrame").css('display','none');
+}
+
+function createDiplay2(type){
+    $('#'+type).css('display','block');
+    $("#materialsTop").css('display','none');
+    $("#rollFrame").css('display','none');
+}
+
+function createDiplay3(type){
+    $('#'+type).css('display','block');
+    $("#materialsBot").css('display','none');
+    $("#materialsTop").css('display','none');
 }
